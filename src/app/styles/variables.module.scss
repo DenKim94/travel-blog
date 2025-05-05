@@ -1,0 +1,11 @@
+// Export der Variablen für SCSS
+$font-size-header: 36px;
+$font-size-blog-title: 20px;
+$font-size-blog-text: 15px;
+
+// Export der Variablen für Javascript
+:export {
+  fontSizeHeader: $font-size-header;
+  fontSizeBlogTitle: $font-size-blog-title;
+  fontSizeBlogText: $font-size-blog-text;
+}

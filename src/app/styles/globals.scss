@@ -1,14 +1,9 @@
+// This file contains global styles for the application.
 :root {
-  --background: #ffffff;
+  --background: rgba(243, 239, 228, 1);
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 html,
 body {
