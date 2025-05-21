@@ -29,7 +29,19 @@ export default function RootLayout({
   return (
     <html lang="de" className={oranienbaum.variable}>
       <body>
-        {children}
+        <div className="root-page">
+          <header>
+            {<p> Placeholder-Header </p>   /* To-Do: Komponente der Navigationsleiste */}
+          </header>
+          
+          <main className="main-content">
+            {children}
+          </main>
+          
+          <footer>
+            {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
+          </footer>
+        </div>
       </body>
     </html>
   );

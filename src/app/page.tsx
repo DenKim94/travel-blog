@@ -1,15 +1,20 @@
 import styles from "@styles/root_page.module.scss";
 
-export default function Home() {
+export default function RootPage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <h1> Travel Blog: Ready to start! </h1>
-
-      </main>
-      <footer className={styles.footer}>
-        <p> Placeholder-Footer </p>
-      </footer>
-    </div>
+    <>
+    {/* To-Do: Erstellen und Einfügen einzelner Abschnitte */}
+    
+      <section id="home" className={styles.section}>
+        {/* Landingpage-Inhalt */}
+        <h1>Willkommen auf meinem Reiseblog</h1>
+      </section>
+      <section id="blogs" className={styles.section}>
+        <h1>Meine Reisen</h1>
+      </section>
+      <section id="about" className={styles.section}>
+        <h1>Über mich</h1>
+      </section>
+    </>
   );
 }
