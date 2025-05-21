@@ -1,10 +1,15 @@
 // This file contains global styles for the application.
 @import './variables.scss';
 
+
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+
+  // Scrollbalken
+  scrollbar-width: thin;
+  scrollbar-color: #171717 rgba(209, 204, 204, 0.5); // Farbe der Scrollbalken und Hintergrundfarbe für Chrome und Firefox
 }
 
 body {
@@ -21,7 +26,38 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
+.root-page {
+  display: grid;
+  grid-template-rows: $header-height 1fr $footer-height;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+  min-height: $root-page-min-height;
+  padding: $root-page-padding;
+  gap: $root-page-gap;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  grid-row-start: 2;
+  overflow-y: auto;               // Ermöglicht Scrollen innerhalb des Hauptbereichs
+  scroll-snap-type: y proximity;  // Aktiviert Snap-Scrolling für Sektionen
+  height: $main-content-height;
+  width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
+  padding-left: $side-gap;
+  padding-right: $side-gap;
+
+  // Für Safari und ältere Browser
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth; // Aktiviert sanftes Scrollen
+}
+
+footer {
+  grid-row-start: 3;
+  display: flex;
+  flex-direction: row;
+  p {
+    font-size: $font-size-footer;
+  }
+}

@@ -4,14 +4,24 @@ $background-color-global: rgba(243, 239, 228, 1);
 $foreground-color-global: #171717;
 
 // Schriftgrößen
-$font-size-header: 2.25rem;
+$font-size-header: 2rem;
+$font-size-footer: 1rem;
 $font-size-blog-title: 1.25rem;
-$font-size-blog-text: 0.9375rem;
+$font-size-blog-text: 0.9rem;
+$font-size-h1: 1.5rem;
 
 // Globale Schriftarten
 $font-oranienbaum: var(--font-oranienbaum, sans-serif);
 
-
+// Globale Größen der Abschnitte
+$root-page-min-height: 100svh;
+$root-page-padding: 5px;
+$root-page-gap: 25px;
+$header-height: 60px;
+$footer-height: 40px;
+$root-page-min-width: 100vw;
+$side-gap: 10vw;
+$main-content-height: calc(#{$root-page-min-height} - #{$header-height} - #{$footer-height} - 2*#{$root-page-gap} - 2*#{$root-page-padding});
 
 // Export der definierten Variablen für Javascript
 :export {

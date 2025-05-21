@@ -1,38 +1,26 @@
 @import './variables.scss';
 
-.page {
-  display: grid;
-  grid-template-rows: 40px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 10px;
-  gap: 64px;
-}
 
-.main {
+.section {
+  min-height: 100%; // Ändere height zu min-height
+  height: $main-content-height; // Füge eine explizite Viewport-Höhe hinzu
+  flex-shrink: 0; // Verhindert, dass Sections schrumpfen
+  scroll-snap-align: start; // Aktiviert Snap-Scrolling für diese Sektion
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-
+  
   h1 {
-    font-size: $font-size-header;
-    font-weight: 300;
-  }
-
-}
-
-.footer {
-  grid-row-start: 3;
-  display: flex;
-  gap: 24px;
-
-  p{
-    font-size: large;
-    text-align: center;
+    font-size: $font-size-h1;
   }
 }
 
+
+// Mobile Viewport
+// tbd
+@media screen and (max-width: 768px) {
+  .page {
+    gap: 15px;
+  }
+}
 
 
