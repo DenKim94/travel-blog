@@ -1,0 +1,24 @@
+// Export der Variablen für SCSS
+// Globale Farben
+$background-color-global: rgba(243, 239, 228, 1);
+$foreground-color-global: #171717;
+
+// Schriftgrößen
+$font-size-header: 2.25rem;
+$font-size-blog-title: 1.25rem;
+$font-size-blog-text: 0.9375rem;
+
+// Globale Schriftarten
+$font-oranienbaum: var(--font-oranienbaum, sans-serif);
+
+
+
+// Export der definierten Variablen für Javascript
+:export {
+  fontSizeHeader: $font-size-header;
+  fontSizeBlogTitle: $font-size-blog-title;
+  fontSizeBlogText: $font-size-blog-text;
+  fontOranienbaum: $font-oranienbaum;
+  backgroundColorGlobal: $background-color-global;
+  foregroundColorGlobal: $foreground-color-global;
+}
