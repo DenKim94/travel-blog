@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Oranienbaum } from 'next/font/google';
-import "@styles/globals.scss";
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
+import "@styles/globals.scss";
+
 
 const oranienbaum = Oranienbaum({
   weight: '400',
