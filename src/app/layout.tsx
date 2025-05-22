@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Oranienbaum } from 'next/font/google';
 import "@styles/globals.scss";
+import {  GlobalStateProvider } from "@context/GlobalStateContext";
 
 const oranienbaum = Oranienbaum({
   weight: '400',
@@ -29,19 +30,21 @@ export default function RootLayout({
   return (
     <html lang="de" className={oranienbaum.variable}>
       <body>
-        <div className="root-page">
-          <header>
-            {<p> Placeholder-Header </p>   /* To-Do: Komponente der Navigationsleiste */}
-          </header>
-          
-          <main className="main-content">
-            {children}
-          </main>
-          
-          <footer>
-            {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
-          </footer>
-        </div>
+        <GlobalStateProvider>
+          <div className="root-page">
+            <header>
+              {<p> Placeholder-Header </p>   /* To-Do: Komponente der Navigationsleiste */}
+            </header>
+            
+            <main className="main-content">
+              {children}
+            </main>
+            
+            <footer>
+              {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
+            </footer>
+          </div>
+        </GlobalStateProvider>
       </body>
     </html>
   );
