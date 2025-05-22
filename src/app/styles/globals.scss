@@ -25,6 +25,19 @@ body {
   margin: 0;
 }
 
+header {
+  grid-row-start: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
+  height: $header-height;
+  // padding-left: $side-gap;
+  // padding-right: $side-gap;
+
+}
+
 .root-page {
   display: grid;
   grid-template-rows: $header-height 1fr $footer-height;
@@ -56,7 +69,20 @@ footer {
   grid-row-start: 3;
   display: flex;
   flex-direction: row;
+  width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
+  height: $footer-height;
+  align-items: center;
+  justify-content: space-between;
+  // padding-left: $side-gap;
+  // padding-right: $side-gap;
+
   p {
     font-size: $font-size-footer;
   }
+}
+
+
+// To-Do: Mobile Viewport
+@media screen and (max-width: 768px) {
+
 }
