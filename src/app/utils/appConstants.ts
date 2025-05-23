@@ -23,6 +23,9 @@ export const metadataTranslations: Record<string, { title: string; description: 
   },
 };
 
+export const authorMetadata = [{ name: "Nadja Ogaj"}];  // Angaben zum Autor
+export const developerMetadata = "Denis Kim";           // Angaben zum Entwickler
+
 // Übersetzungen für die Navigationsleiste
 export const navTranslations = {
     de: {
