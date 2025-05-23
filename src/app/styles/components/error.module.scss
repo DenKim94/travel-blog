@@ -1,0 +1,31 @@
+@use '../variables.scss' as *;
+
+.errorContainer {
+  padding: $padding-fallbacks;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    color: #d00;
+    font-size: 1.5rem;
+  }
+
+  .retryButton {
+    margin-top: 24px;
+    padding: 8px 24px;
+    border-radius: 4px;
+    background: #222;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+    .retryButton:hover {
+        background: #444;
+    }
+    .retryButton:active {
+        scale: 0.95;
+    }
+}

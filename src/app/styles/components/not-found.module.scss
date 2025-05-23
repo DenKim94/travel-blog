@@ -1,0 +1,21 @@
+@use '../variables.scss' as *;
+
+.notFound {
+  padding: $padding-fallbacks;
+  text-align: center;
+  justify-content: center;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 16px;
+  }
+
+  a {
+    color: rgb(159, 145, 100);
+    text-decoration: underline;
+  }
+}
