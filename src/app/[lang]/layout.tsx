@@ -27,6 +27,8 @@ export async function generateMetadata({
     title: meta.title,
     description: meta.description,
     keywords: meta.keywords,
+    authors: appConstants.authorMetadata, 
+    creator: appConstants.developerMetadata,
   };
 }
 
@@ -38,7 +40,7 @@ export default async function RootLayout({
   params: Promise<{lang: string}>
 }>) {
   const {lang} = await params;
-  console.log(`>> RootLayout: Sprache "${lang}"`);
+  console.log(`> Standardsprache: "${lang}"`);
 
   return (
     <html lang={lang ? lang : appConstants.defaultLanguage} className={oranienbaum.variable}>

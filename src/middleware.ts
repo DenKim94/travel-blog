@@ -24,7 +24,6 @@ export function middleware(request: NextRequest) {
     // Keine Sprache im Pfad: Weiterleitung auf Standardsprache
     const url = request.nextUrl.clone();
     url.pathname = `/${appConstants.defaultLanguage}${pathname === '/' ? '' : pathname}`;
-    console.log(`>> Weiterleitung auf Standardsprache: "${url.pathname}".`);
     return NextResponse.redirect(url);
   }
 
