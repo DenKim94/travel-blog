@@ -1,6 +1,7 @@
 import styles from "@styles/root_page.module.scss";
 
 export default function RootPage() {
+
   return (
     <>
     {/* To-Do: Erstellen und Einfügen einzelner Abschnitte */}
