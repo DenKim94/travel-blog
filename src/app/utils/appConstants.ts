@@ -26,6 +26,33 @@ export const metadataTranslations: Record<string, { title: string; description: 
 export const authorMetadata = [{ name: "Nadja Ogaj"}];  // Angaben zum Autor
 export const developerMetadata = "Denis Kim";           // Angaben zum Entwickler
 
+
+// Übersetzungen für die NotFound-Seite
+export const notFoundTranslations: Record<string, { title: string; description: string; backToHome: string }> = {
+    de: {
+        title: "Seite nicht gefunden",
+        description: "Die gewünschte Seite existiert nicht oder wurde verschoben.",
+        backToHome: "Zurück zur Startseite",
+    },
+    en: {
+        title: "Page not found",
+        description: "The requested page does not exist or has been moved.",
+        backToHome: "Back to home",
+    },
+    ru: {
+        title: "Страница не найдена",
+        description: "Запрашиваемая страница не существует или была перемещена.",
+        backToHome: "Вернуться на главную",
+    },
+  };
+
+// Übersetzungen für Fehlerseiten
+export const errorNotificationTranslations: Record<string, { title: string; retry: string }> = {
+  de: { title: 'Ein Fehler ist aufgetreten', retry: 'Erneut versuchen' },
+  en: { title: 'An error occurred', retry: 'Try again' },
+  ru: { title: 'Произошла ошибка', retry: 'Попробовать снова' },
+};
+
 // Übersetzungen für die Navigationsleiste
 export const navTranslations = {
     de: {
