@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import * as appConstants from "@utils/appConstants"
+import * as helperFunctions from "@utils/helperFunctions"
 
 type GlobalStateContextType = {
     language: appConstants.SupportedLanguageType;
@@ -9,7 +10,7 @@ type GlobalStateContextType = {
 };
 
 const GlobalStateContext = createContext<GlobalStateContextType>({
-    language: appConstants.supportedLanguages[0],
+    language: appConstants.defaultLanguage,
     setLanguage: () => {},
 });
 
@@ -22,16 +23,12 @@ export function useGlobalState() {
 };
 
 export function GlobalStateProvider({ children }: { children: ReactNode }) {
-    const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(appConstants.supportedLanguages[0]);
+    const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(appConstants.defaultLanguage);
 
-    // Type Guard für unterstützte Sprachen
-    function isSupportedLanguage(lang: string): lang is appConstants.SupportedLanguageType {
-        return appConstants.supportedLanguages.includes(lang as appConstants.SupportedLanguageType);
-    }
     // Beim ersten Laden prüfen, ob eine gespeicherte Sprache im Cache existiert
     useEffect(() => {
         const savedLanguage = localStorage.getItem("preferred-language");
-        if (savedLanguage && isSupportedLanguage(savedLanguage)) {
+        if (savedLanguage && helperFunctions.isSupportedLanguage(savedLanguage)) {
             setLanguageState(savedLanguage as appConstants.SupportedLanguageType);
         }
     }, []);
