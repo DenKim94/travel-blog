@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Oranienbaum } from 'next/font/google';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
+import * as appConstants from "@utils/appConstants"
 import "@styles/globals.scss";
 
 
@@ -12,24 +13,35 @@ const oranienbaum = Oranienbaum({
   variable: '--font-oranienbaum', // CSS-Variable definieren
 });
 
-export const metadata: Metadata = {
-  title: "Reisen mit Nadja",
-  description: "Der Reiseblog für Reisebegeisterte.",
-  keywords: [
-    "Reisen",
-    "Reiseblog",
-    "Reisetipps",
-    "Reiseberichte",
-    "Reiseziele",],
-};
+// Dynamische Metadaten-Funktion
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{lang: string}>
+}): Promise<Metadata> {
+  // Fallback auf Deutsch, falls Sprache nicht unterstützt wird
+  const {lang} = await params;
+  const meta = appConstants.metadataTranslations[lang] || appConstants.metadataTranslations[appConstants.defaultLanguage];
 
-export default function RootLayout({
+  return {
+    title: meta.title,
+    description: meta.description,
+    keywords: meta.keywords,
+  };
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{lang: string}>
 }>) {
+  const {lang} = await params;
+  console.log(`>> RootLayout: Sprache "${lang}"`);
+
   return (
-    <html lang="de" className={oranienbaum.variable}>
+    <html lang={lang ? lang : appConstants.defaultLanguage} className={oranienbaum.variable}>
       <body>
         <GlobalStateProvider>
           <div className="root-page">
