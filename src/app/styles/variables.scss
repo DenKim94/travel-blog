@@ -4,7 +4,7 @@ $background-color-global: rgba(243, 239, 228, 1);
 $foreground-color-global: #171717;
 
 // Schriftgrößen
-$font-size-header: 2rem;
+$font-size-header: 1.4rem;
 $font-size-footer: 1rem;
 $font-size-blog-title: 1.25rem;
 $font-size-blog-text: 0.9rem;
@@ -13,16 +13,24 @@ $font-size-h1: 1.5rem;
 // Globale Schriftarten
 $font-oranienbaum: var(--font-oranienbaum, sans-serif);
 
-// Globale Abmessungen der Abschnitte
+// Abmessungen der Abschnitte
+$max-width: 1440px; // Maximale Breite für große Bildschirme
 $root-page-min-height: 100svh;
 $root-page-padding: 5px;
 $root-page-gap: 15px;
-$header-height: 60px;
-$footer-height: 40px;
 $root-page-min-width: 100vw;
-$side-gap: 10vw;
+$footer-height: 40px;
+$side-gap: 5vw;
+$header-height: 60px;
+$header-width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
+$footer-width: calc(#{$header-width} - 2*#{$side-gap});
 $main-content-height: calc(#{$root-page-min-height} - #{$header-height} - #{$footer-height} - 2*#{$root-page-gap} - 2*#{$root-page-padding});
+$nav-bar-gap: 40px;
+$scrollbar-offset: 16px; // Offset wegen des Scrollbalkens
+
+// Fallbacks für Padding
 $padding-fallbacks: 32px;
+
 
 // Export der definierten Variablen für Javascript
 :export {

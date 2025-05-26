@@ -3,7 +3,6 @@
 
 html,
 body {
-  max-width: 100vw;
   overflow-x: hidden;
   font-family: $font-oranienbaum;
   
@@ -13,6 +12,8 @@ body {
 }
 
 body {
+  max-width: 100vw;
+  min-height: 100vh;
   color: $foreground-color-global;
   background: $background-color-global;
   -webkit-font-smoothing: antialiased;
@@ -26,21 +27,25 @@ body {
 }
 
 header {
+  max-width: $max-width;
   grid-row-start: 1;
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
+  width: $header-width;
   height: $header-height;
-  // padding-left: $side-gap;
-  // padding-right: $side-gap;
+}
 
+.header-underline {
+  max-width: calc(#{$max-width} - 2*#{$side-gap} - #{$scrollbar-offset});
+  width: calc(#{$header-width} - 2*#{$side-gap} - #{$scrollbar-offset}); // Adjusted for better alignment
+  height: 2px;
+  background: #000;
+  margin-left: $side-gap;
 }
 
 .root-page {
   display: grid;
   grid-template-rows: $header-height 1fr $footer-height;
+  width: 100%;
   align-items: center;
   justify-items: center;
   overflow: hidden;
@@ -51,6 +56,7 @@ header {
 
 .main-content {
   display: flex;
+  max-width: $max-width;
   flex-direction: column;
   grid-row-start: 2;
   overflow-y: auto;               // Ermöglicht Scrollen innerhalb des Hauptbereichs
@@ -66,15 +72,15 @@ header {
 }
 
 footer {
+  max-width: calc(#{$max-width} - 2*#{$side-gap});
+  width: calc(#{$header-width} - 2*#{$side-gap});       /* gewünschte Länge */
   grid-row-start: 3;
   display: flex;
   flex-direction: row;
-  width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
+  width: $footer-width;
   height: $footer-height;
   align-items: center;
   justify-content: space-between;
-  // padding-left: $side-gap;
-  // padding-right: $side-gap;
 
   p {
     font-size: $font-size-footer;

@@ -1,0 +1,34 @@
+@use '../variables.scss' as *;
+
+.navBar {
+    display: flex; 
+    flex-direction: row;
+    max-width: $max-width;
+    width: $header-width;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: $side-gap;
+    padding-right: calc(#{$side-gap} + #{$scrollbar-offset}); // Adjusted for better alignment
+
+    .navBarList {
+        display: flex;
+        gap: $nav-bar-gap;
+        list-style-type: none;
+        justify-content: flex-end;
+
+        .navBarListItem {
+            font-family: $font-oranienbaum;
+            font-size: $font-size-header;
+            color: $foreground-color-global;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            .navBarLinkItem {
+                color: inherit;
+                text-decoration: none;
+            }
+        }        
+    }
+}
+
