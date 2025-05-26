@@ -1,10 +1,10 @@
-// Unterstützte Sprachen (global)
+// *** Unterstützte Sprachen (global) ***
 export type SupportedLanguageType = "de" | "en" | "ru";
 export const supportedLanguages: SupportedLanguageType[] = ["de", "en", "ru"];
-export const defaultLanguage: SupportedLanguageType = supportedLanguages[0]; // Standardsprache als Fallback definieren
+export const defaultLanguage: SupportedLanguageType = supportedLanguages[0]; // Standardsprache als Fallback über Index definieren
 
 
-// Übersetzungen für Metadaten
+// *** Angaben für die Metadaten ***
 export const metadataTranslations: Record<string, { title: string; description: string; keywords: string[] }> = {
   de: {
     title: "Reisen mit Nadja",
@@ -27,7 +27,7 @@ export const authorMetadata = [{ name: "Nadja Ogaj"}];  // Angaben zum Autor
 export const developerMetadata = "Denis Kim";           // Angaben zum Entwickler
 
 
-// Übersetzungen für die NotFound-Seite
+// *** Angaben für die NotFound-Seite ***
 export const notFoundTranslations: Record<string, { title: string; description: string; backToHome: string }> = {
     de: {
         title: "Seite nicht gefunden",
@@ -46,31 +46,53 @@ export const notFoundTranslations: Record<string, { title: string; description: 
     },
   };
 
-// Übersetzungen für Fehlerseiten
+// *** Angaben für Fehlerseiten ***
 export const errorNotificationTranslations: Record<string, { title: string; retry: string }> = {
-  de: { title: 'Ein Fehler ist aufgetreten', retry: 'Erneut versuchen' },
-  en: { title: 'An error occurred', retry: 'Try again' },
-  ru: { title: 'Произошла ошибка', retry: 'Попробовать снова' },
+  de: { title: "Ein Fehler ist aufgetreten", retry: "Erneut versuchen" },
+  en: { title: "An error occurred", retry: "Try again" },
+  ru: { title: "Произошла ошибка", retry: "Попробовать снова" },
 };
 
-// Übersetzungen für die Navigationsleiste
-export const navTranslations = {
+// *** Angaben für die Navigationsleiste ***
+export const navBarIconSize = 24; // Standardgröße für Icons in der Navigationsleiste in Pixel
+
+// Relativer Pfad zum Logo-Bild
+export const logoImageProps = {
+  src: "/assets/AppLogo.svg",
+  alt: "App Logo",
+  width: 50,
+  height: 50,
+  className: "navBarLogoImage",
+};
+
+// Typ für die Navigationselemente
+export type NavigationKey = "blogs" | "about" | "contact";
+// Typ für die Übersetzungen einer Sprache
+export type NavigationTitles = Record<NavigationKey, string>;
+// Gesamttyp für das Übersetzungsobjekt
+export type NavigationTitleTranslations = Record<SupportedLanguageType, NavigationTitles>;
+
+// Array muss bei Anpassung auch in NavigationBar.tsx aktualisiert werden
+export const navigationTitleTranslations: NavigationTitleTranslations = {
     de: {
-        home: "Startseite",
-        blogs: "Blogs",
+        blogs: "Meine Reisen",
         about: "Über mich",
         contact: "Kontakt",
     },
     en: {
-        home: "Home",
-        blogs: "Blogs",
+        blogs: "My Travels",
         about: "About me",
         contact: "Contact",
     },
     ru: {
-        home: "Главная",
-        blogs: "Блоги",
+        blogs: "Мои путешествия",
         about: "Обо мне",
-        contact: "Контакты",
+        contact: "Контакт",
     },
   }
+
+  export const navigationRoutes: Record<string, string> = {
+      blogs: "travel-blogs",
+      about: "about",
+      contact: "contact",
+  };

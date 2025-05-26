@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Oranienbaum } from 'next/font/google';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
+import { NavigationBar } from "@components/NavigationBar";
 import * as appConstants from "@utils/appConstants"
 import "@styles/globals.scss";
 
@@ -46,19 +47,20 @@ export default async function RootLayout({
     <html lang={lang ? lang : appConstants.defaultLanguage} className={oranienbaum.variable}>
       <body>
         <GlobalStateProvider>
-          <div className="root-page">
-            <header>
-              {<p> Placeholder-Header </p>   /* To-Do: Komponente der Navigationsleiste */}
-            </header>
-            
-            <main className="main-content">
-              {children}
-            </main>
-            
-            <footer>
-              {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
-            </footer>
-          </div>
+            <div className="root-page">
+              <header>
+                <NavigationBar />
+                <div className="header-underline"></div>
+              </header>
+              
+              <main className="main-content">
+                {children}
+              </main>
+              
+              <footer>
+                {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
+              </footer>
+            </div>
         </GlobalStateProvider>
       </body>
     </html>
