@@ -1,6 +1,8 @@
+import { NavigationTitles, NavigationKey, NavBarIconProps, NavBarIconKeys } from "@/types/NavigationBarTypes";
+
 // *** Unterstützte Sprachen (global) ***
 export type SupportedLanguageType = "de" | "en" | "ru";
-export const supportedLanguages: SupportedLanguageType[] = ["de", "en", "ru"];
+export const supportedLanguages: Array<SupportedLanguageType> = ["de", "en", "ru"];
 export const defaultLanguage: SupportedLanguageType = supportedLanguages[0]; // Standardsprache als Fallback über Index definieren
 
 
@@ -54,10 +56,10 @@ export const errorNotificationTranslations: Record<string, { title: string; retr
 };
 
 // *** Angaben für die Navigationsleiste ***
-export const navBarIconSize = 24; // Standardgröße für Icons in der Navigationsleiste in Pixel
+export const navBarIconSize = 28; // Standardgröße für Icons in der Navigationsleiste in Pixel
 
-// Relativer Pfad zum Logo-Bild
-export const logoImageProps = {
+// Eigenschaften zum Logo-Bild
+export const appLogoImageProps = {
   src: "/assets/AppLogo.svg",
   alt: "App Logo",
   width: 50,
@@ -65,14 +67,34 @@ export const logoImageProps = {
   className: "navBarLogoImage",
 };
 
-// Typ für die Navigationselemente
-export type NavigationKey = "blogs" | "about" | "contact";
-// Typ für die Übersetzungen einer Sprache
-export type NavigationTitles = Record<NavigationKey, string>;
+// Eigenschaften zu den Icons in der Navigationsleiste
+export const navBarIconProps: Record<NavBarIconKeys, NavBarIconProps> = {
+  search: {
+    src: "/assets/SearchIcon.svg",
+    alt: "Search Icon",
+    width: navBarIconSize,
+    height: navBarIconSize,
+    className: "navBarIcon",
+  },
+  menu: {
+    src: "/assets/MenuIcon.svg",
+    alt: "Menu Icon",
+    width: navBarIconSize,
+    height: navBarIconSize,
+    className: "navBarIcon",
+  },
+  close: {
+    src: "/assets/CloseIcon.svg",
+    alt: "Close Icon",
+    width: navBarIconSize,
+    height: navBarIconSize,
+    className: "navBarIcon",
+  },
+};
+
 // Gesamttyp für das Übersetzungsobjekt
 export type NavigationTitleTranslations = Record<SupportedLanguageType, NavigationTitles>;
 
-// Array muss bei Anpassung auch in NavigationBar.tsx aktualisiert werden
 export const navigationTitleTranslations: NavigationTitleTranslations = {
     de: {
         blogs: "Meine Reisen",
@@ -91,8 +113,9 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
     },
   }
 
-  export const navigationRoutes: Record<string, string> = {
+  export const navigationRoutes: Record<NavigationKey, string> = {
       blogs: "travel-blogs",
       about: "about",
       contact: "contact",
   };
+
