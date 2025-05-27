@@ -7,6 +7,7 @@ import styles from "@styles/components/navbar.module.scss";
 import Image from 'next/image';
 import Link from 'next/link';
 import { JSX, useMemo } from "react";
+import { SearchButton } from "./SearchModule";
 
 /**
  * NavigationBar Component
@@ -16,7 +17,7 @@ import { JSX, useMemo } from "react";
  * @returns {JSX.Element} The rendered navigation bar component.
  */
 export function NavigationBar(): JSX.Element {
-    const { language, setLanguage } = useGlobalState();
+    const { language } = useGlobalState();
 
     const navBarItems: NavigationBarItemType[] = useMemo(() => {
         return helperFunctions.getNavigationItems(language);
@@ -25,7 +26,7 @@ export function NavigationBar(): JSX.Element {
     return (
         <nav className={styles.navBar} aria-label="Navigation">
             <div className={styles.navBarLogo}>
-                <Link href={`/${language}/`} className={styles.navBarLinkLogo}>
+                <Link href={`/${language}/`}>
                     <Image 
                         src={appConstants.appLogoImageProps.src} 
                         alt={appConstants.appLogoImageProps.alt}
@@ -46,15 +47,7 @@ export function NavigationBar(): JSX.Element {
                     </li>
                 ))}
                 {/* Search Functionality */}
-                <div className="search-container">
-                    <Image 
-                        src={appConstants.navBarIconProps.search.src} 
-                        alt={appConstants.navBarIconProps.search.alt}
-                        className={styles.navBarLogoImage} 
-                        width={appConstants.navBarIconProps.search.width} 
-                        height={appConstants.navBarIconProps.search.height} 
-                    />
-                </div>
+                <SearchButton />
             </ul>
         </nav>
     );

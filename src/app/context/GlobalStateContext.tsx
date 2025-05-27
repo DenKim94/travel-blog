@@ -7,11 +7,19 @@ import * as helperFunctions from "@utils/helperFunctions"
 type GlobalStateContextType = {
     language: appConstants.SupportedLanguageType;
     setLanguage: (language: appConstants.SupportedLanguageType) => void;
+    searchFieldOpen: boolean; // Optional: Falls du den Zustand des Suchfeldes verwalten möchtest
+    setSearchFieldOpen: (open: boolean) => void; // Optional: Falls du den Zustand des Suchfeldes verwalten möchtest
+    menuBarOpen: boolean,
+    setMenuBarOpen: (open: boolean) => void; // Optional: Falls du den Zustand der Menüleiste verwalten möchtest
 };
 
 const GlobalStateContext = createContext<GlobalStateContextType>({
     language: appConstants.defaultLanguage,
     setLanguage: () => {},
+    searchFieldOpen: false,
+    setSearchFieldOpen: () => {},
+    menuBarOpen: false,
+    setMenuBarOpen: () => {},
 });
 
 export function useGlobalState() {
@@ -24,6 +32,8 @@ export function useGlobalState() {
 
 export function GlobalStateProvider({ children }: { children: ReactNode }) {
     const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(appConstants.defaultLanguage);
+    const [searchFieldOpen, setSearchFieldOpen] = useState<boolean>(false);
+    const [menuBarOpen, setMenuBarOpen] = useState<boolean>(false);
 
     // Beim ersten Laden prüfen, ob eine gespeicherte Sprache im Cache existiert
     useEffect(() => {
@@ -43,6 +53,10 @@ export function GlobalStateProvider({ children }: { children: ReactNode }) {
     const value = {
         language,
         setLanguage,
+        searchFieldOpen,
+        setSearchFieldOpen,
+        menuBarOpen,
+        setMenuBarOpen,
     };
 
     return (

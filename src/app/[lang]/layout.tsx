@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Oranienbaum } from 'next/font/google';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
 import { NavigationBar } from "@components/NavigationBar";
+import { SearchField } from "@/components/SearchModule";
 import * as appConstants from "@utils/appConstants"
 import "@styles/globals.scss";
 
@@ -51,6 +52,7 @@ export default async function RootLayout({
               <header>
                 <NavigationBar />
                 <div className="header-underline"></div>
+                <SearchField />
               </header>
               
               <main className="main-content">

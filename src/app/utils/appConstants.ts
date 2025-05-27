@@ -119,3 +119,18 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
       contact: "contact",
   };
 
+ 
+// *** Angaben für die Suchfunktion *** 
+export type SearchTitleTranslationsType = Record<SupportedLanguageType, { title: string }>;
+
+export const searchTitleTranslations: SearchTitleTranslationsType = {
+    de: {
+      title: "Suche nach Reisezielen",
+    },
+    en: {
+      title: "Search for travel destinations",
+    },
+    ru: {
+      title: "Поиск туристических направлений",
+    },
+};

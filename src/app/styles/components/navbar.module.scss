@@ -23,13 +23,34 @@
             font-size: $font-size-header;
             color: $foreground-color-global;
             text-decoration: none;
-            transition: color 0.3s ease;
 
             .navBarLinkItem {
                 color: inherit;
                 text-decoration: none;
             }
+
+            &:hover {
+                 font-weight: bold;
+            }
+
         }        
     }
 }
 
+.navBarLogoImage {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%; // Leichte Rundung für besseren Glow-Effekt
+    
+    &:hover {
+        cursor: pointer;
+        
+        // Mehrschichtiger Glow-Effekt für mehr Tiefe
+        box-shadow: 
+            0 0 20px rgba($third-color-global, 0.6),
+            0 0 40px rgba($third-color-global, 0.4),
+            0 0 60px rgba($third-color-global, 0.2);
+        
+        // Leichte Skalierung für zusätzlichen visuellen Effekt
+        transform: scale(1.01);
+    }
+}

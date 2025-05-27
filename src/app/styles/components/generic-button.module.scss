@@ -1,20 +1,32 @@
+@use '../variables.scss' as *;
+
 .genericButton{
     margin-top: 24px;
     padding: 8px 24px;
     border-radius: 5px;
-    background: #222;
+    background: $foreground-color-global;
     font-family: inherit;
     font-size: 1rem;
-    color: #fff;
+    color: $background-color-global;
     border: none;
     cursor: pointer;
 
-    .genericButton:hover {
-        background: #444;
+    &:hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: $third-color-global;
+
+        // Mehrschichtiger Glow-Effekt für mehr Tiefe
+        box-shadow: 
+            0 0 20px rgba($third-color-global, 0.4),
+            0 0 40px rgba($third-color-global, 0.2),
+            0 0 60px rgba($third-color-global, 0.1);
+        
+        // Leichte Skalierung für zusätzlichen visuellen Effekt
+        transform: scale(1.05);        
     }
-    
-    .genericButton:active {
-        scale: 0.95;
+
+    &:active {
+        scale: 0.9;
     }
 
     span {
