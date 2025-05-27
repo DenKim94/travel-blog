@@ -14,7 +14,7 @@ $font-size-h1: 1.5rem;
 $font-oranienbaum: var(--font-oranienbaum, sans-serif);
 
 // Abmessungen der Abschnitte
-$max-width: 1440px; // Maximale Breite für große Bildschirme
+$max-width: 1440px;               // Maximale Breite für große Bildschirme
 $root-page-min-height: 100svh;
 $root-page-padding: 5px;
 $root-page-gap: 15px;
@@ -26,7 +26,7 @@ $header-width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
 $footer-width: calc(#{$header-width} - 2*#{$side-gap});
 $main-content-height: calc(#{$root-page-min-height} - #{$header-height} - #{$footer-height} - 2*#{$root-page-gap} - 2*#{$root-page-padding});
 $nav-bar-gap: 40px;
-$scrollbar-offset: 16px; // Offset wegen des Scrollbalkens
+$scrollbar-offset: 6px; // Offset wegen des Scrollbalkens
 
 // Fallbacks für Padding
 $padding-fallbacks: 32px;
@@ -41,4 +41,5 @@ $padding-fallbacks: 32px;
   backgroundColorGlobal: $background-color-global;
   foregroundColorGlobal: $foreground-color-global;
   paddingFallbacks: $padding-fallbacks;
+  maxWidth: $max-width;
 }
