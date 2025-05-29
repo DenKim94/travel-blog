@@ -29,18 +29,7 @@ $main-content-height: calc(#{$root-page-min-height} - #{$header-height} - #{$foo
 $nav-bar-gap: 40px;
 $scrollbar-offset: 6px; // Offset wegen des Scrollbalkens
 
+
 // Fallbacks für Padding
 $padding-fallbacks: 32px;
 
-
-// Export der definierten Variablen für Javascript
-:export {
-  fontSizeHeader: $font-size-header;
-  fontSizeBlogTitle: $font-size-blog-title;
-  fontSizeBlogText: $font-size-blog-text;
-  fontOranienbaum: $font-oranienbaum;
-  backgroundColorGlobal: $background-color-global;
-  foregroundColorGlobal: $foreground-color-global;
-  paddingFallbacks: $padding-fallbacks;
-  maxWidth: $max-width;
-}

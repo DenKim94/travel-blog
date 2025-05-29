@@ -121,6 +121,10 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
 
  
 // *** Angaben für die Suchfunktion *** 
+export const debounceDelay:number = 1000;     // Verzögerung für die Debounce-Funktion in Millisekunden
+export const transitionDuration:number = 400; // Dauer der CSS-Transition in Millisekunden [muss mit der CSS-Transition in search.module.scss übereinstimmen]
+export const setAnimationDelay:number = 100;  // Verzögerung für die Animation in Millisekunden
+
 export type SearchTitleTranslationsType = Record<SupportedLanguageType, { title: string }>;
 
 export const searchTitleTranslations: SearchTitleTranslationsType = {

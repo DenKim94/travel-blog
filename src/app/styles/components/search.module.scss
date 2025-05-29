@@ -1,6 +1,13 @@
 @use '../variables.scss' as *;
 
 $button-border-radius: 12px;
+$search-field-width: 240px; // Breite des Suchfeldes
+$search-field-height: 60px; // Höhe des Suchfeldes
+$search-field-offset: 20px; // Offset für die Positionierung des Suchfeldes
+$search-field-z-index: 100;
+
+// Animation Variablen
+$search-field-transition-duration: 0.4s;
 
 .searchButton {
   display: flex;
@@ -27,5 +34,37 @@ $button-border-radius: 12px;
     
     &:active {
         transform: scale(0.9); // Leichte Verkleinerung bei Klick
+    }
+}
+
+.searchFieldContainer {
+    position: fixed;
+    top: calc($header-height + $search-field-offset);
+    right: calc($scrollbar-offset + $side-gap);
+    z-index: $search-field-z-index; 
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    width: $search-field-width;
+    height: $search-field-height;
+    border: 2px solid $third-color-global;
+    border-radius: $button-border-radius;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+
+    // Animation
+    transform: translateX(120%); // Startposition: außerhalb des Bildschirms rechts
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        transform $search-field-transition-duration cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity $search-field-transition-duration cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    &.open {
+        transform: translateX(0); // Endposition: sichtbar
+        opacity: 1;
+        pointer-events: auto;
     }
 }
