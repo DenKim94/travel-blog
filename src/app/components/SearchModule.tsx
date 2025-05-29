@@ -96,13 +96,13 @@ export function SearchField(): JSX.Element | null {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchFieldOpen]);
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    function handleSearchChange (event: React.ChangeEvent<HTMLInputElement>){
         setSearchQuery(event.target.value);
     };
 
     function closeSearchField() {
         setSearchQuery("");         // Suchfeld zurücksetzen
-        setSearchFieldOpen(false); // Suchfeld schließen
+        setSearchFieldOpen(false);  // Suchfeld schließen
     }
 
     if (!shouldRender) {
