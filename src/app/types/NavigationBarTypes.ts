@@ -9,12 +9,11 @@ export type NavigationKey = "blogs" | "about" | "contact";
 export type NavigationTitles = Record<NavigationKey, string>;
 
 // Eigenschaften zu den Icons in der Navigationsleiste
-export type NavBarIconKeys = "search" | "menu" | "close" ;
+export type NavBarIconKeys = "search" | "menu" | "close" | "close_search_field";
 
 export type NavBarIconProps = {
   src: string;
   alt: string;
   width: number;
   height: number;
-  className?: string;
 };

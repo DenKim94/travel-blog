@@ -74,21 +74,24 @@ export const navBarIconProps: Record<NavBarIconKeys, NavBarIconProps> = {
     alt: "Search Icon",
     width: navBarIconSize,
     height: navBarIconSize,
-    className: "navBarIcon",
   },
   menu: {
     src: "/assets/MenuIcon.svg",
     alt: "Menu Icon",
     width: navBarIconSize,
     height: navBarIconSize,
-    className: "navBarIcon",
   },
   close: {
     src: "/assets/CloseIcon.svg",
     alt: "Close Icon",
     width: navBarIconSize,
     height: navBarIconSize,
-    className: "navBarIcon",
+  },
+  close_search_field: {
+    src: "/assets/CloseIcon_Search.svg",
+    alt: "Close Search Field Icon",
+    width: 16,
+    height: 16,
   },
 };
 
@@ -121,7 +124,7 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
 
  
 // *** Angaben für die Suchfunktion *** 
-export const debounceDelay:number = 1000;     // Verzögerung für die Debounce-Funktion in Millisekunden
+export const debounceDelay:number = 1500;     // Verzögerung für die Debounce-Funktion in Millisekunden
 export const transitionDuration:number = 400; // Dauer der CSS-Transition in Millisekunden [muss mit der CSS-Transition in search.module.scss übereinstimmen]
 export const setAnimationDelay:number = 100;  // Verzögerung für die Animation in Millisekunden
 
@@ -129,12 +132,12 @@ export type SearchTitleTranslationsType = Record<SupportedLanguageType, { title:
 
 export const searchTitleTranslations: SearchTitleTranslationsType = {
     de: {
-      title: "Suche nach Reisezielen",
+      title: " Suche nach einem Reiseland ",
     },
     en: {
-      title: "Search for travel destinations",
+      title: " Search for a travel destination ",
     },
     ru: {
-      title: "Поиск туристических направлений",
+      title: " Поиск туристического направления ",
     },
 };

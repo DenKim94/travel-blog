@@ -1,10 +1,15 @@
 @use '../variables.scss' as *;
 
 $button-border-radius: 12px;
-$search-field-width: 240px; // Breite des Suchfeldes
+$search-field-width: 280px; // Breite des Suchfeldes
 $search-field-height: 60px; // Höhe des Suchfeldes
+$search-field-padding: 10px; // Padding innerhalb des Suchfeldes
 $search-field-offset: 20px; // Offset für die Positionierung des Suchfeldes
 $search-field-z-index: 100;
+$border-radius-search-field: 5px; // Border-Radius für das Suchfeld
+$close-button-size: 25px; // Größe des Schließen-Buttons
+
+$input-width: calc(#{$search-field-width} - 3*#{$search-field-padding} - #{$close-button-size}); // Breite des Eingabefeldes, abzüglich Padding
 
 // Animation Variablen
 $search-field-transition-duration: 0.4s;
@@ -13,9 +18,10 @@ $search-field-transition-duration: 0.4s;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: auto;
   background-color: inherit;
   border-radius: $button-border-radius;
-  border: 2px solid transparent; // Transparente Umrandung für den Glow-Effekt
+  border: $border-width-global solid transparent; // Transparente Umrandung für den Glow-Effekt
   cursor: pointer;
 
     &:hover {
@@ -46,11 +52,12 @@ $search-field-transition-duration: 0.4s;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    justify-content: center;
+    gap: $search-field-padding;
+    padding: $search-field-padding;
     width: $search-field-width;
     height: $search-field-height;
-    border: 2px solid $third-color-global;
+    border: $border-width-global solid $third-color-global;
     border-radius: $button-border-radius;
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 
@@ -67,4 +74,57 @@ $search-field-transition-duration: 0.4s;
         opacity: 1;
         pointer-events: auto;
     }
+}
+
+.searchInput{
+    width: $input-width;
+    border-radius: $border-radius-search-field;
+    height: 25px;
+    background-color: transparent;
+    border: 1px solid $third-color-global;
+    color: $foreground-color-global;
+    font-size: small;
+    font-family: $font-oranienbaum;
+
+    &::placeholder {
+        color: rgba($foreground-color-global, 0.6);
+    }
+
+    &:focus {
+        outline: none; // Kein Standard-Fokus-Rahmen
+        border: 2px solid $third-color-global; // Fokus-Rahmen
+    }
+}
+
+.searchCloseButton {
+    width: $close-button-size;
+    height: $close-button-size;
+    background-color: transparent;
+    border: 1px solid $third-color-global;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius-search-field;
+    cursor: pointer;
+
+    &:hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: rgba($third-color-global, 0.5);
+    }
+
+    &:active {
+        transform: scale(0.9); // Leichte Verkleinerung bei Klick
+    }
+
+    &:focus {
+        outline: none; // Kein Standard-Fokus-Rahmen
+        border: $border-width-global solid $third-color-global; // Fokus-Rahmen
+    }
+}
+
+.searchCloseIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: $third-color-global; // Farbe des Suchsymbols
 }

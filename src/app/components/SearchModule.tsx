@@ -101,7 +101,7 @@ export function SearchField(): JSX.Element | null {
     };
 
     function closeSearchField() {
-        setSearchQuery(""); // Suchfeld zurücksetzen
+        setSearchQuery("");         // Suchfeld zurücksetzen
         setSearchFieldOpen(false); // Suchfeld schließen
     }
 
@@ -120,16 +120,16 @@ export function SearchField(): JSX.Element | null {
                     className={styles.searchInput}
                 />
                 <button
-                    className={styles.closeButton}
+                    className={styles.searchCloseButton}
                     onClick={closeSearchField}
                     aria-label="Suche schließen"
                 >
                     <Image
-                        src={appConstants.navBarIconProps.close.src}
-                        alt={appConstants.navBarIconProps.close.alt}
-                        className={styles.searchIcon}
-                        width={10}
-                        height={10}
+                        src={appConstants.navBarIconProps.close_search_field.src}
+                        alt={appConstants.navBarIconProps.close_search_field.alt}
+                        className={styles.searchCloseIcon}
+                        width={appConstants.navBarIconProps.close_search_field.width}
+                        height={appConstants.navBarIconProps.close_search_field.height}
                     />
                 </button>
             </div>
