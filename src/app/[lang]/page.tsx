@@ -1,7 +1,12 @@
 import styles from "@styles/root_page.module.scss";
 // import * as appConstants from "@utils/appConstants";
 
-export default function RootPage() {
+async function wait(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export default async function RootPage() {
+  await wait(5000); // Simulate a delay
 
   return (
     <>

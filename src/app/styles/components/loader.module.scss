@@ -1,0 +1,40 @@
+@use '../variables.scss' as *;
+
+$logo-size: 100px; // Größe des Logos
+$loader-size: 110px; // Größe des Loaders
+
+.customLoader {
+  position: fixed;
+  inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
+  z-index: 1000;
+}
+
+.spinner {
+  position: absolute;
+  width: $loader-size;
+  height: $loader-size;
+  border: 5px solid #e0e0e0;
+  border-top: 5px solid $third-color-global;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+.logoWrapper {
+  position: absolute;
+  width: $logo-size;
+  height: $logo-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
