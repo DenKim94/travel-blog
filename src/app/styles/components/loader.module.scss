@@ -1,7 +1,7 @@
 @use '../variables.scss' as *;
 
 $logo-size: 100px; // Größe des Logos
-$loader-size: 110px; // Größe des Loaders
+$loader-size: calc(#{$logo-size} + 10px); // Größe des Loaders
 
 .customLoader {
   position: fixed;
