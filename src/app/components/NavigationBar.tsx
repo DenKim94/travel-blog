@@ -6,7 +6,6 @@ import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/navbar.module.scss";
 import variables from "@styles/variables.module.scss";
 import Image from 'next/image';
-import Link from 'next/link';
 import { JSX, useMemo } from "react";
 import { SearchButton } from "./SearchModule";
 
@@ -56,7 +55,7 @@ export function NavigationBar(): JSX.Element {
     return (
         <nav className={styles.navBar} aria-label="Navigation">
             <div className={styles.navBarLogo}>
-                <Link href={`/${language}/`}>
+                <a href={`/${language}/`}>
                     <Image 
                         src={appConstants.appLogoImageProps.src} 
                         alt={appConstants.appLogoImageProps.alt}
@@ -65,8 +64,9 @@ export function NavigationBar(): JSX.Element {
                         height={appConstants.appLogoImageProps.height} 
                         priority={true}
                     />
-                </Link>
+                </a>
             </div>
+            
             {/* Navigation Items */}
             <ul className={styles.navBarList} role="menubar">
                 {navBarItems.map((item) => (
