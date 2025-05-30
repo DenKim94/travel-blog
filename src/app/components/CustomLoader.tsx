@@ -10,8 +10,8 @@ export function CustomLoader() {
         <Image
           src={appConstants.appLogoImageProps.src}
           alt="Loading Icon"
-          width={100}
-          height={100}
+          width={100}  // Value should match $logo-size in loader.module.scss
+          height={100} // Value should match $logo-size in loader.module.scss
         />
       </div>
     </div>
