@@ -1,7 +1,7 @@
-@use '../variables.scss' as *;
+@use '../variables.module.scss' as *;
 
-$logo-size: 100px; // Größe des Logos
-$loader-size: calc(#{$logo-size} + 10px); // Größe des Loaders
+$loader-logo-size: 100px; // Größe des Logos
+$loader-size: calc(#{$loader-logo-size} + 10px); // Größe des Loaders
 
 .customLoader {
   position: fixed;
@@ -26,8 +26,8 @@ $loader-size: calc(#{$logo-size} + 10px); // Größe des Loaders
 
 .logoWrapper {
   position: absolute;
-  width: $logo-size;
-  height: $logo-size;
+  width: $loader-logo-size;
+  height: $loader-logo-size;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,4 +37,9 @@ $loader-size: calc(#{$logo-size} + 10px); // Größe des Loaders
 @keyframes spin {
   0%   { transform: rotate(0deg);}
   100% { transform: rotate(360deg);}
+}
+
+:export {
+  customLoaderLogoSize: $loader-logo-size;
+  customLoaderSize: $loader-size;
 }
