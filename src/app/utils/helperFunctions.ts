@@ -22,13 +22,13 @@ export function getNavigationItems(
     language: appConstants.SupportedLanguageType,
 ): Array<NavigationBarItemType> {
 
-    const baseUrl: string = `/${language}`
-    const { navigationTitleTranslations, navigationRoutes } = appConstants;
-
-    const navBarItems: Array<NavigationBarItemType> = Object.entries(navigationRoutes).map(([key, value]) => (
+    const { navigationTitleTranslations, navigationIds } = appConstants;
+    const baseURL = `/${language}/`; // Basis-URL für die Navigation
+    const navBarItems: Array<NavigationBarItemType> = Object.entries(navigationIds).map(([key, value]) => (
         {
             title: navigationTitleTranslations[language][key as keyof typeof navigationTitleTranslations[typeof language]],
-            route: `${baseUrl}/${value}`
+            id: `${value}`,
+            route: `${baseURL}${value}`
         }
     ));
 

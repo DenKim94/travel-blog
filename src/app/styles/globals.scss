@@ -1,11 +1,11 @@
 // This file contains global styles for the application.
-@use './variables.scss' as *;
+@use './variables.module.scss' as *;
 
 html,
 body {
   overflow-x: hidden;
   font-family: $font-oranienbaum;
-
+  scroll-behavior: smooth;
 }
 
 body {

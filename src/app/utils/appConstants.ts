@@ -67,7 +67,8 @@ export const appLogoImageProps = {
   className: "navBarLogoImage",
 };
 
-// Eigenschaften zu den Icons in der Navigationsleiste
+
+// *** Angaben für die Navigationselemente ***
 export const navBarIconProps: Record<NavBarIconKeys, NavBarIconProps> = {
   search: {
     src: "/assets/SearchIcon.svg",
@@ -116,16 +117,16 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
     },
   }
 
-  export const navigationRoutes: Record<NavigationKey, string> = {
+  export const navigationIds: Record<NavigationKey, string> = {
       blogs: "travel-blogs",
       about: "about",
       contact: "contact",
   };
 
+  export const fallBackId: string = "home"; // Fallback-ID für die Navigation, wenn kein passendes Element gefunden wird
  
 // *** Angaben für die Suchfunktion *** 
 export const debounceDelay:number = 1500;     // Verzögerung für die Debounce-Funktion in Millisekunden
-export const transitionDuration:number = 400; // Dauer der CSS-Transition in Millisekunden [muss mit der CSS-Transition in search.module.scss übereinstimmen]
 export const setAnimationDelay:number = 100;  // Verzögerung für die Animation in Millisekunden
 
 export type SearchTitleTranslationsType = Record<SupportedLanguageType, { title: string }>;

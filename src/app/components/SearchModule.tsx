@@ -1,5 +1,6 @@
 "use client"
 import styles from "@styles/components/search.module.scss";
+import variables from "@styles/variables.module.scss";
 import { useGlobalState } from '@/context/GlobalStateContext';
 import { useDebouncedValue } from '@hooks/useDebouncedValue';
 import Image from 'next/image';
@@ -35,6 +36,8 @@ export function SearchField(): JSX.Element | null {
     const modalRef = useRef<HTMLDivElement>(null);
     const debouncedQuery = useDebouncedValue(searchQuery, appConstants.debounceDelay);
 
+    const searchFieldTransitionDuration: number = parseFloat(variables.searchFieldTransitionDuration) * 1000 || 300 ; // Umwandlung in Millisekunden
+  
     // Komponente mounten wenn geöffnet wird
     useEffect(() => {
         if (searchFieldOpen) {
@@ -55,11 +58,11 @@ export function SearchField(): JSX.Element | null {
         if (!searchFieldOpen && !isAnimating) {
             const timer = setTimeout(() => {
                 setShouldRender(false);
-            }, appConstants.transitionDuration); // Entspricht der Transition-Dauer
+            }, searchFieldTransitionDuration); // Entspricht der Transition-Dauer
             return () => clearTimeout(timer);
         }
 
-    }, [searchFieldOpen, isAnimating]);
+    }, [searchFieldOpen, isAnimating, searchFieldTransitionDuration]);
 
     // Focus setzen nach Animation
     useEffect(() => {

@@ -4,6 +4,7 @@ import { useGlobalState } from '@context/GlobalStateContext';
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/navbar.module.scss";
+import variables from "@styles/variables.module.scss";
 import Image from 'next/image';
 import Link from 'next/link';
 import { JSX, useMemo } from "react";
@@ -23,6 +24,35 @@ export function NavigationBar(): JSX.Element {
         return helperFunctions.getNavigationItems(language);
     }, [language]);
 
+    const headerHeight = parseInt(variables.headerHeight, 10);
+
+    /**
+     * Handles smooth scrolling to target sections
+     * @param targetId - The ID of the target section
+     * @param event - The click event
+     */
+    function handleSmoothScroll (targetId: string, event: React.MouseEvent<HTMLAnchorElement>) {
+        event.preventDefault();
+
+        const sectionId = event.currentTarget?.getAttribute('href')?.replace('#', '') || targetId;
+        const targetElement = document.getElementById(sectionId);
+
+        if (!targetElement) {
+            console.warn(`Could not find element with ID: "${sectionId}"`);
+            return;
+        }
+
+        // Calculate position with header offset
+        const targetPosition = targetElement.offsetTop - headerHeight;
+
+        targetElement?.scrollIntoView({ block: 'start' });
+
+        window.scrollTo({
+            top: Math.max(0, targetPosition), // Ensure we don't scroll above page top
+            behavior: 'smooth'
+        });
+    }
+
     return (
         <nav className={styles.navBar} aria-label="Navigation">
             <div className={styles.navBarLogo}>
@@ -38,12 +68,17 @@ export function NavigationBar(): JSX.Element {
                 </Link>
             </div>
             {/* Navigation Items */}
-            <ul className={styles.navBarList}>
+            <ul className={styles.navBarList} role="menubar">
                 {navBarItems.map((item) => (
                     <li key={item.title} className={styles.navBarListItem}>
-                        <Link href={item.route} className={styles.navBarLinkItem}>
+                        <a href={`#${item.id}`}
+                            className={styles.navBarLinkItem}
+                            role="menuitem"
+                            tabIndex={0}
+                            aria-label={item.title}
+                            onClick={(e) => handleSmoothScroll(item.id, e)}>
                             {item.title}
-                        </Link>
+                        </a>
                     </li>
                 ))}
                 {/* Search Functionality */}
