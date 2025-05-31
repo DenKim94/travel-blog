@@ -8,6 +8,7 @@ import variables from "@styles/variables.module.scss";
 import Image from 'next/image';
 import { JSX, useMemo } from "react";
 import { SearchButton } from "./SearchModule";
+import { GlobalLanguageSetter } from "./LanguageSetter";
 
 /**
  * NavigationBar Component
@@ -47,13 +48,14 @@ export function NavigationBar(): JSX.Element {
         targetElement?.scrollIntoView({ block: 'start' });
 
         window.scrollTo({
-            top: Math.max(0, targetPosition), // Ensure we don't scroll above page top
+            top: Math.max(0, targetPosition),
             behavior: 'smooth'
         });
     }
 
     return (
         <nav className={styles.navBar} aria-label="Navigation">
+            {/* Application Logo */}
             <div className={styles.navBarLogo}>
                 <a href={`/${language}/`}>
                     <Image 
@@ -77,12 +79,14 @@ export function NavigationBar(): JSX.Element {
                             tabIndex={0}
                             aria-label={item.title}
                             onClick={(e) => handleSmoothScroll(item.id, e)}>
-                            {item.title}
+                            {item.title.toUpperCase()}
                         </a>
                     </li>
                 ))}
                 {/* Search Functionality */}
                 <SearchButton />
+                {/* Language Selector */}
+                <GlobalLanguageSetter />
             </ul>
         </nav>
     );

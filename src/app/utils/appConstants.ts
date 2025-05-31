@@ -5,29 +5,61 @@ export type SupportedLanguageType = "de" | "en" | "ru";
 export const supportedLanguages: Array<SupportedLanguageType> = ["de", "en", "ru"];
 export const defaultLanguage: SupportedLanguageType = supportedLanguages[0]; // Standardsprache als Fallback über Index definieren
 
+export const languageOptions: Record<SupportedLanguageType, { strapiLanguageName: string; shortName: string; longName: string }> = {
+  de: { strapiLanguageName: "de", shortName: "DEU", longName: "Deutsch" },
+  en: { strapiLanguageName: "en", shortName: "ENG", longName: "English" },
+  ru: { strapiLanguageName: "ru-RU", shortName: "RUS", longName: "Русский" },
+};
 
 // *** Angaben für die Metadaten ***
-export const metadataTranslations: Record<string, { title: string; description: string; keywords: string[] }> = {
+type MetadataValues = {
+  title: string;
+  description: string;
+  keywords: string[]; 
+  author: { name: string }[];
+  developer?: string; // Optional, falls Entwicklerinformationen benötigt werden
+};
+
+export const metadataTranslations: Record<SupportedLanguageType | string, MetadataValues> = {
   de: {
     title: "Reisen mit Nadja",
     description: "Der Reiseblog für Reisebegeisterte.",
     keywords: ["Reisen", "Reiseblog", "Reisetipps", "Reiseziele"],
+    author: [{ name: "Nadja Ogaj"}],
+    developer: "Denis Kim",
   },
+
   en: {
     title: "Travel with Nadja",
-    description: "The travel blog for travel enthusiasts.",
+    description: "The travel blog for travelers.",
     keywords: ["Travel", "Travel blog", "Travel tips", "Destinations"],
+    author: [{ name: "Nadja Ogaj"}],
+    developer: "Denis Kim",
   },
+  
   ru: {
     title: "Путешествия с Надей",
-    description: "Блог для любителей путешествий.",
-    keywords: ["Путешествия", "Блог", "Советы", "Направления"],
+    description: "Блог о путешествиях для путешественников.",
+    keywords: ["Путешествия", "Блог", "Советы", "Страны путешествий"],
+    author: [{ name: "Надя Огай"}],
+    developer: "Денис Ким",
   },
 };
 
-export const authorMetadata = [{ name: "Nadja Ogaj"}];  // Angaben zum Autor
-export const developerMetadata = "Denis Kim";           // Angaben zum Entwickler
+// *** Angaben für die Cookies und lokalen Speicher ***
+type StorageSettings = {
+    path: string;
+    maxAge: number;
+    sameSite: "Lax" | "Strict" | "None";
+    storageKey: string;
+};
 
+export const storageSettings: StorageSettings = {
+    path: "/", 
+    maxAge: 60 * 60 * 2, // 2 Stunden
+    sameSite: "Lax" as const,
+    storageKey: "preferred-language",
+};
 
 // *** Angaben für die NotFound-Seite ***
 export const notFoundTranslations: Record<string, { title: string; description: string; backToHome: string }> = {
@@ -106,12 +138,12 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
         contact: "Kontakt",
     },
     en: {
-        blogs: "My Travels",
+        blogs: "My blogs",
         about: "About me",
         contact: "Contact",
     },
     ru: {
-        blogs: "Мои путешествия",
+        blogs: "Мои блоги",
         about: "Обо мне",
         contact: "Контакт",
     },
@@ -139,6 +171,6 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
       title: " Search for a travel destination ",
     },
     ru: {
-      title: " Поиск туристического направления ",
+      title: " Поиск по стране путешествия ",
     },
 };
