@@ -1,6 +1,7 @@
 // This file contains global styles for the application.
 @use './variables.module.scss' as *;
 
+
 html,
 body {
   overflow-x: hidden;
@@ -66,20 +67,32 @@ header {
   // Für Safari und ältere Browser
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth; // Aktiviert sanftes Scrollen
+
+  &::-webkit-scrollbar {
+    // Scrollbalken
+    width: $scrollbar-offset; // Breite des Scrollbalkens
+    background: transparent;
+  }  
+
+  &::-webkit-scrollbar-thumb {
+    // Scrollbalken-Farbe
+    background-color: transparent;
+    border-radius: 10px;
+  }
+
+  // Scrollbar beim Hovern über den Container anzeigen
+  &:hover {    
+    &::-webkit-scrollbar-thumb {
+      background-color: $foreground-color-global;
+
+      &:hover {
+        background-color: $third-color-global; // Farbe beim Hover
+      }
+    }
+  }
 }
 
-.main-content::-webkit-scrollbar {
-  // Scrollbalken
-  width: $scrollbar-offset; // Breite des Scrollbalkens
-  background: transparent;
-}
-
-.main-content::-webkit-scrollbar-thumb {
-  // Scrollbalken-Farbe
-  background: $foreground-color-global; // Halbdurchsichtige Farbe
-  border-radius: 10px; // Abgerundete Ecken
-}
-
+// Footer Styles
 footer {
   max-width: calc(#{$max-width} - 2*#{$side-gap});
   width: calc(#{$header-width} - 2*#{$side-gap});       /* gewünschte Länge */
