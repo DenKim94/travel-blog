@@ -1,10 +1,10 @@
 // Globale Farben
 $background-color-global: rgba(243, 239, 228, 1);
 $foreground-color-global: #171717;
-$third-color-global: rgba(159, 145, 100, 1);
+$third-color-global: rgba(159, 145, 100, 0.8);
 
 // Schriftgrößen
-$font-size-header: 1.4rem;
+$font-size-header: 1.3rem;
 $font-size-footer: 1rem;
 $font-size-blog-title: 1.25rem;
 $font-size-blog-text: 0.9rem;
@@ -31,7 +31,7 @@ $border-width-global: 1.5px;
 $scrollbar-offset: 6px; // Offset wegen des Scrollbalkens
 
 // Animation
-$search-field-transition-duration: 0.4s;
+$search-field-transition-duration: 0.5s;
 
 // Fallbacks für Padding
 $padding-fallbacks: 32px;

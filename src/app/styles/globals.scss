@@ -71,13 +71,19 @@ header {
   &::-webkit-scrollbar {
     // Scrollbalken
     width: $scrollbar-offset; // Breite des Scrollbalkens
-    background: transparent;
+    background-color: transparent;
+    // Safari-Fix: Explizite Höhe setzen
+    height: 100%;
   }  
 
   &::-webkit-scrollbar-thumb {
     // Scrollbalken-Farbe
     background-color: transparent;
     border-radius: 10px;
+    // Safari-Fix: Entferne Standard-Border
+    border: none;
+    // Safari-Fix: Verhindere Standard-Styling
+    -webkit-appearance: none;
   }
 
   // Scrollbar beim Hovern über den Container anzeigen
