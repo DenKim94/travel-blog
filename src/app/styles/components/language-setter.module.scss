@@ -1,0 +1,101 @@
+@use '../variables.module.scss' as *;
+
+$border-radius-selector: 5px; // Radius für die Ecken des Language Selectors
+$border-width: 1px; // Dicke des Rahmens des Language Selectors
+$border-radius-dropdown: 4px; // Radius für die Ecken des Dropdowns
+$dropdown-width: 120px; // Breite des Dropdowns
+$dropdown-max-height: 200px; // Maximale Höhe des Dropdowns
+$dropdown-padding: 5px; // Padding innerhalb der Dropdown-Optionen
+$min-width-selector: 70px; // Minimale Breite des Language Selectors
+$min-height-selector: 35px; // Minimale Höhe des Language Selectors
+$margin-left-arrow: 5px; // Margin links vom Dropdown-Pfeil
+$transition-duration: 0.2s; // Dauer der Transition für Hover-Effekte
+$transition-timing-function: ease; // Timing-Funktion für die Transition
+$drop-down-z-index: 500; // Z-Index für das Dropdown, um es über anderen Elementen anzuzeigen
+
+
+.languageSetter {
+    position: relative;
+    display: inline-block;
+    
+    .languageSelector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: $border-width solid $foreground-color-global;
+        border-radius: $border-radius-selector;
+        background: $background-color-global;
+        cursor: pointer;
+        min-width: $min-width-selector;
+        min-height: $min-height-selector;
+        transition: border-color $transition-duration $transition-timing-function;
+        
+        &:hover, &:focus {
+            border-color: $third-color-global;
+            background: $third-color-global;
+            font-weight: bold;
+            outline: none;
+        }
+        
+        &.open {
+            border-bottom-color: transparent;
+            border-radius: $border-radius-selector $border-radius-selector 0 0;
+        }
+    }
+    
+    .selectedLanguage {
+        font-size: $font-size-header;
+    }
+    
+    .dropdownArrow {
+        display: flex;
+        font-size: $font-size-header;
+        align-items: center;
+        justify-content: center;
+        margin-left: $margin-left-arrow;
+        transition: transform $transition-duration $transition-timing-function;
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
+    }
+    
+    .languageDropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: $dropdown-width;
+        background: $background-color-global;
+        border: $border-width solid $third-color-global;
+        border-top: none;
+        border-radius: 0 $border-radius-selector $border-radius-selector $border-radius-selector;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+        z-index: $drop-down-z-index;
+        max-height: $dropdown-max-height;
+        overflow-y: auto;
+    }
+    
+    .languageOption {
+        display: flex;
+        align-items: center;
+        padding: $dropdown-padding;
+        cursor: pointer;
+        transition: background-color $transition-duration $transition-timing-function;
+
+        &:hover, &:focus {
+            background: $third-color-global;
+            font-weight: bold;
+            outline: none;
+        }
+        
+        &.selected {
+            font-weight: bold;
+        }
+
+        &.disabled {
+            color: rgba(0, 0, 0, 0.5);
+            cursor: not-allowed;
+        }
+    }
+}
