@@ -30,23 +30,30 @@ export function useGlobalState() {
     return context;
 };
 
-export function GlobalStateProvider({ children }: { children: ReactNode }) {
-    const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(appConstants.defaultLanguage);
+interface GlobalStateProviderProps {
+  children: ReactNode;
+  initialLanguage?: string;
+}
+
+export function GlobalStateProvider({ children, initialLanguage = appConstants.defaultLanguage }: GlobalStateProviderProps) {
+    const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(initialLanguage as appConstants.SupportedLanguageType);
     const [searchFieldOpen, setSearchFieldOpen] = useState<boolean>(false);
     const [menuBarOpen, setMenuBarOpen] = useState<boolean>(false);
 
     // Beim ersten Laden prüfen, ob eine gespeicherte Sprache im Cache existiert
     useEffect(() => {
-        const savedLanguage = localStorage.getItem("preferred-language");
+        const savedLanguage = localStorage.getItem(appConstants.storageSettings.storageKey);
         if (savedLanguage && helperFunctions.isSupportedLanguage(savedLanguage)) {
             setLanguageState(savedLanguage as appConstants.SupportedLanguageType);
+            helperFunctions.setLanguageCookie(savedLanguage);
         }
-    }, []);
-
+    }, [initialLanguage]);
+  
     // Funktion zum Ändern und Cachen der Sprache
     const setLanguage = (language: appConstants.SupportedLanguageType) => {
         setLanguageState(language);
-        localStorage.setItem("preferred-language", language);
+        localStorage.setItem(appConstants.storageSettings.storageKey, language);
+        helperFunctions.setLanguageCookie(language);
     };
 
     // Context-Wert

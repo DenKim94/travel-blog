@@ -23,14 +23,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Fallback auf Deutsch, falls Sprache nicht unterstützt wird
   const {lang} = await params;
-  const meta = appConstants.metadataTranslations[lang] || appConstants.metadataTranslations[appConstants.defaultLanguage];
+  const meta = appConstants.metadataTranslations[lang] || 
+                appConstants.metadataTranslations[appConstants.defaultLanguage];
 
   return {
     title: meta.title,
     description: meta.description,
     keywords: meta.keywords,
-    authors: appConstants.authorMetadata, 
-    creator: appConstants.developerMetadata,
+    authors: meta.author,
+    creator: meta.developer ? meta.developer : undefined, // Optional, falls Entwicklerinformationen benötigt werden
   };
 }
 
@@ -42,12 +43,12 @@ export default async function RootLayout({
   params: Promise<{lang: string}>
 }>) {
   const {lang} = await params;
-  console.log(`> Standardsprache: "${lang}"`);
+
 
   return (
-    <html lang={lang ? lang : appConstants.defaultLanguage} className={oranienbaum.variable}>
+    <html lang={lang} className={oranienbaum.variable}>
       <body>
-        <GlobalStateProvider>
+        <GlobalStateProvider initialLanguage={lang}>
             <div className="root-page">
               <header>
                 <NavigationBar />
