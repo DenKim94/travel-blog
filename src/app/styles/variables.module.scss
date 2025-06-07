@@ -36,6 +36,8 @@ $search-field-transition-duration: 0.5s;
 // Fallbacks für Padding
 $padding-fallbacks: 32px;
 
+// Schwellenwerte für responsive Design
+$mobile-header-width: 720px;
 
 
 // *** Export der Variablen für TypeScript ***
@@ -43,4 +45,5 @@ $padding-fallbacks: 32px;
     headerHeight: $header-height;
     searchFieldTransitionDuration: $search-field-transition-duration;
     appMaxWidth: $max-width;
+    mobileHeaderWidth: $mobile-header-width;
 }

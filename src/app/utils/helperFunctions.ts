@@ -25,6 +25,13 @@ export function getNavigationItems(
 
     const { navigationTitleTranslations, navigationIds } = appConstants;
     const baseURL = `/${language}/`; // Basis-URL für die Navigation
+
+    // Prüfung ob die Sprache im Übersetzungsobjekt existiert
+    if (!navigationTitleTranslations[language]) {
+        console.error("Ungültige Sprache: ", language);
+        return []; // Oder Fallback-Werte zurückgeben
+    }
+
     const navBarItems: Array<NavigationBarItemType> = Object.entries(navigationIds).map(([key, value]) => (
         {
             title: navigationTitleTranslations[language][key as keyof typeof navigationTitleTranslations[typeof language]],
@@ -36,6 +43,14 @@ export function getNavigationItems(
     return navBarItems;
 }
 
+/**
+ * Holt die aktuelle Sprache aus den Cookies.
+ * Wenn die Sprache nicht gesetzt wurde oder ungültig ist,
+ * wird die Standardsprache zurückgegeben.
+ * 
+ * @param cookieStore - Ein Objekt, das die Cookies enthält
+ * @returns Die aktuelle Sprache
+ */
 export function getLanguageFromCookies(cookieStore: ReadonlyRequestCookies): string {
   const languageCookie = cookieStore.get(appConstants.storageSettings.storageKey);
   
@@ -46,8 +61,42 @@ export function getLanguageFromCookies(cookieStore: ReadonlyRequestCookies): str
   return appConstants.defaultLanguage;
 }
 
+/**
+ * Setzt einen Cookie, der die bevorzugte Sprache des Benutzers angibt.
+ * @param language - Die zu setzende Sprache.
+ */
 export function setLanguageCookie(language: string) {
   if (typeof window !== 'undefined') {
     document.cookie = `${appConstants.storageSettings.storageKey}=${language}; path=${appConstants.storageSettings.path}; max-age=${appConstants.storageSettings.maxAge}; SameSite=${appConstants.storageSettings.sameSite}`;
   }
+}
+
+/**
+ * Die Funktion übernimmt das Scrollen zu einem bestimmten Element auf der Seite.
+ * 
+ * @param targetId - Die ID des Ziels, zu dem gescrollt werden soll.
+ * @param headerHeight - Die Höhe des Headers, der von der Scroll-Position
+ *                       abgezogen werden soll. Defaultwert ist 0.
+ * @param clickEvent - Das Event, das den Link-Click auslöst.
+ */
+export function handleSmoothScroll (targetId: string, headerHeight: number = 0, clickEvent: React.MouseEvent<HTMLAnchorElement>) {
+    clickEvent.preventDefault();
+    
+    const sectionId = clickEvent.currentTarget?.getAttribute('href')?.replace('#', '') || targetId;
+    const targetElement = document.getElementById(sectionId);
+
+    if (!targetElement) {
+        console.warn(`Could not find element with ID: "${sectionId}"`);
+        return;
+    }
+
+    // Header offset
+    const targetPosition = targetElement.offsetTop - headerHeight;
+
+    targetElement?.scrollIntoView({ block: 'start' });
+
+    window.scrollTo({
+        top: Math.max(0, targetPosition),
+        behavior: 'smooth'
+    });
 }

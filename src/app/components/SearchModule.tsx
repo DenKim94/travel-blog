@@ -15,7 +15,7 @@ export function SearchButton(): JSX.Element {
     }
 
     return (
-        <button className={styles.searchButton} aria-label="Search" onClick={toggleSearchField} >
+        <button className={styles.searchButton} aria-label="Search Button" onClick={toggleSearchField} >
             <Image
                 src={appConstants.navBarIconProps.search.src}
                 alt={appConstants.navBarIconProps.search.alt}

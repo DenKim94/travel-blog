@@ -1,0 +1,51 @@
+@use '../variables.module.scss' as *;
+
+$button-border-radius: 6px;
+
+.menuButton{  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: auto;
+    background-color: inherit;
+    border-radius: $button-border-radius;
+    border: $border-width-global solid transparent; // Transparente Umrandung für den Glow-Effekt
+    cursor: pointer;
+
+    // Menüseitenleiste offen
+    &--visible {
+        display: none;
+    }
+
+    // Menüseitenleiste geschlossen
+    &--hidden {
+        display: flex;
+    }
+
+    &:hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: $third-color-global;
+
+        // Mehrschichtiger Glow-Effekt für mehr Tiefe
+        box-shadow: 
+            0 0 20px rgba($third-color-global, 0.6),
+            0 0 40px rgba($third-color-global, 0.4),
+            0 0 60px rgba($third-color-global, 0.2);
+        
+        // Leichte Skalierung für zusätzlichen visuellen Effekt
+        transform: scale(1.05);
+    }
+    
+    &:active {
+        transform: scale(0.9); // Leichte Verkleinerung bei Klick
+    }
+}
+
+.mobileMenu{
+
+}
+
+.mobileMenuList{
+
+
+}

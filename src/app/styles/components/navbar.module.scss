@@ -17,6 +17,16 @@
         list-style-type: none;
         justify-content: flex-end;
         align-items: center;
+        
+        // Mobile-spezifische Modifikation
+        &--hidden {
+            display: none;
+        }
+        
+        // Desktop-spezifische Modifikation (optional, da Standard)
+        &--visible {
+            display: flex;
+        }
 
         .navBarListItem {
             font-family: $font-oranienbaum;

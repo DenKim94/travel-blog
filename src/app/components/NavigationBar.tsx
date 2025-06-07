@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { JSX, useMemo } from "react";
 import { SearchButton } from "./SearchModule";
 import { GlobalLanguageSetter } from "./LanguageSetter";
+import { MobileNavigationMenu } from "./MobileNavigationMenu";
+import useWindowSize from "@/hooks/useWindowSize";
 
 /**
  * NavigationBar Component
@@ -25,33 +27,8 @@ export function NavigationBar(): JSX.Element {
     }, [language]);
 
     const headerHeight = parseInt(variables.headerHeight, 10);
-
-    /**
-     * Handles smooth scrolling to target sections
-     * @param targetId - The ID of the target section
-     * @param event - The click event
-     */
-    function handleSmoothScroll (targetId: string, event: React.MouseEvent<HTMLAnchorElement>) {
-        event.preventDefault();
-
-        const sectionId = event.currentTarget?.getAttribute('href')?.replace('#', '') || targetId;
-        const targetElement = document.getElementById(sectionId);
-
-        if (!targetElement) {
-            console.warn(`Could not find element with ID: "${sectionId}"`);
-            return;
-        }
-
-        // Calculate position with header offset
-        const targetPosition = targetElement.offsetTop - headerHeight;
-
-        targetElement?.scrollIntoView({ block: 'start' });
-
-        window.scrollTo({
-            top: Math.max(0, targetPosition),
-            behavior: 'smooth'
-        });
-    }
+    const { width: windowWidth } = useWindowSize({ debounceDelay: appConstants.windowUpdateDelay_ms });
+    const isMobile = windowWidth <= parseInt(variables.mobileHeaderWidth, 10);
 
     return (
         <nav className={styles.navBar} aria-label="Navigation">
@@ -68,17 +45,21 @@ export function NavigationBar(): JSX.Element {
                     />
                 </a>
             </div>
-            
+            {isMobile && (
+                <MobileNavigationMenu /> 
+            )}            
             {/* Navigation Items */}
-            <ul className={styles.navBarList} role="menubar">
-                {navBarItems.map((item) => (
+            <ul className={`${styles.navBarList} ${isMobile ? styles['navBarList--hidden'] : styles['navBarList--visible']}`} 
+                role="menubar" aria-label="Navigation Menu">
+
+                {navBarItems?.map((item) => (
                     <li key={item.title} className={styles.navBarListItem}>
                         <a href={`#${item.id}`}
                             className={styles.navBarLinkItem}
                             role="menuitem"
                             tabIndex={0}
                             aria-label={item.title}
-                            onClick={(e) => handleSmoothScroll(item.id, e)}>
+                            onClick={(e) => helperFunctions.handleSmoothScroll(item.id, headerHeight, e)}>
                             {item.title.toUpperCase()}
                         </a>
                     </li>
