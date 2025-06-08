@@ -89,7 +89,7 @@ export const errorNotificationTranslations: Record<string, { title: string; retr
 
 // *** Angaben für die Navigationsleiste ***
 export const navBarIconSize = 28; // Standardgröße für Icons in der Navigationsleiste in Pixel
-export const windowUpdateDelay_ms = 100;
+export const windowUpdateDelay_ms = 60;
 
 // Eigenschaften zum Logo-Bild
 export const appLogoImageProps = {

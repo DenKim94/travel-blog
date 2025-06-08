@@ -11,6 +11,7 @@ body {
 
 body {
   max-width: 100vw;
+  min-width: $min-width;
   min-height: 100vh;
   color: $foreground-color-global;
   background: $background-color-global;
@@ -26,6 +27,7 @@ body {
 
 header {
   max-width: $max-width;
+  min-width: $min-width;
   grid-row-start: 1;
   align-items: center;
   width: $header-width;
@@ -34,6 +36,7 @@ header {
 
 .header-underline {
   max-width: calc(#{$max-width} - 2*#{$side-gap} - #{$scrollbar-offset});
+  min-width: calc(#{$min-width} - 2*#{$side-gap} - #{$scrollbar-offset});
   width: calc(#{$header-width} - 2*#{$side-gap} - #{$scrollbar-offset}); // Adjusted for better alignment
   height: $header-underline-height;
   background: #000;
@@ -43,6 +46,7 @@ header {
 .root-page {
   display: grid;
   grid-template-rows: $header-height 1fr $footer-height;
+  min-width: $min-width;
   width: 100%;
   align-items: center;
   justify-items: center;
@@ -60,6 +64,7 @@ header {
   overflow-y: auto;               // Ermöglicht Scrollen innerhalb des Hauptbereichs
   scroll-snap-type: y proximity;  // Aktiviert Snap-Scrolling für Sektionen
   height: $main-content-height;
+  min-width: $min-width;
   width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
   padding-left: $side-gap;
   padding-right: $side-gap;

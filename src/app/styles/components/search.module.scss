@@ -1,15 +1,14 @@
 @use '../variables.module.scss' as *;
 
-$button-border-radius: 12px;
 $search-field-width: 280px; // Breite des Suchfeldes
 $search-field-height: 60px; // Höhe des Suchfeldes
 $search-field-padding: 10px; // Padding innerhalb des Suchfeldes
 $search-field-offset: 20px; // Offset für die Positionierung des Suchfeldes
-$search-field-z-index: 100;
 $border-radius-search-field: 5px; // Border-Radius für das Suchfeld
 $close-button-size: 25px; // Größe des Schließen-Buttons
 
 $input-width: calc(#{$search-field-width} - 3*#{$search-field-padding} - #{$close-button-size}); // Breite des Eingabefeldes, abzüglich Padding
+$threshold-display-width-search-field: calc($search-field-width + 0.5*#{$min-width}); // Schwellenwert für die Breite des Displays, um den vertikalen Abstand des Suchfelds anzupassen 
 
 .searchButton {
   display: flex;
@@ -125,4 +124,10 @@ $input-width: calc(#{$search-field-width} - 3*#{$search-field-padding} - #{$clos
     align-items: center;
     justify-content: center;
     fill: $third-color-global; // Farbe des Suchsymbols
+}
+
+@media(max-width: $threshold-display-width-search-field){
+    .searchFieldContainer{
+        top: calc($header-height + 15vh);
+    }
 }

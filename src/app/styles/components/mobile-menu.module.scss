@@ -1,6 +1,87 @@
 @use '../variables.module.scss' as *;
 
-$button-border-radius: 6px;
+$menu-button-border-radius: 6px;
+$menu-items-column-gap: 15px;
+$menu-items-row-gap: 10px;
+$menu-items-transition-duration: 0.3s;
+
+.mobileMenuContainer{
+    display: flex;
+    flex-direction: row;
+    gap: $nav-bar-gap;
+}
+
+.mobileMenu{
+    display: flex;
+    flex-direction: row;
+    min-width: $min-width;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($background-color-global, 0.5);
+    backdrop-filter: blur(50px);
+    z-index: $mobile-menu-bar-z-index;
+    transform: translateX(100%);
+    transition: transform $menu-bar-transition-duration ease-in-out;
+    will-change: transform; // Optimiert die Animation
+    
+    &--visible{
+         transform: translate3d(0, 0, 0); // Hardware-Beschleunigung
+    }
+
+    &--hidden{
+        transform: translate3d(100%, 0, 0); // Hardware-Beschleunigung
+    }   
+}
+
+.mobileMenuHeader{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    gap: $menu-items-row-gap;
+    height: $header-height;
+    justify-content: center;
+    align-items: center;
+    padding-right: $side-gap;
+    padding-top: calc(#{$header-height}/2);
+}
+
+.mobileMenuList {
+    display: flex;
+    flex-direction: column;
+    gap: $menu-items-column-gap;
+    list-style-type: none;
+    justify-content: flex-start;
+    align-items: left;
+    padding-left: $side-gap;
+    padding-top: calc(#{$header-height}/2);
+
+    .mobileMenuItem {
+        font-family: $font-oranienbaum;
+        font-size: $font-size-header;
+        color: $foreground-color-global;
+        text-decoration: none;
+
+        // Transition für alle animierbaren Eigenschaften
+        transition: transform $menu-items-transition-duration ease-out, font-weight 0.2s ease-out;
+
+        // Hardware-Beschleunigung für bessere Performance
+        will-change: transform;
+
+        .mobileMenuLinkItem {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        &:hover {
+                transform: translateX(3px);
+                font-weight: bold;
+        }
+    }        
+}
 
 .menuButton{  
     display: flex;
@@ -8,18 +89,12 @@ $button-border-radius: 6px;
     justify-content: center;
     padding: auto;
     background-color: inherit;
-    border-radius: $button-border-radius;
+    border-radius: $menu-button-border-radius;
     border: $border-width-global solid transparent; // Transparente Umrandung für den Glow-Effekt
     cursor: pointer;
 
-    // Menüseitenleiste offen
-    &--visible {
-        display: none;
-    }
-
-    // Menüseitenleiste geschlossen
-    &--hidden {
-        display: flex;
+    &--closeButton {
+        border-radius: $button-border-radius;
     }
 
     &:hover {
@@ -39,13 +114,4 @@ $button-border-radius: 6px;
     &:active {
         transform: scale(0.9); // Leichte Verkleinerung bei Klick
     }
-}
-
-.mobileMenu{
-
-}
-
-.mobileMenuList{
-
-
 }

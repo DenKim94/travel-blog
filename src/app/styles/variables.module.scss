@@ -15,6 +15,7 @@ $font-oranienbaum: var(--font-oranienbaum, sans-serif);
 
 // Abmessungen der Abschnitte
 $max-width: 1440px;               // Maximale Breite für große Bildschirme
+$min-width: 360px;                // Minimale Breite für kleine Bildschirme
 $root-page-min-height: 100svh;
 $root-page-padding: 5px;
 $root-page-gap: 15px;
@@ -29,9 +30,15 @@ $main-content-height: calc(#{$root-page-min-height} - #{$header-height} - #{$foo
 $nav-bar-gap: 40px;
 $border-width-global: 1.5px;
 $scrollbar-offset: 6px; // Offset wegen des Scrollbalkens
+$button-border-radius: 12px;
+
+// Globale z-Ebenen
+$search-field-z-index: 1000;
+$mobile-menu-bar-z-index: calc(#{$search-field-z-index} - 10);
 
 // Animation
 $search-field-transition-duration: 0.5s;
+$menu-bar-transition-duration: 0.35s;
 
 // Fallbacks für Padding
 $padding-fallbacks: 32px;

@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useGlobalState } from '@context/GlobalStateContext';
 import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
-// import * as helperFunctions from "@utils/helperFunctions"
 import { MenuBarElements } from "./MenuBarElements";
+import { GlobalLanguageSetter } from "./LanguageSetter";
 import styles from "@styles/components/mobile-menu.module.scss";
 
 
@@ -16,15 +16,16 @@ import styles from "@styles/components/mobile-menu.module.scss";
  * @returns {JSX.Element} The rendered mobile navigation menu component.
  */
 export function MobileNavigationMenu(): JSX.Element {
-    const { menuBarOpen, setMenuBarOpen } = useGlobalState();
+    const { setMenuBarOpen } = useGlobalState();
 
     function openMenuBar() {
         setMenuBarOpen(true);
     };
     
     return (
-        <div>
-            <button className={`${styles.menuButton} ${menuBarOpen ? styles['menuButton--visible'] : styles['menuButton--hidden']}`} 
+        <div className={styles.mobileMenuContainer}>
+            <GlobalLanguageSetter />
+            <button className={styles.menuButton} 
                 aria-label="Menu Button" onClick={openMenuBar} >
                 <Image
                     src={appConstants.navBarIconProps.menu.src}
@@ -33,8 +34,7 @@ export function MobileNavigationMenu(): JSX.Element {
                     height={appConstants.navBarIconProps.menu.height}
                 />
             </button>
-            {menuBarOpen && <MenuBarElements />}
+            <MenuBarElements />
         </div>
-
     );
 }
