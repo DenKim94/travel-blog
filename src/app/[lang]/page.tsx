@@ -1,5 +1,6 @@
 import styles from "@styles/root_page.module.scss";
 import * as appConstants from "@utils/appConstants";
+import { getLandingPageContent, getBlogPosts, getAboutContent } from "@/lib/contentService";
 
 export default async function RootPage() {
   // await new Promise(resolve => setTimeout(resolve, 5000)); // Simulate a delay
