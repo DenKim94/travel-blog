@@ -102,6 +102,16 @@ export function handleSmoothScroll (targetId: string, headerHeight: number = 0, 
     });
 }
 
+/**
+ * Gibt die passenden Bilddaten für die Landingpage basierend auf der Bildbreite und der gewünschten Format zurück.
+ * 
+ * Die Funktion überprüft, ob die Bildbreite größer/gleich oder kleiner als die festgelegte
+ * Schwelle ist und gibt die passenden Bild-Props zurück.
+ * 
+ * @param {StrapiImage} imageProps - Die Bilddaten, die geprüft werden sollen.
+ * @param {'desktop'|'mobile'} format - Das gewünschte Format ('desktop' oder 'mobile').
+ * @returns {StrapiImage | null} - Die passenden Bild-Props, wenn die Bedingung erfüllt ist, sonst null.
+ */
 export function getLandingPageImagePropsByFormat(imageProps: StrapiImage, format: 'desktop' | 'mobile'): StrapiImage | null{
     if (!imageProps) {
         return null;
@@ -125,6 +135,16 @@ export function getLandingPageImagePropsByFormat(imageProps: StrapiImage, format
     return null;
 }
 
+/**
+ * Gibt die passenden Bild-Eigenschaften basierend auf dem Format zurück.
+ *
+ * Die Funktion überprüft, ob die Bild-Eigenschaften für das angegebene Format
+ * vorhanden sind und gibt diese zurück.
+ *
+ * @param {StrapiImage} imageProps - Die Bilddaten, die geprüft werden sollen.
+ * @param {'original'|'thumbnail'|'small'|'medium'|'large'} format - Das gewünschte Format.
+ * @returns {StrapiImageFormat | null} - Die passenden Bild-Eigenschaften, wenn die Bedingung erfüllt ist, sonst null.
+ */
 export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original' | 'thumbnail' | 'small' | 'medium' | 'large')
 : StrapiImageFormat | null {
 
@@ -133,12 +153,10 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
     }
     let filteredImageProps: StrapiImageFormat | null = null;
 
-    
     switch (format) {
-
         case 'original':
             // Return the original image properties
-            const originalProps = {
+            filteredImageProps = {
                 name: "original",
                 hash: imageProps.hash || "",
                 ext: imageProps.extension || "",
@@ -152,9 +170,8 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
                 alternativeText: imageProps.alternativeText || ""
             };
 
-            filteredImageProps = originalProps;
-
             break;
+
         case 'thumbnail':
             if (imageProps.formats.thumbnail) {
                 filteredImageProps = {
@@ -193,5 +210,5 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
     }
 
     // Fallback
-    return filteredImageProps || null;
+    return filteredImageProps;
 }
