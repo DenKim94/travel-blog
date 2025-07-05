@@ -209,6 +209,5 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
             break;
     }
 
-    // Fallback
     return filteredImageProps;
 }
