@@ -175,3 +175,6 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
       title: " Поиск по стране путешествия ",
     },
 };
+
+// *** Angaben für die Landing-Page *** 
+export const LANDING_PAGE_IMG_WIDTH_THRESHOLD: number = 720; // Schwellenwert für die Breite des Bildes, um zwischen Desktop- und Mobilformat zu unterscheiden [in Pixel] 

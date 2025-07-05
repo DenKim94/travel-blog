@@ -1,6 +1,7 @@
 import * as appConstants from "@utils/appConstants"
 import { NavigationBarItemType } from '@/types/NavigationBarTypes';
 import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
+import { StrapiImage, StrapiImageFormat } from "@/types/strapiTypes";
 
 /**
 Überprüft, ob eine gegebene Sprache in der Liste der unterstützten Sprachen enthalten ist.
@@ -99,4 +100,98 @@ export function handleSmoothScroll (targetId: string, headerHeight: number = 0, 
         top: Math.max(0, targetPosition),
         behavior: 'smooth'
     });
+}
+
+export function getLandingPageImagePropsByFormat(imageProps: StrapiImage, format: 'desktop' | 'mobile'): StrapiImage | null{
+    if (!imageProps) {
+        return null;
+    }
+
+    switch (format) {
+        case 'desktop':
+            if (imageProps.width >= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) {
+                return imageProps;
+            }
+            break;
+
+        case 'mobile':
+            if (imageProps.width < appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) {
+                return imageProps;
+            }
+            break;
+    }
+    
+    // Fallback
+    return null;
+}
+
+export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original' | 'thumbnail' | 'small' | 'medium' | 'large')
+: StrapiImageFormat | null {
+
+    if (!imageProps) {
+        return null;
+    }
+    let filteredImageProps: StrapiImageFormat | null = null;
+
+    
+    switch (format) {
+
+        case 'original':
+            // Return the original image properties
+            const originalProps = {
+                name: "original",
+                hash: imageProps.hash || "",
+                ext: imageProps.extension || "",
+                mime: "",
+                path: "",
+                width: imageProps.width,
+                height: imageProps.height ,
+                size: null,
+                sizeInBytes: null,
+                url: imageProps.url || "",
+                alternativeText: imageProps.alternativeText || ""
+            };
+
+            filteredImageProps = originalProps;
+
+            break;
+        case 'thumbnail':
+            if (imageProps.formats.thumbnail) {
+                filteredImageProps = {
+                    ...imageProps.formats.thumbnail,
+                    alternativeText: imageProps.alternativeText
+                };
+            }
+            break;
+
+        case 'small':
+                if (imageProps.formats.small) {
+                    filteredImageProps = {
+                    ...imageProps.formats.small,
+                    alternativeText: imageProps.alternativeText
+                };
+            }
+            break;
+
+        case 'medium':
+            if (imageProps.formats.medium) {
+                filteredImageProps = {
+                    ...imageProps.formats.medium,
+                    alternativeText: imageProps.alternativeText
+                };
+            break;
+            }
+
+        case 'large':
+            if (imageProps.formats.large) {
+                filteredImageProps = {
+                    ...imageProps.formats.large,
+                    alternativeText: imageProps.alternativeText
+                };
+            }
+            break;
+    }
+
+    // Fallback
+    return filteredImageProps || null;
 }

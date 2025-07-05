@@ -1,9 +1,23 @@
 import styles from "@styles/root_page.module.scss";
 import * as appConstants from "@utils/appConstants";
-import { getLandingPageContent, getBlogPosts, getAboutPageContent } from "@/lib/contentService";
+import { getLandingPageContent, getBlogPosts, getAboutPageContent  } from "@/lib/contentService";
+import { LandingPage } from "@/components/LandingPage";
 
-export default async function RootPage() {
+
+export default async function RootPage({ params }: Readonly<{params: Promise<{lang: appConstants.SupportedLanguageType}>
+}>) {
   // await new Promise(resolve => setTimeout(resolve, 5000)); // Simulate a delay
+
+  const { lang } = await params;
+
+  // const [landingPageContent, blogPostContent, aboutPageContent] = await Promise.all([
+  //   getLandingPageContent(lang),
+  //   getBlogPosts(lang),
+  //   getAboutPageContent(lang)
+  // ]);
+
+  const landingPageContent = await getLandingPageContent(lang);
+  console.log(" >> Landing Page Content:", landingPageContent);
 
   return (
     <>
@@ -11,7 +25,7 @@ export default async function RootPage() {
 
       <section id={appConstants.fallBackId} className={styles.section}>
         {/* Landingpage-Inhalt */}
-        <h1>Willkommen auf meinem Reiseblog</h1>
+        <LandingPage data={landingPageContent} />
       </section>
       <section id={appConstants.navigationIds.blogs} className={styles.section}>
         <h1>Meine Reisen</h1>
