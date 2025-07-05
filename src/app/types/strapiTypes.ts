@@ -12,35 +12,52 @@ export interface StrapiResponse<T> {
 
 export interface LandingPageData {
   id: number;
-  attributes: {
-    title: string;
-    subtitle?: string;
-    heroImage?: StrapiImage;
-    content?: string;
-    createdAt: string;
-    updatedAt: string;
-  };
+  title: string;
+  titleImages: Array<StrapiImage>; // Array of images or null if no image is set
+  content?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface BlogPost {
   id: number;
-  attributes: {
-    title: string;
-    excerpt: string;
-    slug: string;
-    featuredImage?: StrapiImage;
-    publishedAt: string;
-  };
+  title: string;
+  description: string;
+  country: string;
+  featuredImages: Array<StrapiImage>;
+  publishedAt: string;
+  locale: string;
 }
 
 export interface StrapiImage {
-  data: {
-    id: number;
-    attributes: {
-      url: string;
-      alternativeText?: string;
-      width: number;
-      height: number;
-    };
-  };
+  id: number;
+  url: string;
+  alternativeText?: string;
+  width: number;
+  height: number;
+  formats: StrapiImageFormats;
+  extension: string;
+  hash?: string;
+}
+
+export interface StrapiImageFormats {
+  original: StrapiImageFormat | null; // Original image format
+  thumbnail: StrapiImageFormat | null;
+  small: StrapiImageFormat | null;
+  medium: StrapiImageFormat | null;
+  large: StrapiImageFormat | null;
+}
+
+export interface StrapiImageFormat {
+  name: string;
+  hash: string;
+  ext: string;
+  mime: string;
+  path: string;
+  width: number;
+  height: number;
+  size: number | null;
+  sizeInBytes: number | null;
+  url: string;
+  alternativeText?: string | '';
 }

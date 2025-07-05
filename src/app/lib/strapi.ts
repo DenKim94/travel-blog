@@ -64,12 +64,15 @@ export class StrapiClient {
     private async fetchAPI(endpoint: string, revalidationTime_s: number = apiConstants.REVALIDATION_TIME_GENERIC) {
         try {
             const url = `${this.baseURL}/api${endpoint}`;
+            console.log(`>> Fetching from Strapi API: ${url}`);
+
             const headers: HeadersInit = {
+                'Authorization': `Bearer ${this.token}`,
                 'Content-Type': 'application/json',
             };
 
-            if (this.token) {
-                headers.Authorization = `Bearer ${this.token}`;
+            if (!this.token) {
+                throw new Error("Token is missing. Please provide a valid Strapi API token.");
             }
 
             const response = await fetch(url, { 
@@ -81,7 +84,7 @@ export class StrapiClient {
             });
             
             if (!response.ok) {
-                throw new Error(` >> Strapi API Error: ${response.status}`);
+                throw new Error(`Failed request - ${response.status}`);
             }
 
             return response.json();
@@ -101,7 +104,7 @@ export class StrapiClient {
      */
 
     async getLandingPageData() {
-        const endpoint = `/landing-page?locale=${this.appLocale}&populate=*`;
+        const endpoint = `/landing-pages?locale=${this.appLocale}&populate=*`;
         return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_LANDING_PAGE);
     }
 
@@ -118,8 +121,15 @@ export class StrapiClient {
         return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
     }
 
+    /**
+     * Fetches the about page data from the Strapi API for the current locale.
+     * The response includes all related data populated by default.
+     * @returns A promise resolving to the JSON response containing the about page data.
+     * @throws {Error} If the API request fails or the response status is not 200.
+     */
+
     async getAboutData() {
-        const endpoint = `/about-page?locale=${this.appLocale}&populate=*`;
+        const endpoint = `/about-pages?locale=${this.appLocale}&populate=*`;
         return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
     }
 }
