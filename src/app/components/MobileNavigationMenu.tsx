@@ -8,12 +8,14 @@ import { GlobalLanguageSetter } from "./LanguageSetter";
 import styles from "@styles/components/mobile-menu.module.scss";
 
 
+
 /**
- * MobileNavigationMenu Component
- * Displays a button with a menu icon. When clicked, the menu bar will be opened.
- * The menu bar is rendered as a child component of MobileNavigationMenu.
+ * Komponente, die die mobile Navigation-Leiste anzeigt.
  *
- * @returns {JSX.Element} The rendered mobile navigation menu component.
+ * Die Komponente rendert eine Schaltfläche, die die Mobile-Menü-Leiste öffnet, wenn sie angeklickt wird.
+ * Sie enthält außerdem die Komponente {@link MenuBarElements}, die die Navigationselemente anzeigt, wenn die Mobile-Menü-Leiste geöffnet ist.
+ *
+ * @returns {JSX.Element} Die gerenderte Komponente.
  */
 export function MobileNavigationMenu(): JSX.Element {
     const { setMenuBarOpen } = useGlobalState();
@@ -23,7 +25,7 @@ export function MobileNavigationMenu(): JSX.Element {
     };
     
     return (
-        <div className={styles.mobileMenuContainer}>
+        <div className={styles.mobileMenuContainer} id="mobile-menu-container">
             <GlobalLanguageSetter />
             <button className={styles.menuButton} 
                 aria-label="Menu Button" onClick={openMenuBar} >

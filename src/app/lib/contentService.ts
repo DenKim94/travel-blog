@@ -1,4 +1,5 @@
 import { strapiClient } from './strapi';
+import * as appConstants from "@utils/appConstants"
 import type {  LandingPageData, BlogPost, StrapiImage } from '@/types/strapiTypes';
 
 /**
@@ -12,7 +13,7 @@ import type {  LandingPageData, BlogPost, StrapiImage } from '@/types/strapiType
  * @param appLanguage Die gewünschte Sprache (z.B. 'de', 'en', 'ru').
  * @returns Ein LandingPageData-Objekt, wenn die Anfrage erfolgreich war, sonst null.
  */
-export async function getLandingPageContent(appLanguage: string): Promise<LandingPageData | null> {
+export async function getLandingPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<LandingPageData | null> {
   try {
     strapiClient.setLocale(appLanguage);
     const response = await strapiClient.getLandingPageData();
@@ -29,7 +30,7 @@ export async function getLandingPageContent(appLanguage: string): Promise<Landin
   }
 }
 
-export async function getBlogPosts(appLanguage: string): Promise<BlogPost | null> {
+export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageType): Promise<BlogPost | null> {
     try {
         strapiClient.setLocale(appLanguage);
         const response = await strapiClient.getBlogPosts();
@@ -46,7 +47,7 @@ export async function getBlogPosts(appLanguage: string): Promise<BlogPost | null
     }
 }
 
-export async function getAboutPageContent(appLanguage: string): Promise<undefined | null> {
+export async function getAboutPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<undefined | null> {
   try {
     strapiClient.setLocale(appLanguage);
     const response = await strapiClient.getAboutData();

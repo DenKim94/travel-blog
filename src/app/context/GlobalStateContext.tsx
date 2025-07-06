@@ -22,6 +22,13 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
     setMenuBarOpen: () => {},
 });
 
+/**
+ * Holt den aktuellen Zustand des GlobalStateContext und gibt ihn zurück.
+ * Muss innerhalb eines GlobalStateProvider verwendet werden.
+ * 
+ * @returns Der aktuelle Zustand des GlobalStateContext.
+ * @throws {Error} Wenn useGlobalState außerhalb eines GlobalStateProvider verwendet wird.
+ */
 export function useGlobalState() {
     const context = useContext(GlobalStateContext);
     if (!context) {
@@ -35,6 +42,21 @@ interface GlobalStateProviderProps {
   initialLanguage?: string;
 }
 
+/**
+ * GlobalStateProvider-Komponente, die den GlobalStateContext bereitstellt.
+ * 
+ * Die GlobalStateProvider-Komponente ist ein Context-Provider, der den
+ * GlobalStateContext für die Anwendung bereitstellt. Der Context enthält
+ * den aktuellen Sprachzustand und Funktionen, um ihn zu ändern.
+ * 
+ * @param {ReactNode} children - Die Kinder-Komponenten, die innerhalb
+ *                               des GlobalStateContext verfügbar sein
+ *                               sollen.
+ * @param {string} [initialLanguage=appConstants.defaultLanguage] - Die
+ *                                               anfängliche Sprache, die
+ *                                               verwendet werden soll.
+ * @returns - Die JSX-Elemente der GlobalStateProvider-Komponente.
+ */
 export function GlobalStateProvider({ children, initialLanguage = appConstants.defaultLanguage }: GlobalStateProviderProps) {
     const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(initialLanguage as appConstants.SupportedLanguageType);
     const [searchFieldOpen, setSearchFieldOpen] = useState<boolean>(false);

@@ -15,7 +15,10 @@ export function SearchButton(): JSX.Element {
     }
 
     return (
-        <button className={styles.searchButton} aria-label="Search Button" onClick={toggleSearchField} >
+        <button className={styles.searchButton} 
+                id="search-button"
+                aria-label="Search Button" 
+                onClick={toggleSearchField} >
             <Image
                 src={appConstants.navBarIconProps.search.src}
                 alt={appConstants.navBarIconProps.search.alt}
@@ -27,6 +30,15 @@ export function SearchButton(): JSX.Element {
     );
 }
 
+/**
+ * Die Suchleiste wird mit einem Klick auf den Suchbutton geöffnet und 
+ * mit einem Klick außerhalb oder auf den Schließen-Button wieder geschlossen.
+ * 
+ * Wird ein Suchbegriff eingegeben, wird dieser mit einer Verzögerung von 
+ * 300 Millisekunden [fallback-Wert] an die übergeordnete Komponente weitergegeben.
+ * 
+ * @returns {JSX.Element} Die gerenderte Komponente oder null.
+ */
 export function SearchField(): JSX.Element | null {
     const { language, searchFieldOpen, setSearchFieldOpen } = useGlobalState();
     const [searchQuery, setSearchQuery] = useState("");
@@ -113,9 +125,11 @@ export function SearchField(): JSX.Element | null {
     }
 
     return (
-            <div className={`${styles.searchFieldContainer} ${isAnimating ? styles.open : ""}`} ref={modalRef}>
+            <div className={`${styles.searchFieldContainer} ${isAnimating ? styles.open : ""}`}
+                id="search-field-container" 
+                ref={modalRef}>
                 <input
-                    ref = {searchFieldRef}
+                    ref={searchFieldRef}
                     type="text"
                     value={searchQuery}
                     onChange={handleSearchChange}

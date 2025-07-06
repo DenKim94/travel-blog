@@ -4,6 +4,14 @@ import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
 
 
+/**
+ * Komponente, die einen Status anzeigt, wenn der Benutzer versucht, zu einem
+ * nicht existierenden Inhalt zu navigieren. Die Komponente enthält ein Bild,
+ * das den Benutzer darüber informiert, dass der angeforderte Inhalt nicht
+ * vorhanden ist.
+ *
+ * @returns {JSX.Element} Die gerenderte Komponente als Platzhalter.
+ */
 export function ContentNotFound(): JSX.Element {
     const styleProps: React.CSSProperties = {
         height: '100%',
@@ -18,8 +26,8 @@ export function ContentNotFound(): JSX.Element {
         <div id="content-not-found-container" style={styleProps}>
           <Image src={appConstants.contentNotFoundImageUrl} 
                   alt="Content not found"
-                  width={500}
-                  height={500}
+                  width={appConstants.notFoundImgDefaultSize}
+                  height={appConstants.notFoundImgDefaultSize}
                   />
         </div>
     );

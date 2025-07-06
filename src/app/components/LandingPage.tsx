@@ -7,15 +7,23 @@ import styles from "@styles/components/landing-page.module.scss";
 import {ContentNotFound} from "@/components/ContentNotFound"; 
 import { LandingPageData, StrapiImage } from '@/types/strapiTypes';
 
-export function LandingPage({ data }: { data: LandingPageData | null}): JSX.Element | null {
+/**
+ * Die LandingPage-Komponente rendert die Startseite der Anwendung.
+ *
+ * Die Komponente akzeptiert ein Objekt mit den LandingPage-Daten als Prop
+ * und rendert das Titel-Bild und den Titel-Text, wenn die Daten verfügbar
+ * sind. 
+ * Wenn keine Daten verfügbar sind, wird ein Platzhalter aus ContentNotFound gezeigt.
+ *
+ * @param {{ data: LandingPageData | null }} props - Die Props der Komponente.
+ * @returns {JSX.Element} - Die gerenderte Komponente.
+ */
+export function LandingPage({ data }: { data: LandingPageData | null}): JSX.Element {
 
-  const titleImageProps: StrapiImage | null = 
-  data?.titleImages.find((img) => 
+  const titleImageProps: StrapiImage | null = data?.titleImages.find((img) => 
     helperFunctions.getLandingPageImagePropsByFormat(img, 'desktop')
   ) || null;
   
-  console.log('titleImageProps', titleImageProps);
-
   return (
     <div className={styles.landingPageContainer} id="landing-page-container">
       {titleImageProps && 

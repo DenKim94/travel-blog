@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
+
 /**
- * Custom hook for debouncing a value.
- * 
- * Delays the update of a value by a specified delay.
- * 
- * @param {T} value The value to debounce.
- * @param {number} delay The delay in milliseconds.
- * @returns {T} The debounced value.
+ * Eine benutzerdefinierte Hook, der einen Wert mit einer Verzögerung
+ * bereitstellt.
+ *
+ * @param {T} value - Der Wert, der verzögert werden soll.
+ * @param {number} delay - Die Dauer der Verzögerung in Millisekunden.
+ *
+ * @returns {T} Der verzögerte Wert.
  */
 export function useDebouncedValue<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);

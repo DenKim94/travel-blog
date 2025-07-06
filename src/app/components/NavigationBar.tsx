@@ -12,12 +12,18 @@ import { GlobalLanguageSetter } from "./LanguageSetter";
 import { MobileNavigationMenu } from "./MobileNavigationMenu";
 import useWindowSize from "@/hooks/useWindowSize";
 
+
 /**
- * NavigationBar Component
- * Displays a navigation bar with links to different sections of the application.
- * The links are dynamically generated based on the current language setting.
+ * Komponente, die die Navigation-Leiste anzeigt.
  *
- * @returns {JSX.Element} The rendered navigation bar component.
+ * Die Komponente rendert die Navigationselemente je nach aktuell ausgewählter Sprache.
+ * Sie enthält außerdem eine Suchfunktion und ein Dropdown-Menü für die Sprache.
+ *
+ * Die Komponente verwendet die Hook useWindowSize, 
+ * um die aktuelle Fenstergröße zu ermitteln und die mobile Navigation-Leiste anzuzeigen, 
+ * wenn die Fenstergröße kleiner oder gleich der angegebenen mobileHeaderWidth ist.
+ *
+ * @returns {JSX.Element} Die gerenderte Komponente.
  */
 export function NavigationBar(): JSX.Element {
     const { language } = useGlobalState();
@@ -31,7 +37,7 @@ export function NavigationBar(): JSX.Element {
     const isMobile = windowWidth <= parseInt(variables.mobileHeaderWidth, 10);
 
     return (
-        <nav className={styles.navBar} aria-label="Navigation">
+        <nav className={styles.navBar} aria-label="Navigation" id="navigation-bar-container">
             {/* Application Logo */}
             <div className={styles.navBarLogo}>
                 <a href={`/${language}/`}>

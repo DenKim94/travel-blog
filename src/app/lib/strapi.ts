@@ -43,14 +43,8 @@ export class StrapiClient {
         this.token = process.env.STRAPI_API_TOKEN;
     }
 
-
-    setLocale(locale: string) {
-        if (locale === "ru"){
-            this.appLocale = appConstants.strapiLocaleMapping.ru; // Strapi expects "ru-RU" 
-            
-        }else{
-            this.appLocale = locale;
-        }
+    setLocale(locale: appConstants.SupportedLanguageType) {
+        this.appLocale = appConstants.strapiLocaleMapping[locale]; 
     }
     
     getLocale() {
@@ -69,7 +63,6 @@ export class StrapiClient {
     private async fetchAPI(endpoint: string, revalidationTime_s: number = apiConstants.REVALIDATION_TIME_GENERIC) {
         try {
             const url = `${this.baseURL}/api${endpoint}`;
-            console.log(`>> Fetching from Strapi API: ${url}`);
 
             const headers: HeadersInit = {
                 'Authorization': `Bearer ${this.token}`,
@@ -98,7 +91,6 @@ export class StrapiClient {
             console.error(`Error fetching from Strapi API: ${error}`);
             throw error;
         }
-
     }
 
     /**

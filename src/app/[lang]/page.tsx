@@ -17,14 +17,10 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
   // ]);
 
   const landingPageContent = await getLandingPageContent(lang);
-  console.log(" >> Landing Page Content:", landingPageContent);
 
   return (
     <>
-    {/* To-Do: Erstellen und Einfügen einzelner Abschnitte */}
-
       <section id={appConstants.fallBackId} className={styles.section}>
-        {/* Landingpage-Inhalt */}
         <LandingPage data={landingPageContent} />
       </section>
       <section id={appConstants.navigationIds.blogs} className={styles.section}>

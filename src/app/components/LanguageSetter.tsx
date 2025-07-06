@@ -5,6 +5,17 @@ import { useRouter, usePathname } from 'next/navigation';
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/language-setter.module.scss";
 
+
+/**
+ * Globale Komponente, die die aktuelle Sprache anzeigt und erlaubt, die Sprache zu ändern.
+ * 
+ * @param {Object} languageOptions - Ein Objekt, das die verschiedenen Sprachoptionen enthält.
+ *                                    Die Schlüssel sind die Sprachkürzel, die Werte sind Objekte mit
+ *                                    den Eigenschaften `shortName` und `longName`.
+ *                                    Standardmäßig wird `appConstants.languageOptions` verwendet.
+ * 
+ * @returns {JSX.Element} - Die JSX-Elemente der Komponente.
+ */
 export function GlobalLanguageSetter({languageOptions = appConstants.languageOptions}: 
     {languageOptions?: typeof appConstants.languageOptions}): JSX.Element {
 
@@ -57,13 +68,14 @@ export function GlobalLanguageSetter({languageOptions = appConstants.languageOpt
     const currentLanguageOption = languageOptions[language];
 
     return (
-        <div className={styles.languageSetter} ref={dropdownRef}>
+        <div className={styles.languageSetter} ref={dropdownRef} id="language-setter-container">
             <div 
                 className={`${styles.languageSelector} ${isOpen ? styles.open : ''}`}
                 onClick={() => setIsOpen(!isOpen)}
                 onKeyDown={handleKeyDown}
                 tabIndex={0}
                 role="button"
+                id="language-selector"
                 aria-expanded={isOpen}
                 aria-haspopup="listbox"
                 aria-label="Sprache auswählen"
@@ -77,7 +89,7 @@ export function GlobalLanguageSetter({languageOptions = appConstants.languageOpt
             </div>
             
             {isOpen && (
-                <div className={styles.languageDropdown} role="listbox">
+                <div className={styles.languageDropdown} role="listbox" id="language-options">
                     {Object.entries(languageOptions).map(([key, {shortName, longName}]) => (
                         <div
                             key={key}
@@ -85,6 +97,7 @@ export function GlobalLanguageSetter({languageOptions = appConstants.languageOpt
                             onClick={() => handleLanguageChange(key as appConstants.SupportedLanguageType)}
                             role="option"
                             aria-selected={key === language}
+                            id={`language-option-${key}`}
                             tabIndex={0}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' || e.key === ' ') {
