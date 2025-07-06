@@ -105,27 +105,20 @@ export function handleSmoothScroll (targetId: string, headerHeight: number = 0, 
 /**
  * Gibt die passenden Bilddaten für die Landingpage basierend auf der Bildbreite und dem gewünschten Format zurück.
  * 
- * @param imageProps - Die Bilddaten, die geprüft werden sollen
+ * @param imageProps - Die Bilddaten als Array, die geprüft werden sollen
  * @param format - Das gewünschte Format ('desktop' oder 'mobile')
  * @returns Die passenden Bild-Props, wenn die Bedingung erfüllt ist, sonst null
  */
 export function getLandingPageImagePropsByFormat(
-  imageProps: StrapiImage | null | undefined, 
+  imageProps: Array<StrapiImage> | undefined, 
   format: 'desktop' | 'mobile'
 ): StrapiImage | null {
     
-  // Early return für ungültige Eingaben
-  if (!imageProps?.width) {
-    return null;
+  if (format === 'desktop') {
+    return imageProps?.find(img => img.width >= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) || null;
+  } else {
+    return imageProps?.find(img => img.width < appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) || null;
   }
-
-  const isDesktopSize = imageProps.width >= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD;
-  
-  // Direkte Rückgabe basierend auf Format und Bildbreite
-  return (format === 'desktop' && isDesktopSize) || 
-         (format === 'mobile' && !isDesktopSize) 
-         ? imageProps 
-         : null;
 }
 
 /**
