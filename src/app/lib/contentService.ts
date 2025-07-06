@@ -90,10 +90,10 @@ function mapBlogPostData(response: any): BlogPost | null {
 
     return {
       id: entry.id,
-      title: entry.Titel,
-      description: entry.Beschreibung,
+      title: entry.Titel,               // Ggf. Eigenschaften je nach Content Typ anpassen
+      description: entry.Beschreibung,  // Ggf. Eigenschaften je nach Content Typ anpassen
       country: entry.Land,
-      featuredImages: entry.Medien?.map(mapStrapiImageProps) || [],
+      featuredImages: entry.Medien?.map(mapStrapiImageProps) || [], // Ggf. Eigenschaften je nach Content Typ anpassen
       publishedAt: entry.publishedAt,
       locale: entry.locale
     };
@@ -112,7 +112,7 @@ function mapStrapiImageProps(imgProps: any): StrapiImage | null {
   }
   return {
     id: imgProps.id,
-    url: imgProps.url,
+    url: `${process.env.STRAPI_PUBLIC_URL}${imgProps.url}`,
     alternativeText: imgProps.alternativeText,
     width: imgProps.width,
     height: imgProps.height,

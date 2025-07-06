@@ -1,7 +1,6 @@
 import * as apiConstants from "@utils/apiConstants"
 import * as appConstants from "@utils/appConstants"
 
-
 /**
  * StrapiClient ist eine Klasse zur Interaktion mit der Strapi-API.
  * 
@@ -44,8 +43,14 @@ export class StrapiClient {
         this.token = process.env.STRAPI_API_TOKEN;
     }
 
+
     setLocale(locale: string) {
-        this.appLocale = locale;
+        if (locale === "ru"){
+            this.appLocale = appConstants.strapiLocaleMapping.ru; // Strapi expects "ru-RU" 
+            
+        }else{
+            this.appLocale = locale;
+        }
     }
     
     getLocale() {

@@ -68,6 +68,7 @@ header {
   width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
   padding-left: $side-gap;
   padding-right: $side-gap;
+  gap: $root-page-gap;
 
   // Für Safari und ältere Browser
   -webkit-overflow-scrolling: touch;

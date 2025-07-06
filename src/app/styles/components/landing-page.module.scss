@@ -1,0 +1,63 @@
+@use '../variables.module.scss' as *;
+
+$title-font-size: 1.5rem; // Größe des Titels anpassen
+$text-color: $background-color-global; // Textfarbe für den Titel
+$slide-up-duration: 1.3s; // Dauer der Slide-Up-Animation
+
+.landingPageContainer {
+  width: 100%;
+  height: $main-content-height;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: $main-content-height; // Gewünschte Höhe festlegen
+  overflow: hidden;
+}
+
+.landingPageImage {
+  object-fit: cover; // Bild füllt Container aus, behält Seitenverhältnis
+}
+
+.titleOverlay {
+  position: absolute;
+  top: 38%;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  overflow: hidden; // Wichtig für slideUp-Effekt
+  z-index: 10;
+}
+
+.landingPageTitle {
+  color: $text-color;
+  font-size: $title-font-size;
+  font-weight: normal;
+  margin: 0;
+  text-align: right;
+  line-height: 1.3; // Optimierte Zeilenhöhe für mehrzeiligen Text
+  white-space: pre-line; // Berücksichtigt Zeilenumbrüche aus dem CMS
+  max-width: 80%; // Begrenzt die Textbreite für bessere Umbrüche
+  margin-left: auto; // Schiebt den Text nach rechts
+  overflow-wrap: break-word; // Moderne Alternative zu word-wrap
+  hyphens: auto; // Automatische Silbentrennung (sprachabhängig)
+
+  // SlideUp-Animation
+  animation: slideUp $slide-up-duration ease-out forwards;
+  transform: translateY(100%); // Startet unterhalb des sichtbaren Bereichs
+  opacity: 0;
+}
+
+
+// Keyframe-Animation für slideUp-Effekt
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

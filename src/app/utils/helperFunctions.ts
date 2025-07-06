@@ -166,7 +166,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
                 height: imageProps.height ,
                 size: null,
                 sizeInBytes: null,
-                url: imageProps.url || "",
+                url: `${process.env.STRAPI_PUBLIC_URL}${imageProps.url}` || "",
                 alternativeText: imageProps.alternativeText || ""
             };
 
@@ -176,6 +176,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
             if (imageProps.formats.thumbnail) {
                 filteredImageProps = {
                     ...imageProps.formats.thumbnail,
+                    url: `${process.env.STRAPI_PUBLIC_URL}${imageProps.url}` || "",
                     alternativeText: imageProps.alternativeText
                 };
             }
@@ -185,6 +186,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
                 if (imageProps.formats.small) {
                     filteredImageProps = {
                     ...imageProps.formats.small,
+                    url: `${process.env.STRAPI_PUBLIC_URL}${imageProps.url}` || "",
                     alternativeText: imageProps.alternativeText
                 };
             }
@@ -194,6 +196,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
             if (imageProps.formats.medium) {
                 filteredImageProps = {
                     ...imageProps.formats.medium,
+                    url: `${process.env.STRAPI_PUBLIC_URL}${imageProps.url}` || "",
                     alternativeText: imageProps.alternativeText
                 };
             break;
@@ -203,6 +206,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage, format: 'original
             if (imageProps.formats.large) {
                 filteredImageProps = {
                     ...imageProps.formats.large,
+                    url: `${process.env.STRAPI_PUBLIC_URL}${imageProps.url}` || "",
                     alternativeText: imageProps.alternativeText
                 };
             }

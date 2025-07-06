@@ -11,6 +11,12 @@ export const languageOptions: Record<SupportedLanguageType, { strapiLanguageName
   ru: { strapiLanguageName: "ru-RU", shortName: "RUS", longName: "Русский" },
 };
 
+export const strapiLocaleMapping: Record<SupportedLanguageType, string> = {
+  de: "de",
+  en: "en",
+  ru: "ru-RU",
+};
+
 // *** Angaben für die Metadaten ***
 type MetadataValues = {
   title: string;
@@ -79,6 +85,8 @@ export const notFoundTranslations: Record<string, { title: string; description: 
         backToHome: "Вернуться на главную",
     },
   };
+
+export const contentNotFoundImageUrl: string = "/assets/ContentNotFound.png";
 
 // *** Angaben für Fehlerseiten ***
 export const errorNotificationTranslations: Record<string, { title: string; retry: string }> = {
@@ -178,3 +186,4 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
 
 // *** Angaben für die Landing-Page *** 
 export const LANDING_PAGE_IMG_WIDTH_THRESHOLD: number = 720; // Schwellenwert für die Breite des Bildes, um zwischen Desktop- und Mobilformat zu unterscheiden [in Pixel] 
+export const LANDING_PAGE_ALT_TEXT: string = "Landing Page Title Image";
