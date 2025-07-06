@@ -103,36 +103,29 @@ export function handleSmoothScroll (targetId: string, headerHeight: number = 0, 
 }
 
 /**
- * Gibt die passenden Bilddaten für die Landingpage basierend auf der Bildbreite und der gewünschten Format zurück.
+ * Gibt die passenden Bilddaten für die Landingpage basierend auf der Bildbreite und dem gewünschten Format zurück.
  * 
- * Die Funktion überprüft, ob die Bildbreite größer/gleich oder kleiner als die festgelegte
- * Schwelle ist und gibt die passenden Bild-Props zurück.
- * 
- * @param {StrapiImage} imageProps - Die Bilddaten, die geprüft werden sollen.
- * @param {'desktop'|'mobile'} format - Das gewünschte Format ('desktop' oder 'mobile').
- * @returns {StrapiImage | null} - Die passenden Bild-Props, wenn die Bedingung erfüllt ist, sonst null.
+ * @param imageProps - Die Bilddaten, die geprüft werden sollen
+ * @param format - Das gewünschte Format ('desktop' oder 'mobile')
+ * @returns Die passenden Bild-Props, wenn die Bedingung erfüllt ist, sonst null
  */
-export function getLandingPageImagePropsByFormat(imageProps: StrapiImage, format: 'desktop' | 'mobile'): StrapiImage | null{
-    if (!imageProps) {
-        return null;
-    }
-
-    switch (format) {
-        case 'desktop':
-            if (imageProps.width >= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) {
-                return imageProps;
-            }
-            break;
-
-        case 'mobile':
-            if (imageProps.width < appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) {
-                return imageProps;
-            }
-            break;
-    }
+export function getLandingPageImagePropsByFormat(
+  imageProps: StrapiImage | null | undefined, 
+  format: 'desktop' | 'mobile'
+): StrapiImage | null {
     
-    // Fallback
+  // Early return für ungültige Eingaben
+  if (!imageProps?.width) {
     return null;
+  }
+
+  const isDesktopSize = imageProps.width >= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD;
+  
+  // Direkte Rückgabe basierend auf Format und Bildbreite
+  return (format === 'desktop' && isDesktopSize) || 
+         (format === 'mobile' && !isDesktopSize) 
+         ? imageProps 
+         : null;
 }
 
 /**

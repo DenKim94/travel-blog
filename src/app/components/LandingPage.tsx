@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
+import useWindowSize from "@/hooks/useWindowSize";
 import styles from "@styles/components/landing-page.module.scss";
 import {ContentNotFound} from "@/components/ContentNotFound"; 
 import { LandingPageData, StrapiImage } from '@/types/strapiTypes';
@@ -20,8 +21,11 @@ import { LandingPageData, StrapiImage } from '@/types/strapiTypes';
  */
 export function LandingPage({ data }: { data: LandingPageData | null}): JSX.Element {
 
-  const titleImageProps: StrapiImage | null = data?.titleImages.find((img) => 
-    helperFunctions.getLandingPageImagePropsByFormat(img, 'desktop')
+  const { width: windowWidth } = useWindowSize({ debounceDelay: appConstants.windowUpdateDelay_ms });
+  const imgFormat = (windowWidth <= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) ? 'mobile' : 'desktop';
+
+  const titleImageProps: StrapiImage | null = data?.titleImages.find((imgProp) => 
+    helperFunctions.getLandingPageImagePropsByFormat(imgProp, imgFormat)
   ) || null;
   
   return (
