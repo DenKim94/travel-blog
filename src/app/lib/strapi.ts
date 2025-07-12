@@ -139,7 +139,7 @@ export class StrapiClient {
 
     async getTravelMapData() {
         const endpoint = `/travel-maps?locale=${this.appLocale}&populate=*`;
-        return this.fetchAPI(endpoint);
+        return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
     }
 }
 
