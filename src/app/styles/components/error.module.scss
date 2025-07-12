@@ -9,10 +9,12 @@
   p {
     color: #d00;
     font-size: 1.5rem;
+    margin-top: 30px;
+    overflow-wrap: break-word;
   }
 
   .retryButton {
-    margin-top: 24px;
+    margin-top: 48px;
     padding: 8px 24px;
     border-radius: 4px;
     background: #222;

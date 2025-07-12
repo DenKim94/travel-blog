@@ -23,6 +23,7 @@ export default function Error({
       <GenericButton
         title={messages.retry}
         onClick={reset}
+        classname={styles.retryButton}
       />
     </div>
   );
