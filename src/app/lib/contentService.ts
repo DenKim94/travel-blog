@@ -72,7 +72,7 @@ function mapLandingPageData(response: any): LandingPageData | null {
     return {
       id: entry.id,
       title: entry.TitleText,
-      titleImages: entry.TitleImage?.map(mapStrapiImageProps) || [],
+      titleImages: entry.TitleImage ? mapStrapiImageProps(entry.TitleImage) : null,
       createdAt: entry.createdAt,
       updatedAt: entry.updatedAt,
     };

@@ -13,7 +13,7 @@ export interface StrapiResponse<T> {
 export interface LandingPageData {
   id: number;
   title: string;
-  titleImages: Array<StrapiImage>; // Array of images or null if no image is set
+  titleImages: StrapiImage | null;
   content?: string;
   createdAt: string;
   updatedAt: string;

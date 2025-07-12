@@ -1,7 +1,8 @@
 @use '../variables.module.scss' as *;
 
 $title-font-size: 1.5rem; // Größe des Titels anpassen
-$text-color: $background-color-global; // Textfarbe für den Titel
+// $text-color: $background-color-global; // Textfarbe für den Titel
+$text-color: black; // Textfarbe für den Titel
 $slide-up-duration: 1.3s; // Dauer der Slide-Up-Animation
 $title-distance-top-percentage: 5%;
 
@@ -40,7 +41,7 @@ $title-distance-top-percentage: 5%;
   line-height: 1.3; // Optimierte Zeilenhöhe für mehrzeiligen Text
   white-space: pre-line; // Berücksichtigt Zeilenumbrüche aus dem CMS
   max-width: 80%; // Begrenzt die Textbreite für bessere Umbrüche
-  margin-left: auto; // Schiebt den Text nach rechts
+  margin-left: auto; // Schiebt den Text nach rechts 
   overflow-wrap: break-word; // Moderne Alternative zu word-wrap
   hyphens: auto; // Automatische Silbentrennung (sprachabhängig)
 
@@ -60,5 +61,12 @@ $title-distance-top-percentage: 5%;
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+// Mobile Viewport
+@media screen and (max-width: 768px) {
+  .titleOverlay {
+    top: 3%;
   }
 }

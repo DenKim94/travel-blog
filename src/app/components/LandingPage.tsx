@@ -5,7 +5,7 @@ import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/landing-page.module.scss";
 import {ContentNotFound} from "@/components/ContentNotFound"; 
-import { LandingPageData, StrapiImage } from '@/types/strapiTypes';
+import { LandingPageData, StrapiImageFormat } from '@/types/strapiTypes';
 
 /**
  * Die LandingPage-Komponente rendert die Startseite der Anwendung.
@@ -20,9 +20,8 @@ import { LandingPageData, StrapiImage } from '@/types/strapiTypes';
  */
 export function LandingPage({ data }: { data: LandingPageData | null}): JSX.Element {
 
-  const imgFormat = 'desktop'; // TO-DO: Dynamisch anpassen [06.07.2025]
-  const titleImageProps: StrapiImage | null = helperFunctions.getLandingPageImagePropsByFormat(data?.titleImages, imgFormat)
-  
+  const titleImageProps: StrapiImageFormat | null = helperFunctions.getImagePropsByFormat(data?.titleImages, 'original')
+
   return (
     <div className={styles.landingPageContainer} id="landing-page-container">
       {titleImageProps && 
