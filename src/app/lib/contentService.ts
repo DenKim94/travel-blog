@@ -1,6 +1,6 @@
 import { strapiClient } from './strapi';
 import * as appConstants from "@utils/appConstants"
-import type {  LandingPageData, BlogPost, StrapiImage } from '@/types/strapiTypes';
+import type {  LandingPageData, BlogPost, StrapiImage, TravelMapData } from '@/types/strapiTypes';
 
 /**
  * Lädt die Landingpage-Daten für die angegebene Sprache.
@@ -55,10 +55,28 @@ export async function getAboutPageContent(appLanguage: appConstants.SupportedLan
       console.warn('@getAboutPageContent: Keine Daten gefunden.');
       return null;
     }
-    return response.data;
+
+    return response.data; // TBD
 
   } catch (error) {
-    console.error('Fehler beim Laden der About-Seite-Daten: ', error);
+    console.error('Fehler beim Laden der About-Daten: ', error);
+    return null;
+  }
+}
+
+export async function getTravelMapData(appLanguage: appConstants.SupportedLanguageType): Promise<TravelMapData | null> {
+  try {
+    strapiClient.setLocale(appLanguage);
+    const response = await strapiClient.getTravelMapData();
+    if (response.data.length === 0) {
+      console.warn('@getTravelMapData: Keine Daten gefunden.');
+      return null;
+    }
+    const travelMapMappedData = mapTravelMapData(response);
+    return travelMapMappedData;
+
+  } catch (error) {
+    console.error('Fehler beim Laden der Travel-Map-Daten: ', error);
     return null;
   }
 }
@@ -79,6 +97,24 @@ function mapLandingPageData(response: any): LandingPageData | null {
 
   } catch (error) {
     console.error('Fehler beim Mappen der Landingpage-Daten: ', error);
+    return null;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapTravelMapData(response: any): TravelMapData | null {
+  try {
+    if (!response.data || response.data.length === 0) return null;
+    const entry = response.data[0];
+    
+    return {
+      name: entry.TravelMap ? entry.TravelMap.name : '',
+      imageProps: entry.TravelMap ? mapStrapiImageProps(entry.TravelMap) : null,
+      updatedAt: entry.updatedAt,
+    };
+
+  }catch (error) {
+    console.error('Fehler beim Mappen der Blogpost-Daten: ', error);
     return null;
   }
 }

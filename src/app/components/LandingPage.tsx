@@ -1,10 +1,9 @@
-"use client"
 import Image from 'next/image';
 import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/landing-page.module.scss";
-import {ContentNotFound} from "@/components/ContentNotFound"; 
+import { ContentNotFound } from "@/components/ContentNotFound"; 
 import { LandingPageData, StrapiImageFormat } from '@/types/strapiTypes';
 
 /**
@@ -18,7 +17,7 @@ import { LandingPageData, StrapiImageFormat } from '@/types/strapiTypes';
  * @param {{ data: LandingPageData | null }} props - Die Props der Komponente.
  * @returns {JSX.Element} - Die gerenderte Komponente.
  */
-export function LandingPage({ data }: { data: LandingPageData | null}): JSX.Element {
+export function LandingPage({ data }: { data: LandingPageData | null }): JSX.Element {
 
   const titleImageProps: StrapiImageFormat | null = helperFunctions.getImagePropsByFormat(data?.titleImages, 'original')
 
@@ -30,7 +29,8 @@ export function LandingPage({ data }: { data: LandingPageData | null}): JSX.Elem
                   alt={titleImageProps.alternativeText || appConstants.LANDING_PAGE_ALT_TEXT} 
                   className={styles.landingPageImage}
                   priority={true}
-                  fill={true}/>
+                  fill = {true}
+                  />
 
             <div className={styles.titleOverlay}>
               <p className={styles.landingPageTitle} id="landing-page-title">

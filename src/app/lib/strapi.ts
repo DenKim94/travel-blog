@@ -129,6 +129,18 @@ export class StrapiClient {
         const endpoint = `/about-pages?locale=${this.appLocale}&populate=*`;
         return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
     }
+
+    /**
+     * Fetches travel map data from the Strapi API for the current locale.
+     * The response includes all related data populated by default.
+     * @returns A promise resolving to the JSON response containing the travel map data.
+     * @throws {Error} If the API request fails or the response status is not 200.
+     */
+
+    async getTravelMapData() {
+        const endpoint = `/travel-maps?locale=${this.appLocale}&populate=*`;
+        return this.fetchAPI(endpoint);
+    }
 }
 
 export const strapiClient = new StrapiClient();

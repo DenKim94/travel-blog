@@ -31,6 +31,7 @@ $nav-bar-gap: 40px;
 $border-width-global: 1.5px;
 $scrollbar-offset: 6px; // Offset wegen des Scrollbalkens
 $button-border-radius: 12px;
+$margin-top-h1: 15px;
 
 // Globale z-Ebenen
 $search-field-z-index: 1000;
@@ -53,4 +54,5 @@ $mobile-header-width: 720px;
     searchFieldTransitionDuration: $search-field-transition-duration;
     appMaxWidth: $max-width;
     mobileHeaderWidth: $mobile-header-width;
+    rootPageGap: $root-page-gap;
 }

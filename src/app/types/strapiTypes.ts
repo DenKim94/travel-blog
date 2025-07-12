@@ -29,19 +29,25 @@ export interface BlogPost {
   locale: string;
 }
 
+export interface TravelMapData {
+  name: string;
+  imageProps: StrapiImage | null;
+  updatedAt: string;
+}
+
 export interface StrapiImage {
   id: number;
   url: string;
   alternativeText?: string;
-  width: number;
-  height: number;
-  formats: StrapiImageFormats;
+  width: number | null;
+  height: number | null;
+  formats: StrapiImageFormats | null;
   extension: string;
   hash?: string;
 }
 
 export interface StrapiImageFormats {
-  original: StrapiImageFormat | null; // Original image format
+  original: StrapiImageFormat | null;
   thumbnail: StrapiImageFormat | null;
   small: StrapiImageFormat | null;
   medium: StrapiImageFormat | null;
@@ -54,8 +60,8 @@ export interface StrapiImageFormat {
   ext: string;
   mime: string;
   path: string;
-  width: number;
-  height: number;
+  width: number | null;
+  height: number | null;
   size: number | null;
   sizeInBytes: number | null;
   url: string;

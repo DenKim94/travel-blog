@@ -91,9 +91,9 @@ export const notFoundImgDefaultSize: number = 350; // Größe des Bildes in Pixe
 
 // *** Angaben für Fehlerseiten ***
 export const errorNotificationTranslations: Record<string, { title: string; retry: string }> = {
-  de: { title: "Ein Fehler ist aufgetreten", retry: "Erneut versuchen" },
-  en: { title: "An error occurred", retry: "Try again" },
-  ru: { title: "Произошла ошибка", retry: "Попробовать снова" },
+  de: { title: "Ein Fehler ist aufgetreten:", retry: "Erneut versuchen" },
+  en: { title: "An error occurred:", retry: "Try again" },
+  ru: { title: "Произошла ошибка:", retry: "Попробовать снова" },
 };
 
 // *** Angaben für die Navigationsleiste ***
@@ -148,12 +148,12 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
         contact: "Kontakt",
     },
     en: {
-        blogs: "My blogs",
+        blogs: "My travels",
         about: "About me",
         contact: "Contact",
     },
     ru: {
-        blogs: "Мои блоги",
+        blogs: "Мои путешествия",
         about: "Обо мне",
         contact: "Контакт",
     },
@@ -186,5 +186,5 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
 };
 
 // *** Angaben für die Landing-Page *** 
-export const LANDING_PAGE_IMG_WIDTH_THRESHOLD: number = 720; // Schwellenwert für die Breite des Bildes, um zwischen Desktop- und Mobilformat zu unterscheiden [in Pixel] 
 export const LANDING_PAGE_ALT_TEXT: string = "Landing Page Title Image";
+export const TRAVEL_MAP_ALT_TEXT: string = "Travel Map Image";

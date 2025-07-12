@@ -103,25 +103,6 @@ export function handleSmoothScroll (targetId: string, headerHeight: number = 0, 
 }
 
 /**
- * Gibt die passenden Bilddaten für die Landingpage basierend auf der Bildbreite und dem gewünschten Format zurück.
- * 
- * @param imageProps - Die Bilddaten als Array, die geprüft werden sollen
- * @param format - Das gewünschte Format ('desktop' oder 'mobile')
- * @returns Die passenden Bild-Props, wenn die Bedingung erfüllt ist, sonst null
- */
-export function getLandingPageImagePropsByFormat(
-  imageProps: Array<StrapiImage> | undefined, 
-  format: 'desktop' | 'mobile'
-): StrapiImage | null {
-    
-  if (format === 'desktop') {
-    return imageProps?.find(img => img.width >= appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) || null;
-  } else {
-    return imageProps?.find(img => img.width < appConstants.LANDING_PAGE_IMG_WIDTH_THRESHOLD) || null;
-  }
-}
-
-/**
  * Gibt die passenden Bild-Eigenschaften basierend auf dem Format zurück.
  *
  * Die Funktion überprüft, ob die Bild-Eigenschaften für das angegebene Format
@@ -142,7 +123,6 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
 
     switch (format) {
         case 'original':
-            // Return the original image properties
             filteredImageProps = {
                 name: "original",
                 hash: imageProps.hash || "",
@@ -150,7 +130,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
                 mime: "",
                 path: "",
                 width: imageProps.width,
-                height: imageProps.height ,
+                height: imageProps.height,
                 size: null,
                 sizeInBytes: null,
                 url: imageProps.url || "",
@@ -159,7 +139,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
             break;
 
         case 'thumbnail':
-            if (imageProps.formats.thumbnail) {
+            if (imageProps.formats?.thumbnail) {
                 filteredImageProps = {
                     ...imageProps.formats.thumbnail,
                     url: imageProps.url || "",
@@ -169,7 +149,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
             break;
 
         case 'small':
-                if (imageProps.formats.small) {
+                if (imageProps.formats?.small) {
                     filteredImageProps = {
                     ...imageProps.formats.small,
                     url: imageProps.url || "",
@@ -179,7 +159,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
             break;
 
         case 'medium':
-            if (imageProps.formats.medium) {
+            if (imageProps.formats?.medium) {
                 filteredImageProps = {
                     ...imageProps.formats.medium,
                     url: imageProps.url || "",
@@ -189,7 +169,7 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
             }
 
         case 'large':
-            if (imageProps.formats.large) {
+            if (imageProps.formats?.large) {
                 filteredImageProps = {
                     ...imageProps.formats.large,
                     url: imageProps.url || "",

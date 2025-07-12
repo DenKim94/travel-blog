@@ -8,16 +8,19 @@
   scroll-snap-align: start; // Aktiviert Snap-Scrolling für diese Sektion
   display: flex;
   flex-direction: column;
+  font-family: $font-oranienbaum;
   
   h1 {
     font-size: $font-size-h1;
+    text-align: center;
+    margin-top: $margin-top-h1;
   }
 }
 
 // Mobile Viewport
 @media screen and (max-width: 768px) {
   .page {
-    gap: 15px;
+    gap: $root-page-gap;
   }
 }
 
