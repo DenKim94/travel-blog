@@ -5,7 +5,7 @@ $loader-size: calc(#{$loader-logo-size} + 10px); // Größe des Loaders
 
 .customLoader {
   position: fixed;
-  inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;

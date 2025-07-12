@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/loader.module.scss";
 import variables from "@styles/components/loader.module.scss";
@@ -16,7 +17,7 @@ import variables from "@styles/components/loader.module.scss";
  *
  * @returns {JSX.Element} Die gerenderte CustomLoader-Komponente.
  */
-export function CustomLoader() {
+export function CustomLoader(): JSX.Element {
   const logoSize: number = parseInt(variables.customLoaderLogoSize, 10) || 100; // Fallback auf 100, falls die Variable nicht gesetzt ist
 
   return (

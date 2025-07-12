@@ -7,9 +7,9 @@ import { TravelMap } from "@/components/TravelMap";
 
 export default async function RootPage({ params }: Readonly<{params: Promise<{lang: appConstants.SupportedLanguageType}>
 }>) {
-  // await new Promise(resolve => setTimeout(resolve, 5000)); // Simulate a delay
-
   const { lang } = await params;
+
+  // await new Promise(resolve => setTimeout(resolve, 5000)); // Simulate a delay
 
   const [landingPageContent, travelMapContent ] = await Promise.all([
     getLandingPageContent(lang),

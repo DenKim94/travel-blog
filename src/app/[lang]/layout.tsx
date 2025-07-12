@@ -47,6 +47,13 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} className={oranienbaum.variable}>
+      <head>
+        <link
+          rel="prefetch"
+          href={`/_next/static/css/app/${lang}/loading.css`}
+          as="style"
+        />
+      </head>
       <body>
         <GlobalStateProvider initialLanguage={lang}>
             <div className="root-page">
