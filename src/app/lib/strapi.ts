@@ -37,10 +37,13 @@ export class StrapiClient {
     appLocale: string = appConstants.defaultLanguage; // Default locale
     private baseURL: string;
     private token?: string;
+    private maxPageSize: number
 
     constructor() {
         this.baseURL = process.env.STRAPI_PUBLIC_URL || 'http://localhost:1337';
         this.token = process.env.STRAPI_API_TOKEN;
+        this.maxPageSize = parseInt(process.env.MAX_PAGE_SIZE_DEFAULT || '25', 10);
+        console.log("maxPageSize: ", this.maxPageSize)
     }
 
     setLocale(locale: appConstants.SupportedLanguageType) {
@@ -109,11 +112,11 @@ export class StrapiClient {
      * Fetches blog posts from the Strapi API for the current locale.
      * The response includes all related data populated by default.
      * @param {number} limit The number of blog posts to fetch.
-     * Defaults to {@link apiConstants.MAX_PAGE_SIZE_DEFAULT}.
+     * Defaults to MAX_PAGE_SIZE_DEFAULT.
      * @returns A promise resolving to the JSON response containing the blog posts.
      * @throws {Error} If the API request fails or the response status is not 200.
      */
-    async getBlogPosts(limit: number = apiConstants.MAX_PAGE_SIZE_DEFAULT) {
+    async getBlogPosts(limit: number = this.maxPageSize) {
         const endpoint = `/blog-posts?locale=${this.appLocale}&populate=*&pagination[limit]=${limit}`;
         return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
     }

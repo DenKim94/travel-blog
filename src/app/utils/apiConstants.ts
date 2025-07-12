@@ -3,8 +3,4 @@ export const REVALIDATION_TIME_BLOG_POSTS = 60 * 15;
 export const REVALIDATION_TIME_ABOUT_PAGE = 60 * 60;         
 export const REVALIDATION_TIME_LANDING_PAGE = 60 * 30;   
 export const REVALIDATION_TIME_GENERIC = 30;  
-export const MAX_PAGE_SIZE_DEFAULT = 20;  // Maximum number of items per page for pagination
 
-export const STRAPI_BLOGPOSTS_ENDPOINT = '/api/blog-posts';
-export const STRAPI_ABOUT_ENDPOINT = '/api/about-page';
-export const STRAPI_LANDING_PAGE_ENDPOINT = '/api/landing-page';
