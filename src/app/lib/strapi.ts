@@ -63,6 +63,14 @@ export class StrapiClient {
         return this.blogPostsData;
     }
 
+    getBlogPostCountries(): Array<string> {
+        return this.blogPostsData?.map((blogPost: BlogPostData) => blogPost.country) || [];
+    }
+
+    getBlogPostIds(): Array<number> {
+        return this.blogPostsData?.map((blogPost: BlogPostData) => blogPost.id) || [];
+    }
+
     /**
      * Private method to fetch data from Strapi API.
      * @param endpoint The API endpoint to query.
