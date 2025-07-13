@@ -160,9 +160,9 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
   }
 
   export const navigationIds: Record<NavigationKey, string> = {
-      blogs: "travel-blogs",
-      about: "about",
-      contact: "contact",
+    blogs: "travel-blogs",
+    about: "about",
+    contact: "contact",
   };
 
   export const fallBackId: string = "home"; // Fallback-ID für die Navigation, wenn kein passendes Element gefunden wird

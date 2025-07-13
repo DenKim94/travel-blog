@@ -1,6 +1,6 @@
 import { strapiClient } from './strapi';
 import * as appConstants from "@utils/appConstants"
-import type {  LandingPageData, BlogPost, StrapiImage, TravelMapData } from '@/types/strapiTypes';
+import type {  LandingPageData, BlogPostData, StrapiImage, TravelMapData } from '@/types/strapiTypes';
 
 /**
  * Lädt die Landingpage-Daten für die angegebene Sprache.
@@ -30,7 +30,7 @@ export async function getLandingPageContent(appLanguage: appConstants.SupportedL
   }
 }
 
-export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageType): Promise<BlogPost | null> {
+export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageType): Promise<Array<BlogPostData> | null> {
     try {
         strapiClient.setLocale(appLanguage);
         const response = await strapiClient.getBlogPosts();
@@ -39,6 +39,8 @@ export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageTy
           return null;
         }        
         const blogPostsMappedData = mapBlogPostData(response);
+        strapiClient.setBlogPostData(blogPostsMappedData);
+        
         return blogPostsMappedData;
 
     } catch (error) {
@@ -120,12 +122,12 @@ function mapTravelMapData(response: any): TravelMapData | null {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapBlogPostData(response: any): BlogPost | null {
+function mapBlogPostData(response: any): Array<BlogPostData> | null {
   try {
     if (!response.data || response.data.length === 0) return null;
-    const entry = response.data[0];
 
-    return {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return response.data.map((entry: any) => ({
       id: entry.id,
       title: entry.Titel,               // Ggf. Eigenschaften je nach Content Typ anpassen
       description: entry.Beschreibung,  // Ggf. Eigenschaften je nach Content Typ anpassen
@@ -133,7 +135,7 @@ function mapBlogPostData(response: any): BlogPost | null {
       featuredImages: entry.Medien?.map(mapStrapiImageProps) || [], // Ggf. Eigenschaften je nach Content Typ anpassen
       publishedAt: entry.publishedAt,
       locale: entry.locale
-    };
+    }));
 
   } catch (error) {
     console.error('Fehler beim Mappen der Blogpost-Daten: ', error);

@@ -19,6 +19,6 @@
   display: block;
   height: calc(#{$main-content-height} - #{$font-size-h1} - #{$margin-top-h1}) ;
   width: 100%;
-  min-width: 1024px; // Beispiel: Bild ist mindestens 600px breit
-  object-fit: contain; // Verhindert Verzerrung
+  min-width: 1024px;    // Minimale Breite des Bildes
+  object-fit: contain;  // Verhindert Verzerrung
 }

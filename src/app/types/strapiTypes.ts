@@ -19,7 +19,7 @@ export interface LandingPageData {
   updatedAt: string;
 }
 
-export interface BlogPost {
+export interface BlogPostData {
   id: number;
   title: string;
   description: string;

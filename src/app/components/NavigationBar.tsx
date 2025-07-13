@@ -60,13 +60,13 @@ export function NavigationBar(): JSX.Element {
 
                 {navBarItems?.map((item) => (
                     <li key={item.title} className={styles.navBarListItem}>
-                        <a href={`#${item.id}`}
+                        <a href={`#${item?.id}`}
                             className={styles.navBarLinkItem}
                             role="menuitem"
                             tabIndex={0}
                             aria-label={item.title}
                             onClick={(e) => helperFunctions.handleSmoothScroll(item.id, headerHeight, e)}>
-                            {item.title.toUpperCase()}
+                            {item.title?.toUpperCase()}
                         </a>
                     </li>
                 ))}
