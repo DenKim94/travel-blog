@@ -6,7 +6,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 3/2;
-    border-radius: .15em;
+    aspect-ratio: 1;
+    border-radius: .2em;
+    scroll-snap-align: start;
     border: 2px solid black;
+    
 }

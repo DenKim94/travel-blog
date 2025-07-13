@@ -9,7 +9,7 @@ import { BlogPostData } from '@/types/strapiTypes';
 export function BlogPostsContainer({ data }: { data: Array<BlogPostData>| null }): JSX.Element {
     if (!data){return <ContentNotFound />}
  
-    const tripleArray = Array(3).fill(data).flat(); // Test --> change "tripleArray" to "data"
+    const tripleArray = Array(4).fill(data).flat(); // Test --> change "tripleArray" to "data"
 
     return (
         <div className={styles.blogPostsContainer} id="blog-posts-container">

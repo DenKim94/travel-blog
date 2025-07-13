@@ -95,7 +95,7 @@ header {
   // Scrollbar beim Hovern über den Container anzeigen
   &:hover {    
     &::-webkit-scrollbar-thumb {
-      background-color: $foreground-color-global;
+      background-color: rgba(0, 0, 0, 0.6);
 
       &:hover {
         background-color: $third-color-global; // Farbe beim Hover

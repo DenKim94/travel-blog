@@ -47,6 +47,8 @@ $padding-fallbacks: 32px;
 // Schwellenwerte für responsive Design
 $mobile-header-width: 720px;
 
+// Blog-Cards
+$min-card-width: 300px;
 
 // *** Export der Variablen für TypeScript ***
 :export {
@@ -55,4 +57,5 @@ $mobile-header-width: 720px;
     appMaxWidth: $max-width;
     mobileHeaderWidth: $mobile-header-width;
     rootPageGap: $root-page-gap;
+    minCardWidth: $min-card-width;
 }
