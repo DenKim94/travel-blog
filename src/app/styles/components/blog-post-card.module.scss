@@ -1,0 +1,12 @@
+@use '../variables.module.scss' as *;
+
+.blogPostCard{
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3/2;
+    border-radius: .15em;
+    border: 2px solid black;
+}

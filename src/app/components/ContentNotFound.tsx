@@ -12,8 +12,11 @@ import * as appConstants from "@utils/appConstants"
  *
  * @returns {JSX.Element} Die gerenderte Komponente als Platzhalter.
  */
-export function ContentNotFound(): JSX.Element {
-    const styleProps: React.CSSProperties = {
+export function ContentNotFound({imgWidth = appConstants.notFoundImgDefaultSize, 
+    imgHeight =appConstants.notFoundImgDefaultSize}: {imgWidth?: number, imgHeight?: number})
+    : JSX.Element{
+    
+        const styleProps: React.CSSProperties = {
         height: '100%',
         width: '100%',
         display: 'flex',
@@ -26,8 +29,8 @@ export function ContentNotFound(): JSX.Element {
         <div id="content-not-found-container" style={styleProps}>
           <Image src={appConstants.contentNotFoundImageUrl} 
                   alt="Content not found"
-                  width={appConstants.notFoundImgDefaultSize}
-                  height={appConstants.notFoundImgDefaultSize}
+                  width={imgWidth}
+                  height={imgHeight}
                   />
         </div>
     );

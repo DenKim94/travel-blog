@@ -17,14 +17,7 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
     getTravelMapData(lang),
     getBlogPosts(lang)
   ]);
-
-  // Test-Abschnitt
-  const testStyle = {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'lightgrey'
-  };
-  
+ 
   return (
     <>
       <section id={appConstants.fallBackId} className={styles.section}>
@@ -34,11 +27,8 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].blogs}</h1>
         <TravelMap data={travelMapContent} />
       </section>
-      <section id={appConstants.navigationIds.blogs} className={styles.section}>
-        <div style={testStyle}>
-            <h1>Platzhalter-Testabschnitt</h1>
-            <BlogPostsContainer data={blogPostsContent} />
-        </div>
+      <section id="blog-posts" className={styles.section}>
+        <BlogPostsContainer data={blogPostsContent} />
       </section>
       <section id={appConstants.navigationIds.about} className={styles.section}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].about}</h1>

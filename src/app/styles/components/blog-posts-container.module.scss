@@ -1,2 +1,68 @@
 @use '../variables.module.scss' as *;
 
+.blogPostsContainer {
+    display: grid;
+    width: 100%;
+    height: $main-content-height;
+    overflow-y: scroll;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    // Für Safari und ältere Browser
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth; // Aktiviert sanftes Scrollen
+
+    &::-webkit-scrollbar {
+        // Scrollbalken
+        width: $scrollbar-offset; // Breite des Scrollbalkens
+        background-color: transparent;
+        // Safari-Fix: Explizite Höhe setzen
+        height: 100%;
+    }  
+
+    &::-webkit-scrollbar-thumb {
+        // Scrollbalken-Farbe
+        background-color: transparent;
+        border-radius: 10px;
+        // Safari-Fix: Entferne Standard-Border
+        border: none;
+        // Safari-Fix: Verhindere Standard-Styling
+        -webkit-appearance: none;
+    }
+
+    // Scrollbar beim Hovern über den Container anzeigen
+    &:hover {    
+        &::-webkit-scrollbar-thumb {
+        background-color: $foreground-color-global;
+
+        &:hover {
+            background-color: $third-color-global; // Farbe beim Hover
+        }
+        }
+    }
+  }
+  
+
+//   .blogPostsContainer> * {
+//     flex: 0 0 calc(25% - 3.75rem);
+//     box-sizing: border-box;
+//   }
+
+//   @media (max-width: 1200px) {
+//     .blogPostsContainer > * {
+//       flex: 0 0 calc(33.333% - 3.33rem);
+//     }
+//   }
+  
+//   @media (max-width: 768px) {
+//     .blogPostsContainer > * {
+//       flex: 0 0 calc(50% - 2.5rem);
+//     }
+//   }
+  
+//   @media (max-width: 480px) {
+//     .blogPostsContainer > * {
+//       flex: 0 0 100%;
+//     }
+//   }
+
