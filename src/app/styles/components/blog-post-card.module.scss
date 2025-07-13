@@ -1,5 +1,19 @@
 @use '../variables.module.scss' as *;
 
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// TODO: Animation anpassen [13.07.2025]
+
 .blogPostCard{
     background-color: lightblue;
     display: flex;
@@ -11,4 +25,10 @@
     scroll-snap-align: start;
     border: 2px solid black;
     
+    animation-name: slideInUp;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    opacity: 0;
+    animation-delay: calc(var(--animation-order) * 0.1s);
 }

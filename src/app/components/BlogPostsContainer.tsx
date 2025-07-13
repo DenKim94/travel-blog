@@ -14,7 +14,9 @@ export function BlogPostsContainer({ data }: { data: Array<BlogPostData>| null }
     return (
         <div className={styles.blogPostsContainer} id="blog-posts-container">
             {tripleArray.map((blogPostElement: BlogPostData, index) => {
-                return <BlogPostCard key={index} data={blogPostElement} />            
+                return <BlogPostCard key={index} 
+                                     data={blogPostElement} 
+                                     styleProps={{ '--animation-order': index + 1 } as React.CSSProperties}/>            
             })}
         </div>
     )
