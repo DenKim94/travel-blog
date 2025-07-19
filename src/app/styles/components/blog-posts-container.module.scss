@@ -7,7 +7,7 @@
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     gap: $card-gap;
-    grid-template-columns: repeat(auto-fit, minmax($min-card-width, 1fr));  
+    grid-template-columns: repeat(auto-fit, minmax($min-card-width, 0.95fr));  
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth; // Aktiviert sanftes Scrollen
     grid-auto-rows: auto; // ← Zeilen passen sich dem Inhalt an

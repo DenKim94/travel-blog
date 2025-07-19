@@ -186,8 +186,9 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
 };
 
 // *** Angaben für die Landing-Page *** 
-export const LANDING_PAGE_ALT_TEXT: string = "Landing Page Title Image";
-export const TRAVEL_MAP_ALT_TEXT: string = "Travel Map Image";
+export const LANDING_PAGE_ALT_TEXT: string = "Landing page title image";
+export const TRAVEL_MAP_ALT_TEXT: string = "Travel map image";
+export const BLOG_POST_ALT_TEXT: string = "Blog post title image: ";
 
 // *** Angaben für die Blogpost-Page *** 
 export const IN_VIEW_THRESHOLD: number = 0.25;

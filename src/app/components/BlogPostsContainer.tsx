@@ -12,15 +12,13 @@ export function BlogPostsContainer({ data }: { data: Array<BlogPostData>| null }
     const [ref, isVisible] = useInView<HTMLDivElement>(appConstants.IN_VIEW_THRESHOLD);
     if (!data){return <ContentNotFound />}
 
-    const tripleArray = Array(1).fill(data).flat(); // Test --> change "tripleArray" to "data"
-
     return (
         <div 
             ref={ref} 
             className={styles.blogPostsContainer} 
             id="blog-posts-container">
             
-            {tripleArray.map((blogPostElement: BlogPostData, index) => {
+            {data.map((blogPostElement: BlogPostData, index) => {
                 return <BlogPostCard key={index}
                                      data={blogPostElement} 
                                      styleProps={{ '--animation-order': index + 1 } as React.CSSProperties}

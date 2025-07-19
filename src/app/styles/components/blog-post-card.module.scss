@@ -1,7 +1,10 @@
 @use '../variables.module.scss' as *;
 
 $y-offset: 50px;
-$animatio-duration: 0.5s;
+$animation-duration: 0.5s;
+$hover-transition: 0.3s ease-in-out;
+$card-title-font-size: 1.1rem;
+$card-button-font-size: 0.95rem;
 
 @keyframes slideInUp {
   0% {
@@ -15,20 +18,119 @@ $animatio-duration: 0.5s;
 }
 
 .blogPostCard{
-    background-color: lightblue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1;
-    border-radius: .2em;
-    scroll-snap-align: start;
-    border: 2px solid black;
     opacity: 0;
+    width: 95%;
+    height: 95%;
+    margin: auto;
 
     &.runAnimation {
-      animation: slideInUp $animatio-duration ease-out forwards;
+      animation: slideInUp $animation-duration ease-out forwards;
       animation-delay: calc(var(--animation-order, 1) * 0.1s);
-  }
+    }
+}
+
+.blogPostCardContent {
+    background-color: $background-color-global;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1;
+    border-radius: .2em;
+    align-items: center;
+    scroll-snap-align: start;
+    border: $border-width-global solid $foreground-color-global;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform $hover-transition, box-shadow $hover-transition;
+
+    &:hover {
+        transform: scale(1.01);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.blogPostImage {
+    position: relative;
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    transition: transform $hover-transition;
+
+    &.imageHovered {
+        transform: scale(1.05);
+    }
+}
+
+.titleButtonContainer {
+    height: 20%;
+    width: 100%;
+    position: relative;
+    perspective: 1000px; // 3D Perspective für die Rotation
+    transform-style: preserve-3d;
+}
+
+// Gemeinsame Eigenschaften für beide Seiten
+.titleSide,
+.buttonSide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    backface-visibility: hidden; // Verhindert Sichtbarkeit der Rückseite
+    transition: transform $hover-transition ease-in-out;
+    transform-style: preserve-3d;
+    transition: transform $hover-transition;
+}
+
+// Titel-Seite (Vorderseite)
+.titleSide {
+    transform: rotateX(0deg);
+   
+    .titleButtonContainer.flipped & {
+        transform: rotateX(180deg);
+    }
+}
+
+// Button-Seite (Rückseite, anfangs um 180° gedreht)
+.buttonSide {
+    transform: rotateX(-180deg);
+
+    .titleButtonContainer.flipped & {
+        margin-top: 2px;
+        transform: rotateX(0deg);
+    }
+}
+
+.title {
+    margin: 0;
+    text-align: center;
+    font-size: $card-title-font-size;
+    font-weight: 550;
+    line-height: 1.3;
+    color: $foreground-color-global;
+}
+
+.readMoreButton {
+    background-color: $foreground-color-global;
+    color: $background-color-global;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: $card-button-font-size;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    // &:hover {
+    //     background-color: $third-color-global;
+    // }
+    &:active {
+        scale: 0.9;
+    }
 }
 
