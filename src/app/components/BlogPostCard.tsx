@@ -20,7 +20,9 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
         setIsHovered(false);
     }, []);
 
-    if (!data){return <ContentNotFound imgWidth={160} imgHeight={160}/>}
+    if (!data){return <ContentNotFound 
+                        imgWidth={appConstants.notFoundImgDefaultSize/2} 
+                        imgHeight={appConstants.notFoundImgDefaultSize/2}/>}
 
     const titleImage = data.featuredImages[0];
 
@@ -46,10 +48,10 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         <p className={styles.title}>{data.title}</p>
                     </div>
                     
-                    {/* Rückseite: Button */}
+                    {/* TODO: Buttoninhalt an jeweilige Sprache anpassen */}
                     <div className={styles.buttonSide}>
                         <button className={styles.readMoreButton}>
-                            Mehr lesen
+                            Mehr lesen 
                         </button>
                     </div>
                 </div>

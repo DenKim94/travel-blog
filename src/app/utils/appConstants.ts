@@ -87,7 +87,7 @@ export const notFoundTranslations: Record<string, { title: string; description: 
   };
 
 export const contentNotFoundImageUrl: string = "/assets/ContentNotFound.png";
-export const notFoundImgDefaultSize: number = 350; // Größe des Bildes in Pixel
+export const notFoundImgDefaultSize: number = 340; // Größe des Bildes in Pixel
 
 // *** Angaben für Fehlerseiten ***
 export const errorNotificationTranslations: Record<string, { title: string; retry: string }> = {
