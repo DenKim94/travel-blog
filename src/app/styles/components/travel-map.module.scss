@@ -2,14 +2,15 @@
 
 .travelMapContainer{
     width: 100%;
-    height: $main-content-height;
+    height: auto;
     overflow: hidden;
+    margin: auto;
 }
 
 .imageContainer{
     position: relative;
     width: 100%;
-    height: $main-content-height;
+    height: 100%;
     overflow-x: auto; // Nur horizontal scrollen erlauben
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
@@ -17,8 +18,16 @@
 
 .travelMapImage{
   display: block;
-  height: calc(#{$main-content-height} - #{$font-size-h1} - #{$margin-top-h1}) ;
+  height: auto;
   width: 100%;
   min-width: 1024px;    // Minimale Breite des Bildes
   object-fit: contain;  // Verhindert Verzerrung
 }
+
+  .travelMapContainer {
+    // Tablet: Höhe automatisch an Inhalt anpassen
+    @media (max-width: 1024px) {
+      margin-top: $root-page-gap;
+      margin-bottom: $root-page-gap;
+    }
+  }

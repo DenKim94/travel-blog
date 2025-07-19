@@ -1,7 +1,5 @@
 @use '../variables.module.scss' as *;
 
-$card-gap: 1.5rem;
-
 .blogPostsContainer {
     display: grid;
     width: 100%;
@@ -9,11 +7,11 @@ $card-gap: 1.5rem;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     gap: $card-gap;
-    grid-template-columns: repeat(auto-fit, minmax($min-card-width, 1fr));
-
-    // Für Safari und ältere Browser
+    grid-template-columns: repeat(auto-fit, minmax($min-card-width, 1fr));  
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth; // Aktiviert sanftes Scrollen
+    grid-auto-rows: auto; // ← Zeilen passen sich dem Inhalt an
+    align-content: start;  // ← Grid startet oben, keine Verteilung über volle Höhe
 
     &::-webkit-scrollbar {
         // Scrollbalken

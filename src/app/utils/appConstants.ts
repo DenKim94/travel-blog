@@ -188,3 +188,6 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
 // *** Angaben für die Landing-Page *** 
 export const LANDING_PAGE_ALT_TEXT: string = "Landing Page Title Image";
 export const TRAVEL_MAP_ALT_TEXT: string = "Travel Map Image";
+
+// *** Angaben für die Blogpost-Page *** 
+export const IN_VIEW_THRESHOLD: number = 0.25;

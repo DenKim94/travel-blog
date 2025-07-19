@@ -48,7 +48,8 @@ $padding-fallbacks: 32px;
 $mobile-header-width: 720px;
 
 // Blog-Cards
-$min-card-width: 300px;
+$card-gap: 1rem;
+$min-card-width: 260px;
 
 // *** Export der Variablen für TypeScript ***
 :export {

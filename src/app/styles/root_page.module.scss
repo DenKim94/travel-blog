@@ -1,15 +1,24 @@
 @use './variables.module.scss' as *;
 
 .section {
-  min-height: 100%; // Ändere height zu min-height
-  height: $main-content-height; // Füge eine explizite Viewport-Höhe hinzu
+  min-height: 100%;
+  max-height: $main-content-height; // Füge eine explizite Viewport-Höhe hinzu
+  height: auto;
   width: 100%;
   flex-shrink: 0; // Verhindert, dass Sections schrumpfen
-  scroll-snap-align: start; // Aktiviert Snap-Scrolling für diese Sektion
+  scroll-snap-align: start; 
   display: flex;
   flex-direction: column;
   font-family: $font-oranienbaum;
   
+  &.responsiveHeight {
+    // Tablet: Höhe automatisch an Inhalt anpassen
+    @media (max-width: 1024px) {
+      height: auto;
+      min-height: auto;
+    }
+  }
+
   h1 {
     font-size: $font-size-h1;
     text-align: center;

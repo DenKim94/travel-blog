@@ -23,11 +23,16 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
       <section id={appConstants.fallBackId} className={styles.section}>
         <LandingPage data={landingPageContent} />
       </section>
-      <section id={appConstants.navigationIds.blogs} className={styles.section}>
+      <section 
+          id={appConstants.navigationIds.blogs} 
+          className={`${styles.section} ${styles.responsiveHeight}`}>
+
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].blogs}</h1>
         <TravelMap data={travelMapContent} />
       </section>
-      <section id="blog-posts" className={styles.section}>
+      <section 
+          id="blog-posts" 
+          className={`${styles.section} ${styles.responsiveHeight}`}>
         <BlogPostsContainer data={blogPostsContent} />
       </section>
       <section id={appConstants.navigationIds.about} className={styles.section}>
