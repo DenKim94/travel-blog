@@ -1,8 +1,8 @@
 @use './variables.module.scss' as *;
 
 @mixin vertical-margins {
-  margin-top: $root-page-gap;
-  margin-bottom: $root-page-gap;
+  height: auto;
+  min-height: auto;
 }
 
 .section {
