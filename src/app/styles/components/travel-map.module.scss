@@ -24,10 +24,13 @@
   object-fit: contain;  // Verhindert Verzerrung
 }
 
-  .travelMapContainer {
-    // Tablet: Höhe automatisch an Inhalt anpassen
-    @media (max-width: 1024px) {
-      margin-top: $root-page-gap;
-      margin-bottom: $root-page-gap;
-    }
+@mixin vertical-margins {
+  margin-top: $root-page-gap;
+  margin-bottom: $root-page-gap;
+}
+
+.travelMapContainer {
+  @media (max-width: 1024px), (min-width: 1920px) {
+    @include vertical-margins;
   }
+}

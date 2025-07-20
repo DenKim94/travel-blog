@@ -5,6 +5,7 @@ $animation-duration: 0.5s;
 $hover-transition: 0.3s ease-in-out;
 $card-title-font-size: 1.1rem;
 $card-button-font-size: 0.95rem;
+$scale-factor: 1.02;
 
 @keyframes slideInUp {
   0% {
@@ -35,7 +36,8 @@ $card-button-font-size: 0.95rem;
     flex-direction: column;
     aspect-ratio: 1;
     border-radius: .2em;
-    align-items: center;
+    align-items: stretch;
+    justify-content: stretch;
     scroll-snap-align: start;
     border: $border-width-global solid $foreground-color-global;
     overflow: hidden;
@@ -43,29 +45,33 @@ $card-button-font-size: 0.95rem;
     transition: transform $hover-transition, box-shadow $hover-transition;
 
     &:hover {
-        transform: scale(1.01);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: scale($scale-factor);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }
 }
 
 .blogPostImage {
     position: relative;
+    flex: 1 1 0;
     width: 100%;
-    height: 80%;
+    height: auto;
+    min-height: 0;
     overflow: hidden;
     transition: transform $hover-transition;
 
     &.imageHovered {
-        transform: scale(1.05);
+        transform: scale($scale-factor);
     }
 }
 
 .titleButtonContainer {
-    height: 20%;
+    flex: 0 0 auto;
+    min-height: 55px;
     width: 100%;
     position: relative;
     perspective: 1000px; // 3D Perspective für die Rotation
     transform-style: preserve-3d;
+
 }
 
 // Gemeinsame Eigenschaften für beide Seiten
@@ -100,7 +106,6 @@ $card-button-font-size: 0.95rem;
     transform: rotateX(-180deg);
 
     .titleButtonContainer.flipped & {
-        margin-top: 2px;
         transform: rotateX(0deg);
     }
 }
@@ -125,10 +130,7 @@ $card-button-font-size: 0.95rem;
     font-family: inherit;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    
-    // &:hover {
-    //     background-color: $third-color-global;
-    // }
+
     &:active {
         scale: 0.9;
     }

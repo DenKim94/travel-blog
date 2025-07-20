@@ -1,4 +1,5 @@
 import { NavigationTitles, NavigationKey, NavBarIconProps, NavBarIconKeys } from "@/types/NavigationBarTypes";
+import { strapiLocaleType } from "@/types/strapiTypes";
 
 // *** Unterstützte Sprachen (global) ***
 export type SupportedLanguageType = "de" | "en" | "ru";
@@ -192,3 +193,5 @@ export const BLOG_POST_ALT_TEXT: string = "Blog post title image: ";
 
 // *** Angaben für die Blogpost-Page *** 
 export const IN_VIEW_THRESHOLD: number = 0.25;
+export const indexCardTitleImage: number = 0;
+export const blogCardButtonText: Record<strapiLocaleType, string> = { "de": "Mehr lesen", "en": "Read more", "ru-RU": "Подробнее" };

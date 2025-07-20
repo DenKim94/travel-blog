@@ -1,3 +1,6 @@
+
+export type strapiLocaleType = "de" | "en" | "ru-RU";
+
 export interface StrapiResponse<T> {
   data: T;
   meta: {

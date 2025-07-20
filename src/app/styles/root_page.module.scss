@@ -1,5 +1,10 @@
 @use './variables.module.scss' as *;
 
+@mixin vertical-margins {
+  margin-top: $root-page-gap;
+  margin-bottom: $root-page-gap;
+}
+
 .section {
   min-height: 100%;
   max-height: $main-content-height; // Füge eine explizite Viewport-Höhe hinzu
@@ -12,10 +17,8 @@
   font-family: $font-oranienbaum;
   
   &.responsiveHeight {
-    // Tablet: Höhe automatisch an Inhalt anpassen
-    @media (max-width: 1024px) {
-      height: auto;
-      min-height: auto;
+    @media (max-width: 1024px), (min-width: 1920px) {
+      @include vertical-margins;
     }
   }
 

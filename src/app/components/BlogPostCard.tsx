@@ -2,7 +2,7 @@ import { JSX, useState, useCallback } from "react";
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/blog-post-card.module.scss";
 import { ContentNotFound } from "@/components/ContentNotFound"; 
-import { BlogPostData } from '@/types/strapiTypes';
+import { BlogPostData,  strapiLocaleType} from '@/types/strapiTypes';
 import Image from 'next/image';
 
 export function BlogPostCard({ data, styleProps, startAnimation }: { 
@@ -24,7 +24,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         imgWidth={appConstants.notFoundImgDefaultSize/2} 
                         imgHeight={appConstants.notFoundImgDefaultSize/2}/>}
 
-    const titleImage = data.featuredImages[0];
+    const titleImage = data.featuredImages[appConstants.indexCardTitleImage]; // first image is the title image
 
     return(
         <div className={`${styles.blogPostCard} ${startAnimation ? styles['runAnimation'] : ''}`} 
@@ -39,6 +39,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         src={titleImage.url} 
                         alt={titleImage.alternativeText || `${appConstants.BLOG_POST_ALT_TEXT} ${data.title}`} 
                         fill={true}
+                        sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
                         style={{ objectFit: 'cover' }}
                     /> 
                 </div>      
@@ -47,11 +48,10 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                     <div className={styles.titleSide}>
                         <p className={styles.title}>{data.title}</p>
                     </div>
-                    
-                    {/* TODO: Buttoninhalt an jeweilige Sprache anpassen */}
+
                     <div className={styles.buttonSide}>
                         <button className={styles.readMoreButton}>
-                            Mehr lesen 
+                           <p> {appConstants.blogCardButtonText[data.locale as strapiLocaleType]} </p> 
                         </button>
                     </div>
                 </div>
