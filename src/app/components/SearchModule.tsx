@@ -2,7 +2,7 @@
 import styles from "@styles/components/search.module.scss";
 import variables from "@styles/variables.module.scss";
 import { useGlobalState } from '@/context/GlobalStateContext';
-import { useDebouncedValue } from '@hooks/useDebouncedValue';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as appConstants from "@utils/appConstants"
 import { JSX, useState, useEffect, useRef } from "react";
@@ -46,9 +46,9 @@ export function SearchField(): JSX.Element | null {
     const [isAnimating, setIsAnimating] = useState(false);
     const searchFieldRef = useRef<HTMLInputElement>(null);
     const modalRef = useRef<HTMLDivElement>(null);
-    const debouncedQuery = useDebouncedValue(searchQuery, appConstants.debounceDelay);
+    const router = useRouter();
 
-    const searchFieldTransitionDuration: number = parseFloat(variables.searchFieldTransitionDuration) * 1000 || 300 ; // Umwandlung in Millisekunden
+    const searchFieldTransitionDuration: number = parseFloat(variables.searchFieldTransitionDuration) * 1000 || 300 ; // Umrechnung in Millisekunden
   
     // Komponente mounten wenn geöffnet wird
     useEffect(() => {
@@ -83,14 +83,6 @@ export function SearchField(): JSX.Element | null {
         }
     }, [isAnimating]);
 
-    useEffect(() => {
-        if (debouncedQuery) {
-            // Suche oder API-Call nur mit debouncedQuery ausführen!
-            // To-Do: API-Call mit debouncedQuery
-            console.log(`> Suchbegriff: "${debouncedQuery}"`);
-        }
-    }, [debouncedQuery]);
-
     // Klick außerhalb erkennen und Suchfeld schließen
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -120,6 +112,17 @@ export function SearchField(): JSX.Element | null {
         setSearchFieldOpen(false);  // Suchfeld schließen
     }
 
+    const handleKeyPress = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && searchQuery.trim().length > 0) {
+            event.preventDefault();
+            
+            console.log(`>> Suche nach: ${searchQuery.trim()}`);
+
+            router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+            closeSearchField();
+        }
+    };
+
     if (!shouldRender) {
         return null;
     }
@@ -132,14 +135,17 @@ export function SearchField(): JSX.Element | null {
                     ref={searchFieldRef}
                     type="text"
                     value={searchQuery}
+                    enterKeyHint="search"
+                    aria-label="Search field"
                     onChange={handleSearchChange}
+                    onKeyDown={handleKeyPress}
                     placeholder={appConstants.searchTitleTranslations[language].title}
                     className={styles.searchInput}
                 />
                 <button
                     className={styles.searchCloseButton}
                     onClick={closeSearchField}
-                    aria-label="Suche schließen"
+                    aria-label="Close search field"
                 >
                     <Image
                         src={appConstants.navBarIconProps.close_search_field.src}

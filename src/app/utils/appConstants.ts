@@ -169,7 +169,7 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
   export const fallBackId: string = "home"; // Fallback-ID für die Navigation, wenn kein passendes Element gefunden wird
  
 // *** Angaben für die Suchfunktion *** 
-export const debounceDelay:number = 1500;     // Verzögerung für die Debounce-Funktion in Millisekunden
+export const debounceDelay:number = 800;     // Verzögerung für die Debounce-Funktion in Millisekunden
 export const setAnimationDelay:number = 100;  // Verzögerung für die Animation in Millisekunden
 
 export type SearchTitleTranslationsType = Record<SupportedLanguageType, { title: string }>;
@@ -183,6 +183,18 @@ export const searchTitleTranslations: SearchTitleTranslationsType = {
     },
     ru: {
       title: " Поиск по стране путешествия ",
+    },
+};
+
+export const searchLoaderTranslations: SearchTitleTranslationsType = {
+    de: {
+      title: " Suche läuft ... ",
+    },
+    en: {
+      title: " Search is running ... ",
+    },
+    ru: {
+      title: " Поиск ... ",
     },
 };
 

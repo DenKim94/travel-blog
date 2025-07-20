@@ -1,6 +1,5 @@
 import * as appConstants from "@utils/appConstants"
 import { NavigationBarItemType } from '@/types/NavigationBarTypes';
-import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 import { StrapiImage, StrapiImageFormat } from "@/types/strapiTypes";
 
 /**
@@ -52,8 +51,10 @@ export function getNavigationItems(
  * @param cookieStore - Ein Objekt, das die Cookies enthält
  * @returns Die aktuelle Sprache
  */
-export function getLanguageFromCookies(cookieStore: ReadonlyRequestCookies): string {
-  const languageCookie = cookieStore.get(appConstants.storageSettings.storageKey);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getLanguageFromCookies(cookieStore: any): Promise<string> {
+    
+  const languageCookie = await cookieStore.get(appConstants.storageSettings.storageKey);
   
   if (languageCookie?.value && isSupportedLanguage(languageCookie.value)) {
     return languageCookie.value;
@@ -180,4 +181,8 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
     }
 
     return filteredImageProps;
+}
+
+export function mockDelay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

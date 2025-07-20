@@ -17,11 +17,12 @@ import variables from "@styles/components/loader.module.scss";
  *
  * @returns {JSX.Element} Die gerenderte CustomLoader-Komponente.
  */
-export function CustomLoader(): JSX.Element {
+export function CustomLoader({message}: {message?: string | null}): JSX.Element {
   const logoSize: number = parseInt(variables.customLoaderLogoSize, 10) || 100; // Fallback auf 100, falls die Variable nicht gesetzt ist
 
   return (
     <div className={styles.customLoader} id='custom-loader-container'>
+      {message && <p className={styles.loaderMessage}>{message}</p>}
       <span className={styles.spinner}></span>
       <div className={styles.logoWrapper}>
         <Image

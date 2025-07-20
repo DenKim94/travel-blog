@@ -34,6 +34,15 @@ $loader-size: calc(#{$loader-logo-size} + 10px); // Größe des Loaders
   z-index: 2;
 }
 
+.loaderMessage{
+  position: absolute;
+  display: flex;
+  margin-bottom: calc(#{$loader-size} + 50px);
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
 @keyframes spin {
   0%   { transform: rotate(0deg);}
   100% { transform: rotate(360deg);}

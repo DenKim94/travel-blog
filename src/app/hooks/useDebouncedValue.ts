@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
  * bereitstellt.
  *
  * @param {T} value - Der Wert, der verzögert werden soll.
- * @param {number} delay - Die Dauer der Verzögerung in Millisekunden.
+ * @param {number} delay - Die Dauer der Verzögerung in Millisekunden (default: 500 ms).
  *
  * @returns {T} Der verzögerte Wert.
  */
-export function useDebouncedValue<T>(value: T, delay: number): T {
+export function useDebouncedValue<T>(value: T, delay: number = 500): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
