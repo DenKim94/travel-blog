@@ -26,9 +26,11 @@ export function ContentNotFound({imgWidth = appConstants.notFoundImgDefaultSize,
     }
 
     return (
-        <div id="content-not-found-container" style={styleProps}>
+        <div id="content-not-found-container" 
+             aria-label="Content not found."
+             style={styleProps}>
           <Image src={appConstants.contentNotFoundImageUrl} 
-                  alt="Content not found"
+                  alt="Content not found image."
                   width={imgWidth}
                   height={imgHeight}
                   />

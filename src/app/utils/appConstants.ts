@@ -195,3 +195,4 @@ export const BLOG_POST_ALT_TEXT: string = "Blog post title image: ";
 export const IN_VIEW_THRESHOLD: number = 0.25;
 export const indexCardTitleImage: number = 0;
 export const blogCardButtonText: Record<strapiLocaleType, string> = { "de": "Mehr lesen", "en": "Read more", "ru-RU": "Подробнее" };
+export const imgDefaultSizes: string = "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw";

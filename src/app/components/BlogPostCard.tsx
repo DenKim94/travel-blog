@@ -39,7 +39,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         src={titleImage.url} 
                         alt={titleImage.alternativeText || `${appConstants.BLOG_POST_ALT_TEXT} ${data.title}`} 
                         fill={true}
-                        sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                        sizes={appConstants.imgDefaultSizes}
                         style={{ objectFit: 'cover' }}
                     /> 
                 </div>      

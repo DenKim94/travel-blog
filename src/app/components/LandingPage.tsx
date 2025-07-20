@@ -33,7 +33,9 @@ export function LandingPage({ data }: { data: LandingPageData | null }): JSX.Ele
                   />
 
             <div className={styles.titleOverlay}>
-              <p className={styles.landingPageTitle} id="landing-page-title">
+              <p className={styles.landingPageTitle} 
+                  id="landing-page-title"
+                  aria-label="Landing Page Title">
                 {data?.title}
               </p>
             </div>

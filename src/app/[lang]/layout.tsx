@@ -57,17 +57,17 @@ export default async function RootLayout({
       <body>
         <GlobalStateProvider initialLanguage={lang}>
             <div className="root-page">
-              <header>
+              <header aria-label="Application header">
                 <NavigationBar />
                 <div className="header-underline"></div>
                 <SearchField />
               </header>
               
-              <main className="main-content">
+              <main className="main-content" aria-label="Main content area">
                 {children}
               </main>
               
-              <footer>
+              <footer aria-label="Application footer">
                 {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
               </footer>
             </div>
