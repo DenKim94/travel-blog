@@ -7,10 +7,12 @@ import * as helperFunctions from "@utils/helperFunctions"
 type GlobalStateContextType = {
     language: appConstants.SupportedLanguageType;
     setLanguage: (language: appConstants.SupportedLanguageType) => void;
-    searchFieldOpen: boolean; // Optional: Falls du den Zustand des Suchfeldes verwalten möchtest
-    setSearchFieldOpen: (open: boolean) => void; // Optional: Falls du den Zustand des Suchfeldes verwalten möchtest
+    searchFieldOpen: boolean;
+    setSearchFieldOpen: (open: boolean) => void; 
     menuBarOpen: boolean,
-    setMenuBarOpen: (open: boolean) => void; // Optional: Falls du den Zustand der Menüleiste verwalten möchtest
+    setMenuBarOpen: (open: boolean) => void; 
+    isOnSearchPage: boolean,
+    setIsOnSearchPage: (open: boolean) => void
 };
 
 const GlobalStateContext = createContext<GlobalStateContextType>({
@@ -20,6 +22,8 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
     setSearchFieldOpen: () => {},
     menuBarOpen: false,
     setMenuBarOpen: () => {},
+    isOnSearchPage: false, 
+    setIsOnSearchPage: () => {}
 });
 
 /**
@@ -61,6 +65,7 @@ export function GlobalStateProvider({ children, initialLanguage = appConstants.d
     const [language, setLanguageState] = useState<appConstants.SupportedLanguageType>(initialLanguage as appConstants.SupportedLanguageType);
     const [searchFieldOpen, setSearchFieldOpen] = useState<boolean>(false);
     const [menuBarOpen, setMenuBarOpen] = useState<boolean>(false);
+    const [isOnSearchPage, setIsOnSearchPage] = useState<boolean>(false);
 
     // Beim ersten Laden prüfen, ob eine gespeicherte Sprache im Cache existiert
     useEffect(() => {
@@ -86,6 +91,8 @@ export function GlobalStateProvider({ children, initialLanguage = appConstants.d
         setSearchFieldOpen,
         menuBarOpen,
         setMenuBarOpen,
+        isOnSearchPage, 
+        setIsOnSearchPage
     };
 
     return (

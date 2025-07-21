@@ -1,3 +1,4 @@
+'use client';
 import { useState, useLayoutEffect, useCallback, useRef } from 'react';
 
 interface WindowSize {

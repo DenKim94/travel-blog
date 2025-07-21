@@ -2,6 +2,7 @@
 import styles from "@styles/components/search.module.scss";
 import variables from "@styles/variables.module.scss";
 import { useGlobalState } from '@/context/GlobalStateContext';
+import { useIsOnSearchPage } from "@/hooks/useTrackSearchPage";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as appConstants from "@utils/appConstants"
@@ -40,7 +41,7 @@ export function SearchButton(): JSX.Element {
  * @returns {JSX.Element} Die gerenderte Komponente oder null.
  */
 export function SearchField(): JSX.Element | null {
-    const { language, searchFieldOpen, setSearchFieldOpen } = useGlobalState();
+    const { language, searchFieldOpen, setSearchFieldOpen, setMenuBarOpen } = useGlobalState();
     const [searchQuery, setSearchQuery] = useState("");
     const [shouldRender, setShouldRender] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -49,7 +50,9 @@ export function SearchField(): JSX.Element | null {
     const router = useRouter();
 
     const searchFieldTransitionDuration: number = parseFloat(variables.searchFieldTransitionDuration) * 1000 || 300 ; // Umrechnung in Millisekunden
-  
+    
+    const isOnSearchPage = useIsOnSearchPage();
+
     // Komponente mounten wenn geöffnet wird
     useEffect(() => {
         if (searchFieldOpen) {
@@ -115,11 +118,16 @@ export function SearchField(): JSX.Element | null {
     const handleKeyPress = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' && searchQuery.trim().length > 0) {
             event.preventDefault();
-            
-            console.log(`>> Suche nach: ${searchQuery.trim()}`);
+            const searchUrl = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
 
-            router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+            if(isOnSearchPage) {
+                router.replace(searchUrl);
+            } else {
+                router.push(searchUrl);
+            }
+
             closeSearchField();
+            setMenuBarOpen(false);
         }
     };
 

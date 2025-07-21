@@ -1,6 +1,7 @@
 "use client";
 import { NavigationBarItemType } from "@/types/NavigationBarTypes";
 import { useGlobalState } from '@context/GlobalStateContext';
+import { useIsOnSearchPage } from "@/hooks/useTrackSearchPage";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/navbar.module.scss";
@@ -27,7 +28,8 @@ import useWindowSize from "@/hooks/useWindowSize";
  */
 export function NavigationBar(): JSX.Element {
     const { language } = useGlobalState();
-
+    const isOnSearchPage = useIsOnSearchPage();
+    
     const navBarItems: NavigationBarItemType[] = useMemo(() => {
         return helperFunctions.getNavigationItems(language);
     }, [language]);
@@ -58,7 +60,7 @@ export function NavigationBar(): JSX.Element {
             <ul className={`${styles.navBarList} ${isMobile ? styles['navBarList--hidden'] : styles['navBarList--visible']}`} 
                 role="menubar" aria-label="Navigation Menu">
 
-                {navBarItems?.map((item) => (
+                {!isOnSearchPage && navBarItems?.map((item) => (
                     <li key={item.title} className={styles.navBarListItem}>
                         <a href={`#${item?.id}`}
                             className={styles.navBarLinkItem}
@@ -66,6 +68,7 @@ export function NavigationBar(): JSX.Element {
                             tabIndex={0}
                             aria-label={item.title}
                             onClick={(e) => helperFunctions.handleSmoothScroll(item.id, headerHeight, e)}>
+
                             {item.title?.toUpperCase()}
                         </a>
                     </li>

@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef, useState } from "react";
 
 export function useInView<T extends HTMLElement>(threshold: number = 0.1): [React.RefObject<T | null> , boolean] {

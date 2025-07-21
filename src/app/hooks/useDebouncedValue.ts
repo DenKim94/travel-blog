@@ -1,5 +1,5 @@
+'use client';
 import { useState, useEffect } from "react";
-
 
 /**
  * Eine benutzerdefinierte Hook, der einen Wert mit einer Verzögerung

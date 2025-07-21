@@ -75,18 +75,43 @@ export function setLanguageCookie(language: string) {
 
 /**
  * Die Funktion übernimmt das Scrollen zu einem bestimmten Element auf der Seite.
+ * Falls der User nicht auf der Hauptseite ist, wird zuerst zur Hauptseite navigiert.
  * 
  * @param targetId - Die ID des Ziels, zu dem gescrollt werden soll.
- * @param headerHeight - Die Höhe des Headers, der von der Scroll-Position
- *                       abgezogen werden soll. Defaultwert ist 0.
+ * @param headerHeight - Die Höhe des Headers, der von der Scroll-Position abgezogen werden soll.
  * @param clickEvent - Das Event, das den Link-Click auslöst.
+ * @param router - Next.js Router für Navigation (optional)
+ * @param currentPath - Der aktuelle Pfad (optional)
  */
-export function handleSmoothScroll (targetId: string, headerHeight: number = 0, clickEvent: React.MouseEvent<HTMLAnchorElement>) {
+export function handleSmoothScroll (
+    targetId: string, 
+    headerHeight: number = 0, 
+    clickEvent: React.MouseEvent<HTMLAnchorElement>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    router?: any,
+    currentPath?: string) {
+
     clickEvent.preventDefault();
     
     const sectionId = clickEvent.currentTarget?.getAttribute('href')?.replace('#', '') || targetId;
-    const targetElement = document.getElementById(sectionId);
+    const currentPathname = currentPath || window.location.pathname;
+    const isOnHomePage = /^\/[a-z]{2}\/?$/.test(currentPathname); 
 
+    if (!isOnHomePage) {
+        
+        const lang = currentPathname.split('/')[1] || 'de';
+        const homeUrl = `/${lang}/`;
+        
+        if (router) {
+            router.push(homeUrl);
+        } else {
+            window.location.href = homeUrl;
+        }
+        return;
+    }
+
+    const targetElement = document.getElementById(sectionId);
+    
     if (!targetElement) {
         console.warn(`Could not find element with ID: "${sectionId}"`);
         return;
