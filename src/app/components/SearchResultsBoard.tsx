@@ -16,7 +16,7 @@ export default function SearchResultsBoard({ results }: { results: Array<BlogPos
     return (
         <div className="search-results-board">
             <p>Platzhalter: Suchergebnisse</p>
-            {/* TODO: Suchergebnisse/Treffer als Cards anzeigen */}
+            {/* TODO: [21.07.2025] Suchergebnisse/Treffer als Cards anzeigen */}
             <GenericButton
             title={appConstants.notFoundTranslations[lang].backToHome}
             onClick={backToHome}
