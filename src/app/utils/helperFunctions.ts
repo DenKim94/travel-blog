@@ -28,8 +28,7 @@ export function getNavigationItems(
 
     // Prüfung ob die Sprache im Übersetzungsobjekt existiert
     if (!navigationTitleTranslations[language]) {
-        console.error("Ungültige Sprache: ", language);
-        return []; // Oder Fallback-Werte zurückgeben
+        return [];
     }
 
     const navBarItems: Array<NavigationBarItemType> = Object.entries(navigationIds).map(([key, value]) => (

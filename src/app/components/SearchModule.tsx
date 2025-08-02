@@ -118,7 +118,7 @@ export function SearchField(): JSX.Element | null {
     const handleKeyPress = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' && searchQuery.trim().length > 0) {
             event.preventDefault();
-            const searchUrl = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+            const searchUrl = `/${language}/search?q=${encodeURIComponent(searchQuery.trim())}`;
 
             if(isOnSearchPage) {
                 router.replace(searchUrl);

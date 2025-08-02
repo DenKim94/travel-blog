@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import * as helperFunctions from "@utils/helperFunctions"
 import * as appConstants from "@utils/appConstants"
 import SearchResultsBoard from "@/components/SearchResultsBoard";
+import { getBlogPosts } from "@/lib/contentService";
+import { BlogPostData } from '@/types/strapiTypes';
 
 interface SearchPageProps {
     searchParams: Promise<{ q?: string }>;
@@ -12,20 +14,35 @@ interface SearchPageProps {
 export default async function SearchPage({ searchParams }: SearchPageProps) {
     const resolvedSearchParams = await searchParams;
     const cookieStore = await cookies();
-    const language = await helperFunctions.getLanguageFromCookies(cookieStore);
+    const language = await helperFunctions.getLanguageFromCookies(cookieStore) as appConstants.SupportedLanguageType;
     const loaderMessage = appConstants.searchLoaderTranslations[language as keyof typeof appConstants.searchLoaderTranslations].title;
     
     const query = resolvedSearchParams.q as string;
-    {/* TODO: [21.07.2025]
-        1. Suche durchführen: query <--> strapiClient.getBlogPostData() 
-        2. Treffer an Subkomponente übergeben */}
+
+    const searchResults = await findQueryElement(language, query);
 
     return (
         <div className="search-page">
             <h1> Suche nach: {query}</h1>
             <Suspense fallback={<CustomLoader message={loaderMessage} />}>
-                <SearchResultsBoard results={null} />
+                <SearchResultsBoard results={searchResults} />
             </Suspense>
         </div>
     );
+}
+
+async function findQueryElement(language: appConstants.SupportedLanguageType, query: string): Promise<Array<BlogPostData> | null> {
+
+    if (!query || !language) {
+        return null;
+    }
+
+    const blogPosts = await getBlogPosts(language);
+
+    const searchResults = blogPosts?.find((post: BlogPostData) =>
+        post.title.toLowerCase().includes(query.toLowerCase()) ||
+        post.country.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    return searchResults ? [searchResults] : null;
 }
