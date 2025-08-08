@@ -13,6 +13,8 @@ type GlobalStateContextType = {
     setMenuBarOpen: (open: boolean) => void; 
     isOnSearchPage: boolean,
     setIsOnSearchPage: (open: boolean) => void
+    isOnBlogPage: boolean,
+    setIsOnBlogPage: (open: boolean) => void
 };
 
 const GlobalStateContext = createContext<GlobalStateContextType>({
@@ -23,7 +25,9 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
     menuBarOpen: false,
     setMenuBarOpen: () => {},
     isOnSearchPage: false, 
-    setIsOnSearchPage: () => {}
+    setIsOnSearchPage: () => {},
+    isOnBlogPage: false,
+    setIsOnBlogPage: () => {}
 });
 
 /**
@@ -66,6 +70,7 @@ export function GlobalStateProvider({ children, initialLanguage = appConstants.d
     const [searchFieldOpen, setSearchFieldOpen] = useState<boolean>(false);
     const [menuBarOpen, setMenuBarOpen] = useState<boolean>(false);
     const [isOnSearchPage, setIsOnSearchPage] = useState<boolean>(false);
+    const [isOnBlogPage, setIsOnBlogPage] = useState<boolean>(false);
 
     // Beim ersten Laden prüfen, ob eine gespeicherte Sprache im Cache existiert
     useEffect(() => {
@@ -92,7 +97,9 @@ export function GlobalStateProvider({ children, initialLanguage = appConstants.d
         menuBarOpen,
         setMenuBarOpen,
         isOnSearchPage, 
-        setIsOnSearchPage
+        setIsOnSearchPage,
+        isOnBlogPage,
+        setIsOnBlogPage
     };
 
     return (

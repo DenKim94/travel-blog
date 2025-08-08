@@ -5,7 +5,6 @@ import { LandingPage } from "@/components/LandingPage";
 import { TravelMap } from "@/components/TravelMap";
 import { BlogPostsContainer } from "@/components/BlogPostsContainer";
 
-
 export default async function RootPage({ params }: Readonly<{params: Promise<{lang: appConstants.SupportedLanguageType}>
 }>) {
   const { lang } = await params;

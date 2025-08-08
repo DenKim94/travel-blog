@@ -2,7 +2,7 @@
 import styles from "@styles/components/search.module.scss";
 import variables from "@styles/variables.module.scss";
 import { useGlobalState } from '@/context/GlobalStateContext';
-import { useIsOnSearchPage } from "@/hooks/useTrackSearchPage";
+import { useIsOnSearchPage } from "@/hooks/usePageTracker";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as appConstants from "@utils/appConstants"

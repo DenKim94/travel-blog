@@ -1,4 +1,6 @@
 import { JSX, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { useGlobalState } from '@context/GlobalStateContext';
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/blog-post-card.module.scss";
 import { ContentNotFound } from "@/components/ContentNotFound"; 
@@ -11,6 +13,9 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
     startAnimation?: boolean }): JSX.Element {
 
     const [isHovered, setIsHovered] = useState(false);
+    const router = useRouter();
+    const { language } = useGlobalState();
+
     // Memoize event handlers to prevent re-renders
     const handleMouseEnter = useCallback(() => {
         setIsHovered(true);
@@ -19,6 +24,23 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
     const handleMouseLeave = useCallback(() => {
         setIsHovered(false);
     }, []);
+
+    const handleReadMore = useCallback(() => {
+
+        if (!data?.title) {
+            console.error('Blog post ID is missing');
+            return;
+        }
+        
+        try {
+            const urlProp: string = data.title.replace(/\s+/g, '-').toLowerCase(); 
+            const blogUrl = `/${language}/blogs/${urlProp}`;
+            router.push(blogUrl);
+
+        } catch (error) {
+            console.error('Navigation failed:', error);
+        }
+    }, [data?.title, language, router]);
 
     if (!data){return <ContentNotFound 
                         imgWidth={appConstants.notFoundImgDefaultSize/2} 
@@ -32,7 +54,8 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
             style={styleProps}>
             <div className={styles.blogPostCardContent}
                 onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>
+                onMouseLeave={handleMouseLeave}
+                onClick={handleReadMore}>
                 
                 <div className={`${styles.blogPostImage} ${isHovered ? styles.imageHovered : ''}`}>
                     <Image 
@@ -50,7 +73,9 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                     </div>
 
                     <div className={styles.buttonSide}>
-                        <button className={styles.readMoreButton}>
+                        <button className={styles.readMoreButton}
+                                onClick={handleReadMore}
+                                aria-label={`${appConstants.blogCardButtonText[data.locale as strapiLocaleType]} - ${data.title}`}>
                            <p> {appConstants.blogCardButtonText[data.locale as strapiLocaleType]} </p> 
                         </button>
                     </div>

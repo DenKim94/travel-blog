@@ -1,7 +1,7 @@
 "use client";
 import { NavigationBarItemType } from "@/types/NavigationBarTypes";
 import { useGlobalState } from '@context/GlobalStateContext';
-import { useIsOnSearchPage } from "@/hooks/useTrackSearchPage";
+import { useIsOnSearchPage } from "@/hooks/usePageTracker";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/navbar.module.scss";
