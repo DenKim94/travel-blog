@@ -1,4 +1,5 @@
-import { JSX } from "react";
+"use client"
+import { JSX, useState } from "react";
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/travel-map.module.scss";
 import { ContentNotFound } from "@/components/ContentNotFound"; 
@@ -13,6 +14,11 @@ import { TravelMapData } from '@/types/strapiTypes';
  * Wenn keine Daten verfügbar sind, wird ein Platzhalter aus ContentNotFound gezeigt.
  */
 export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element {
+    const [imageError, setImageError] = useState(false);
+
+    if (!data || imageError) {
+        return <ContentNotFound />;
+    }
 
     return (
         <div className={styles.travelMapContainer} id="travel-map-container">
@@ -24,9 +30,9 @@ export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element
                     src={data.imageProps.url}
                     alt={data.imageProps.alternativeText || appConstants.TRAVEL_MAP_ALT_TEXT}
                     className={styles.travelMapImage}
+                    onError={() => setImageError(true)}
                 />
             </div>}
-            {!data?.imageProps && <ContentNotFound />}
         </div>
     );
 }

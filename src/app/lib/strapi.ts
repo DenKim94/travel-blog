@@ -100,12 +100,12 @@ export class StrapiClient {
                     revalidate: revalidationTime_s, 
                 } 
             });
-            
+
             if (!response.ok) {
                 throw new Error(`Failed request - ${response.status}`);
             }
 
-            return response.json();
+            return await response.json();
 
         }catch(error){
             console.error(`Error fetching from Strapi API: ${error}`);
@@ -121,8 +121,14 @@ export class StrapiClient {
      */
 
     async getLandingPageData() {
-        const endpoint = `/landing-pages?locale=${this.appLocale}&populate=*`;
-        return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_LANDING_PAGE);
+        try {
+            const endpoint = `/landing-pages?locale=${this.appLocale}&populate=*`;
+            return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_LANDING_PAGE);
+
+        } catch (error) {
+            console.error("Landing Page konnte nicht geladen werden:", error);
+            return null;
+        }
     }
 
     /**
@@ -134,10 +140,14 @@ export class StrapiClient {
      * @throws {Error} If the API request fails or the response status is not 200.
      */
     async getBlogPosts(limit: number = this.maxPageSize) {
-        const endpoint = `/blog-posts?locale=${this.appLocale}&populate=*&pagination[limit]=${limit}`;
-        return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
+        try {
+            const endpoint = `/blog-posts?locale=${this.appLocale}&populate=*&pagination[limit]=${limit}`;
+            return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
+        } catch (error) {
+            console.error("Blog Posts konnten nicht geladen werden:", error);
+            return null;
+        }
     }
-
     /**
      * Fetches the about page data from the Strapi API for the current locale.
      * The response includes all related data populated by default.
@@ -146,8 +156,13 @@ export class StrapiClient {
      */
 
     async getAboutData() {
-        const endpoint = `/about-pages?locale=${this.appLocale}&populate=*`;
-        return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
+        try {
+            const endpoint = `/about-pages?locale=${this.appLocale}&populate=*`;
+            return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
+        } catch (error) {
+            console.error("About Page konnte nicht geladen werden:", error);
+            return null;
+        }
     }
 
     /**
@@ -158,8 +173,13 @@ export class StrapiClient {
      */
 
     async getTravelMapData() {
-        const endpoint = `/travel-maps?locale=${this.appLocale}&populate=*`;
-        return this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
+        try {
+            const endpoint = `/travel-maps?locale=${this.appLocale}&populate=*`;
+            return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
+        } catch (error) {
+            console.error('TravelMap konnte nicht geladen werden:', error);
+            return null;
+        }
     }
 }
 

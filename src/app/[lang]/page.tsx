@@ -16,7 +16,7 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
     getTravelMapData(lang),
     getBlogPosts(lang)
   ]);
- 
+
   return (
     <>
       <section id={appConstants.fallBackId} className={styles.section}>

@@ -23,6 +23,8 @@ export function ContentNotFound({imgWidth = appConstants.notFoundImgDefaultSize,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
+        marginTop: '10px',
+        marginBottom: '10px',
     }
 
     return (
