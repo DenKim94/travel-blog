@@ -1,7 +1,7 @@
 "use client";
 import { NavigationBarItemType } from "@/types/NavigationBarTypes";
 import { useGlobalState } from '@context/GlobalStateContext';
-import { useIsOnSearchPage } from "@/hooks/usePageTracker";
+import { useIsOnBlogPage, useIsOnSearchPage } from "@/hooks/usePageTracker";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/navbar.module.scss";
@@ -29,6 +29,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 export function NavigationBar(): JSX.Element {
     const { language } = useGlobalState();
     const isOnSearchPage = useIsOnSearchPage();
+    const isOnBlogPage = useIsOnBlogPage();
     
     const navBarItems: NavigationBarItemType[] = useMemo(() => {
         return helperFunctions.getNavigationItems(language);
@@ -76,7 +77,7 @@ export function NavigationBar(): JSX.Element {
                 {/* Search Functionality */}
                 <SearchButton />
                 {/* Language Selector */}
-                <GlobalLanguageSetter />
+                {!isOnBlogPage && <GlobalLanguageSetter />}
             </ul>
         </nav>
     );
