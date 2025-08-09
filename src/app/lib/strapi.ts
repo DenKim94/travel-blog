@@ -1,6 +1,5 @@
 import * as apiConstants from "@utils/apiConstants"
 import * as appConstants from "@utils/appConstants"
-import type {  BlogPostData } from '@/types/strapiTypes';
 
 /**
  * StrapiClient ist eine Klasse zur Interaktion mit der Strapi-API.
@@ -39,7 +38,6 @@ export class StrapiClient {
     private baseURL: string;
     private token?: string;
     private maxPageSize: number
-    private blogPostsData: Array<BlogPostData> | null = [] ;
 
     constructor() {
         this.baseURL = process.env.STRAPI_PUBLIC_URL || 'http://localhost:1337';
@@ -53,22 +51,6 @@ export class StrapiClient {
     
     getLocale() {
         return this.appLocale;
-    }
-
-    setBlogPostData(data: Array<BlogPostData> | null) {
-        this.blogPostsData = data;
-    }
-
-    getBlogPostData() : Array<BlogPostData> | null {
-        return this.blogPostsData;
-    }
-
-    getBlogPostCountries(): Array<string> {
-        return this.blogPostsData?.map((blogPost: BlogPostData) => blogPost.country) || [];
-    }
-
-    getBlogPostIds(): Array<number> {
-        return this.blogPostsData?.map((blogPost: BlogPostData) => blogPost.id) || [];
     }
 
     /**

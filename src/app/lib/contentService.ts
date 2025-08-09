@@ -39,8 +39,6 @@ export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageTy
           return null;
         }        
         const blogPostsMappedData = mapBlogPostData(response);
-        strapiClient.setBlogPostData(blogPostsMappedData);
-        
         return blogPostsMappedData;
 
     } catch (error) {
@@ -57,7 +55,6 @@ export async function getAboutPageContent(appLanguage: appConstants.SupportedLan
       console.warn('@getAboutPageContent: Keine Daten gefunden.');
       return null;
     }
-
     return response.data; // TBD
 
   } catch (error) {
