@@ -53,6 +53,29 @@ export const metadataTranslations: Record<SupportedLanguageType | string, Metada
   },
 };
 
+export const defaultMetadataBlogPost: Record<SupportedLanguageType | string, MetadataValues> = {
+  de: {
+    title: "Reisen mit Nadja",
+    description: "Der Reiseblog für Reisebegeisterte.",
+    keywords: ["Reisen", "Reiseblog", "Reisetipps", "Reiseziele"],
+    author: [{ name: "Nadja Ogaj"}],
+  },
+
+  en: {
+    title: "Travel with Nadja",
+    description: "The travel blog for travelers.",
+    keywords: ["Travel", "Travel blog", "Travel tips", "Destinations"],
+    author: [{ name: "Nadja Ogaj"}],
+  },
+  
+  ru: {
+    title: "Путешествия с Надей",
+    description: "Блог о путешествиях для путешественников.",
+    keywords: ["Путешествия", "Блог", "Советы", "Страны путешествий"],
+    author: [{ name: "Надя Огай"}],
+  },
+};
+
 // *** Angaben für die Cookies und lokalen Speicher ***
 type StorageSettings = {
     path: string;
