@@ -43,7 +43,6 @@ export function GlobalLanguageSetter({languageOptions = appConstants.languageOpt
             setLanguage(language);
             setIsOpen(false);
 
-            // URL für neue Sprache rekonstruieren
             const currentPathWithoutLang = pathname.replace(/^\/[a-z]{2}/, '') || '/';
             const newPath = `/${language}${currentPathWithoutLang}`;
 

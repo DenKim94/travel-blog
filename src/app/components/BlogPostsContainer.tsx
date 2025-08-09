@@ -8,7 +8,7 @@ import { ContentNotFound } from "@/components/ContentNotFound";
 import { BlogPostData } from '@/types/strapiTypes';
 
 
-export function BlogPostsContainer({ data }: { data: Array<BlogPostData>| null }): JSX.Element {
+export function BlogPostsContainer({ data }: { data: Array<BlogPostData> | null }): JSX.Element {
     const [ref, isVisible] = useInView<HTMLDivElement>(appConstants.IN_VIEW_THRESHOLD);
     
     if (!data){return <ContentNotFound />}

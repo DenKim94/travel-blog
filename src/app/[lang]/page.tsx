@@ -9,8 +9,6 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
 }>) {
   const { lang } = await params;
 
-  // await new Promise(resolve => setTimeout(resolve, 5000)); // Simulate a delay
-
   const [landingPageContent, travelMapContent, blogPostsContent ] = await Promise.all([
     getLandingPageContent(lang),
     getTravelMapData(lang),

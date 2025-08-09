@@ -17,8 +17,8 @@ $font-oranienbaum: var(--font-oranienbaum, sans-serif);
 $max-width: 1440px;               // Maximale Breite für große Bildschirme
 $min-width: 360px;                // Minimale Breite für kleine Bildschirme
 $root-page-min-height: 100svh;
-$root-page-padding: 5px;
-$root-page-gap: 15px;
+$root-page-padding: 0px;
+$root-page-gap: 3px;
 $root-page-min-width: 100vw;
 $footer-height: 40px;
 $side-gap: 5vw;
