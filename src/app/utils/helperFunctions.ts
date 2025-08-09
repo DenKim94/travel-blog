@@ -1,6 +1,6 @@
 import * as appConstants from "@utils/appConstants"
 import { NavigationBarItemType } from '@/types/NavigationBarTypes';
-import { StrapiImage, StrapiImageFormat } from "@/types/strapiTypes";
+import { BlogPostData, StrapiImage, StrapiImageFormat } from "@/types/strapiTypes";
 
 /**
 Überprüft, ob eine gegebene Sprache in der Liste der unterstützten Sprachen enthalten ist.
@@ -207,6 +207,18 @@ export function getImagePropsByFormat(imageProps: StrapiImage | undefined | null
     return filteredImageProps;
 }
 
-export function mockDelay(ms: number) {
+export function wait(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function getBlogPostByTitle(data: Array<BlogPostData> | null, qTitle: string): BlogPostData | null {
+  try {
+    return data?.find(post => 
+        (post.title.replace(/\s+/g, '-').toLowerCase()).includes(qTitle.toLowerCase())
+    ) || null;
+
+  } catch (error) {
+    console.error("Error @getBlogPostByTitle():", error);
+    return null;
+  }
 }
