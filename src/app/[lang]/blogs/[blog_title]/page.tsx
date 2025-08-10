@@ -4,6 +4,7 @@ import styles from "@styles/components/blog-page.module.scss";
 import { getBlogPosts } from "@/lib/contentService";
 import * as helperFunctions from "@utils/helperFunctions"
 import { ContentNotFound } from "@/components/ContentNotFound";
+import { BlogPostContent } from "@/components/BlogPostContent";
 
 function getMetaDescription(text: string | undefined): string | undefined {
   if (!text) return undefined;
@@ -39,7 +40,6 @@ export default async function TravelBlogsPage({ params }:
   const blogPostsContent = await getBlogPosts(lang);
 
   const foundBlogPost = helperFunctions.getBlogPostByTitle(blogPostsContent, blog_title);
-  console.log("foundBlogPost: ", foundBlogPost)
 
   if (!foundBlogPost) { 
     return <ContentNotFound />;
@@ -48,7 +48,7 @@ export default async function TravelBlogsPage({ params }:
   return (
     <section className={styles.blogPage}>
         <h1 className={styles.blogTitle}>{foundBlogPost.title}</h1>
-
+        <BlogPostContent data={foundBlogPost} />
     </section>
   );
 }

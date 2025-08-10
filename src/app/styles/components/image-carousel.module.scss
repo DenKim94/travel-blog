@@ -1,0 +1,169 @@
+@use '../variables.module.scss' as *;
+
+$maxImageWidth: 640px;
+$aspectRatio: 16/9;
+
+@mixin setFocus {
+    outline: 2px solid $third-color-global;
+    outline-offset: 1px;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: $maxImageWidth;
+    overflow: hidden;
+    aspect-ratio: $aspectRatio;
+    border-radius: 8px;
+    margin: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    &:focus {
+        @include setFocus;
+    }
+}
+
+.singleImageContainer {
+    position: relative;
+    width: 100%;
+    max-width: $maxImageWidth;
+    border-radius: 8px;
+    aspect-ratio: $aspectRatio;
+    overflow: hidden;
+    margin: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.imageWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+  aspect-ratio: 4/3; // Anpassbar je nach Design
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  &:focus {
+    @include setFocus;
+  }
+  
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+  
+  svg {
+    fill: currentColor;
+  }
+}
+
+.prevButton {
+  left: 12px;
+}
+
+.nextButton {
+  right: 12px;
+}
+
+.indicators {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &.active {
+    background: white;
+    transform: scale(1.2);
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  &:focus {
+    @include setFocus;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .prevButton {
+    left: 8px;
+  }
+  
+  .nextButton {
+    right: 8px;
+  }
+  
+  .indicators {
+    bottom: 12px;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  .imageWrapper {
+    transition: none;
+  }
+  
+  .navButton {
+    transition: none;
+  }
+  
+  .indicator {
+    transition: none;
+  }
+}
