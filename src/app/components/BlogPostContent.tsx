@@ -5,6 +5,7 @@ import styles from "@styles/components/blog-post-content.module.scss";
 import { ContentNotFound } from "@/components/ContentNotFound"; 
 import { BlogPostData } from '@/types/strapiTypes';
 import { ImageCarousel } from "./ImageCarousel"; 
+import { MarkdownTransformer } from "./MarkdownTransformer"; 
 
 export function BlogPostContent({ data }: { data: BlogPostData | null }): JSX.Element {
     
@@ -16,7 +17,7 @@ export function BlogPostContent({ data }: { data: BlogPostData | null }): JSX.El
         <div>
             <article key={data.id} className={styles.blogPost}>
                 <ImageCarousel images={data.featuredImages} />
-                <p className={styles.description}>{data.description}</p>
+                <MarkdownTransformer content={data.description} />
             </article>
         </div>
     );

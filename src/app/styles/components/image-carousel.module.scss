@@ -1,7 +1,6 @@
 @use '../variables.module.scss' as *;
 
 $maxImageWidth: 640px;
-$aspectRatio: 16/9;
 
 @mixin setFocus {
     outline: 2px solid $third-color-global;
@@ -13,7 +12,7 @@ $aspectRatio: 16/9;
     width: 100%;
     max-width: $maxImageWidth;
     overflow: hidden;
-    aspect-ratio: $aspectRatio;
+    aspect-ratio: 16/9;
     border-radius: 8px;
     margin: auto;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -28,7 +27,7 @@ $aspectRatio: 16/9;
     width: 100%;
     max-width: $maxImageWidth;
     border-radius: 8px;
-    aspect-ratio: $aspectRatio;
+    aspect-ratio: 16/9;
     overflow: hidden;
     margin: auto;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
