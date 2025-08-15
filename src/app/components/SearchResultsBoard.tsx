@@ -2,24 +2,38 @@
 import { JSX } from "react";
 import { useParams } from 'next/navigation';
 import * as appConstants from "@utils/appConstants"
+import styles from "@styles/components/search-results-board.module.scss"
 import GenericButton from "@components/GenericButton";
 import { BlogPostData } from '@/types/strapiTypes';
 import { useBackToHomeCallback } from '@hooks/useBackHomeCallback';
+import { ContentNotFound } from "./ContentNotFound";
+import { FoundBlogPostsContainer } from "@/components/FoundBlogPostsContainer";
 
 export default function SearchResultsBoard({ results }: { results: Array<BlogPostData>| null }): JSX.Element{
     const params = useParams();
     const lang = params.lang as string; 
     const backToHome = useBackToHomeCallback();
-
+    
     console.log("results: ", results);
 
+    if (!results) {
+        return (
+            <div className={styles.searchResultsNotFound}>
+                <ContentNotFound />
+                <GenericButton
+                    title={appConstants.notFoundTranslations[lang].backToHome}
+                    onClick={backToHome}
+                />
+            </div>
+        );
+    }
+
     return (
-        <div className="search-results-board">
-            <p>Platzhalter: Suchergebnisse</p>
-            {/* TODO: [21.07.2025] Suchergebnisse/Treffer als Cards anzeigen */}
+        <div className={styles.searchResultsBoard}>
+            <FoundBlogPostsContainer data={results} />
             <GenericButton
-            title={appConstants.notFoundTranslations[lang].backToHome}
-            onClick={backToHome}
+                title={appConstants.notFoundTranslations[lang].backToHome}
+                onClick={backToHome}
             />
         </div>
     );

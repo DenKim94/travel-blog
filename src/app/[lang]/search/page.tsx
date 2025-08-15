@@ -18,12 +18,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     const loaderMessage = appConstants.searchLoaderTranslations[language as keyof typeof appConstants.searchLoaderTranslations].title;
     
     const query = resolvedSearchParams.q as string;
-
     const searchResults = await findQueryElement(language, query);
 
     return (
-        <div className="search-page">
-            <h1> Suche nach: {query}</h1>
+        <div>
             <Suspense fallback={<CustomLoader message={loaderMessage} />}>
                 <SearchResultsBoard results={searchResults} />
             </Suspense>
