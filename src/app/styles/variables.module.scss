@@ -32,7 +32,7 @@ $footer-width: calc(#{$header-width} - 2*#{$side-gap});
 $main-content-height: calc(#{$root-page-min-height} - #{$header-height} - #{$footer-height} - 2*#{$root-page-gap} - 2*#{$root-page-padding});
 $nav-bar-gap: 40px;
 $border-width-global: 1.5px;
-$scrollbar-offset: 6px; // Offset wegen des Scrollbalkens
+$scrollbar-offset: 0px; // Offset wegen des Scrollbalkens
 $button-border-radius: 12px;
 $margin-top-h1: 15px;
 
