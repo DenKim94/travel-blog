@@ -85,7 +85,9 @@ export function MarkdownTransformer({ content }: MarkdownTransformerProps) : JSX
           
           // Bilder mit Next.js Image
           img: ({ src, alt }: { src?: string | Blob ; alt?: string }) => (
-            <MarkdownImage src={src} alt={alt} />
+            <span className={styles.markdownImageWrapper}>
+              <MarkdownImage src={src} alt={alt} />
+            </span>
           ),
           
           // Listen
@@ -102,14 +104,7 @@ export function MarkdownTransformer({ content }: MarkdownTransformerProps) : JSX
           ),
           
           // Code (falls vorhanden)
-          code: ({ children, className }) => {
-            const isInline = !className;
-            
-            if (isInline) {
-              return (
-                <code className={styles.inlineCode}>{children}</code>
-              );
-            }
+          code: ({ children }) => {
             
             return (
               <pre className={styles.codeBlock}>
@@ -168,16 +163,13 @@ function MarkdownImage({ src, alt }: { src : string | Blob | undefined, alt?: st
   // Kein Rendering wenn Blob-URL noch nicht verfügbar
   if (src instanceof Blob && !blobUrl) {
     return (
-      <span className={styles.imageWrapper}>
         <span className={styles.imagePlaceholder}>
           <CustomLoader />
         </span>
-      </span>
     );
   }
   
   return (
-    <span className={styles.markdownImageWrapper}>
         <Image
           src={finalSrc as string}
           alt={alt || 'Embedded Image'}
@@ -189,12 +181,5 @@ function MarkdownImage({ src, alt }: { src : string | Blob | undefined, alt?: st
             console.error('MarkdownImage:', e);
           }}
         />
-        {/* TODO: Bildbeschreibung unter dem Bild */}
-        {(alt) && (
-          <span className={styles.imageCaptionBelow}>
-            {alt}
-          </span>
-        )}
-    </span>
   );
 };

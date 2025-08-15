@@ -7,6 +7,8 @@
     background: $foreground-color-global;
     font-family: inherit;
     font-size: 1rem;
+    max-width: 300px;
+    max-height: 50px;
     color: $background-color-global;
     border: none;
     cursor: pointer;
@@ -27,6 +29,10 @@
 
     &:active {
         scale: 0.9;
+    }
+
+    &:focus {
+        outline: 2px solid var(--focus-color, #3b82f6);
     }
 
     span {

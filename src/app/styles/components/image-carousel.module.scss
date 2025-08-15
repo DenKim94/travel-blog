@@ -3,7 +3,7 @@
 $maxImageWidth: 640px;
 
 @mixin setFocus {
-    outline: 2px solid $third-color-global;
+    outline: 2px solid #3b82f6;
     outline-offset: 1px;
 }
 

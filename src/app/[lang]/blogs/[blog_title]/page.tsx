@@ -37,9 +37,10 @@ export default async function TravelBlogsPage({ params }:
   Readonly<{params: Promise<{lang: appConstants.SupportedLanguageType, blog_title: string}>
 }>) {
   const { lang, blog_title} = await params;
+  const decodedTitle = decodeURIComponent(blog_title);
   const blogPostsContent = await getBlogPosts(lang);
-
-  const foundBlogPost = helperFunctions.getBlogPostByTitle(blogPostsContent, blog_title);
+  
+  const foundBlogPost = helperFunctions.getBlogPostByTitle(blogPostsContent, decodedTitle);
 
   if (!foundBlogPost) { 
     return <ContentNotFound />;

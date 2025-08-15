@@ -69,7 +69,7 @@ $maxImageWidth: 640px;
   
   // Zentriere Bilder innerhalb von Paragraphen
   &:has(.markdownImageWrapper) {
-    text-align: center;  // ✅ Zentriert Inline-Block-Elemente
+    text-align: center;
   }
 
   @media (max-width: 768px) {
@@ -79,13 +79,13 @@ $maxImageWidth: 640px;
 
 // Links
 .link {
-  color: var(--link-color, #3b82f6);
+  color: var(--link-color, #3b70f6);
   text-decoration: underline;
   text-decoration-color: transparent;
   transition: all 0.2s ease;
   
   &:hover {
-    color: var(--link-hover-color, #1d4ed8);
+    color: var(--link-hover-color, #3b82f6);
     text-decoration-color: currentColor;
   }
   
@@ -119,37 +119,11 @@ $maxImageWidth: 640px;
     position: relative;
     width: 100%;
     max-width: $maxImageWidth;
-    margin: 2rem 0;
+    margin: 1rem 0;
     border-radius: 8px;
     overflow: hidden;
-    margin: auto;
-    
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     aspect-ratio: 16/9; // Verhindert Layout Shift
-}
-
-.imageCaptionBelow {
-  background: var(--caption-bg, $background-color-global);
-  color: var(--caption-color, $foreground-color-global);
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  text-align: center;
-  font-style: inherit;
-  
-  // Subtle text shadow für bessere Lesbarkeit
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-  
-  // Responsive Anpassungen
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    padding: 0.6rem 0.8rem;
-  }
-  
-  @media (min-width: 1200px) {
-    font-size: 0.9rem;
-    padding: 0.875rem 1.25rem;
-  }
 }
 
 // Listen
@@ -192,28 +166,22 @@ $maxImageWidth: 640px;
   }
 }
 
-// Code
-.inlineCode {
-  background-color: var(--code-bg, $background-color-global);
-  color: var(--code-color, $third-color-global);
-  padding: 0.125rem 0.25rem;
-  border-radius: 3px;
-  font-family: 'Fira Code', Consolas, Monaco, monospace;
-  font-size: 0.9em;
-}
-
 .codeBlock {
   background-color: var(--code-block-bg, $foreground-color-global);
   border-radius: 6px;
   padding: 1rem;
   overflow-x: auto;
   margin: 1rem 0;
-  
+
+  max-width: 100%;
+  text-align: left; // Zentriert den Inhalt
+
   .code {
-    color: var(--code-block-color, #f9fafb);
+    color: var(--code-block-color, $background-color-global);
     font-family: 'Fira Code', Consolas, Monaco, monospace;
     font-size: 0.9rem;
     line-height: 1.5;
+    white-space: pre-wrap;
   }
 }
 
