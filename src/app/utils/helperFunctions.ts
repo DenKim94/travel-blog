@@ -212,13 +212,57 @@ export function wait(ms: number) {
 }
 
 export function getBlogPostByTitle(data: Array<BlogPostData> | null, qTitle: string): BlogPostData | null {
-  try {
-    return data?.find(post => 
-        (post.title.replace(/\s+/g, '-').toLowerCase()).includes(qTitle.toLowerCase())
-    ) || null;
 
-  } catch (error) {
-    console.error("Error @getBlogPostByTitle():", error);
-    return null;
-  }
+    try {
+        return data?.find(post => 
+            (post.title.replace(/\s+/g, '-').toLowerCase()).includes(qTitle.toLowerCase())
+        ) || null;
+
+    } catch (error) {
+        console.error("Error @getBlogPostByTitle():", error);
+        return null;
+    }
+}
+
+/**
+ * Erweitert ein Array auf eine bestimmte Länge durch Kopieren des letzten Elements
+ * 
+ * @param array - Das ursprüngliche Array
+ * @param newLength - Die gewünschte neue Länge
+ * @returns Ein neues Array mit der angegebenen Länge
+ * @throws Error wenn newLength kleiner als die ursprüngliche Array-Länge ist
+ */
+export function extendArrayWithLastElement<T>(array: T[] | null, newLength: number): T[] {
+    // Input-Validierung
+    if (!Array.isArray(array)) {
+        throw new Error('Input muss ein Array sein');
+    }
+    
+    if (array.length === 0) {
+        throw new Error('Array darf nicht leer sein');
+    }
+    
+    if (newLength < 0 || !Number.isInteger(newLength)) {
+        throw new Error('newLength muss eine positive ganze Zahl sein');
+    }
+    
+    if (newLength < array.length) {
+        throw new Error(`newLength (${newLength}) darf nicht kleiner als die ursprüngliche Array-Länge (${array.length}) sein`);
+    }
+    
+    // Wenn bereits die richtige Länge, return copy
+    if (newLength === array.length) {
+        return [...array];
+    }
+    
+    // Neues Array erstellen mit gewünschter Länge
+    const result: T[] = [...array];
+    const lastElement = array[array.length - 1];
+    
+    // Fehlende Elemente hinzufügen
+    for (let i = array.length; i < newLength; i++) {
+        result.push(lastElement);
+    }
+    
+    return result;
 }

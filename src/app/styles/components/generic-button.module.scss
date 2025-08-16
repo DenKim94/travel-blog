@@ -1,5 +1,19 @@
 @use '../variables.module.scss' as *;
 
+$y-offset: 50px;
+$animation-duration: 1s;
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY($y-offset);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .genericButton{
     margin-top: 24px;
     padding: 8px 24px;
@@ -11,24 +25,27 @@
     max-height: 50px;
     color: $background-color-global;
     border: none;
+    position: relative;
     cursor: pointer;
 
     &:hover {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         background-color: $third-color-global;
+        transform: scale(1.05);
 
-        // Mehrschichtiger Glow-Effekt für mehr Tiefe
         box-shadow: 
             0 0 20px rgba($third-color-global, 0.4),
             0 0 40px rgba($third-color-global, 0.2),
-            0 0 60px rgba($third-color-global, 0.1);
-        
-        // Leichte Skalierung für zusätzlichen visuellen Effekt
-        transform: scale(1.05);        
+            0 0 60px rgba($third-color-global, 0.1);       
+    }
+
+    &.runAnimation {
+        animation: slideInUp $animation-duration ease-out forwards;
+    
     }
 
     &:active {
-        scale: 0.9;
+        transform: scale(0.9);
     }
 
     &:focus {
@@ -36,8 +53,8 @@
     }
 
     span {
-        display: 'inline-flex';
-        align-items: 'center';
+        display: inline-flex;
+        align-items: center;
         margin-left: 8px;
     }
   }

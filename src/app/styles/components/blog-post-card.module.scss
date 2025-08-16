@@ -5,7 +5,9 @@ $animation-duration: 0.5s;
 $hover-transition: 0.3s ease-in-out;
 $card-title-font-size: 1.1rem;
 $card-button-font-size: 0.95rem;
-$scale-factor: 1.02;
+$scale-factor-blog-card: 1;
+$scale-factor-blog-image: 1.025;
+
 
 @keyframes slideInUp {
   0% {
@@ -20,8 +22,8 @@ $scale-factor: 1.02;
 
 .blogPostCard{
     opacity: 0;
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     margin: auto;
 
     &.runAnimation {
@@ -38,14 +40,14 @@ $scale-factor: 1.02;
     border-radius: .2em;
     align-items: stretch;
     justify-content: stretch;
-    scroll-snap-align: start;
+    scroll-snap-align: none;
     border: $border-width-global solid $foreground-color-global;
     overflow: hidden;
     cursor: pointer;
     transition: transform $hover-transition, box-shadow $hover-transition;
 
     &:hover {
-        transform: scale($scale-factor);
+        transform: scale($scale-factor-blog-card);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }
 }
@@ -60,7 +62,7 @@ $scale-factor: 1.02;
     transition: transform $hover-transition;
 
     &.imageHovered {
-        transform: scale($scale-factor);
+        transform: scale($scale-factor-blog-image);
     }
 }
 
@@ -136,3 +138,11 @@ $scale-factor: 1.02;
     }
 }
 
+@media screen and (max-width: $tablet-threshold-max-width) {
+    .blogPostCardContent {
+        &:hover {
+            transform: scale(1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+    }
+}

@@ -9,7 +9,8 @@ type GenericButtonProps = {
   disabled?: boolean;
   icon?: React.ReactNode; // Optionales Icon (z.B. <MyIcon />)
   iconPosition?: 'left' | 'right'; // Optional: Icon links oder rechts vom Text
-  classname?: string
+  classname?: string;
+  runAnimation?: boolean; // Optional: Flag, um Animation zu starten
 };
 
 /**
@@ -33,12 +34,13 @@ export default function GenericButton({
   icon,
   iconPosition = 'left',
   classname = styles.genericButton,
+  runAnimation = false,
 }: GenericButtonProps) {
 
   return (
     <button
       type={type}
-      className={classname}
+      className={`${classname}${runAnimation ? ` ${styles.runAnimation}` : ''}`}
       style={style}
       onClick={onClick}
       disabled={disabled}

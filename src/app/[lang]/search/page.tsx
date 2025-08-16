@@ -18,7 +18,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     const loaderMessage = appConstants.searchLoaderTranslations[language as keyof typeof appConstants.searchLoaderTranslations].title;
     
     const query = resolvedSearchParams.q as string;
-    const searchResults = await findQueryElement(language, query);
+    const searchResults = await findQueryElements(language, query);
 
     return (
         <div>
@@ -29,7 +29,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     );
 }
 
-async function findQueryElement(language: appConstants.SupportedLanguageType, query: string): Promise<Array<BlogPostData> | null> {
+async function findQueryElements(language: appConstants.SupportedLanguageType, query: string): Promise<Array<BlogPostData> | null> {
 
     if (!query || !language) {
         return null;
@@ -37,10 +37,10 @@ async function findQueryElement(language: appConstants.SupportedLanguageType, qu
 
     const blogPosts = await getBlogPosts(language);
 
-    const searchResults = blogPosts?.find((post: BlogPostData) =>
+    const searchResults = blogPosts?.filter((post: BlogPostData) =>
         post.title.toLowerCase().includes(query.toLowerCase()) ||
         post.country.toLowerCase().includes(query.toLowerCase())
     );
-    
-    return searchResults ? [searchResults] : null;
+
+    return searchResults && searchResults.length > 0 ? searchResults : null;
 }

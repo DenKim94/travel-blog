@@ -61,8 +61,8 @@ header {
   max-width: $max-width;
   flex-direction: column;
   grid-row-start: 2;
-  overflow-y: auto;               // Ermöglicht Scrollen innerhalb des Hauptbereichs
-  scroll-snap-type: y proximity;  // Aktiviert Snap-Scrolling für Sektionen
+  overflow-y: auto;        // Ermöglicht Scrollen innerhalb des Hauptbereichs
+  scroll-snap-type: none;  // Aktiviert Snap-Scrolling für Sektionen
   height: $main-content-height;
   min-width: $min-width;
   width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
@@ -76,7 +76,7 @@ header {
 
   &::-webkit-scrollbar {
     // Scrollbalken
-    width: $scrollbar-offset; // Breite des Scrollbalkens
+    width: $scrollbar-width;
     background-color: transparent;
     // Safari-Fix: Explizite Höhe setzen
     height: 100%;
@@ -95,7 +95,7 @@ header {
   // Scrollbar beim Hovern über den Container anzeigen
   &:hover {    
     &::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.4);
 
       &:hover {
         background-color: $third-color-global; // Farbe beim Hover

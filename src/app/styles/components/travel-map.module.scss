@@ -34,3 +34,9 @@
     @include vertical-margins;
   }
 }
+
+@media screen and (min-width: $desktop-threshold-max-width) {
+    .travelMapContainer  {
+        margin-bottom: 30px;  
+    }
+}

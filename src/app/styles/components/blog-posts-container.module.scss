@@ -13,10 +13,11 @@
     grid-auto-rows: auto;
     align-content: start;
     justify-content: center;
+    padding: 0px;
 
     &::-webkit-scrollbar {
         // Scrollbalken
-        width: $scrollbar-offset; // Breite des Scrollbalkens
+        width: $scrollbar-width; // Breite des Scrollbalkens
         background-color: transparent;
         // Safari-Fix: Explizite Höhe setzen
         height: 100%;
@@ -44,4 +45,11 @@
     }
   }
   
+@media screen and (max-width: $tablet-threshold-max-width) {
+    .blogPostsContainer  {
+        padding: 10px;
+        margin: 10px 0;  
+    }
+}
+
 

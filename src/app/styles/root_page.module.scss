@@ -30,7 +30,7 @@
 }
 
 // Mobile Viewport
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $smartphone-threshold-max-width) {
   .page {
     gap: $root-page-gap;
   }
