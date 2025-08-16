@@ -2,7 +2,6 @@
 import { JSX } from "react";
 import { useParams } from 'next/navigation';
 import * as appConstants from "@utils/appConstants"
-import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/search-results-board.module.scss"
 import GenericButton from "@components/GenericButton";
 import { BlogPostData } from '@/types/strapiTypes';
@@ -19,8 +18,6 @@ export default function SearchResultsBoard({ results }: { results: Array<BlogPos
         marginTop: '0px',
         width: '250px'
     }
-
-    // results = helperFunctions.extendArrayWithLastElement(results, 12);
 
     if (!results) {
         return (
