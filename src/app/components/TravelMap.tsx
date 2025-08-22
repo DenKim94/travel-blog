@@ -3,7 +3,7 @@ import { JSX, useState } from "react";
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/travel-map.module.scss";
 import variables from "@styles/variables.module.scss";
-import { ContentNotFound } from "@/components/ContentNotFound"; 
+import { DataNotFound } from "@/components/DataNotFound"; 
 import { TravelMapData } from '@/types/strapiTypes';
 import { SwipeIcon } from './SwipeIcon';
 import useWindowSize from "@/hooks/useWindowSize";
@@ -25,7 +25,7 @@ export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element
     const showSwipeIcon = isMobile && isVisible;
 
     if (!data || imageError) {
-        return <ContentNotFound />;
+        return <DataNotFound />;
     }
 
     return (

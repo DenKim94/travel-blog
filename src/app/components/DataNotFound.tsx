@@ -12,10 +12,12 @@ import * as appConstants from "@utils/appConstants"
  *
  * @returns {JSX.Element} Die gerenderte Komponente als Platzhalter.
  */
-export function ContentNotFound({imgWidth = appConstants.notFoundImgDefaultSize, 
+export function DataNotFound({imgWidth = appConstants.notFoundImgDefaultSize, 
     imgHeight =appConstants.notFoundImgDefaultSize}: {imgWidth?: number, imgHeight?: number})
     : JSX.Element{
-    
+
+        // TODO: Add SearchNotFound.jpeg in case of search results not found
+
         const styleProps: React.CSSProperties = {
         height: '100%',
         width: '100%',
@@ -39,3 +41,4 @@ export function ContentNotFound({imgWidth = appConstants.notFoundImgDefaultSize,
         </div>
     );
 }
+

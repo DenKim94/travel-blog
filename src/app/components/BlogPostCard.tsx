@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useGlobalState } from '@context/GlobalStateContext';
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/blog-post-card.module.scss";
-import { ContentNotFound } from "@/components/ContentNotFound"; 
+import { DataNotFound } from "@/components/DataNotFound"; 
 import { BlogPostData,  strapiLocaleType} from '@/types/strapiTypes';
 import Image from 'next/image';
 
@@ -42,7 +42,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
         }
     }, [data?.title, language, router]);
 
-    if (!data){return <ContentNotFound 
+    if (!data){return <DataNotFound 
                         imgWidth={appConstants.notFoundImgDefaultSize/2} 
                         imgHeight={appConstants.notFoundImgDefaultSize/2}/>}
 

@@ -4,14 +4,14 @@ import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/blog-posts-container.module.scss";
 import { useInView } from "@/hooks/useInView"; 
 import { BlogPostCard } from "./BlogPostCard";
-import { ContentNotFound } from "@/components/ContentNotFound"; 
+import { DataNotFound } from "@/components/DataNotFound"; 
 import { BlogPostData } from '@/types/strapiTypes';
 
 
 export function BlogPostsContainer({ data }: { data: Array<BlogPostData> | null }): JSX.Element {
     const [ref, isVisible] = useInView<HTMLDivElement>(appConstants.IN_VIEW_THRESHOLD);
     
-    if (!data){return <ContentNotFound />}
+    if (!data){return <DataNotFound />}
 
     return (
         <div 

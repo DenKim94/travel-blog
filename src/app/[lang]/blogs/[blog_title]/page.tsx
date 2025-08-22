@@ -3,7 +3,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import styles from "@styles/components/blog-page.module.scss";
 import { getBlogPosts } from "@/lib/contentService";
 import * as helperFunctions from "@utils/helperFunctions"
-import { ContentNotFound } from "@/components/ContentNotFound";
+import { DataNotFound } from "@/components/DataNotFound";
 import { BlogPostContent } from "@/components/BlogPostContent";
 
 function getMetaDescription(text: string | undefined): string | undefined {
@@ -43,7 +43,7 @@ export default async function TravelBlogsPage({ params }:
   const foundBlogPost = helperFunctions.getBlogPostByTitle(blogPostsContent, decodedTitle);
 
   if (!foundBlogPost) { 
-    return <ContentNotFound />;
+    return <DataNotFound />;
   }
 
   return (

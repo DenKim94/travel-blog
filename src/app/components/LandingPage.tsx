@@ -3,7 +3,7 @@ import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/landing-page.module.scss";
-import { ContentNotFound } from "@/components/ContentNotFound"; 
+import { DataNotFound } from "@/components/DataNotFound"; 
 import { LandingPageData, StrapiImageFormat } from '@/types/strapiTypes';
 
 /**
@@ -40,7 +40,7 @@ export function LandingPage({ data }: { data: LandingPageData | null }): JSX.Ele
               </p>
             </div>
         </div>
-      }{!titleImageProps && <ContentNotFound />}
+      }{!titleImageProps && <DataNotFound />}
     </div>
   );
 }

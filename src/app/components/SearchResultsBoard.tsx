@@ -6,7 +6,7 @@ import styles from "@styles/components/search-results-board.module.scss"
 import GenericButton from "@components/GenericButton";
 import { BlogPostData } from '@/types/strapiTypes';
 import { useBackToHomeCallback } from '@hooks/useBackHomeCallback';
-import { ContentNotFound } from "./ContentNotFound";
+import { DataNotFound } from "./DataNotFound";
 import { FoundBlogPostsContainer } from "@/components/FoundBlogPostsContainer";
 
 export default function SearchResultsBoard({ results }: { results: Array<BlogPostData>| null }): JSX.Element{
@@ -22,7 +22,7 @@ export default function SearchResultsBoard({ results }: { results: Array<BlogPos
     if (!results) {
         return (
             <div className={styles.searchResultsNotFound}>
-                <ContentNotFound />
+                <DataNotFound />
                 <GenericButton
                     title={appConstants.notFoundTranslations[lang].backToHome}
                     onClick={backToHome}
