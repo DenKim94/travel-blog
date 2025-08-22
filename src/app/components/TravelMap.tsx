@@ -2,8 +2,12 @@
 import { JSX, useState } from "react";
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/travel-map.module.scss";
+import variables from "@styles/variables.module.scss";
 import { ContentNotFound } from "@/components/ContentNotFound"; 
 import { TravelMapData } from '@/types/strapiTypes';
+import { SwipeIcon } from './SwipeIcon';
+import useWindowSize from "@/hooks/useWindowSize";
+import { useInView } from "@/hooks/useInView";
 
 /**
  * Die TravelMap-Komponente rendert die Travel-Map-Seite der Anwendung.
@@ -15,13 +19,19 @@ import { TravelMapData } from '@/types/strapiTypes';
  */
 export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element {
     const [imageError, setImageError] = useState(false);
+    const [ref, isVisible] = useInView<HTMLDivElement>(0.8);
+    const { width: windowWidth } = useWindowSize();
+    const isMobile = windowWidth <= parseInt(variables.travelMapImgMinWidth, 10);
+    const showSwipeIcon = isMobile && isVisible;
 
     if (!data || imageError) {
         return <ContentNotFound />;
     }
 
     return (
-        <div className={styles.travelMapContainer} id="travel-map-container">
+        <div 
+            ref={ref} 
+            className={styles.travelMapContainer} id="travel-map-container">
             {data?.imageProps && 
             <div className={styles.imageContainer}>
                 {/* eslint-disable-next-line @next/next/no-img-element*/}
@@ -33,6 +43,7 @@ export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element
                     onError={() => setImageError(true)}
                 />
             </div>}
+            {showSwipeIcon && <SwipeIcon isVisible={showSwipeIcon} />}
         </div>
     );
 }

@@ -231,3 +231,9 @@ export const IN_VIEW_THRESHOLD: number = 0.25;
 export const indexCardTitleImage: number = 0;
 export const blogCardButtonText: Record<strapiLocaleType, string> = { "de": "Mehr lesen", "en": "Read more", "ru-RU": "Подробнее" };
 export const imgDefaultSizes: string = "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw";
+
+// Angaben für den Swipe-Icon
+export const SWIPE_ICON_URL: string = "/assets/SwipeIcon.svg";
+export const SWIPE_ICON_ALT_TEXT: string = "Swipe Icon";
+export const SWIPE_ICON_WIDTH: number = 50;
+export const SWIPE_ICON_HEIGHT: number = 50;

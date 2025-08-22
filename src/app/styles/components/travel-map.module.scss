@@ -5,23 +5,37 @@
     height: auto;
     overflow: hidden;
     margin: auto;
+    position: relative;
 }
 
 .imageContainer{
     position: relative;
     width: 100%;
     height: 100%;
-    overflow-x: auto; // Nur horizontal scrollen erlauben
+    overflow-x: auto;   // Nur horizontal scrollen erlauben
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    touch-action: pan-x;
+        
+    @media (max-width: $tablet-threshold-max-width) {
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // IE/Edge
+        
+        &::-webkit-scrollbar {
+            display: none; // Chrome, Safari, Opera
+        }
+    }
 }
 
 .travelMapImage{
   display: block;
   height: auto;
   width: 100%;
-  min-width: 1024px;    // Minimale Breite des Bildes
-  object-fit: contain;  // Verhindert Verzerrung
+  min-width: $travel-map-image-min-width;    // Minimale Breite des Bildes
+  object-fit: contain;                     
+  position: relative;
+  z-index: 1;
 }
 
 @mixin vertical-margins {
@@ -30,7 +44,7 @@
 }
 
 .travelMapContainer {
-  @media (max-width: 1024px), (min-width: 1920px) {
+  @media (max-width: $travel-map-image-min-width), (min-width: 1920px) {
     @include vertical-margins;
   }
 }

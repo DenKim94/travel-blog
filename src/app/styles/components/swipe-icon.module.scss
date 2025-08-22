@@ -1,0 +1,65 @@
+@use '../variables.module.scss' as *;
+
+/* ------------------------------------------------------------------ */
+/* Design-Tokens – zentral änderbar                                   */
+/* ------------------------------------------------------------------ */
+$swipe-duration: 0.6s !default;     // Geschwindigkeit des Slide-In
+$swipe-delay:    1s  !default;   // Sichtbarkeitsdauer, bevor ausgeblendet wird
+
+/* Optional: Richtung zentral konfigurierbar                           */
+$swipe-from: -100% !default;      // -100 % = von links, 100 % = von rechts
+/* ------------------------------------------------------------------ */
+/* Hilfs-Mixin für absolut zentrierte Elemente                        */
+/* ------------------------------------------------------------------ */
+@mixin absolute-center($x-translate: -50%, $y-translate: -50%) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate($x-translate, $y-translate);
+}
+
+/* ------------------------------------------------------------------ */
+/* Komponente                                                         */
+/* ------------------------------------------------------------------ */
+.swipeIcon {
+  @include absolute-center(-50%, -50%); // Start: zentriert
+  transform: translate(-50%, -50%) translateX($swipe-from);
+  z-index: 10;
+
+  display: inline-flex;          // kleiner Performance-Boost
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0;
+
+  /* GPU-friendly Eigenschaften vorab anmelden */
+  will-change: opacity, transform;
+
+
+  /* -------------------------- Sichtbar-Modifikation --------------- */
+  &.visible {                                                    
+    animation:  slide-in $swipe-duration   ease-out forwards,
+                fade-out $swipe-duration   ease-out ($swipe-duration + $swipe-delay) forwards;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Zugänglichkeit – weniger Bewegung, wenn gewünscht                  */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .swipeIcon--visible {
+    animation: fade-in $swipe-duration ease-out forwards,
+               fade-out $swipe-duration ease-out ($swipe-duration + $swipe-delay) forwards;
+    transform: translate(-50%, -50%);               // kein Slide
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Keyframes                                                          */
+/* ------------------------------------------------------------------ */
+@keyframes slide-in  {
+  from { opacity: 0; transform: translate(-50%, -50%) translateX($swipe-from); }
+  to   { opacity: 1; transform: translate(-50%, -50%) translateX(0);   }
+}
+
+@keyframes fade-in   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out  { to   { opacity: 0; } }

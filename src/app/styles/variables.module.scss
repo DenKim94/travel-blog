@@ -53,6 +53,7 @@ $mobile-header-width: 720px;
 $smartphone-threshold-max-width: 768px;
 $tablet-threshold-max-width: 1023px;
 $desktop-threshold-max-width: 1920px;
+$travel-map-image-min-width: 1024px;
 
 // Blog-Cards
 $card-gap: 0.8rem;
@@ -66,4 +67,5 @@ $min-card-width: 240px;
     mobileHeaderWidth: $mobile-header-width;
     rootPageGap: $root-page-gap;
     minCardWidth: $min-card-width;
+    travelMapImgMinWidth: $travel-map-image-min-width;
 }

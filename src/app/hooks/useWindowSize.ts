@@ -12,16 +12,16 @@ interface UseWindowSizeOptions {
 
 
 /**
- * Ein benutzerdefinierter Hook zur Ermittlung der Fenstergröße.
+ * Ein benutzerdefinierte Hook zur Ermittlung der Fenstergröße.
  * 
  * Ermittelt die Breite und Höhe des sichtbaren Fensters und aktualisiert diese Werte bei einer Größenänderung.
  * Optional kann ein Verzögerungsintervall für die Aktualisierung angegeben werden, um die Anzahl der
  * Neuberechnungen zu begrenzen.
  *
  * @param {UseWindowSizeOptions} options - Ein Objekt mit optionalen Einstellungen.
- * @param {number} [options.debounceDelay=0] - Die Verzögerung in Millisekunden zwischen den
+ * @param {number} [options.debounceDelay] - Die Verzögerung in Millisekunden zwischen den
  * Aktualisierungen der Fenstergröße. Wird verwendet, um die Häufigkeit der Neuberechnungen
- * bei einer Größenänderung zu reduzieren.
+ * bei einer Größenänderung zu reduzieren. [default: 0]
  *
  * @returns {WindowSize} Ein Objekt, das die aktuelle Breite und Höhe des sichtbaren Fensters enthält.
  */
