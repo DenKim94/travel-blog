@@ -91,7 +91,7 @@ export const storageSettings: StorageSettings = {
     storageKey: "preferred-language",
 };
 
-// *** Angaben für die NotFound-Seite ***
+// *** Angaben für die NotFound-Komponente ***
 export const notFoundTranslations: Record<string, { title: string; description: string; backToHome: string }> = {
     de: {
         title: "Seite nicht gefunden",
@@ -110,8 +110,9 @@ export const notFoundTranslations: Record<string, { title: string; description: 
     },
   };
 
-export const contentNotFoundImageUrl: string = "/assets/ContentNotFound.png";
-export const notFoundImgDefaultSize: number = 340; // Größe des Bildes in Pixel
+export const contentNotFoundImageUrl: string  = "/assets/ContentNotFound.png";
+export const searchNotFoundImageUrl: string   = "/assets/SearchNotFound.jpeg";
+export const notFoundImgDefaultSize: number   = 340; // Größe des Bildes in Pixel
 
 // *** Angaben für Fehlerseiten ***
 export const errorNotificationTranslations: Record<string, { title: string; retry: string }> = {
@@ -227,7 +228,7 @@ export const TRAVEL_MAP_ALT_TEXT: string = "Travel map image";
 export const BLOG_POST_ALT_TEXT: string = "Blog post title image: ";
 
 // *** Angaben für die Blogpost-Page *** 
-export const IN_VIEW_THRESHOLD: number = 0.25;
+export const IN_VIEW_THRESHOLD: number = 0.15;
 export const indexCardTitleImage: number = 0;
 export const blogCardButtonText: Record<strapiLocaleType, string> = { "de": "Mehr lesen", "en": "Read more", "ru-RU": "Подробнее" };
 export const imgDefaultSizes: string = "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw";

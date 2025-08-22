@@ -3,20 +3,22 @@ import Image from 'next/image';
 import { JSX } from "react";
 import * as appConstants from "@utils/appConstants"
 
-
 /**
  * Komponente, die einen Status anzeigt, wenn der Benutzer versucht, zu einem
  * nicht existierenden Inhalt zu navigieren. Die Komponente enthält ein Bild,
  * das den Benutzer darüber informiert, dass der angeforderte Inhalt nicht
- * vorhanden ist.
+ * verfügbar ist.
+ *
+ * @param {string} [props.type]         - Der Typ des nicht gefundenen Inhalts. [ default: "content" ]
+ * @param {number} [props.imgWidth]     - Die Breite des Bildes. [ default: notFoundImgDefaultSize ]
+ * @param {number} [props.imgHeight]    - Die Höhe des Bildes. [ default: notFoundImgDefaultSize ]
  *
  * @returns {JSX.Element} Die gerenderte Komponente als Platzhalter.
  */
-export function DataNotFound({imgWidth = appConstants.notFoundImgDefaultSize, 
-    imgHeight =appConstants.notFoundImgDefaultSize}: {imgWidth?: number, imgHeight?: number})
-    : JSX.Element{
+export function DataNotFound({type = "content", imgWidth = appConstants.notFoundImgDefaultSize, imgHeight =appConstants.notFoundImgDefaultSize}
+    :{type?: "content" | "search", imgWidth?: number, imgHeight?: number}): JSX.Element{
 
-        // TODO: Add SearchNotFound.jpeg in case of search results not found
+        let imageUrl: string = "";
 
         const styleProps: React.CSSProperties = {
         height: '100%',
@@ -29,15 +31,25 @@ export function DataNotFound({imgWidth = appConstants.notFoundImgDefaultSize,
         marginBottom: '10px',
     }
 
+    switch (type?.toLowerCase()) {
+        case "search":
+            imageUrl = appConstants.searchNotFoundImageUrl;
+            break;
+
+        default:
+            imageUrl = appConstants.contentNotFoundImageUrl;
+            break;
+    }
+
     return (
-        <div id="content-not-found-container" 
-             aria-label="Content not found."
+        <div id="data-not-found-container" 
+             aria-label="Data not found."
              style={styleProps}>
-          <Image src={appConstants.contentNotFoundImageUrl} 
-                  alt="Content not found image."
-                  width={imgWidth}
-                  height={imgHeight}
-                  />
+            <Image  src={imageUrl} 
+                    alt="Data not found image."
+                    width={imgWidth}
+                    height={imgHeight}
+                    />
         </div>
     );
 }

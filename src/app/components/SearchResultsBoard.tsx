@@ -22,7 +22,7 @@ export default function SearchResultsBoard({ results }: { results: Array<BlogPos
     if (!results) {
         return (
             <div className={styles.searchResultsNotFound}>
-                <DataNotFound />
+                <DataNotFound type="search" />
                 <GenericButton
                     title={appConstants.notFoundTranslations[lang].backToHome}
                     onClick={backToHome}
