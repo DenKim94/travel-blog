@@ -1,6 +1,6 @@
 import { strapiClient } from './strapi';
 import * as appConstants from "@utils/appConstants"
-import type {  LandingPageData, BlogPostData, StrapiImage, TravelMapData } from '@/types/strapiTypes';
+import type {  LandingPageData, BlogPostData, StrapiImage, TravelMapData, AboutPageData } from '@/types/strapiTypes';
 
 /**
  * Lädt die Landingpage-Daten für die angegebene Sprache.
@@ -47,7 +47,7 @@ export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageTy
     }
 }
 
-export async function getAboutPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<undefined | null> {
+export async function getAboutPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<AboutPageData | null> {
   try {
     strapiClient.setLocale(appLanguage);
     const response = await strapiClient.getAboutData();
@@ -55,7 +55,9 @@ export async function getAboutPageContent(appLanguage: appConstants.SupportedLan
       console.warn('@getAboutPageContent: Keine Daten gefunden.');
       return null;
     }
-    return response.data; // TBD
+
+    const aboutPageMappedData = mapAboutPageData(response);
+    return aboutPageMappedData;
 
   } catch (error) {
     console.error('Fehler beim Laden der About-Daten: ', error);
@@ -113,7 +115,7 @@ function mapTravelMapData(response: any): TravelMapData | null {
     };
 
   }catch (error) {
-    console.error('Fehler beim Mappen der Blogpost-Daten: ', error);
+    console.error('Fehler beim Mappen der Travel-Daten: ', error);
     return null;
   }
 }
@@ -141,9 +143,30 @@ function mapBlogPostData(response: any): Array<BlogPostData> | null {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapAboutPageData(response: any): AboutPageData | null {
+  try {
+    if (!response.data || response.data.length === 0) return null;
+    const entry = response.data[0];
+
+    return {
+      id: entry.id,
+      titleImage: mapStrapiImageProps(entry.TitleImage),
+      description: entry.AboutDescription,
+      profileImage: mapStrapiImageProps(entry.ProfileImage),
+      createdAt: entry.createdAt,
+      updatedAt: entry.updatedAt,
+    };
+
+  } catch (error) {
+    console.error('Fehler beim Mappen der About-Seiten-Daten: ', error);
+    return null;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapStrapiImageProps(imgProps: any): StrapiImage | null {
   if (!imgProps || !imgProps.url) {
-    console.warn('Ungültige Bilddaten: ', imgProps);
+    console.warn('Bilddaten nicht gefunden: ', imgProps);
     return null;
   }
   return {

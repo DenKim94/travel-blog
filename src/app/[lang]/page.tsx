@@ -1,18 +1,20 @@
 import styles from "@styles/root_page.module.scss";
 import * as appConstants from "@utils/appConstants";
-import { getLandingPageContent, getBlogPosts, getTravelMapData  } from "@/lib/contentService";
+import { getLandingPageContent, getBlogPosts, getTravelMapData, getAboutPageContent } from "@/lib/contentService";
 import { LandingPage } from "@/components/LandingPage";
 import { TravelMap } from "@/components/TravelMap";
 import { BlogPostsContainer } from "@/components/BlogPostsContainer";
+import { AboutPageContainer } from "@/components/AboutPageContainer";
 
 export default async function RootPage({ params }: Readonly<{params: Promise<{lang: appConstants.SupportedLanguageType}>
 }>) {
   const { lang } = await params;
 
-  const [landingPageContent, travelMapContent, blogPostsContent ] = await Promise.all([
+  const [landingPageContent, travelMapContent, blogPostsContent, aboutPageContent] = await Promise.all([
     getLandingPageContent(lang),
     getTravelMapData(lang),
-    getBlogPosts(lang)
+    getBlogPosts(lang),
+    getAboutPageContent(lang)
   ]);
 
   return (
@@ -34,6 +36,7 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
       </section>
       <section id={appConstants.navigationIds.about} className={styles.section}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].about}</h1>
+        <AboutPageContainer data={aboutPageContent} />
       </section>
       <section id={appConstants.navigationIds.contact} className={styles.section}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].contact}</h1>

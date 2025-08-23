@@ -38,6 +38,15 @@ export interface TravelMapData {
   updatedAt: string;
 }
 
+export interface AboutPageData {
+  id: number;
+  titleImage: StrapiImage | null;
+  description: string;
+  profileImage: StrapiImage | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface StrapiImage {
   id: number;
   url: string;
