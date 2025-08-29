@@ -35,7 +35,7 @@ $border-width-global: 1.5px;
 $scrollbar-width: 6px;
 $scrollbar-offset: 0px; // Offset wegen des Scrollbalkens
 $button-border-radius: 12px;
-$margin-top-h1: 15px;
+$margin-top-h1: 20px;
 
 // Globale z-Ebenen
 $search-field-z-index: 1000;
@@ -50,7 +50,7 @@ $padding-fallbacks: 32px;
 
 // Schwellenwerte für responsive Design
 $mobile-header-width: 720px;
-$smartphone-threshold-max-width: 768px;
+$tablet-mini-threshold-max-width: 768px;
 $tablet-threshold-max-width: 1023px;
 $desktop-threshold-max-width: 1920px;
 $travel-map-image-min-width: 1024px;

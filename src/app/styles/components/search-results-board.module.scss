@@ -60,7 +60,7 @@ $max-heigth-offset: 0px;
 }
 
 // Mobile Viewport
-@media screen and (max-width: $smartphone-threshold-max-width) {
+@media screen and (max-width: $tablet-mini-threshold-max-width) {
     .searchResultsBoard {
         margin-top: 0px;
     }
