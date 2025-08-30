@@ -1,4 +1,5 @@
 import { NavigationTitles, NavigationKey, NavBarIconProps, NavBarIconKeys } from "@/types/NavigationBarTypes";
+import { ValidationProps } from "@/types/contactFormTypes";
 import { strapiLocaleType } from "@/types/strapiTypes";
 
 // *** Unterstützte Sprachen (global) ***
@@ -242,3 +243,66 @@ export const SWIPE_ICON_HEIGHT: number = 50;
 // *** Angaben für die About-Page *** 
 export const ABOUT_PAGE_ALT_TEXT: string = "About page title image";
 export const PROFILE_IMAGE_ALT_TEXT: string = "Profile image";
+
+// *** Angaben für das Kontaktformular ***
+export type validationTranslationsType = Record<SupportedLanguageType, ValidationProps>;
+export const minNameLength : number = 2;
+export const maxNameLength : number = 50;
+export const minMessageLength : number = 10;
+export const maxMessageLength : number = 2000;
+export const maxEmailLength : number = 100;
+
+export const validationTranslations : validationTranslationsType = {
+  de: {
+    name_min: `Name muss mindestens ${minNameLength} Zeichen lang sein`,
+    name_max: `Name darf maximal ${maxNameLength} Zeichen lang sein`, 
+    name_regex: 'Name enthält ungültige Zeichen',
+    email_invalid: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+    email_max: 'E-Mail-Adresse ist zu lang',
+    message_min: `Nachricht muss mindestens ${minMessageLength} Zeichen lang sein`,
+    message_max: `Nachricht darf maximal ${maxMessageLength} Zeichen lang sein`
+  },
+  en: {
+    name_min: `Name must be at least ${minNameLength} characters long`,
+    name_max: `Name must be at most ${maxNameLength} characters long`,
+    name_regex: 'Name contains invalid characters', 
+    email_invalid: 'Please enter a valid email address',
+    email_max: 'Email address is too long',
+    message_min: `Message must be at least ${minMessageLength} characters long`,
+    message_max: `Message must be at most ${maxMessageLength} characters long`
+  },
+  ru: {
+    name_min: `Имя должно содержать не менее ${minNameLength} символов`,
+    name_max: `Имя не должно превышать ${maxNameLength} символов`,
+    name_regex: 'Имя содержит недопустимые символы',
+    email_invalid: 'Пожалуйста, введите действительный адрес электронной почты', 
+    email_max: 'Адрес электронной почты слишком длинный',
+    message_min: `Сообщение должно содержать не менее ${minMessageLength} символов`,
+    message_max: `Сообщение должно содержать не более ${maxMessageLength} символов`
+  }
+}
+
+// *** Angaben für die CAPTCHA-Rückmeldung ***
+export const verificationFailedMessages: Record<SupportedLanguageType, string> = {
+  de: 'Die reCAPTCHA-Überprüfung ist fehlgeschlagen.',
+  en: 'The reCAPTCHA verification failed.',
+  ru: 'Проверка reCAPTCHA не удалась.'
+};
+
+// *** Angaben für die Rückmeldung nach dem Absenden einer Nachricht ***
+export const responseMessages: Record<SupportedLanguageType, { success: string; failed: string }> = {
+  de: {
+    success: 'Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.',
+    failed: 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut.'
+  },
+
+  en: {
+    success: 'Thank you! Your message has been sent successfully.',
+    failed: 'Error sending message. Please try again later.'
+  },
+
+  ru: {
+    success: 'Спасибо! Ваше сообщение было успешно отправлено.',
+    failed: 'Ошибка отправки сообщения. Пожалуйста, попробуйте позже.'
+  }
+};
