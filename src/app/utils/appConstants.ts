@@ -245,6 +245,8 @@ export const ABOUT_PAGE_ALT_TEXT: string = "About page title image";
 export const PROFILE_IMAGE_ALT_TEXT: string = "Profile image";
 
 // *** Angaben für das Kontaktformular ***
+export const popupTimeout_ms: number = 5500;
+
 export type validationTranslationsType = Record<SupportedLanguageType, ValidationProps>;
 export const minNameLength : number = 2;
 export const maxNameLength : number = 50;
@@ -282,6 +284,49 @@ export const validationTranslations : validationTranslationsType = {
   }
 }
 
+// *** Platzhalter für das Kontaktformular ***
+export const contactFormPlaceholders: Record<SupportedLanguageType, { name: string; email: string; message: string }> = {
+  de: {
+    name: 'Ihr Name',
+    email: 'Ihre E-Mail-Adresse',
+    message: 'Ihre Nachricht'
+  },
+  en: {
+    name: 'Your Name',
+    email: 'Your Email Address',
+    message: 'Your Message'
+  },
+  ru: {
+    name: 'Ваше имя',
+    email: 'Ваш адрес электронной почты',
+    message: 'Ваше сообщение'
+  }
+};
+
+export const contactFormFieldNames: Record<SupportedLanguageType, { name: string; email: string; message: string }> = {
+  de: {
+    name: 'Name',
+    email: 'Ihre E-Mail-Adresse',
+    message: 'Ihre Nachricht'
+  },
+  en: {
+    name: 'Name',
+    email: 'Email Address',
+    message: 'Message'
+  },
+  ru: {
+    name: 'Имя',
+    email: 'Адрес электронной почты',
+    message: 'Сообщение'
+  }
+};
+
+export const sendButtonTitle: Record<SupportedLanguageType, { isPending: string; done: string}> = {
+  de: { isPending: 'Wird gesendet...', done: 'Senden' },
+  en: { isPending: 'Sending...', done: 'Send' },
+  ru: { isPending: 'Отправка...', done: 'Отправить' }
+};
+
 // *** Angaben für die CAPTCHA-Rückmeldung ***
 export const verificationFailedMessages: Record<SupportedLanguageType, string> = {
   de: 'Die reCAPTCHA-Überprüfung ist fehlgeschlagen.',
@@ -306,3 +351,25 @@ export const responseMessages: Record<SupportedLanguageType, { success: string; 
     failed: 'Ошибка отправки сообщения. Пожалуйста, попробуйте позже.'
   }
 };
+
+// *** Angaben für die Datenschutzbestimmungen ***
+export const privacyConsentTranslations: Record<SupportedLanguageType, { text: string; linkText: string; suffix: string; href: string }> = {
+  de: {
+    text: 'Ich stimme den',
+    linkText: 'Datenschutzbestimmungen',
+    suffix: 'zu.',
+    href: '/de/datenschutz.html'
+  },
+  en: {
+    text: 'I agree to the',
+    linkText: 'Privacy Policy',
+    suffix: '.',
+    href: '/en/privacy-policy.html'
+  },
+  ru: {
+    text: 'Я соглашаюсь с',
+    linkText: 'Политикой конфиденциальности',
+    suffix: '.',
+    href: '/ru/privacy-policy.html'
+  }
+} 

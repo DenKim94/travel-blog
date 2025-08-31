@@ -9,21 +9,21 @@ import * as appConstants from "@utils/appConstants"
  * Liest die Sprache aus den HTTP-Headern und gibt sie als `SupportedLocale` zurück.
  * Wenn die Sprache nicht in den Headern enthalten ist oder nicht unterstützt wird,
  * wird die Standardsprache (`defaultLanguage`) zurückgegeben.
- * 
+ *
+ * Hinweis: Die Sprache wird aus dem `x-locale` Header der Anfrage gelesen und muss dort vorhanden sein.
+ *
  * @returns Die erkannte Sprache (`SupportedLocale`).
  * @throws Wenn ein Fehler auftritt, wird die Standardsprache (`defaultLanguage`) zurückgegeben.
  */
 async function getLocaleFromHeaders(): Promise<SupportedLocale> {
   try {
-    const pathname = (await headers()).get('x-pathname') || '';
-    const localeMatch = pathname.match(/^\/([a-z]{2})/);
-    const locale = localeMatch?.[1] as SupportedLocale;
+    const locale = (await headers()).get('x-locale') || appConstants.defaultLanguage;
 
-    return appConstants.supportedLanguages.includes(locale) ? locale : appConstants.defaultLanguage;
-    
+    return locale as SupportedLocale;
+
   } catch (error) {
     console.error('Fehler beim Abrufen der Sprache aus den Headern:', error);
-    return appConstants.defaultLanguage;
+    return appConstants.defaultLanguage as SupportedLocale;
   }
 }
 
@@ -79,6 +79,7 @@ export async function submitContactForm(
 ): Promise<ContactFormState> {
 
   const locale = await getLocaleFromHeaders();
+  console.log('@submitContactForm - Erkannte Sprache:', locale);
   const contactFormSchema = createContactFormSchema(locale);
 
   const rawData = {
@@ -122,8 +123,11 @@ export async function submitContactForm(
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function sendContactEmail(data: any): Promise<boolean> {
-  // TODO [30.08.2025]: E-Mail-Service Integration
+  // Simuliere das Senden der E-Mail
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  
+  // TODO [31.08.2025]: Anfrage an E-Mail-Service integrieren
   console.log('Sende E-Mail mit den folgenden Daten:', data);
 
-  return true; 
+  return true;
 }

@@ -7,7 +7,7 @@ import * as helperFunctions from "@utils/helperFunctions"
  * Middleware-Funktion zur Verarbeitung eingehender Anfragen.
  *
  * - Ignoriert Anfragen an bestimmte Pfade wie `/api`, `/_next`, `/assets`, `/favicon.ico`, und `/.well-known`.
- * - Überprüft, ob das erste Segment des Pfades eine unterstützte Sprache ist.
+ * - Überprüft, ob das erste Element des Pfades eine unterstützte Sprache ist.
  *   - Wenn keine Sprache im Pfad enthalten ist, wird auf die Standardsprache umgeleitet.
  *   - Wenn eine unterstützte Sprache im Pfad enthalten ist, wird die Anfrage normal weitergeleitet.
  *
@@ -38,8 +38,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Sprache ist im Pfad, alles OK
-  return NextResponse.next();
+  // Sprache ist im Pfad - Request Headers für Server Actions setzen
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pathname', pathname);
+  requestHeaders.set('x-locale', firstSegment);
+
+  return NextResponse.next({
+  request: {
+    headers: requestHeaders, // Erweiterte Headers mitgeben
+  },
+});
 }
 
 // Matcher: Nur relevante Pfade abfangen

@@ -28,8 +28,7 @@ function getValidationTranslation(locale: SupportedLocale, key: ValidationKey): 
  * Regeln durchgeführt. Die Error-Messages werden in der `validationTranslations`
  * Konstante definiert.
  *
- * @param locale Die gewünschte Sprache (z.B. 'de', 'en', 'ru'). Standardmäßig
- * wird die `defaultLanguage` verwendet.
+ * @param locale Die gewünschte Sprache (z.B. 'de', 'en', 'ru'). Standardmäßig wird die `defaultLanguage` verwendet.
  * @returns Ein zod-Schema, das die Kontaktformulardaten validiert.
  */
 export function createContactFormSchema(locale: SupportedLocale = appConstants.defaultLanguage) {

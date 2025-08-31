@@ -3,14 +3,14 @@ import styles from "@styles/components/generic-button.module.scss";
 
 type GenericButtonProps = {
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
   style?: React.CSSProperties;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  icon?: React.ReactNode; // Optionales Icon (z.B. <MyIcon />)
-  iconPosition?: 'left' | 'right'; // Optional: Icon links oder rechts vom Text
+  icon?: React.ReactNode;           
+  iconPosition?: 'left' | 'right';  
   classname?: string;
-  runAnimation?: boolean; // Optional: Flag, um Animation zu starten
+  runAnimation?: boolean;         
 };
 
 /**
@@ -18,12 +18,14 @@ type GenericButtonProps = {
  * Klick-Handler, Stil, Typ, und optionalem Icon. Das Icon kann links oder rechts vom Text angezeigt werden.
  *
  * @param  title - Der Text, der auf der Schaltfläche angezeigt wird.
- * @param  onClick - Die Funktion, die beim Klicken auf die Schaltfläche aufgerufen wird.
- * @param {React.CSSProperties} [style] - Zusätzliche CSS-Stile für die Schaltfläche.
- * @param {'button' | 'submit' | 'reset'} [type='button'] - Der Typ der Schaltfläche.
- * @param {boolean} [disabled=false] - Gibt an, ob die Schaltfläche deaktiviert ist.
- * @param {React.ReactNode} [icon] - Ein optionales Icon, das auf der Schaltfläche angezeigt wird.
- * @param {'left' | 'right'} [iconPosition='left'] - Die Position des Icons relativ zum Text.
+ * @param  onClick - OPTIONAL: Die Funktion, die beim Klicken aufgerufen wird.
+ * @param  style - Zusätzliche CSS-Stile für die Schaltfläche.
+ * @param  type  - Der Typ der Schaltfläche [type='button'].
+ * @param  disabled - Gibt an, ob die Schaltfläche deaktiviert ist.
+ * @param  icon - Ein optionales Icon, das auf der Schaltfläche angezeigt wird.
+ * @param  iconPosition - Die Position des Icons relativ zum Text.
+ * @param  classname - Zusätzliche CSS-Klassen für die Schaltfläche.
+ * @param  runAnimation - Flag, um eine Animation beim Klicken zu starten.
  */
 export default function GenericButton({
   title,

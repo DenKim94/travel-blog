@@ -1,129 +1,142 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useTransition, useActionState, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { submitContactForm } from '@/lib/actionsContactForm';
 import { ContactFormState } from '@/types/contactFormTypes';
+import  GenericButton from "./GenericButton";
+import PopUp from './PopUp';
 import styles from "@styles/components/contact-form.module.scss";
-// import * as appConstants from "@utils/appConstants"
+import * as appConstants from "@utils/appConstants"
+import { useGlobalState } from '@/context/GlobalStateContext';
 
-
-// TODO [30.08.2025]: Combine with GenericButton.tsx 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  
-  return (
-    <button 
-      type="submit" 
-      disabled={pending}
-      className={styles.submitButton}
-    >
-      {pending ? 'Wird gesendet...' : 'Nachricht senden'}
-    </button>
-  );
-}
 
 export default function ContactForm() {
-  const [state, formAction] = useFormState<ContactFormState, FormData>(
+  const [state, formAction] = useActionState<ContactFormState, FormData>(
     submitContactForm,
     { success: false }
   );
   
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { language } = useGlobalState();  
+  const [isPending, startTransition] = useTransition();
+  const [showPopUp, setShowPopUp] = useState(false);
 
   // Formular zurücksetzen nach erfolgreichem Versand
   useEffect(() => {
     if (state.success) {
       formRef.current?.reset();
-      recaptchaRef.current?.reset();
     }
+
   }, [state.success]);
 
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+
+    if(!isPending && (state.success || state.errors)){
+      setShowPopUp(true);
+
+      // Timer für automatisches Ausblenden
+      timer = setTimeout(() => {
+        setShowPopUp(false);
+
+      }, appConstants.popupTimeout_ms);
+
+    }else{
+      setShowPopUp(false);
+    }
+
+    // Cleanup-Funktion: Timer löschen
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+
+  }, [isPending, state.success, state.errors]);
+
+  // reCAPTCHA-Reset nur bei Unmount
+  useEffect(() => {
+    return () => {
+      try {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        recaptchaRef.current?.reset();
+      } catch (error) {
+        console.debug('Cleanup error:', error);
+      }
+    };
+  }, []);
+
   const handleSubmit = async (formData: FormData) => {
-    if (isSubmitting) return;
-    
-    setIsSubmitting(true);
-    
     try {
-      // Invisible reCAPTCHA ausführen
       const recaptchaToken = await recaptchaRef.current?.executeAsync();
-      
       if (recaptchaToken) {
         formData.append('recaptchaToken', recaptchaToken);
       }
       
-      // Server Action aufrufen
-      formAction(formData);
+      // Manuell in startTransition wrappen
+      startTransition(() => {
+        formAction(formData);
+      });
       
     } catch (error) {
-      console.error('Fehler beim Absenden:', error);
-
-    } finally {
-      setIsSubmitting(false);
-      recaptchaRef.current?.reset();
+      console.error('reCAPTCHA-Fehler:', error);
+      try {
+        recaptchaRef.current?.reset();
+      } catch (resetError) {
+        console.debug('reCAPTCHA reset bei Fehler:', resetError);
+      }
     }
   };
 
   return (
-    <div className={styles.contactFormContainer}>
-      <h2>Kontakt aufnehmen</h2>
-      
-      {state.message && (
-        <div className={`${styles.message} ${state.success ? styles.success : styles.error}`}>
-          {state.message}
-        </div>
-      )}
-
+    <div className={styles.contactFormContainer}>      
       <form 
         ref={formRef}
         action={handleSubmit}
         className={styles.contactForm}
       >
         <div className={styles.formGroup}>
-          <label htmlFor="name">Name *</label>
+          <label htmlFor="name">{appConstants.contactFormFieldNames[language].name}</label>
           <input
             type="text"
             id="name"
             name="name"
             required
             className={state.errors?.name ? styles.inputError : ''}
-            placeholder="Ihr vollständiger Name"
+            placeholder={appConstants.contactFormPlaceholders[language].name}
           />
           {state.errors?.name && (
-            <span className={styles.errorMessage}>{state.errors.name[0]}</span>
+            <PopUp message={state.errors.name[0]} visible={showPopUp} type="error" />
           )}
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="email">E-Mail-Adresse *</label>
+          <label htmlFor="email">{appConstants.contactFormFieldNames[language].email}</label>
           <input
             type="email"
             id="email"
             name="email"
             required
             className={state.errors?.email ? styles.inputError : ''}
-            placeholder="ihre@email.com"
+            placeholder={appConstants.contactFormPlaceholders[language].email}
           />
           {state.errors?.email && (
-            <span className={styles.errorMessage}>{state.errors.email[0]}</span>
+            <PopUp message={state.errors.email[0]} visible={showPopUp} type="error" />
           )}
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="message">Nachricht *</label>
+          <label htmlFor="message">{appConstants.contactFormFieldNames[language].message}</label>
           <textarea
             id="message"
             name="message"
-            rows={5}
             required
             className={state.errors?.message ? styles.inputError : ''}
-            placeholder="Ihre Nachricht an uns..."
+            placeholder={appConstants.contactFormPlaceholders[language].message}
           />
           {state.errors?.message && (
-            <span className={styles.errorMessage}>{state.errors.message[0]}</span>
+            <PopUp message={state.errors.message[0]} visible={showPopUp} type="error" />
           )}
         </div>
 
@@ -133,8 +146,41 @@ export default function ContactForm() {
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
         />
 
-        <SubmitButton />
+        {/* Checkbox für die Datenschutzbestimmungen */}
+        <div className="data-privacy-container" style={{ display: 'flex', alignItems: 'center'}}>
+            <input 
+                type="checkbox" 
+                className="checkbox-data-privacy"
+                data-testid="data-privacy-checkbox" 
+                style={{ marginRight: '8px' }} 
+                required
+            />
+            <label style={{ fontSize: '1rem' }}>
+                {appConstants.privacyConsentTranslations[language].text}{" "} 
+                <a 
+                href={appConstants.privacyConsentTranslations[language].href} // TODO [31.08.2025]: Datei zum Link der Datenschutzbestimmungen anlegen
+                id='data-privacy-link'
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: 'black', textDecoration: 'underline'}}
+                >
+                    {appConstants.privacyConsentTranslations[language].linkText}{" "}
+                </a> 
+                {appConstants.privacyConsentTranslations[language].suffix}
+            </label>
+        </div>
+
+        {/* Senden Button */}
+        <GenericButton
+          type="submit"
+          style={{ fontSize: '1.1rem' }}
+          disabled={isPending}
+          title={isPending ? appConstants.sendButtonTitle[language].isPending : appConstants.sendButtonTitle[language].done}
+        />
       </form>
+      {state.success && (
+        <PopUp message={state.message} visible={showPopUp} type="success" />
+      )}
     </div>
   );
 }

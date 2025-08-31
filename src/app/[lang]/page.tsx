@@ -5,6 +5,7 @@ import { LandingPage } from "@/components/LandingPage";
 import { TravelMap } from "@/components/TravelMap";
 import { BlogPostsContainer } from "@/components/BlogPostsContainer";
 import { AboutPageContainer } from "@/components/AboutPageContainer";
+import ContactForm from "@/components/ContactForm";
 
 export default async function RootPage({ params }: Readonly<{params: Promise<{lang: appConstants.SupportedLanguageType}>
 }>) {
@@ -40,6 +41,7 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
       </section>
       <section id={appConstants.navigationIds.contact} className={styles.section}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].contact}</h1>
+        <ContactForm />
       </section>
     </>
   );
