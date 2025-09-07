@@ -10,18 +10,18 @@ import styles from "@styles/components/contact-form.module.scss";
 import * as appConstants from "@utils/appConstants"
 import { useGlobalState } from '@/context/GlobalStateContext';
 
-
 export default function ContactForm() {
   const [state, formAction] = useActionState<ContactFormState, FormData>(
     submitContactForm,
     { success: false }
   );
-  
+
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const { language } = useGlobalState();  
   const [isPending, startTransition] = useTransition();
   const [showPopUp, setShowPopUp] = useState(false);
+  const [popupErrorMessage, setPopupErrorMessage] = useState<string | null>(null);
 
   // Formular zurücksetzen nach erfolgreichem Versand
   useEffect(() => {
@@ -31,11 +31,31 @@ export default function ContactForm() {
 
   }, [state.success]);
 
+  // Validierungsfehler überwachen und setzen
+  useEffect(() => {
+    if (state.errors?.name) {
+      setPopupErrorMessage(state.errors.name[0]);
 
+    } else if (state.errors?.email) {
+      setPopupErrorMessage(state.errors.email[0]);
+
+    } else if (state.errors?.message) {
+      setPopupErrorMessage(state.errors.message[0]);
+
+    } else if (state.message && !state.success) {
+      setPopupErrorMessage(state.message);
+
+    } else {
+      setPopupErrorMessage(null);
+    }
+
+  }, [state.errors, state.message, state.success]);
+
+  // PopUp Sichtbarkeit steuern
   useEffect(() => {
     let timer: NodeJS.Timeout | undefined;
 
-    if(!isPending && (state.success || state.errors)){
+    if(!isPending){
       setShowPopUp(true);
 
       // Timer für automatisches Ausblenden
@@ -53,7 +73,7 @@ export default function ContactForm() {
       if (timer) clearTimeout(timer);
     };
 
-  }, [isPending, state.success, state.errors]);
+  }, [isPending]);
 
   // reCAPTCHA-Reset nur bei Unmount
   useEffect(() => {
@@ -61,8 +81,9 @@ export default function ContactForm() {
       try {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         recaptchaRef.current?.reset();
+
       } catch (error) {
-        console.debug('Cleanup error:', error);
+        console.error('>> Cleanup error:', error);
       }
     };
   }, []);
@@ -106,9 +127,6 @@ export default function ContactForm() {
             className={state.errors?.name ? styles.inputError : ''}
             placeholder={appConstants.contactFormPlaceholders[language].name}
           />
-          {state.errors?.name && (
-            <PopUp message={state.errors.name[0]} visible={showPopUp} type="error" />
-          )}
         </div>
 
         <div className={styles.formGroup}>
@@ -121,9 +139,6 @@ export default function ContactForm() {
             className={state.errors?.email ? styles.inputError : ''}
             placeholder={appConstants.contactFormPlaceholders[language].email}
           />
-          {state.errors?.email && (
-            <PopUp message={state.errors.email[0]} visible={showPopUp} type="error" />
-          )}
         </div>
 
         <div className={styles.formGroup}>
@@ -135,15 +150,13 @@ export default function ContactForm() {
             className={state.errors?.message ? styles.inputError : ''}
             placeholder={appConstants.contactFormPlaceholders[language].message}
           />
-          {state.errors?.message && (
-            <PopUp message={state.errors.message[0]} visible={showPopUp} type="error" />
-          )}
         </div>
 
         <ReCAPTCHA
           ref={recaptchaRef}
           size="invisible"
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+          badge="bottomright"
         />
 
         {/* Checkbox für die Datenschutzbestimmungen */}
@@ -178,8 +191,13 @@ export default function ContactForm() {
           title={isPending ? appConstants.sendButtonTitle[language].isPending : appConstants.sendButtonTitle[language].done}
         />
       </form>
+
       {state.success && (
         <PopUp message={state.message} visible={showPopUp} type="success" />
+      )}
+
+      {popupErrorMessage && (
+        <PopUp message={popupErrorMessage} visible={showPopUp} type="error" />
       )}
     </div>
   );

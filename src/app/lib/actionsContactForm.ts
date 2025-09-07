@@ -2,7 +2,7 @@
 
 import { headers } from 'next/headers';
 import { createContactFormSchema, type SupportedLocale } from './validationContactForm';
-import { ContactFormState } from '@/types/contactFormTypes';
+import { ContactFormState, EmailResponse, EmailRequest, ContactFormData } from '@/types/contactFormTypes';
 import * as appConstants from "@utils/appConstants"
 
 /**
@@ -79,7 +79,6 @@ export async function submitContactForm(
 ): Promise<ContactFormState> {
 
   const locale = await getLocaleFromHeaders();
-  console.log('@submitContactForm - Erkannte Sprache:', locale);
   const contactFormSchema = createContactFormSchema(locale);
 
   const rawData = {
@@ -110,24 +109,61 @@ export async function submitContactForm(
     };
   }
 
-  // E-Mail senden (Ihre Backend-Integration)
-  const emailSent = await sendContactEmail(validation.data);
-
-  const responseMessage = emailSent ? appConstants.responseMessages[locale].success : appConstants.responseMessages[locale].failed;
+  // E-Mail senden
+  const serviceResponse = await sendContactEmail(validation.data);
+  const errorMessage = (!serviceResponse.success && serviceResponse.code) ? appConstants.responseMessages[locale].failed[serviceResponse.code] : serviceResponse.error;
+  const responseMessage = serviceResponse.success ? appConstants.responseMessages[locale].success : errorMessage;
 
   return {
-    success: emailSent,
-    message: responseMessage
+    success: serviceResponse.success,
+    message: responseMessage,
+    code: serviceResponse.code ? serviceResponse.code : undefined,
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function sendContactEmail(data: any): Promise<boolean> {
-  // Simuliere das Senden der E-Mail
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-  
-  // TODO [31.08.2025]: Anfrage an E-Mail-Service integrieren
-  console.log('Sende E-Mail mit den folgenden Daten:', data);
+async function sendContactEmail(data: ContactFormData): Promise<EmailResponse> {
+  try {
+      const emailRequest: EmailRequest = {
+        senderName: data.name.trim(),
+        senderEmail: data.email.trim(),
+        subject: `Nachricht von ${data.name}`,
+        message: data.message.trim()
+      };
 
-  return true;
+      // Konfiguration aus Environment Variables
+      const emailServiceUrl = process.env.EMAIL_SERVICE_URL || 'http://localhost:3005';
+    
+      if (!emailServiceUrl) {
+        console.error('>> EMAIL_SERVICE_URL ist nicht konfiguriert');
+        return { success: false, error: 'Email service URL is not configured', code: 400 };
+      }
+
+      const requestOptions: RequestInit = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailRequest),
+        signal: AbortSignal.timeout(parseInt(process.env.REQUEST_TIMEOUT_MS || '30000')) // Request Timeout in ms
+      };
+      
+      // HTTP-Request ausführen
+      const response = await fetch(`${emailServiceUrl}/api/send-email`, requestOptions);
+
+      if (!response.ok) {
+        console.error(`E-Mail-Service HTTP Error: ${response.status} ${response.statusText}`);
+        return { success: false, error: `E-Mail-Service HTTP Error: ${response.status} ${response.statusText}`, code: response.status };
+      }
+      const result: EmailResponse = await response.json();
+
+      return result;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (errorObj: any) {
+    // Error Handling
+    const errorMessage: string = errorObj.message;
+    console.error('Fehler beim Senden der E-Mail:', errorMessage);
+
+    return { success: false, error: errorMessage, code: errorMessage.includes("fetch failed") ? 503 : 500};
+  }
 }

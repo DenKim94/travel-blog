@@ -245,7 +245,7 @@ export const ABOUT_PAGE_ALT_TEXT: string = "About page title image";
 export const PROFILE_IMAGE_ALT_TEXT: string = "Profile image";
 
 // *** Angaben für das Kontaktformular ***
-export const popupTimeout_ms: number = 5500;
+export const popupTimeout_ms: number = 5000;
 
 export type validationTranslationsType = Record<SupportedLanguageType, ValidationProps>;
 export const minNameLength : number = 2;
@@ -335,20 +335,38 @@ export const verificationFailedMessages: Record<SupportedLanguageType, string> =
 };
 
 // *** Angaben für die Rückmeldung nach dem Absenden einer Nachricht ***
-export const responseMessages: Record<SupportedLanguageType, { success: string; failed: string }> = {
+export const responseMessages: Record<SupportedLanguageType, { success: string; failed: Record<number, string> }> = {
   de: {
     success: 'Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.',
-    failed: 'Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut.'
+    failed: { 
+              500: 'Serverfehler. Bitte versuchen Sie es später erneut.',
+              503: 'Der E-Mail-Service ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.',
+              400: 'Fehlerhafte Anfrage. Bitte überprüfen Sie Ihre Eingaben und versuchen Sie es erneut.',
+              403: 'Anfrage für diesen Absender ist verweigert.',
+              404: 'Fehlerhafte Anfrage. Zieladresse ist ungültig.'
+            } 
   },
 
   en: {
     success: 'Thank you! Your message has been sent successfully.',
-    failed: 'Error sending message. Please try again later.'
+    failed: { 
+              500: 'Error sending message. Please try again later.',
+              503: 'The email service is currently unavailable. Please try again later.',
+              400: 'Bad request. Please check your input and try again.',
+              403: 'Request from this sender is denied.',
+              404: 'Bad request. The target address is invalid.'
+            }
   },
 
   ru: {
     success: 'Спасибо! Ваше сообщение было успешно отправлено.',
-    failed: 'Ошибка отправки сообщения. Пожалуйста, попробуйте позже.'
+    failed: { 
+              500: 'Ошибка отправки сообщения. Пожалуйста, попробуйте позже.',
+              503: 'Сервис электронной почты в настоящее время недоступен. Пожалуйста, попробуйте позже.',
+              400: 'Некорректный запрос. Пожалуйста, проверьте свои данные и попробуйте снова.',
+              403: 'Запрос от этого отправителя отклонен.',
+              404: 'Некорректный запрос. Целевой адрес недействителен.'
+            }
   }
 };
 
@@ -362,13 +380,13 @@ export const privacyConsentTranslations: Record<SupportedLanguageType, { text: s
   },
   en: {
     text: 'I agree to the',
-    linkText: 'Privacy Policy',
+    linkText: 'privacy policy',
     suffix: '.',
     href: '/en/privacy-policy.html'
   },
   ru: {
     text: 'Я соглашаюсь с',
-    linkText: 'Политикой конфиденциальности',
+    linkText: 'политикой конфиденциальности',
     suffix: '.',
     href: '/ru/privacy-policy.html'
   }

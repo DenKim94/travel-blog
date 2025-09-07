@@ -8,7 +8,7 @@ export default function PopUp({ message = "", visible, type = 'info' } : { messa
         info: { color: "white" },
         warning: { color: "rgba(221, 140, 0, 1)" },
         success: { color: "rgba(74, 236, 74, 1)" },
-        error: { color: "rgba(255, 0, 0, 1)" },
+        error: { color: "rgba(255, 23, 23, 1)" },
     };
 
     const popupStyle = {

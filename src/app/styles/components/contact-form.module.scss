@@ -8,12 +8,22 @@ $padding-container: 2rem;
   padding: $padding-container;
   background: var(--card-background);
   border-radius: $button-border-radius;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 
   h2 {
     margin-bottom: 1.5rem;
     color: var(--text-primary);
     text-align: center;
+  }
+}
+
+.grecaptcha-badge {
+  transform: scale(0.8); // Verkleinern statt verbergen
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
   }
 }
 
@@ -43,13 +53,13 @@ $padding-container: 2rem;
     font-size: $font-size-h3;
     font-family: inherit;
     transition: all 0.2s ease;
-    background: var(--input-background);
-    color: var(--text-primary);
+    background: $background-color-global;
+    color: $foreground-color-global;
+    box-shadow: 0 0 0 $border-width-global rgba($foreground-color-global, 0.1);
 
     &:focus {
       outline: none;
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.1);
+      border-color: $foreground-color-global;
     }
 
     &.inputError {
@@ -122,12 +132,18 @@ $padding-container: 2rem;
 // Responsive Design
 @media (max-width: $small-mobile-width) {
   .contactFormContainer {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 
   .formGroup {
-    min-width: 250px;
+    min-width: 290px;
     max-width: calc(#{$min-width} - 2 * #{$side-gap} - #{$padding-container});
-   
+
+    input, textarea {
+      padding: 0.5rem;
+    }
+  }
+  .contactForm {
+    align-items: center;
   }
 }
