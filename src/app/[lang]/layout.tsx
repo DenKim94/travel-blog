@@ -3,6 +3,7 @@ import { Oranienbaum } from 'next/font/google';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
 import { NavigationBar } from "@components/NavigationBar";
 import { SearchField } from "@/components/SearchModule";
+import Footer from "@/components/Footer";
 import * as appConstants from "@utils/appConstants"
 import "@styles/globals.scss";
 
@@ -68,7 +69,7 @@ export default async function RootLayout({
               </main>
               
               <footer aria-label="Application footer">
-                {<p> Placeholder-Footer </p>   /* To-Do: Komponente der Fußzeile */}
+                <Footer />
               </footer>
             </div>
         </GlobalStateProvider>

@@ -38,3 +38,21 @@ export function useIsOnBlogPage(): boolean {
 
     return isOnBlogPage;
 }
+
+/**
+ * Hook, die true zurückgibt, wenn die aktuelle Route auf /impressum (oder Subroutes davon) ist.
+ */
+export function useIsOnImprintPage(): boolean {
+    const { isOnImprintPage, setIsOnImprintPage } = useGlobalState();
+    const pathname = usePathname();
+
+    useEffect(() => {
+        if (pathname.match(/^\/[a-z]{2}\/impressum/)) {
+            setIsOnImprintPage(true);
+        } else {
+            setIsOnImprintPage(false);
+        }
+    }, [pathname, setIsOnImprintPage]);
+
+    return isOnImprintPage;
+}

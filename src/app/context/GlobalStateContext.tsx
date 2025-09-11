@@ -15,6 +15,8 @@ type GlobalStateContextType = {
     setIsOnSearchPage: (open: boolean) => void
     isOnBlogPage: boolean,
     setIsOnBlogPage: (open: boolean) => void
+    isOnImprintPage: boolean,
+    setIsOnImprintPage: (open: boolean) => void
 };
 
 const GlobalStateContext = createContext<GlobalStateContextType>({
@@ -27,7 +29,9 @@ const GlobalStateContext = createContext<GlobalStateContextType>({
     isOnSearchPage: false, 
     setIsOnSearchPage: () => {},
     isOnBlogPage: false,
-    setIsOnBlogPage: () => {}
+    setIsOnBlogPage: () => {},
+    isOnImprintPage: false,
+    setIsOnImprintPage: () => {}
 });
 
 /**
@@ -56,13 +60,9 @@ interface GlobalStateProviderProps {
  * Die GlobalStateProvider-Komponente ist ein Context-Provider, der den
  * GlobalStateContext für die Anwendung bereitstellt. Der Context enthält
  * den aktuellen Sprachzustand und Funktionen, um ihn zu ändern.
- * 
- * @param {ReactNode} children - Die Kinder-Komponenten, die innerhalb
- *                               des GlobalStateContext verfügbar sein
- *                               sollen.
- * @param {string} [initialLanguage=appConstants.defaultLanguage] - Die
- *                                               anfängliche Sprache, die
- *                                               verwendet werden soll.
+ *
+ * @param children - Die Sub-Komponenten, die innerhalb des GlobalStateContext verfügbar sein sollen.
+ * @param initialLanguage - Die initiale Sprache, die verwendet werden soll [DEFAULT: appConstants.defaultLanguage].
  * @returns - Die JSX-Elemente der GlobalStateProvider-Komponente.
  */
 export function GlobalStateProvider({ children, initialLanguage = appConstants.defaultLanguage }: GlobalStateProviderProps) {
@@ -71,6 +71,7 @@ export function GlobalStateProvider({ children, initialLanguage = appConstants.d
     const [menuBarOpen, setMenuBarOpen] = useState<boolean>(false);
     const [isOnSearchPage, setIsOnSearchPage] = useState<boolean>(false);
     const [isOnBlogPage, setIsOnBlogPage] = useState<boolean>(false);
+    const [isOnImprintPage, setIsOnImprintPage] = useState<boolean>(false);
 
     // Beim ersten Laden prüfen, ob eine gespeicherte Sprache im Cache existiert
     useEffect(() => {
@@ -99,7 +100,9 @@ export function GlobalStateProvider({ children, initialLanguage = appConstants.d
         isOnSearchPage, 
         setIsOnSearchPage,
         isOnBlogPage,
-        setIsOnBlogPage
+        setIsOnBlogPage,
+        isOnImprintPage,
+        setIsOnImprintPage
     };
 
     return (

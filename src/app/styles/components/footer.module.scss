@@ -1,0 +1,26 @@
+@use '../variables.module.scss' as *;
+
+.footerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $background-color-global;
+    color: $foreground-color-global;
+    height: $footer-height;
+    width: $footer-width;
+    font-family: inherit;
+}
+
+.footerLink {
+    color: $foreground-color-global;
+    text-decoration: none;
+    font-size: $font-size-footer;
+    font-weight: $font-weight-global;
+    transition: color 0.3s ease;
+
+
+    &:hover {
+        color: $third-color-global;
+        text-decoration: underline;
+    }
+}

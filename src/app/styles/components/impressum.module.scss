@@ -1,0 +1,51 @@
+@use '../variables.module.scss' as *;
+
+.container {
+  margin: 0;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: $background-color-global;
+  color: $foreground-color-global;
+  gap: 20px;
+}
+
+.header {
+  color: $foreground-color-global;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0 0 0;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.impressumContainer {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px;
+}
+
+.section {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.section h2 {
+  color: $foreground-color-global;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.section p {
+  line-height: 1.6;
+  color: $foreground-color-global;
+}
+
+

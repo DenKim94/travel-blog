@@ -1,7 +1,7 @@
 "use client";
 import { NavigationBarItemType } from "@/types/NavigationBarTypes";
 import { useGlobalState } from '@context/GlobalStateContext';
-import { useIsOnBlogPage, useIsOnSearchPage } from "@/hooks/usePageTracker";
+import { useIsOnBlogPage, useIsOnImprintPage, useIsOnSearchPage } from "@/hooks/usePageTracker";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import styles from "@styles/components/navbar.module.scss";
@@ -30,6 +30,7 @@ export function NavigationBar(): JSX.Element {
     const { language } = useGlobalState();
     const isOnSearchPage = useIsOnSearchPage();
     const isOnBlogPage = useIsOnBlogPage();
+    const isOnImprintPage = useIsOnImprintPage();
     
     const navBarItems: NavigationBarItemType[] = useMemo(() => {
         return helperFunctions.getNavigationItems(language);
@@ -54,14 +55,14 @@ export function NavigationBar(): JSX.Element {
                     />
                 </a>
             </div>
-            {isMobile && (
+            {isMobile && !isOnImprintPage && (
                 <MobileNavigationMenu /> 
             )}            
             {/* Navigation Items */}
             <ul className={`${styles.navBarList} ${isMobile ? styles['navBarList--hidden'] : styles['navBarList--visible']}`} 
                 role="menubar" aria-label="Navigation Menu">
 
-                {!isOnSearchPage && navBarItems?.map((item) => (
+                {!isOnSearchPage && !isOnImprintPage && navBarItems?.map((item) => (
                     <li key={item.title} className={styles.navBarListItem}>
                         <a href={`#${item?.id}`}
                             className={styles.navBarLinkItem}
@@ -75,7 +76,7 @@ export function NavigationBar(): JSX.Element {
                     </li>
                 ))}
                 {/* Search Functionality */}
-                <SearchButton />
+                {!isOnImprintPage && <SearchButton />}
                 {/* Language Selector */}
                 {!isOnBlogPage && <GlobalLanguageSetter />}
             </ul>
