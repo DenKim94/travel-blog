@@ -2,6 +2,24 @@
 @use './variables.module.scss' as *;
 
 
+:root {
+  --recaptcha-offset-y: 45px; // Standard-Versatz
+}
+
+.grecaptcha-badge {
+  position: fixed !important;
+  right: 6px !important;
+  bottom: calc(14px + var(--recaptcha-offset-y, 0px)) !important;
+  width: 70px !important;           /* eingeklappt */
+  overflow: hidden !important;      /* Text abschneiden */
+  transition: width 0.3s ease !important;
+  z-index: 1000;                    
+}
+
+.grecaptcha-badge:hover {
+  width: 256px !important;          /* ausgeklappt bei Hover */
+}
+
 html,
 body {
   overflow-x: hidden;

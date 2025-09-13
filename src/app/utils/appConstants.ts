@@ -95,18 +95,18 @@ export const storageSettings: StorageSettings = {
 // *** Angaben für die NotFound-Komponente ***
 export const notFoundTranslations: Record<string, { title: string; description: string; backToHome: string }> = {
     de: {
-        title: "Seite nicht gefunden",
-        description: "Die gewünschte Seite existiert nicht oder wurde verschoben.",
+        title: "Seite nicht gefunden.",
+        description: "Die gewünschte Seite existiert nicht oder wurde entfernt.",
         backToHome: "Zurück zur Startseite",
     },
     en: {
-        title: "Page not found",
-        description: "The requested page does not exist or has been moved.",
+        title: "Page not found.",
+        description: "The requested page does not exist or has been removed.",
         backToHome: "Back to home",
     },
     ru: {
-        title: "Страница не найдена",
-        description: "Запрашиваемая страница не существует или была перемещена.",
+        title: "Страница не найдена.",
+        description: "Запрашиваемая страница не существует или была удалена.",
         backToHome: "Вернуться на главную",
     },
   };
@@ -374,24 +374,21 @@ export const responseMessages: Record<SupportedLanguageType, { success: string; 
 };
 
 // *** Angaben für die Datenschutzbestimmungen ***
-export const privacyConsentTranslations: Record<SupportedLanguageType, { text: string; linkText: string; suffix: string; href: string }> = {
+export const privacyConsentTranslations: Record<SupportedLanguageType, { text: string; linkText: string; suffix: string }> = {
   de: {
     text: 'Ich stimme den',
     linkText: 'Datenschutzbestimmungen',
     suffix: 'zu.',
-    href: '/de/datenschutz.html'
   },
   en: {
     text: 'I agree to the',
     linkText: 'privacy policy',
     suffix: '.',
-    href: '/en/privacy-policy.html'
   },
   ru: {
     text: 'Я соглашаюсь с',
     linkText: 'политикой конфиденциальности',
     suffix: '.',
-    href: '/ru/privacy-policy.html'
   }
 }
 
@@ -455,3 +452,33 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     }
   }
 };
+
+// *** Angaben für den Footer ***
+const footerIconSize: number = 25;  // Größe der Footer-Icons in Pixel
+type footerIconType = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  url: string;
+  className?: string;
+}
+
+export const footerIconProps : Array<footerIconType> = [
+  { 
+    src: "/assets/FacebookIcon.svg",
+    alt: "Facebook Icon",
+    width: footerIconSize,
+    height: footerIconSize,
+    url: "https://www.facebook.com/share/1Jvk6g3vjF/?mibextid=wwXIfr",
+    className: "footerIcon",
+  },
+  { 
+    src: "/assets/Instagramlcon.svg",
+    alt: "Instagram Icon",
+    width: footerIconSize,
+    height: footerIconSize,
+    url: "https://www.instagram.com/nadja.ogaj/",
+    className: "footerIcon",
+  }
+];

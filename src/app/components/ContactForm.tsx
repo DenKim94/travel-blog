@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useTransition, useActionState, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Link from 'next/link';
 import { submitContactForm } from '@/lib/actionsContactForm';
 import { ContactFormState } from '@/types/contactFormTypes';
 import  GenericButton from "./GenericButton";
@@ -170,15 +171,9 @@ export default function ContactForm() {
             />
             <label style={{ fontSize: '1rem' }}>
                 {appConstants.privacyConsentTranslations[language].text}{" "} 
-                <a 
-                href={appConstants.privacyConsentTranslations[language].href} // TODO [31.08.2025]: Datei zum Link der Datenschutzbestimmungen anlegen
-                id='data-privacy-link'
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{ color: 'black', textDecoration: 'underline'}}
-                >
-                    {appConstants.privacyConsentTranslations[language].linkText}{" "}
-                </a> 
+                <Link href="/data-privacy" style={{ color: 'black', textDecoration: 'underline'}}>
+                  {appConstants.privacyConsentTranslations[language].linkText}{" "}
+                </Link>
                 {appConstants.privacyConsentTranslations[language].suffix}
             </label>
         </div>
