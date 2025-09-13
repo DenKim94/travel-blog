@@ -423,7 +423,7 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     },
     contact: {
       title: 'Kontakt',
-      email: 'Nutzen Sie zur Kontaktaufnahme bitte das entsprechende Kontaktformular der Webseite.'
+      email: 'Bitte nutzen Sie zur Kontaktaufnahme das entsprechende Kontaktformular der Webseite.'
     }
   },
   en: {
