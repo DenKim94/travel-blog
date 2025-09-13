@@ -478,7 +478,7 @@ export const footerIconProps : Array<footerIconType> = [
     alt: "Instagram Icon",
     width: footerIconSize,
     height: footerIconSize,
-    url: "https://www.instagram.com/nadja.ogaj/",
+    url: "https://www.instagram.com/migen168?utm_source=qr",
     className: "footerIcon",
   }
 ];

@@ -171,7 +171,8 @@ export default function ContactForm() {
             />
             <label style={{ fontSize: '1rem' }}>
                 {appConstants.privacyConsentTranslations[language].text}{" "} 
-                <Link href="/data-privacy" style={{ color: 'black', textDecoration: 'underline'}}>
+                {/* TODO: Link zu Datenschutzbestimmungen [13.09.2025] */}
+                <Link href="/data-privacy" style={{ color: 'black', textDecoration: 'underline'}}> 
                   {appConstants.privacyConsentTranslations[language].linkText}{" "}
                 </Link>
                 {appConstants.privacyConsentTranslations[language].suffix}
