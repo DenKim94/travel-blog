@@ -343,7 +343,8 @@ export const responseMessages: Record<SupportedLanguageType, { success: string; 
               503: 'Der E-Mail-Service ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.',
               400: 'Fehlerhafte Anfrage. Bitte überprüfen Sie Ihre Eingaben und versuchen Sie es erneut.',
               403: 'Anfrage für diesen Absender ist verweigert.',
-              404: 'Fehlerhafte Anfrage. Zieladresse ist ungültig.'
+              404: 'Fehlerhafte Anfrage. Zieladresse ist ungültig.',
+              429: 'Zu viele Anfragen. Bitte versuchen Sie es erneut.'
             } 
   },
 
@@ -354,7 +355,8 @@ export const responseMessages: Record<SupportedLanguageType, { success: string; 
               503: 'The email service is currently unavailable. Please try again later.',
               400: 'Bad request. Please check your input and try again.',
               403: 'Request from this sender is denied.',
-              404: 'Bad request. The target address is invalid.'
+              404: 'Bad request. The target address is invalid.',
+              429: 'Too many requests. Please try again.'
             }
   },
 
@@ -365,7 +367,8 @@ export const responseMessages: Record<SupportedLanguageType, { success: string; 
               503: 'Сервис электронной почты в настоящее время недоступен. Пожалуйста, попробуйте позже.',
               400: 'Некорректный запрос. Пожалуйста, проверьте свои данные и попробуйте снова.',
               403: 'Запрос от этого отправителя отклонен.',
-              404: 'Некорректный запрос. Целевой адрес недействителен.'
+              404: 'Некорректный запрос. Целевой адрес недействителен.',
+              429: 'Слишком много запросов. Пожалуйста, попробуйте ещё раз позже.'
             }
   }
 };
@@ -390,4 +393,65 @@ export const privacyConsentTranslations: Record<SupportedLanguageType, { text: s
     suffix: '.',
     href: '/ru/privacy-policy.html'
   }
-} 
+}
+
+// *** Angaben für das Impressum ***
+type imprintContentType = { 
+  title: string; 
+  subtitle: string; 
+  adress: {
+    name: string;
+    street: string;
+    city: string;
+    country: string
+  }; 
+  contact: {
+    title: string,
+    email: string,
+  } 
+}
+
+export const imprintTranslations: Record<SupportedLanguageType, imprintContentType> = {
+  de: {
+    title: 'Impressum',
+    subtitle: 'Angaben gemaß § 5 TMG',
+    adress: {
+      name: 'Nadja Ogaj',
+      street: 'Brambusch 5',
+      city: '28757 Bremen',
+      country: 'Deutschland'
+    },
+    contact: {
+      title: 'Kontakt',
+      email: 'Nutzen Sie zur Kontaktaufnahme bitte das entsprechende Kontaktformular der Webseite.'
+    }
+  },
+  en: {
+    title: 'Imprint',
+    subtitle: 'Legal Notice as per § 5 TMG',
+    adress: {
+      name: 'Najda Ogaj',
+      street: 'Brambusch 5',
+      city: '28757 Bremen',
+      country: 'Germany'
+    },
+    contact: {
+      title: 'Contact',
+      email: 'Please use the corresponding contact form on the website.'
+    }
+  },
+  ru: {
+    title: 'Импрессум',
+    subtitle: 'Правовое уведомление по § 5 ТМГ',
+    adress: {
+      name: 'Надя Огай',
+      street: 'Брамбуш 5',
+      city: '28757 Бремен',
+      country: 'Германия'
+    },
+    contact: {
+      title: 'Контакт',
+      email: 'Пожалуйста, используйте соответствующую форму контакта на веб-сайте.'
+    }
+  }
+};

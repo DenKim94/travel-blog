@@ -19,18 +19,23 @@ export default function Imprint() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <h1>Impressum</h1>
+                <h1>{appConstants.imprintTranslations[lang].title}</h1>
             </header>
 
             <main className={styles.impressumContainer}>
                 <section className={styles.section}>
-                    <h2>Angaben gemäß § 5 TMG</h2>
-                    <p>Nadja Ogaj <br/>Brambusch 5<br/>28757 Bremen<br /> Deutschland</p>               
+                    <h2>{appConstants.imprintTranslations[lang].subtitle}</h2>
+                    <p>
+                        {appConstants.imprintTranslations[lang].adress.name}<br/>
+                        {appConstants.imprintTranslations[lang].adress.street}<br/>
+                        {appConstants.imprintTranslations[lang].adress.city}<br /> 
+                        {appConstants.imprintTranslations[lang].adress.country}
+                    </p>               
                 </section>
 
                 <section className={styles.section}>
-                    <h2>Kontakt</h2>
-                    <p>Nutzen Sie zur Kontaktaufnahme bitte das entsprechende Kontaktformular der Webseite.</p>
+                    <h2>{appConstants.imprintTranslations[lang].contact.title}</h2>
+                    <p>{appConstants.imprintTranslations[lang].contact.email}</p>
                 </section>
                 <GenericButton
                     title={appConstants.notFoundTranslations[lang].backToHome}
