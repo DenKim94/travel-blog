@@ -47,7 +47,7 @@ export function useIsOnImprintPage(): boolean {
     const pathname = usePathname();
 
     useEffect(() => {
-        if (pathname.match(/^\/[a-z]{2}\/impressum/)) {
+        if (pathname.match(/^\/[a-z]{2}\/imprint/)) {
             setIsOnImprintPage(true);
         } else {
             setIsOnImprintPage(false);
