@@ -1,31 +1,33 @@
 import { strapiClient } from './strapi';
 import * as appConstants from "@utils/appConstants"
-import type {  LandingPageData, BlogPostData, StrapiImage, TravelMapData, AboutPageData } from '@/types/strapiTypes';
+import type { LandingPageData, BlogPostData, StrapiImage, TravelMapData, AboutPageData, PrivacyPolicyData } from '@/types/strapiTypes';
 
 /**
- * Lädt die Landingpage-Daten für die angegebene Sprache.
+ * Die folgenden Funktionen laden die entsprechenden Daten (für Landingpage, Blog-Posts, About-Page oder Privacy-Policy) 
+ * für die angegebene Sprache.
  *
- * Die Funktion setzt die Locale des Strapi-Clients auf die angegebene Sprache,
- * fragt die Landingpage-Daten ab und konvertiert die Antwort in ein LandingPageData-Objekt.
+ * Die Funktionen setzen die Sprache (locale) des Strapi-Clients auf die angegebene Sprache
+ * und konvertieren jeweils die Antwort in ein entsprechendes Data-Objekt.
  * Wenn ein Fehler auftritt, wird null zurückgegeben und der Fehler wird in der Konsole
  * ausgegeben.
  *
  * @param appLanguage Die gewünschte Sprache (z.B. 'de', 'en', 'ru').
- * @returns Ein LandingPageData-Objekt, wenn die Anfrage erfolgreich war, sonst null.
+ * @returns Ein Data-Objekt, wenn die Anfrage erfolgreich war, sonst null.
  */
+
 export async function getLandingPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<LandingPageData | null> {
   try {
     strapiClient.setLocale(appLanguage);
     const response = await strapiClient.getLandingPageData();
       if (response.data.length === 0) {
-        console.warn('@getLandingPageContent: Keine Daten gefunden.');
+        console.warn('@getLandingPageContent: No data found.');
         return null;
       }    
     const landingPageMappedData = mapLandingPageData(response);
     return landingPageMappedData;
 
   } catch (error) {
-    console.error('Fehler beim Laden der Landingpage-Daten: ', error);
+    console.error('Error on loading Landingpage data: ', error);
     return null;
   }
 }
@@ -35,14 +37,14 @@ export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageTy
         strapiClient.setLocale(appLanguage);
         const response = await strapiClient.getBlogPosts();
         if (response.data.length === 0) {
-          console.warn('@getBlogPosts: Keine Daten gefunden.');
+          console.warn('@getBlogPosts: No data found.');
           return null;
         }        
         const blogPostsMappedData = mapBlogPostData(response);
         return blogPostsMappedData;
 
     } catch (error) {
-        console.error('Fehler beim Laden der Blog-Posts: ', error);
+        console.error('Error on loading blog post data: ', error);
         return null;
     }
 }
@@ -52,7 +54,7 @@ export async function getAboutPageContent(appLanguage: appConstants.SupportedLan
     strapiClient.setLocale(appLanguage);
     const response = await strapiClient.getAboutData();
     if (response.data.length === 0) {
-      console.warn('@getAboutPageContent: Keine Daten gefunden.');
+      console.warn('@getAboutPageContent: No data found.');
       return null;
     }
 
@@ -60,7 +62,7 @@ export async function getAboutPageContent(appLanguage: appConstants.SupportedLan
     return aboutPageMappedData;
 
   } catch (error) {
-    console.error('Fehler beim Laden der About-Daten: ', error);
+    console.error('Error on loading about-page data: ', error);
     return null;
   }
 }
@@ -70,18 +72,37 @@ export async function getTravelMapData(appLanguage: appConstants.SupportedLangua
     strapiClient.setLocale(appLanguage);
     const response = await strapiClient.getTravelMapData();
     if (response.data.length === 0) {
-      console.warn('@getTravelMapData: Keine Daten gefunden.');
+      console.warn('@getTravelMapData: No data found.');
       return null;
     }
     const travelMapMappedData = mapTravelMapData(response);
     return travelMapMappedData;
 
   } catch (error) {
-    console.error('Fehler beim Laden der Travel-Map-Daten: ', error);
+    console.error('Error on loading travel-map data: ', error);
     return null;
   }
 }
 
+export async function getPrivacyPolicyData(appLanguage: appConstants.SupportedLanguageType): Promise<PrivacyPolicyData | null> {
+  try {
+    strapiClient.setLocale(appLanguage);
+    const response = await strapiClient.getPrivacyPolicyData();
+    if (response.data.length === 0) {
+      console.warn('@getPrivacyPolicyContent: No data found.');
+      return null;
+    }
+
+    const privacyPolicyMappedData = mapPrivacyPolicyData(response);
+    return privacyPolicyMappedData;
+
+  } catch (error) {
+    console.error('Error on loading privacy-policy data: ', error);
+    return null;
+  }
+}
+
+// ############### Helper Functions ###############
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapLandingPageData(response: any): LandingPageData | null {
   try {
@@ -97,7 +118,7 @@ function mapLandingPageData(response: any): LandingPageData | null {
     };
 
   } catch (error) {
-    console.error('Fehler beim Mappen der Landingpage-Daten: ', error);
+    console.error('Error on loading landing-page data: ', error);
     return null;
   }
 }
@@ -115,7 +136,7 @@ function mapTravelMapData(response: any): TravelMapData | null {
     };
 
   }catch (error) {
-    console.error('Fehler beim Mappen der Travel-Daten: ', error);
+    console.error('Error on mapping the travel data: ', error);
     return null;
   }
 }
@@ -137,7 +158,7 @@ function mapBlogPostData(response: any): Array<BlogPostData> | null {
     }));
 
   } catch (error) {
-    console.error('Fehler beim Mappen der Blogpost-Daten: ', error);
+    console.error('Error on mapping the blog-post data: ', error);
     return null;
   }
 }
@@ -158,7 +179,7 @@ function mapAboutPageData(response: any): AboutPageData | null {
     };
 
   } catch (error) {
-    console.error('Fehler beim Mappen der About-Seiten-Daten: ', error);
+    console.error('Error on mapping the about-page data: ', error);
     return null;
   }
 }
@@ -166,7 +187,7 @@ function mapAboutPageData(response: any): AboutPageData | null {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapStrapiImageProps(imgProps: any): StrapiImage | null {
   if (!imgProps || !imgProps.url) {
-    console.warn('Bilddaten nicht gefunden: ', imgProps);
+    console.warn('No image properties found: ', imgProps);
     return null;
   }
   return {
@@ -179,4 +200,23 @@ function mapStrapiImageProps(imgProps: any): StrapiImage | null {
     extension: imgProps.ext,
     hash: imgProps.hash || null,
   };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapPrivacyPolicyData(response: any): PrivacyPolicyData | null {
+  try {
+    if (!response.data || response.data.length === 0) return null;
+    const entry = response.data[0];
+
+    return {
+      title: entry.Titel,
+      content: entry.Content,
+      createdAt: entry.createdAt,
+      updatedAt: entry.updatedAt,
+    };
+
+  } catch (error) {
+    console.error('Error on mapping the privacy-policy data: ', error);
+    return null;
+  }
 }

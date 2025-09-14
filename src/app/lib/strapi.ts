@@ -108,7 +108,7 @@ export class StrapiClient {
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_LANDING_PAGE);
 
         } catch (error) {
-            console.error("Landing Page konnte nicht geladen werden:", error);
+            console.error("Landing Page could not be loaded:", error);
             return null;
         }
     }
@@ -126,7 +126,7 @@ export class StrapiClient {
             const endpoint = `/blog-posts?locale=${this.appLocale}&populate=*&pagination[limit]=${limit}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
         } catch (error) {
-            console.error("Blog Posts konnten nicht geladen werden:", error);
+            console.error("Blog Posts could not be loaded:", error);
             return null;
         }
     }
@@ -142,7 +142,7 @@ export class StrapiClient {
             const endpoint = `/about-pages?locale=${this.appLocale}&populate=*`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
         } catch (error) {
-            console.error("About Page konnte nicht geladen werden:", error);
+            console.error("About Page could not be loaded:", error);
             return null;
         }
     }
@@ -159,7 +159,24 @@ export class StrapiClient {
             const endpoint = `/travel-maps?locale=${this.appLocale}&populate=*`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
         } catch (error) {
-            console.error('TravelMap konnte nicht geladen werden:', error);
+            console.error('TravelMap could not be loaded:', error);
+            return null;
+        }
+    }
+
+    /**
+     * Fetches the privacy policy data from the Strapi API for the current locale.
+     * The response includes all related data populated by default.
+     * @returns A promise resolving to the JSON response containing the privacy policy data.
+     * @throws {Error} If the API request fails or the response status is not 200.
+     */
+    async getPrivacyPolicyData() {
+        try {
+            const endpoint = `/privacy-policies?locale=${this.appLocale}`;
+            return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_GENERIC);
+
+        } catch (error) {
+            console.error("Privacy Policy could not be loaded:", error);
             return null;
         }
     }

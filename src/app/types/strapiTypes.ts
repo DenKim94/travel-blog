@@ -38,6 +38,13 @@ export interface TravelMapData {
   updatedAt: string;
 }
 
+export interface PrivacyPolicyData {
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface AboutPageData {
   id: number;
   titleImage: StrapiImage | null;
