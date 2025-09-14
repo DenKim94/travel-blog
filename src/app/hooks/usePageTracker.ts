@@ -40,7 +40,7 @@ export function useIsOnBlogPage(): boolean {
 }
 
 /**
- * Hook, die true zurückgibt, wenn die aktuelle Route auf /impressum (oder Subroutes davon) ist.
+ * Hook, die true zurückgibt, wenn die aktuelle Route auf /imprint (oder Subroutes davon) ist.
  */
 export function useIsOnImprintPage(): boolean {
     const { isOnImprintPage, setIsOnImprintPage } = useGlobalState();
