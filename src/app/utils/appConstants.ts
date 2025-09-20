@@ -33,7 +33,7 @@ export const metadataTranslations: Record<SupportedLanguageType | string, Metada
     title: "Reisen mit Nadja",
     description: "Der Reiseblog für Reisebegeisterte.",
     keywords: ["Reisen", "Reiseblog", "Reisetipps", "Reiseziele"],
-    author: [{ name: "Nadja Ogaj"}],
+    author: [{ name: "Nadja Ogay"}],
     developer: "Denis Kim",
   },
 
@@ -41,7 +41,7 @@ export const metadataTranslations: Record<SupportedLanguageType | string, Metada
     title: "Travel with Nadja",
     description: "The travel blog for travelers.",
     keywords: ["Travel", "Travel blog", "Travel tips", "Destinations"],
-    author: [{ name: "Nadja Ogaj"}],
+    author: [{ name: "Nadja Ogay"}],
     developer: "Denis Kim",
   },
   
@@ -59,14 +59,14 @@ export const defaultMetadataBlogPost: Record<SupportedLanguageType | string, Met
     title: "Reisen mit Nadja",
     description: "Der Reiseblog für Reisebegeisterte.",
     keywords: ["Reisen", "Reiseblog", "Reisetipps", "Reiseziele"],
-    author: [{ name: "Nadja Ogaj"}],
+    author: [{ name: "Nadja Ogay"}],
   },
 
   en: {
     title: "Travel with Nadja",
     description: "The travel blog for travelers.",
     keywords: ["Travel", "Travel blog", "Travel tips", "Destinations"],
-    author: [{ name: "Nadja Ogaj"}],
+    author: [{ name: "Nadja Ogay"}],
   },
   
   ru: {
@@ -413,7 +413,7 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     title: 'Impressum',
     subtitle: 'Angaben gemaß § 5 TMG',
     adress: {
-      name: 'Nadja Ogaj',
+      name: 'Nadja Ogay',
       street: 'Brambusch 5',
       city: '28757 Bremen',
       country: 'Deutschland'
@@ -427,7 +427,7 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     title: 'Imprint',
     subtitle: 'Legal Notice as per § 5 TMG',
     adress: {
-      name: 'Najda Ogaj',
+      name: 'Najda Ogay',
       street: 'Brambusch 5',
       city: '28757 Bremen',
       country: 'Germany'
