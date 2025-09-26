@@ -171,7 +171,7 @@ export default function ContactForm() {
             />
             <label style={{ fontSize: '1rem' }}>
                 {appConstants.privacyConsentTranslations[language].text}{" "} 
-                <Link href="/privacy-policy" style={{ color: 'black', textDecoration: 'underline'}}> 
+                <Link href={`/${language}/privacy-policy`} style={{ color: 'black', textDecoration: 'underline'}}> 
                   {appConstants.privacyConsentTranslations[language].linkText}{" "}
                 </Link>
                 {appConstants.privacyConsentTranslations[language].suffix}
