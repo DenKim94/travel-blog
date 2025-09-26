@@ -58,7 +58,7 @@ export async function getLanguageFromCookies(cookieStore: any): Promise<string> 
   if (languageCookie?.value && isSupportedLanguage(languageCookie.value)) {
     return languageCookie.value;
   }
-  
+  console.warn("Language cookie not found or unsupported, falling back to default language.");
   return appConstants.defaultLanguage;
 }
 
