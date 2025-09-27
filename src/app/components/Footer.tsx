@@ -15,7 +15,7 @@ export default function Footer() {
     
     return (
         <div className={styles.footerContainer}>
-            <Link href="/imprint" className={styles.footerLink}>
+            <Link href={`/${language}/imprint`} className={styles.footerLink}>
               {appConstants.imprintTranslations[language]?.title} 
             </Link>
             {/* Social-Media Icons */}
