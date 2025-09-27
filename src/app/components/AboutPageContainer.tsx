@@ -19,7 +19,7 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
                     alt={titleImage.alternativeText || appConstants.ABOUT_PAGE_ALT_TEXT}
                     fill={true}
                     sizes={appConstants.imgDefaultSizes}
-                    priority={true}           /* Above-the-fold → kein Lazy Loading  */
+                    priority={true}         
                     className={styles.titleImage}
                 />
                 </div>
