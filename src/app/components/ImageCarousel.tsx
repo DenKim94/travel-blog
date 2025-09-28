@@ -53,7 +53,7 @@ export function ImageCarousel({
                     fill={true}
                     sizes={appConstants.imgDefaultSizes}
                     style={{ objectFit: 'cover' }}
-                    loading="lazy"
+                    loading="eager"
                 />
             </div>
         );

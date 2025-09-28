@@ -52,6 +52,7 @@ export function NavigationBar(): JSX.Element {
                         width={appConstants.appLogoImageProps.width} 
                         height={appConstants.appLogoImageProps.height} 
                         priority={true}
+                        loading="eager"
                     />
                 </a>
             </div>
