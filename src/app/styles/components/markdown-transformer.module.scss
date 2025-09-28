@@ -83,13 +83,9 @@ $maxImageWidth: 640px;
   &:has(.markdownImageWrapper) {
     text-align: center;
   }
- 
-  @media (max-width: 768px) {
-    text-align: left;
-  }
 
-  &--center {
-    text-align: justify;;
+  &--justify {
+    text-align: justify;
   }
 
   &--left {

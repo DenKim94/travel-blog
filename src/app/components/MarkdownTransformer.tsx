@@ -10,7 +10,7 @@ import { CustomLoader } from "./CustomLoader";
 
 interface MarkdownTransformerProps {
   content: string;
-  textAlign?: 'left' | 'center' | 'right';
+  textAlign?: 'left' | 'justify' | 'right';
   alignContent?: 'left' | 'center' | 'right';
 }
 
@@ -38,7 +38,7 @@ interface MarkdownTransformerProps {
  * 
  * @returns Die transformierte Markdown-Komponente als JSX-Element.
  */
-export function MarkdownTransformer({ content, textAlign = 'center', alignContent = 'center' }: MarkdownTransformerProps) : JSX.Element {
+export function MarkdownTransformer({ content, textAlign = 'justify', alignContent = 'center' }: MarkdownTransformerProps) : JSX.Element {
 
  return (
     <div className={`${styles.markdownContent} ${styles[`markdownContent--${alignContent}`]}`}>
@@ -46,6 +46,7 @@ export function MarkdownTransformer({ content, textAlign = 'center', alignConten
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
+
           // Headers
           h1: ({ children }) => (
             <h1 className={styles.heading1}>{children}</h1>

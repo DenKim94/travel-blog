@@ -36,7 +36,7 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
                 </div>
             )}
             <div className={styles.descriptionContainer}>
-                <MarkdownTransformer content={description} alignContent="center" />
+                <MarkdownTransformer content={description} textAlign="left" alignContent="center" />
             </div>
         </section>
     );
