@@ -36,9 +36,9 @@ async function fetchStrapiData(type: string, lang: appConstants.SupportedLanguag
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { type: string; lang: appConstants.SupportedLanguageType } }
+  { params }: { params: Promise<{ type: string; lang: appConstants.SupportedLanguageType }> }
 ) {
-  const { type, lang } = params;
+  const { type, lang } = await params;
 
   try {
     const data = await fetchStrapiData(type, lang);
