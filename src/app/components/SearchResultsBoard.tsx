@@ -4,12 +4,12 @@ import { useParams } from 'next/navigation';
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/search-results-board.module.scss"
 import GenericButton from "@components/GenericButton";
-import { BlogPostData } from '@/types/strapiTypes';
+import { BlogPostListData } from '@/types/strapiTypes';
 import { useBackToHomeCallback } from '@hooks/useBackHomeCallback';
 import { DataNotFound } from "./DataNotFound";
 import { FoundBlogPostsContainer } from "@/components/FoundBlogPostsContainer";
 
-export default function SearchResultsBoard({ results }: { results: Array<BlogPostData>| null }): JSX.Element{
+export default function SearchResultsBoard({ results }: { results: Array<BlogPostListData>| null }): JSX.Element{
     const params = useParams();
     const lang = params.lang as string; 
     const backToHome = useBackToHomeCallback();

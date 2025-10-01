@@ -1,6 +1,7 @@
 import { strapiClient } from './strapi';
 import * as appConstants from "@utils/appConstants"
-import type { LandingPageData, BlogPostData, StrapiImage, TravelMapData, AboutPageData, PrivacyPolicyData } from '@/types/strapiTypes';
+import qs from 'qs';
+import type { LandingPageData, BlogPostDetailedData, BlogPostListData, StrapiImage, TravelMapData, AboutPageData, PrivacyPolicyData } from '@/types/strapiTypes';
 
 /**
  * Die folgenden Funktionen laden die entsprechenden Daten (für Landingpage, Blog-Posts, About-Page oder Privacy-Policy) 
@@ -16,9 +17,20 @@ import type { LandingPageData, BlogPostData, StrapiImage, TravelMapData, AboutPa
  */
 
 export async function getLandingPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<LandingPageData | null> {
+
+  const query = qs.stringify({
+    locale: appConstants.languageOptions[appLanguage].strapiLanguageName,
+    fields: ['TitleText', 'locale', 'publishedAt'],
+    populate: {
+      TitleImage: {
+        fields: ['url', 'alternativeText', 'width', 'height'],
+      }
+    },
+  }, { encodeValuesOnly: true });
+
   try {
     strapiClient.setLocale(appLanguage);
-    const response = await strapiClient.getLandingPageData();
+    const response = await strapiClient.getLandingPageData(query);
       if (response.data.length === 0) {
         console.warn('@getLandingPageContent: No data found.');
         return null;
@@ -32,27 +44,62 @@ export async function getLandingPageContent(appLanguage: appConstants.SupportedL
   }
 }
 
-export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageType): Promise<Array<BlogPostData> | null> {
+export async function getDetailedBlogPost(appLanguage: appConstants.SupportedLanguageType, blog_title: string): Promise<BlogPostDetailedData | null> {
     try {
         strapiClient.setLocale(appLanguage);
-        const response = await strapiClient.getBlogPosts();
-        if (response.data.length === 0) {
-          console.warn('@getBlogPosts: No data found.');
+        const detailedQuery = buildBlogDetailQuery(appLanguage, blog_title);
+        const response = await strapiClient.getBlogPostData(detailedQuery);
+      
+        if (!response || response.data.length === 0) {
+          console.warn('@getDetailedBlogPosts: No data found.');
+          return null;
+        }        
+        const blogPostsMappedData = mapDetailedBlogPostData(response);
+        return blogPostsMappedData;
+
+    } catch (error) {
+        console.error('Error @getDetailedBlogPosts: ', error);
+        return null;
+    }
+}
+
+export async function getBlogPosts(appLanguage: appConstants.SupportedLanguageType): Promise<Array<BlogPostListData> | null> {
+    try {
+        strapiClient.setLocale(appLanguage);
+        const query = buildBlogListQuery(appLanguage);
+        const response = await strapiClient.getBlogPostData(query);
+      
+        if (!response || response.data.length === 0) {
+          console.warn('@getBlogPosts(): No data found.');
           return null;
         }        
         const blogPostsMappedData = mapBlogPostData(response);
         return blogPostsMappedData;
 
     } catch (error) {
-        console.error('Error on loading blog post data: ', error);
+        console.error('Error @getBlogPosts(): ', error);
         return null;
     }
 }
 
 export async function getAboutPageContent(appLanguage: appConstants.SupportedLanguageType): Promise<AboutPageData | null> {
+
+  const query = qs.stringify({
+    locale: appConstants.languageOptions[appLanguage].strapiLanguageName,
+    fields: ['AboutDescription', 'locale', 'publishedAt', 'documentId'],
+    populate: {
+      TitleImage: {
+        fields: ['url', 'alternativeText', 'width', 'height'],
+      },
+      ProfileImage: {
+        fields: ['url', 'alternativeText', 'width', 'height'],
+      }
+    },
+  }, { encodeValuesOnly: true });
+
   try {
     strapiClient.setLocale(appLanguage);
-    const response = await strapiClient.getAboutData();
+    const response = await strapiClient.getAboutData(query);
     if (response.data.length === 0) {
       console.warn('@getAboutPageContent: No data found.');
       return null;
@@ -68,9 +115,20 @@ export async function getAboutPageContent(appLanguage: appConstants.SupportedLan
 }
 
 export async function getTravelMapData(appLanguage: appConstants.SupportedLanguageType): Promise<TravelMapData | null> {
+
+  const query = qs.stringify({
+    locale: appConstants.languageOptions[appLanguage].strapiLanguageName,
+    fields: ['Description', 'locale', 'updatedAt', 'documentId'],
+    populate: {
+      TravelMap: {
+        fields: ['name', 'url', 'alternativeText', 'width', 'height'],
+      }
+    },
+  }, { encodeValuesOnly: true });
+
   try {
     strapiClient.setLocale(appLanguage);
-    const response = await strapiClient.getTravelMapData();
+    const response = await strapiClient.getTravelMapData(query);
     if (response.data.length === 0) {
       console.warn('@getTravelMapData: No data found.');
       return null;
@@ -142,23 +200,44 @@ function mapTravelMapData(response: any): TravelMapData | null {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapBlogPostData(response: any): Array<BlogPostData> | null {
+function mapBlogPostData(response: any): Array<BlogPostListData> | null {
   try {
     if (!response.data || response.data.length === 0) return null;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return response.data.map((entry: any) => ({
-      id: entry.id,
-      title: entry.Titel,               // Ggf. Eigenschaften je nach Content Typ anpassen
-      description: entry.Beschreibung,  // Ggf. Eigenschaften je nach Content Typ anpassen
-      country: entry.Land,
-      featuredImages: entry.Medien?.map(mapStrapiImageProps) || [], // Ggf. Eigenschaften je nach Content Typ anpassen
-      publishedAt: entry.publishedAt,
-      locale: entry.locale
+        id: entry.id,
+        title: entry.Titel,               
+        country: entry.Land,
+        featuredImage: entry.Medien?.map(mapStrapiImageProps).at(0), // first image is the title image
+        publishedAt: entry.publishedAt,
+        locale: entry.locale
     }));
 
   } catch (error) {
     console.error('Error on mapping the blog-post data: ', error);
+    return null;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapDetailedBlogPostData(response: any): BlogPostDetailedData | null {
+  try {
+    if (!response.data || response.data.length === 0) return null;
+    const entry = response.data[0];
+
+    return {
+        id: entry.id,
+        title: entry.Titel,
+        description: entry.Beschreibung,
+        country: entry.Land,
+        featuredImages: entry.Medien?.map(mapStrapiImageProps) || [],
+        publishedAt: entry.publishedAt,
+        locale: entry.locale
+    };
+
+  } catch (error) {
+    console.error('Error @mapDetailedBlogPostData(): ', error);
     return null;
   }
 }
@@ -219,4 +298,44 @@ function mapPrivacyPolicyData(response: any): PrivacyPolicyData | null {
     console.error('Error on mapping the privacy-policy data: ', error);
     return null;
   }
+}
+
+// Query-Builder für Blog-Liste (Übersicht)
+function buildBlogListQuery(language: appConstants.SupportedLanguageType) {
+  return qs.stringify({
+    locale: appConstants.languageOptions[language].strapiLanguageName,
+    fields: ['Titel', 'Land', 'locale', 'publishedAt'],
+    populate: {
+      Medien: {
+        fields: ['url', 'alternativeText', 'width', 'height'],
+        sort: ['createdAt:asc'], // Erstes hochgeladenes Bild
+      }
+    },
+    pagination: {
+      limit: parseInt(process.env.MAX_PAGE_SIZE_DEFAULT || '25', 10)
+    },
+    sort: ['publishedAt:desc']
+  }, { encodeValuesOnly: true });
+}
+
+// Query-Builder für Blog-Detail (Einzelansicht)
+function buildBlogDetailQuery(
+  language: appConstants.SupportedLanguageType, 
+  blog_title: string
+) {
+  return qs.stringify({
+    locale: appConstants.languageOptions[language].strapiLanguageName,
+    filters: {
+      Titel: {
+        $containsi: blog_title // Suche nach Titel
+      }
+    },
+    fields: ['Titel', 'Beschreibung', 'Land', 'locale','publishedAt', 'documentId'],
+    populate: {
+      Medien: {
+        fields: ['url', 'alternativeText', 'width', 'height'],
+        sort: ['createdAt:asc'], // Erstes hochgeladenes Bild
+      }
+    }
+  }, { encodeValuesOnly: true });
 }

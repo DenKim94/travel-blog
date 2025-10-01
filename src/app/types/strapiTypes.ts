@@ -22,15 +22,29 @@ export interface LandingPageData {
   updatedAt: string;
 }
 
-export interface BlogPostData {
+// Für Blog-Übersichtsseiten (Liste)
+export interface BlogPostListData {
+  id: number;
+  documentId: string;
+  title: string;
+  country: string;
+  publishedAt: string;
+  locale: string;
+  featuredImage: StrapiImage;              // Nur Thumbnail für Performance
+}
+
+export interface BlogPostDetailedData {
   id: number;
   title: string;
   description: string;
   country: string;
-  featuredImages: Array<StrapiImage>;
+  featuredImages: Array<StrapiImage> | []; // Alle Bilder für den Blog-Beitrag
   publishedAt: string;
   locale: string;
 }
+
+// Generischer Typ für beide Szenarien
+export type BlogPostData = BlogPostListData | BlogPostDetailedData;
 
 export interface TravelMapData {
   name: string;

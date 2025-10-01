@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getLandingPageContent, getBlogPosts } from "@/lib/contentService";
 import * as appConstants from "@utils/appConstants"
-import type {  LandingPageData, BlogPostData } from '@/types/strapiTypes';
+import type {  LandingPageData, BlogPostListData } from '@/types/strapiTypes';
 
-async function fetchStrapiData(type: string, lang: appConstants.SupportedLanguageType): Promise<Array<BlogPostData> |LandingPageData | null> {
+async function fetchStrapiData(type: string, lang: appConstants.SupportedLanguageType): Promise<Array<BlogPostListData> |LandingPageData | null> {
   switch (type) {
     case 'blog-posts':
       return await getBlogPosts(lang);

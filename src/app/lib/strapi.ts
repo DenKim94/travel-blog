@@ -37,12 +37,10 @@ export class StrapiClient {
     appLocale: string = appConstants.defaultLanguage; // Default locale
     private baseURL: string;
     private token?: string;
-    private maxPageSize: number
 
     constructor() {
         this.baseURL = process.env.STRAPI_PUBLIC_URL || 'http://localhost:1337';
         this.token = process.env.STRAPI_API_TOKEN;
-        this.maxPageSize = parseInt(process.env.MAX_PAGE_SIZE_DEFAULT || '25', 10);
     }
 
     setLocale(locale: appConstants.SupportedLanguageType) {
@@ -98,13 +96,14 @@ export class StrapiClient {
     /**
      * Fetches landing page data from the Strapi API for the current locale.
      * The response includes all related data populated by default.
+     * @param query The query string to filter, sort, and paginate results.
      * @returns A promise resolving to the JSON response containing the landing page data.
      * @throws {Error} If the API request fails or the response status is not 200.
      */
 
-    async getLandingPageData() {
+    async getLandingPageData(query: string) {
         try {
-            const endpoint = `/landing-pages?locale=${this.appLocale}&populate=*`;
+            const endpoint = `/landing-pages?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_LANDING_PAGE);
 
         } catch (error) {
@@ -114,17 +113,17 @@ export class StrapiClient {
     }
 
     /**
-     * Fetches blog posts from the Strapi API for the current locale.
+     * Fetches blog post data from the Strapi API for the current locale.
      * The response includes all related data populated by default.
-     * @param {number} limit The number of blog posts to fetch.
-     * Defaults to MAX_PAGE_SIZE_DEFAULT.
+     * @param query The query string to filter, sort, and paginate results.
      * @returns A promise resolving to the JSON response containing the blog posts.
      * @throws {Error} If the API request fails or the response status is not 200.
      */
-    async getBlogPosts(limit: number = this.maxPageSize) {
+    async getBlogPostData(query: string) {
         try {
-            const endpoint = `/blog-posts?locale=${this.appLocale}&populate=*&pagination[limit]=${limit}`;
+            const endpoint = `/blog-posts?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
+
         } catch (error) {
             console.error("Blog Posts could not be loaded:", error);
             return null;
@@ -133,13 +132,14 @@ export class StrapiClient {
     /**
      * Fetches the about page data from the Strapi API for the current locale.
      * The response includes all related data populated by default.
+     * @param query The query string to filter, sort, and paginate results.
      * @returns A promise resolving to the JSON response containing the about page data.
      * @throws {Error} If the API request fails or the response status is not 200.
      */
 
-    async getAboutData() {
+    async getAboutData(query: string) {
         try {
-            const endpoint = `/about-pages?locale=${this.appLocale}&populate=*`;
+            const endpoint = `/about-pages?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
         } catch (error) {
             console.error("About Page could not be loaded:", error);
@@ -150,13 +150,15 @@ export class StrapiClient {
     /**
      * Fetches travel map data from the Strapi API for the current locale.
      * The response includes all related data populated by default.
+     * @param query The query string to filter, sort, and paginate results.
      * @returns A promise resolving to the JSON response containing the travel map data.
      * @throws {Error} If the API request fails or the response status is not 200.
      */
 
-    async getTravelMapData() {
+    async getTravelMapData(query: string) {
         try {
-            const endpoint = `/travel-maps?locale=${this.appLocale}&populate=*`;
+            const endpoint = `/travel-maps?${query}`;
+              console.log(endpoint);
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
         } catch (error) {
             console.error('TravelMap could not be loaded:', error);

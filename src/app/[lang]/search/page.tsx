@@ -5,7 +5,7 @@ import * as helperFunctions from "@utils/helperFunctions"
 import * as appConstants from "@utils/appConstants"
 import SearchResultsBoard from "@/components/SearchResultsBoard";
 import { getBlogPosts } from "@/lib/contentService";
-import { BlogPostData } from '@/types/strapiTypes';
+import { BlogPostListData } from '@/types/strapiTypes';
 
 interface SearchPageProps {
     searchParams: Promise<{ q?: string }>;
@@ -29,15 +29,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     );
 }
 
-async function findQueryElements(language: appConstants.SupportedLanguageType, query: string): Promise<Array<BlogPostData> | null> {
+async function findQueryElements(language: appConstants.SupportedLanguageType, query: string): Promise<Array<BlogPostListData> | null> {
 
     if (!query || !language) {
         return null;
     }
-
     const blogPosts = await getBlogPosts(language);
 
-    const searchResults = blogPosts?.filter((post: BlogPostData) =>
+    const searchResults = blogPosts?.filter((post: BlogPostListData) =>
         post.title.toLowerCase().includes(query.toLowerCase()) ||
         post.country.toLowerCase().includes(query.toLowerCase())
     );

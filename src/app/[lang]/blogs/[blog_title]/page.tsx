@@ -1,8 +1,8 @@
 import * as appConstants from "@utils/appConstants";
 import type { Metadata, ResolvingMetadata } from "next";
 import styles from "@styles/components/blog-page.module.scss";
-import { getBlogPosts } from "@/lib/contentService";
-import * as helperFunctions from "@utils/helperFunctions"
+import { getDetailedBlogPost } from "@/lib/contentService";
+// import * as helperFunctions from "@utils/helperFunctions"
 import { DataNotFound } from "@/components/DataNotFound";
 import { BlogPostContent } from "@/components/BlogPostContent";
 
@@ -19,8 +19,8 @@ export async function generateMetadata({
   
   const parentMeta = await parent;
   const {lang, blog_title} = await params;
-  const blogPostsContent = await getBlogPosts(lang);
-  const foundBlogPost = helperFunctions.getBlogPostByTitle(blogPostsContent, blog_title);
+  const decodedTitle = decodeURIComponent(blog_title);
+  const foundBlogPost = await getDetailedBlogPost(lang, decodedTitle);
 
   const meta = foundBlogPost ? {
   ...parentMeta,
@@ -38,9 +38,7 @@ export default async function TravelBlogsPage({ params }:
 }>) {
   const { lang, blog_title} = await params;
   const decodedTitle = decodeURIComponent(blog_title);
-  const blogPostsContent = await getBlogPosts(lang);
-  
-  const foundBlogPost = helperFunctions.getBlogPostByTitle(blogPostsContent, decodedTitle);
+  const foundBlogPost = await getDetailedBlogPost(lang, decodedTitle);
 
   if (!foundBlogPost) { 
     return <DataNotFound />;

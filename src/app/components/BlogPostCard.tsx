@@ -4,18 +4,18 @@ import { useGlobalState } from '@context/GlobalStateContext';
 import * as appConstants from "@utils/appConstants"
 import styles from "@styles/components/blog-post-card.module.scss";
 import { DataNotFound } from "@/components/DataNotFound"; 
-import { BlogPostData,  strapiLocaleType} from '@/types/strapiTypes';
+import { BlogPostListData,  strapiLocaleType} from '@/types/strapiTypes';
 import Image from 'next/image';
 
 export function BlogPostCard({ data, styleProps, startAnimation }: { 
-    data: BlogPostData, 
+    data: BlogPostListData, 
     styleProps?: React.CSSProperties,
     startAnimation?: boolean }): JSX.Element {
 
     const [isHovered, setIsHovered] = useState(false);
     const router = useRouter();
     const { language } = useGlobalState();
-
+        
     // Memoize event handlers to prevent re-renders
     const handleMouseEnter = useCallback(() => {
         setIsHovered(true);
@@ -33,8 +33,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
         }
         
         try {
-            const urlProp: string = data.title.replace(/\s+/g, '-').toLowerCase(); 
-            const blogUrl = `/${language}/blogs/${urlProp}`;
+            const blogUrl = `/${language}/blogs/${data.title}`;
             router.push(blogUrl);
 
         } catch (error) {
@@ -46,7 +45,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         imgWidth={appConstants.notFoundImgDefaultSize/2} 
                         imgHeight={appConstants.notFoundImgDefaultSize/2}/>}
 
-    const titleImage = data.featuredImages[appConstants.indexCardTitleImage]; // first image is the title image
+    const titleImage = data.featuredImage;
 
     return(
         <div className={`${styles.blogPostCard} ${startAnimation ? styles['runAnimation'] : ''}`} 

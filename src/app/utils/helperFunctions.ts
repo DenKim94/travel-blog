@@ -1,6 +1,6 @@
 import * as appConstants from "@utils/appConstants"
 import { NavigationBarItemType } from '@/types/NavigationBarTypes';
-import { BlogPostData, StrapiImage, StrapiImageFormat } from "@/types/strapiTypes";
+import { BlogPostDetailedData, StrapiImage, StrapiImageFormat } from "@/types/strapiTypes";
 
 /**
 Überprüft, ob eine gegebene Sprache in der Liste der unterstützten Sprachen enthalten ist.
@@ -211,7 +211,7 @@ export function wait(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function getBlogPostByTitle(data: Array<BlogPostData> | null, qTitle: string): BlogPostData | null {
+export function getBlogPostByTitle(data: Array<BlogPostDetailedData> | null, qTitle: string): BlogPostDetailedData | null {
 
     try {
         return data?.find(post => 
