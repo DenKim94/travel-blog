@@ -48,7 +48,7 @@ body {
 }
 
 header {
-  position: fixed;
+  // position: fixed;
   top: 0;
   max-width: $max-width;
   min-width: $min-width;
@@ -132,7 +132,6 @@ header {
 
 // Footer Styles
 footer {
-  position: fixed;
   bottom: 0;
   max-width: calc(#{$max-width} - 2*#{$side-gap});
   width: calc(#{$header-width} - 2*#{$side-gap});       /* gewünschte Länge */
