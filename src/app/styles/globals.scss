@@ -48,12 +48,15 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
   max-width: $max-width;
   min-width: $min-width;
   grid-row-start: 1;
   align-items: center;
   width: $header-width;
   height: $header-height;
+  z-index: 10;
 }
 
 .header-underline {
@@ -128,6 +131,8 @@ header {
 
 // Footer Styles
 footer {
+  position: fixed;
+  bottom: 0;
   max-width: calc(#{$max-width} - 2*#{$side-gap});
   width: calc(#{$header-width} - 2*#{$side-gap});       /* gewünschte Länge */
   grid-row-start: 3;
@@ -140,6 +145,13 @@ footer {
 
   p {
     font-size: $font-size-footer;
+  }
+}
+
+// Mobile Viewport
+@media screen and (max-width: $small-mobile-width) {
+  .main-content {
+    padding-right: $side-gap;
   }
 }
 

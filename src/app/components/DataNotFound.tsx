@@ -18,9 +18,9 @@ import * as appConstants from "@utils/appConstants"
 export function DataNotFound({type = "content", imgWidth = appConstants.notFoundImgDefaultSize, imgHeight =appConstants.notFoundImgDefaultSize}
     :{type?: "content" | "search", imgWidth?: number, imgHeight?: number}): JSX.Element{
 
-        let imageUrl: string = "";
+    let imageUrl: string = "";
 
-        const styleProps: React.CSSProperties = {
+    const styleProps: React.CSSProperties = {
         height: '100%',
         width: '100%',
         display: 'flex',
