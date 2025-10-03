@@ -144,7 +144,7 @@ footer {
   height: $footer-height;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 20px);
 
   p {
     font-size: $font-size-footer;
