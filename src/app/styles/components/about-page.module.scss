@@ -77,9 +77,9 @@ $description-text-width-percent: 70%;
         &::-webkit-scrollbar-thumb {
         background-color: rgba(0, 0, 0, 0.4);
 
-        &:hover {
-            background-color: $third-color-global; // Farbe beim Hover
-        }
+          &:hover {
+              background-color: $third-color-global; // Farbe beim Hover
+          }
         }
     }
 }
@@ -137,6 +137,16 @@ $description-text-width-percent: 70%;
     width: 100%;
     margin: auto;
     margin-top: calc(#{$title-image-height}/2);
+
+    &::-webkit-scrollbar-thumb {
+      // Scrollbalken-Farbe
+      background-color: $foreground-color-global;
+      border-radius: 10px;
+      // Safari-Fix: Entferne Standard-Border
+      border: none;
+      // Safari-Fix: Verhindere Standard-Styling
+      -webkit-appearance: none;
+    }
   }
 }
 

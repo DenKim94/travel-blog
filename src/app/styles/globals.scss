@@ -2,23 +2,27 @@
 @use './variables.module.scss' as *;
 
 
-:root {
-  --recaptcha-offset-y: 45px; // Standard-Versatz
-}
-
 .grecaptcha-badge {
   position: fixed !important;
-  right: 6px !important;
-  bottom: calc(14px + var(--recaptcha-offset-y, 0px)) !important;
-  width: 70px !important;           /* eingeklappt */
+  right: 0px !important;
+  bottom: calc(#{$footer-height} + 5px) !important;
+  width: calc(#{$side-gap} - #{$scrollbar-width}) !important;           /* eingeklappt */
   overflow: hidden !important;      /* Text abschneiden */
   transition: width 0.3s ease !important;
-  z-index: 1000;                    
+  z-index: 1000; 
 }
 
 .grecaptcha-badge:hover {
   width: 256px !important;          /* ausgeklappt bei Hover */
 }
+
+// Mobile Viewport
+@media screen and (max-width: $travel-map-image-min-width) {
+  .grecaptcha-badge{
+    width: calc(2*#{$scrollbar-width}) !important; 
+  }
+}
+
 
 html,
 body {
@@ -55,7 +59,7 @@ header {
 .header-underline {
   max-width: calc(#{$max-width} - 2*#{$side-gap} - #{$scrollbar-offset});
   min-width: calc(#{$min-width} - 2*#{$side-gap} - #{$scrollbar-offset});
-  width: calc(#{$header-width} - 2*#{$side-gap} - #{$scrollbar-offset}); // Adjusted for better alignment
+  width: calc(#{$header-width} - 2*#{$side-gap} - #{$scrollbar-offset});
   height: $header-underline-height;
   background: #000;
   margin-left: $side-gap;
@@ -85,7 +89,7 @@ header {
   min-width: $min-width;
   width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
   padding-left: $side-gap;
-  padding-right: $side-gap;
+  padding-right: calc(#{$side-gap} - #{$scrollbar-width});
   gap: $root-page-gap;
 
   // Für Safari und ältere Browser
