@@ -6,7 +6,7 @@ import * as appConstants from "@utils/appConstants"
 import { MenuBarElements } from "./MenuBarElements";
 import { GlobalLanguageSetter } from "./LanguageSetter";
 import styles from "@styles/components/mobile-menu.module.scss";
-
+import { useIsOnBlogPage } from '@/hooks/usePageTracker';
 
 
 /**
@@ -19,6 +19,7 @@ import styles from "@styles/components/mobile-menu.module.scss";
  */
 export function MobileNavigationMenu(): JSX.Element {
     const { setMenuBarOpen } = useGlobalState();
+    const isOnBlogPage = useIsOnBlogPage();
 
     function openMenuBar() {
         setMenuBarOpen(true);
@@ -26,7 +27,7 @@ export function MobileNavigationMenu(): JSX.Element {
     
     return (
         <div className={styles.mobileMenuContainer} id="mobile-menu-container">
-            <GlobalLanguageSetter />
+            {!isOnBlogPage && <GlobalLanguageSetter />}
             <button className={styles.menuButton} 
                 aria-label="Menu Button" onClick={openMenuBar} >
                 <Image

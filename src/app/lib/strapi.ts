@@ -158,7 +158,6 @@ export class StrapiClient {
     async getTravelMapData(query: string) {
         try {
             const endpoint = `/travel-maps?${query}`;
-              console.log(endpoint);
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
         } catch (error) {
             console.error('TravelMap could not be loaded:', error);
