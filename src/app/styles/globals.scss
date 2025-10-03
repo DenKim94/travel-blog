@@ -63,6 +63,7 @@ header {
   max-width: calc(#{$max-width} - 2*#{$side-gap} - #{$scrollbar-offset});
   min-width: calc(#{$min-width} - 2*#{$side-gap} - #{$scrollbar-offset});
   width: calc(#{$header-width} - 2*#{$side-gap} - #{$scrollbar-offset});
+  padding-right: calc(#{$side-gap} - #{$scrollbar-width});
   height: $header-underline-height;
   background: #000;
   margin-left: $side-gap;
@@ -149,7 +150,7 @@ footer {
 }
 
 // Mobile Viewport
-@media screen and (max-width: $small-mobile-width) {
+@media screen and (max-width: 1400px) {
   .main-content {
     padding-right: $side-gap;
   }

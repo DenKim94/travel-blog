@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Oranienbaum } from 'next/font/google';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
 import { NavigationBar } from "@components/NavigationBar";
@@ -15,6 +15,12 @@ const oranienbaum = Oranienbaum({
   preload: true, // Schriftart vorab laden
   variable: '--font-oranienbaum', // CSS-Variable definieren
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 // Dynamische Metadaten-Funktion
 export async function generateMetadata({
