@@ -152,12 +152,8 @@ footer {
 @media screen and (max-width: 1400px) {
   .main-content {
     padding-right: $side-gap;
+    padding-left: $side-gap;
   }
 }
 
-@media screen and (max-width: $small-mobile-width) {
-  .header {
-    margin-top: 10px;
-  }
-}
 
