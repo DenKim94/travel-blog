@@ -50,6 +50,7 @@ body {
 header {
   position: fixed;
   top: 0;
+  padding-top: env(safe-area-inset-top, 20px);
   max-width: $max-width;
   min-width: $min-width;
   grid-row-start: 1;
@@ -143,6 +144,7 @@ footer {
   height: $footer-height;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 
   p {
     font-size: $font-size-footer;
