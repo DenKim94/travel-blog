@@ -28,7 +28,7 @@ $title-distance-top-percentage: 5%;
   right: 0;
   padding: 2rem;
   overflow: hidden; // Wichtig für slideUp-Effekt
-  z-index: 10;
+  z-index: 5;
 }
 
 .landingPageTitle {
@@ -43,6 +43,7 @@ $title-distance-top-percentage: 5%;
   margin-left: auto; // Schiebt den Text nach rechts 
   overflow-wrap: break-word; // Moderne Alternative zu word-wrap
   hyphens: auto; // Automatische Silbentrennung (sprachabhängig)
+
 
   // SlideUp-Animation
   animation: slideUp $slide-up-duration ease-out forwards;

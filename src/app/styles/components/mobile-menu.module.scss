@@ -23,13 +23,13 @@ $menu-items-transition-duration: 0.3s;
     height: 100%;
     background-color: rgba($background-color-global, 0.5);
     backdrop-filter: blur(50px);
-    z-index: $mobile-menu-bar-z-index;
     transform: translateX(100%);
     transition: transform $menu-bar-transition-duration ease-in-out;
     will-change: transform; // Optimiert die Animation
     
     &--visible{
          transform: translate3d(0, 0, 0); // Hardware-Beschleunigung
+         z-index: $mobile-menu-bar-z-index;
     }
 
     &--hidden{

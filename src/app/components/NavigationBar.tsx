@@ -79,7 +79,7 @@ export function NavigationBar(): JSX.Element {
                 {/* Search Functionality */}
                 {!isOnImprintPage && <SearchButton />}
                 {/* Language Selector */}
-                {!isOnBlogPage && <GlobalLanguageSetter />}
+                {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter />}
             </ul>
         </nav>
     );
