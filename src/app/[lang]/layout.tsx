@@ -1,26 +1,22 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
+import { cookies } from 'next/headers';
 import { Oranienbaum } from 'next/font/google';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
 import { NavigationBar } from "@components/NavigationBar";
 import { SearchField } from "@/components/SearchModule";
 import Footer from "@/components/Footer";
 import * as appConstants from "@utils/appConstants"
+import * as helperFunctions from "@utils/helperFunctions";
 import "@styles/globals.scss";
 
 
 const oranienbaum = Oranienbaum({
   weight: '400',
   subsets: ['latin'],
-  display: 'swap', // Schriftart-Display-Einstellung: Nahtloser Übergang nach dem Laden der Schriftart
-  preload: true, // Schriftart vorab laden
+  display: 'swap',                // Schriftart-Display-Einstellung: Nahtloser Übergang nach dem Laden der Schriftart
+  preload: true,                  // Schriftart vorab laden
   variable: '--font-oranienbaum', // CSS-Variable definieren
 });
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  viewportFit: 'cover',
-}
 
 // Dynamische Metadaten-Funktion
 export async function generateMetadata({
@@ -50,22 +46,25 @@ export default async function RootLayout({
   params: Promise<{lang: appConstants.SupportedLanguageType}>
 }>) {
   
-  const {lang} = await params;
+  const {lang} = await params ;
+  const cookieStore = await cookies();
+  const languageCookie = cookieStore.get(appConstants.storageSettings.storageKey);
+  const cookieLanguage = languageCookie?.value as appConstants.SupportedLanguageType | undefined;
+
+  if (lang !== cookieLanguage) {
+    helperFunctions.setLanguageCookie(lang);
+  }
 
   return (
     <html lang={lang} className={oranienbaum.variable}>
       <head>
-        <link
-          rel="prefetch"
-          href={`/_next/static/css/app/${lang}/loading.css`}
-          as="style"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body>
         <GlobalStateProvider initialLanguage={lang}>
             <div className="root-page">
               <header aria-label="Application header">
-                <NavigationBar />
+                <NavigationBar language={lang} />
                 <div className="header-underline"></div>
                 <SearchField />
               </header>

@@ -1,6 +1,5 @@
 "use client";
 import { NavigationBarItemType } from "@/types/NavigationBarTypes";
-import { useGlobalState } from '@context/GlobalStateContext';
 import { useIsOnBlogPage, useIsOnImprintPage, useIsOnSearchPage } from "@/hooks/usePageTracker";
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
@@ -14,6 +13,10 @@ import { MobileNavigationMenu } from "./MobileNavigationMenu";
 import useWindowSize from "@/hooks/useWindowSize";
 
 
+interface NavigationBarProps {
+  language: appConstants.SupportedLanguageType;
+}
+
 /**
  * Komponente, die die Navigation-Leiste anzeigt.
  *
@@ -26,8 +29,8 @@ import useWindowSize from "@/hooks/useWindowSize";
  *
  * @returns {JSX.Element} Die gerenderte Komponente.
  */
-export function NavigationBar(): JSX.Element {
-    const { language } = useGlobalState();
+export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
+    // const { language } = useGlobalState();
     const isOnSearchPage = useIsOnSearchPage();
     const isOnBlogPage = useIsOnBlogPage();
     const isOnImprintPage = useIsOnImprintPage();
@@ -57,7 +60,7 @@ export function NavigationBar(): JSX.Element {
                 </a>
             </div>
             {isMobile && !isOnImprintPage && (
-                <MobileNavigationMenu /> 
+                <MobileNavigationMenu language={language} /> 
             )}            
             {/* Navigation Items */}
             <ul className={`${styles.navBarList} ${isMobile ? styles['navBarList--hidden'] : styles['navBarList--visible']}`} 
@@ -79,7 +82,7 @@ export function NavigationBar(): JSX.Element {
                 {/* Search Functionality */}
                 {!isOnImprintPage && <SearchButton />}
                 {/* Language Selector */}
-                {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter />}
+                {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language} />}
             </ul>
         </nav>
     );

@@ -68,7 +68,11 @@ export async function getLanguageFromCookies(cookieStore: any): Promise<string> 
  */
 export function setLanguageCookie(language: string) {
   if (typeof window !== 'undefined') {
-    document.cookie = `${appConstants.storageSettings.storageKey}=${language}; path=${appConstants.storageSettings.path}; max-age=${appConstants.storageSettings.maxAge}; SameSite=${appConstants.storageSettings.sameSite}`;
+    document.cookie = `httpOnly=${appConstants.storageSettings.httpOnly}; 
+                        ${appConstants.storageSettings.storageKey}=${language}; 
+                        path=${appConstants.storageSettings.path}; 
+                        max-age=${appConstants.storageSettings.maxAge}; 
+                        SameSite=${appConstants.storageSettings.sameSite}`;
   }
 }
 

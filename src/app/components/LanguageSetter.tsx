@@ -16,10 +16,10 @@ import styles from "@styles/components/language-setter.module.scss";
  * 
  * @returns {JSX.Element} - Die JSX-Elemente der Komponente.
  */
-export function GlobalLanguageSetter({languageOptions = appConstants.languageOptions}: 
-    {languageOptions?: typeof appConstants.languageOptions}): JSX.Element {
+export function GlobalLanguageSetter({language, languageOptions = appConstants.languageOptions}: 
+    {language: appConstants.SupportedLanguageType, languageOptions?: typeof appConstants.languageOptions}): JSX.Element {
 
-    const { language, setLanguage } = useGlobalState();
+    const { setLanguage } = useGlobalState();
     const router = useRouter();
     const pathname = usePathname();
 

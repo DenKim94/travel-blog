@@ -79,15 +79,25 @@ export const defaultMetadataBlogPost: Record<SupportedLanguageType | string, Met
 
 // *** Angaben für die Cookies und lokalen Speicher ***
 type StorageSettings = {
+    httpOnly: boolean;
     path: string;
     maxAge: number;
     sameSite: "Lax" | "Strict" | "None";
     storageKey: string;
 };
 
+/**
+ * Cookie-Konfiguration:
+ * - httpOnly: false (muss von Client-Side lesbar sein für Language Switcher)
+ * - path: "/" (für gesamte Domain gültig)
+ * - maxAge: 2 Stunden (Cookie-Persistenz)
+ * - sameSite: 'lax' für CSRF-Schutz bei normaler Navigation
+ * - storageKey: "preferred-language" (Name des Cookies)
+ */
 export const storageSettings: StorageSettings = {
+    httpOnly: false,      
     path: "/", 
-    maxAge: 60 * 60 * 2, // 2 Stunden
+    maxAge: 60 * 60 * 2,  
     sameSite: "Lax" as const,
     storageKey: "preferred-language",
 };

@@ -17,7 +17,7 @@ import { useIsOnBlogPage, useIsOnSearchPage } from '@/hooks/usePageTracker';
  *
  * @returns {JSX.Element} Die gerenderte Komponente.
  */
-export function MobileNavigationMenu(): JSX.Element {
+export function MobileNavigationMenu({language}: {language: appConstants.SupportedLanguageType}): JSX.Element {
     const { setMenuBarOpen } = useGlobalState();
     const isOnBlogPage = useIsOnBlogPage();
     const isOnSearchPage = useIsOnSearchPage();
@@ -28,7 +28,7 @@ export function MobileNavigationMenu(): JSX.Element {
     
     return (
         <div className={styles.mobileMenuContainer} id="mobile-menu-container">
-            {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter />}
+            {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language} />}
             <button className={styles.menuButton} 
                 aria-label="Menu Button" onClick={openMenuBar} >
                 <Image
