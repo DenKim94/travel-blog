@@ -133,6 +133,7 @@ $padding-container: 2rem;
 @media (max-width: $small-mobile-width) {
   .contactFormContainer {
     padding: 0.8rem;
+    box-shadow: none;
   }
 
   .formGroup {
