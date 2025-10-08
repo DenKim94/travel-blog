@@ -316,8 +316,8 @@ export const contactFormPlaceholders: Record<SupportedLanguageType, { name: stri
 export const contactFormFieldNames: Record<SupportedLanguageType, { name: string; email: string; message: string }> = {
   de: {
     name: 'Name',
-    email: 'Ihre E-Mail-Adresse',
-    message: 'Ihre Nachricht'
+    email: 'E-Mail-Adresse',
+    message: 'Nachricht'
   },
   en: {
     name: 'Name',
