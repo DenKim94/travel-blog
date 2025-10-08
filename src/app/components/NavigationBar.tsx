@@ -24,13 +24,13 @@ interface NavigationBarProps {
  * Sie enthält außerdem eine Suchfunktion und ein Dropdown-Menü für die Sprache.
  *
  * Die Komponente verwendet die Hook useWindowSize, 
- * um die aktuelle Fenstergröße zu ermitteln und die mobile Navigation-Leiste anzuzeigen, 
- * wenn die Fenstergröße kleiner oder gleich der angegebenen mobileHeaderWidth ist.
+ * um die aktuelle Bildschirmgröße zu ermitteln und ggf. die mobile Navigation-Leiste anzuzeigen, 
+ * wenn die Bildschirmgröße kleiner oder gleich der angegebenen mobileHeaderWidth ist.
  *
  * @returns {JSX.Element} Die gerenderte Komponente.
  */
 export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
-    // const { language } = useGlobalState();
+
     const isOnSearchPage = useIsOnSearchPage();
     const isOnBlogPage = useIsOnBlogPage();
     const isOnImprintPage = useIsOnImprintPage();

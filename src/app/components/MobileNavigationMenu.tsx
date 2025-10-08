@@ -6,6 +6,7 @@ import * as appConstants from "@utils/appConstants"
 import { MenuBarElements } from "./MenuBarElements";
 import { GlobalLanguageSetter } from "./LanguageSetter";
 import styles from "@styles/components/mobile-menu.module.scss";
+import { useScrollLock } from '@hooks/useScrollLock';
 import { useIsOnBlogPage, useIsOnSearchPage } from '@/hooks/usePageTracker';
 
 
@@ -18,9 +19,10 @@ import { useIsOnBlogPage, useIsOnSearchPage } from '@/hooks/usePageTracker';
  * @returns {JSX.Element} Die gerenderte Komponente.
  */
 export function MobileNavigationMenu({language}: {language: appConstants.SupportedLanguageType}): JSX.Element {
-    const { setMenuBarOpen } = useGlobalState();
+    const { menuBarOpen, setMenuBarOpen } = useGlobalState();
     const isOnBlogPage = useIsOnBlogPage();
     const isOnSearchPage = useIsOnSearchPage();
+    useScrollLock(menuBarOpen);
 
     function openMenuBar() {
         setMenuBarOpen(true);
@@ -36,6 +38,7 @@ export function MobileNavigationMenu({language}: {language: appConstants.Support
                     alt={appConstants.navBarIconProps.menu.alt}
                     width={appConstants.navBarIconProps.menu.width}
                     height={appConstants.navBarIconProps.menu.height}
+                    loading="eager"
                 />
             </button>
             <MenuBarElements />
