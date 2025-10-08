@@ -179,7 +179,7 @@ function MarkdownImage({ src, alt }: { src : string | Blob | undefined, alt?: st
           fill={true}
           sizes={appConstants.imgDefaultSizes}
           style={{ objectFit: 'cover' }}
-          loading="lazy"
+          loading="eager"
           onError={(e) => {
             console.error('MarkdownImage:', e);
           }}

@@ -40,6 +40,7 @@ export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element
                     src={data.imageProps.url}
                     alt={data.imageProps.alternativeText || appConstants.TRAVEL_MAP_ALT_TEXT}
                     className={styles.travelMapImage}
+                    loading="eager"
                     onError={() => setImageError(true)}
                 />
             </div>}

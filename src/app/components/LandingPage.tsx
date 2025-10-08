@@ -30,7 +30,6 @@ export function LandingPage({ data }: { data: LandingPageData | null }): JSX.Ele
                   className={styles.landingPageImage}
                   priority={true}
                   fill = {true}
-                  loading="eager"
                   />
 
             <div className={styles.titleOverlay}>
