@@ -20,7 +20,6 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
                     fill={true}
                     sizes={appConstants.imgDefaultSizes}
                     priority={true}        
-                    loading="eager" 
                     className={styles.titleImage}
                 />
                 </div>
@@ -34,7 +33,6 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
                     sizes="(max-width: 768px) 120px, 180px"
                     className={styles.profileImage}
                     priority={true}
-                    loading="eager"
                 />
                 </div>
             )}
