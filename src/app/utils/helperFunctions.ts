@@ -270,3 +270,7 @@ export function extendArrayWithLastElement<T>(array: T[] | null, newLength: numb
     
     return result;
 }
+
+export async function simulateDelay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

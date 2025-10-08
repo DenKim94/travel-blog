@@ -13,6 +13,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
     startAnimation?: boolean }): JSX.Element {
 
     const [isHovered, setIsHovered] = useState(false);
+    const [imageLoading, setImageLoading] = useState(true);
     const router = useRouter();
     const { language } = useGlobalState();
         
@@ -41,6 +42,10 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
         }
     }, [data?.title, language, router]);
 
+    const handleImageLoad = useCallback(() => {
+        setImageLoading(false);
+    }, []);
+
     if (!data){return <DataNotFound 
                         imgWidth={appConstants.notFoundImgDefaultSize/2} 
                         imgHeight={appConstants.notFoundImgDefaultSize/2}/>}
@@ -57,6 +62,11 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                 onClick={handleReadMore}>
                 
                 <div className={`${styles.blogPostImage} ${isHovered ? styles.imageHovered : ''}`}>
+                    {imageLoading && (
+                        <div className={styles.loaderContainer}>
+                            <div className={styles.loader}></div>
+                        </div>
+                    )}
                     <Image 
                         src={titleImage.url} 
                         alt={titleImage.alternativeText || `${appConstants.BLOG_POST_ALT_TEXT} ${data.title}`} 
@@ -64,6 +74,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         priority={true}                
                         sizes={appConstants.imgDefaultSizes}
                         style={{ objectFit: 'cover' }}
+                        onLoadingComplete={handleImageLoad}
                     /> 
                 </div>      
                 <div className={`${styles.titleButtonContainer} ${isHovered ? styles.flipped : ''}`}>
