@@ -74,7 +74,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         priority={true}                
                         sizes={appConstants.imgDefaultSizes}
                         style={{ objectFit: 'cover' }}
-                        onLoadingComplete={handleImageLoad}
+                        onLoad={handleImageLoad}
                     /> 
                 </div>      
                 <div className={`${styles.titleButtonContainer} ${isHovered ? styles.flipped : ''}`}>
