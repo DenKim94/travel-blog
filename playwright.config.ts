@@ -79,5 +79,8 @@ export default defineConfig({
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 90000,
+    env: {
+        PLAYWRIGHT_TEST_MODE: 'true',  // ← MSW aktivieren
+    },
   },
 });

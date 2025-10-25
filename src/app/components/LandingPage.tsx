@@ -22,7 +22,9 @@ export function LandingPage({ data }: { data: LandingPageData | null }): JSX.Ele
   const titleImageProps: StrapiImageFormat | null = helperFunctions.getImagePropsByFormat(data?.titleImages, 'original')
 
   return (
-    <div className={styles.landingPageContainer} id="landing-page-container">
+    <div className={styles.landingPageContainer} 
+      data-testid="landing-page-container"
+      id="landing-page-container">
       {titleImageProps && 
         <div className={styles.imageContainer}>
           <Image src={titleImageProps.url} 
@@ -33,7 +35,8 @@ export function LandingPage({ data }: { data: LandingPageData | null }): JSX.Ele
                   />
 
             <div className={styles.titleOverlay}>
-              <p className={styles.landingPageTitle} 
+              <p className={styles.landingPageTitle}
+                  data-testid="landing-page-title" 
                   id="landing-page-title"
                   aria-label="Landing Page Title">
                 {data?.title}
