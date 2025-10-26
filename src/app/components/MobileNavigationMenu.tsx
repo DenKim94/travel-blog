@@ -29,16 +29,22 @@ export function MobileNavigationMenu({language}: {language: appConstants.Support
     };
     
     return (
-        <div className={styles.mobileMenuContainer} id="mobile-menu-container">
+        <div className={styles.mobileMenuContainer} 
+            id="mobile-menu-container"
+            data-testid="mobile-menu-container">
+
             {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language} />}
             <button className={styles.menuButton} 
-                aria-label="Menu Button" onClick={openMenuBar} >
+                    aria-label="Menu Button" 
+                    data-testid="mobile-menu-button"
+                    onClick={openMenuBar} >
                 <Image
                     src={appConstants.navBarIconProps.menu.src}
                     alt={appConstants.navBarIconProps.menu.alt}
                     width={appConstants.navBarIconProps.menu.width}
                     height={appConstants.navBarIconProps.menu.height}
                     loading="eager"
+                    data-testid="mobile-menu-icon"
                 />
             </button>
             <MenuBarElements />

@@ -18,6 +18,7 @@ export function SearchButton(): JSX.Element {
     return (
         <button className={styles.searchButton} 
                 id="search-button"
+                data-testid="search-button"
                 aria-label="Search Button" 
                 onClick={toggleSearchField} >
             <Image
@@ -26,6 +27,8 @@ export function SearchButton(): JSX.Element {
                 className={styles.searchIcon}
                 width={appConstants.navBarIconProps.search.width}
                 height={appConstants.navBarIconProps.search.height}
+                loading="eager"
+                data-testid="search-icon"
             />
         </button>
     );

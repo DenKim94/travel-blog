@@ -44,9 +44,12 @@ export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
     const isMobile = windowWidth <= parseInt(variables.mobileHeaderWidth, 10);
 
     return (
-        <nav className={styles.navBar} aria-label="Navigation" id="navigation-bar-container">
+        <nav className={styles.navBar} 
+            aria-label="Navigation" 
+            id="navigation-bar-container"
+            data-testid="navigation-bar-container">
             {/* Application Logo */}
-            <div className={styles.navBarLogo}>
+            <div className={styles.navBarLogo} data-testid="navigation-bar-logo">
                 <a href={`/${language}/`}>
                     <Image 
                         src={appConstants.appLogoImageProps.src} 

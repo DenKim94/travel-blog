@@ -44,11 +44,13 @@ export function MenuBarElements(): JSX.Element {
     return(
         <div className={`${styles.mobileMenu} ${menuBarOpen ? styles['mobileMenu--visible'] : styles['mobileMenu--hidden']}`} 
             id="mobile-menu-container"
+            data-testid="mobile-menu-container"
             role="menu" 
             aria-label="Mobile Menu">  
             {/* Navigation Items */}
             <ul className={styles.mobileMenuList} 
                 id="mobile-menu-list"
+                data-testid="mobile-menu-list"
                 role="menubar" 
                 aria-label="Mobile Menu Elements">
 
@@ -68,7 +70,8 @@ export function MenuBarElements(): JSX.Element {
             <div className={styles.mobileMenuHeader}>
                 <SearchButton />
                 <button className={`${styles.menuButton} ${styles['menuButton--closeButton']}`} 
-                        aria-label="Close Menu Button" 
+                        aria-label="Close Menu Button"
+                        data-testid="mobile-menu-close-button"
                         onClick={closeMenuBar} >
                     <Image
                         src={appConstants.navBarIconProps.close.src}

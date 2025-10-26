@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from 'next/headers';
 import { Oranienbaum } from 'next/font/google';
+import Image from 'next/image';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
 import { NavigationBar } from "@components/NavigationBar";
 import { SearchField } from "@/components/SearchModule";
@@ -51,9 +52,34 @@ export default async function RootLayout({
   const languageCookie = cookieStore.get(appConstants.storageSettings.storageKey);
   const cookieLanguage = languageCookie?.value as appConstants.SupportedLanguageType | undefined;
 
+  if(process.env.MAINTENANCE_MODE === 'true') {
+    return(
+      <html lang={lang} className={oranienbaum.variable}>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+        </head>
+        <body>
+          <div id="maintenance-container" 
+              aria-label="Maintenance mode."
+              data-testid="maintenance-mode-container"
+              style={appConstants.maintenanceModeImage.styleProps}>
+              <Image  src={appConstants.maintenanceModeImage.src} 
+                      alt={appConstants.maintenanceModeImage.alt}
+                      width={appConstants.maintenanceModeImage.width}
+                      height={appConstants.maintenanceModeImage.height}
+                      />
+              <h1>{appConstants.maintenanceModeTranslations[lang].title}</h1>
+              <p>{appConstants.maintenanceModeTranslations[lang].description}</p>       
+          </div>
+        </body>
+      </html>    
+    );
+  }
+
   if (lang !== cookieLanguage) {
     helperFunctions.setLanguageCookie(lang);
   }
+
 
   return (
     <html lang={lang} className={oranienbaum.variable}>
