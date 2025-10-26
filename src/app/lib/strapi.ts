@@ -1,5 +1,6 @@
 import * as apiConstants from "@utils/apiConstants"
 import * as appConstants from "@utils/appConstants"
+import * as testParameters from '@e2e/utils/testParameters';
 
 /**
  * StrapiClient ist eine Klasse zur Interaktion mit der Strapi-API.
@@ -40,6 +41,7 @@ export class StrapiClient {
 
     constructor() {
         this.baseURL = process.env.STRAPI_PUBLIC_URL || 'http://localhost:1337';
+
         this.token = process.env.STRAPI_API_TOKEN;
     }
 
@@ -63,7 +65,6 @@ export class StrapiClient {
     private async fetchAPI(endpoint: string, revalidationTime_s: number = apiConstants.REVALIDATION_TIME_GENERIC) {
         try {
             const url = `${this.baseURL}/api${endpoint}`;
-
             const headers: HeadersInit = {
                 'Authorization': `Bearer ${this.token}`,
                 'Content-Type': 'application/json',
@@ -103,6 +104,9 @@ export class StrapiClient {
 
     async getLandingPageData(query: string) {
         try {
+            if (process.env.PLAYWRIGHT_TEST_MODE === 'true') {
+                return testParameters.landingPageMockData;
+            }
             const endpoint = `/landing-pages?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_LANDING_PAGE);
 
@@ -121,6 +125,10 @@ export class StrapiClient {
      */
     async getBlogPostData(query: string) {
         try {
+            if (process.env.PLAYWRIGHT_TEST_MODE === 'true') {
+                return testParameters.blogPostsMockData;
+            }
+
             const endpoint = `/blog-posts?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
 
@@ -139,6 +147,9 @@ export class StrapiClient {
 
     async getAboutData(query: string) {
         try {
+            if (process.env.PLAYWRIGHT_TEST_MODE === 'true') {
+                return testParameters.aboutPageMockData;
+            }
             const endpoint = `/about-pages?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_ABOUT_PAGE);
         } catch (error) {
@@ -157,6 +168,9 @@ export class StrapiClient {
 
     async getTravelMapData(query: string) {
         try {
+            if (process.env.PLAYWRIGHT_TEST_MODE === 'true') {
+                return testParameters.travelMapMockData;
+            }
             const endpoint = `/travel-maps?${query}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_BLOG_POSTS);
         } catch (error) {
@@ -173,6 +187,9 @@ export class StrapiClient {
      */
     async getPrivacyPolicyData() {
         try {
+            if (process.env.PLAYWRIGHT_TEST_MODE === 'true') {
+                return testParameters.privacyPolicyMockData;
+            }
             const endpoint = `/privacy-policies?locale=${this.appLocale}`;
             return await this.fetchAPI(endpoint, apiConstants.REVALIDATION_TIME_GENERIC);
 

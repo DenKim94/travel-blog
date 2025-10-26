@@ -116,9 +116,10 @@ export const config = {
      * - /api (API Routes)
      * - /_next (Next.js Internals)
      * - /assets (Statische Assets)
+     * - /mock-images (Mock-Bilder)
      * - /favicon.ico (Favicon)
      * - /.well-known (Well-known URIs)
      */
-    '/((?!api|_next|assets|favicon.ico|\\.well-known).*)',
+    '/((?!api|_next|assets|mock-images|favicon.ico|\\.well-known).*)',
   ],
 };

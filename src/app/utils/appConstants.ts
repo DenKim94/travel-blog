@@ -132,6 +132,38 @@ export const errorNotificationTranslations: Record<string, { title: string; retr
   ru: { title: "Произошла ошибка:", retry: "Попробовать снова" },
 };
 
+// *** Angaben für den Wartungsmodus ***
+export const maintenanceModeTranslations: Record<string, { title: string; description: string }> = {
+  de: {
+    title: "Wartungsmodus",
+    description: "Die Website wird derzeit gewartet. Bitte versuchen Sie es später erneut.",
+  },
+  en: {
+    title: "Maintenance mode",
+    description: "The website is currently undergoing maintenance. Please try again later.",
+  },
+  ru: {
+    title: "Режим обслуживания",
+    description: "Сайт в настоящее время находится на обслуживании. Пожалуйста, попробуйте позже.",
+  },
+};
+
+export const maintenanceModeImage= { 
+  src: "/assets/Maintenance.png", 
+  alt: "Maintenance mode image",
+  width: 850 as number,
+  height: 550 as number,
+  styleProps: { 
+      display: 'flex',
+      flexDirection: 'column' as const,
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '20px',
+      height: '100vh',
+      textAlign: 'center',
+    } as React.CSSProperties,
+  };
+
 // *** Angaben für die Navigationsleiste ***
 export const navBarIconSize = 28; // Standardgröße für Icons in der Navigationsleiste in Pixel
 export const windowUpdateDelay_ms = 60;
