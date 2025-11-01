@@ -3,6 +3,14 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+const mobileDevicesToTest = [
+  'iPhone 15',
+  'Galaxy S24',
+  'iPad Pro 11',
+  'iPad Pro 11 landscape'
+];
+
 export default defineConfig({
   testDir: './e2e',
   timeout: 30000,              // Maximal 30 Sekunden pro Test
@@ -45,14 +53,14 @@ export default defineConfig({
     },
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['iPhone 15 Pro'], ...mobileDevicesToTest },
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 15 Pro'], ...mobileDevicesToTest },
+    },
 
     /* Test against branded browsers. */
     // {
