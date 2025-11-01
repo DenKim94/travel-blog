@@ -1,5 +1,7 @@
 import { http, HttpResponse } from 'msw';
-import { landingPageMockData } from '../e2e/utils/testParameters';
+import { landingPageMockData, travelMapMockData, 
+         blogPostsMockData, aboutPageMockData, 
+         privacyPolicyMockData } from '../e2e/utils/testParameters';
 
 const strapiApiUrl = process.env.STRAPI_PUBLIC_URL;
 
@@ -15,24 +17,19 @@ export const handlers = [
     }),
 
     // Weitere Endpoints mocken
-    // http.get(`${strapiApiUrl}/api/landing-pages`, () => {
-    //     return HttpResponse.json({  [], meta: {} });
-    // }),
+    http.get(`${strapiApiUrl}/api/blog-posts`, () => {
+        return HttpResponse.json(blogPostsMockData);
+    }),
 
-    // http.get(`${strapiApiUrl}/api/travel-maps`, () => {
-    //     return HttpResponse.json({  [], meta: {} });
-    // }),
+    http.get(`${strapiApiUrl}/api/travel-maps`, () => {
+        return HttpResponse.json(travelMapMockData);
+    }),
 
-    // http.get(`${strapiApiUrl}/api/about-pages`, () => {
-    //     return HttpResponse.json({  [], meta: {} });
-    // }),
-];
+    http.get(`${strapiApiUrl}/api/about-pages`, () => {
+        return HttpResponse.json(aboutPageMockData);
+    }),
 
-export const errorHandlers = [
-    http.get(`${strapiApiUrl}/api/landing-pages`, () => {
-        return HttpResponse.json(
-            { error: 'Internal Server Error' },
-            { status: 500 }
-        );
+    http.get(`${strapiApiUrl}/api/privacy-policy`, () => {
+        return HttpResponse.json(privacyPolicyMockData);
     }),
 ];

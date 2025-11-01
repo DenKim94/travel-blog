@@ -1,3 +1,4 @@
+// [Stand: 01.11.2025]: Mock-Daten sind nur für die deutsche Sprache/Locale vorhanden
 
 export const visibilityTimeout_ms = 3000;
 const mockImageBaseUrl = 'mock-images/';
@@ -50,6 +51,7 @@ export const blogPostsMockData = {
       documentId: "opa6ksl6o9rwndmyajs2csu2",
       Titel: "[MOCK] Reise in Usbekistan",
       Land: "Usbekistan",
+      Beschreibung: "**[MOCK] Usbekistan** liegt in Zentralasien und war einst Teil der 15 ehemaligen Sowjetrepubliken. Das Land grenzt an Kasachstan, Kirgisistan, Tadschikistan, Afghanistan und Turkmenistan. Der größte Teil Usbekistans besteht aus Wüstengebieten.",
       locale: "de",
       publishedAt: "2025-09-27T14:29:41.230Z",
       Medien: [
@@ -57,7 +59,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.320Z",
           id: 17,
           documentId: "kf0xc1bqwfdt5k2rs5gvlbmd",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -66,7 +68,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.353Z",
           id: 19,
           documentId: "vh671phqhv2p3jvbq3uw3uk6",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -75,7 +77,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.609Z",
           id: 20,
           documentId: "mbef35i7y9vhj2m42l693rj4",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -84,7 +86,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:43.085Z",
           id: 21,
           documentId: "zqrpw334r7bbh006bkbl2fpb",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -93,7 +95,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:46.247Z",
           id: 32,
           documentId: "jx0a0smlqtd5l2smwhqlkxb9",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 3022,
           height: 2692
@@ -102,7 +104,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:48.196Z",
           id: 33,
           documentId: "izg5mnthzorkxkphwlx32af6",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 3741,
           height: 2806
@@ -111,7 +113,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:51.552Z",
           id: 34,
           documentId: "j3d4unwykbo1gezj7bor1778",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -120,7 +122,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:52.420Z",
           id: 35,
           documentId: "fc6bin9esfy431c4dbza2y96",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -132,6 +134,7 @@ export const blogPostsMockData = {
       documentId: "gpxv73zcpep6dzy0dhi511ao",
       Titel: "[MOCK] Reise in Indonesien",
       Land: "Indonesien",
+      Beschreibung: "**[MOCK] Indonesien** ist ein Archipel aus über 17.000 Inseln in Südostasien. Es ist bekannt für seine vielfältige Kultur, atemberaubende Landschaften und reiche Tierwelt.",
       locale: "de",
       publishedAt: "2025-09-27T14:06:12.180Z",
       Medien: [
@@ -139,7 +142,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:13.735Z",
           id: 44,
           documentId: "ja6lyos72vy49ccgbwjylnyj",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -148,7 +151,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:14.886Z",
           id: 45,
           documentId: "oay757xtlvo1nmj3bm7fromw",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -157,7 +160,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:17.196Z",
           id: 46,
           documentId: "ntjy34d2q8zk1ypfbiad2dtp",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -166,7 +169,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:20.748Z",
           id: 47,
           documentId: "vncp0z760g7civkcapz5j0cu",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -175,7 +178,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:38.917Z",
           id: 48,
           documentId: "tmc73ncd3647pwxt3ftx9gol",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -184,7 +187,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:39.820Z",
           id: 50,
           documentId: "addd76tqostzzy3k8qi27s8x",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -193,7 +196,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T13:28:44.344Z",
           id: 51,
           documentId: "dwtftem7si6ouki1rt8vr0uf",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -205,6 +208,7 @@ export const blogPostsMockData = {
       documentId: "opa6ksl6o9rwndmyajs2csu2",
       Titel: "[MOCK] Reise in Italien",
       Land: "Italien",
+      Beschreibung: "**[MOCK] Italien** ist ein südeuropäisches Land, das für seine reiche Geschichte, Kunst und Kultur bekannt ist. Es beherbergt einige der berühmtesten Kunstwerke und Architektur der Welt.",
       locale: "de",
       publishedAt: "2025-09-27T14:29:41.230Z",
       Medien: [
@@ -212,7 +216,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.320Z",
           id: 17,
           documentId: "kf0xc1bqwfdt5k2rs5gvlbmd",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -221,7 +225,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.353Z",
           id: 19,
           documentId: "vh671phqhv2p3jvbq3uw3uk6",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -230,7 +234,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.609Z",
           id: 20,
           documentId: "mbef35i7y9vhj2m42l693rj4",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -239,7 +243,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:43.085Z",
           id: 21,
           documentId: "zqrpw334r7bbh006bkbl2fpb",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -248,7 +252,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:46.247Z",
           id: 32,
           documentId: "jx0a0smlqtd5l2smwhqlkxb9",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 3022,
           height: 2692
@@ -257,7 +261,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:48.196Z",
           id: 33,
           documentId: "izg5mnthzorkxkphwlx32af6",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 3741,
           height: 2806
@@ -266,7 +270,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:51.552Z",
           id: 34,
           documentId: "j3d4unwykbo1gezj7bor1778",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -275,7 +279,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:52.420Z",
           id: 35,
           documentId: "fc6bin9esfy431c4dbza2y96",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -287,6 +291,7 @@ export const blogPostsMockData = {
       documentId: "opa6ksl6o9rwndmyajs2csu2",
       Titel: "[MOCK] Reise in Kanada",
       Land: "Kanada",
+      Beschreibung: "**[MOCK] Kanada** ist das zweitgrößte Land der Welt und bekannt für seine atemberaubenden Landschaften, von den Rocky Mountains bis zu den endlosen Wäldern und Seen.",
       locale: "de",
       publishedAt: "2025-09-27T14:29:41.230Z",
       Medien: [
@@ -294,7 +299,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.320Z",
           id: 17,
           documentId: "kf0xc1bqwfdt5k2rs5gvlbmd",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -303,7 +308,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.353Z",
           id: 19,
           documentId: "vh671phqhv2p3jvbq3uw3uk6",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -312,7 +317,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:41.609Z",
           id: 20,
           documentId: "mbef35i7y9vhj2m42l693rj4",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -321,7 +326,7 @@ export const blogPostsMockData = {
           createdAt: "2025-07-13T11:20:43.085Z",
           id: 21,
           documentId: "zqrpw334r7bbh006bkbl2fpb",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -330,7 +335,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:46.247Z",
           id: 32,
           documentId: "jx0a0smlqtd5l2smwhqlkxb9",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.jpeg`,
           alternativeText: null,
           width: 3022,
           height: 2692
@@ -339,7 +344,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:48.196Z",
           id: 33,
           documentId: "izg5mnthzorkxkphwlx32af6",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 3741,
           height: 2806
@@ -348,7 +353,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:51.552Z",
           id: 34,
           documentId: "j3d4unwykbo1gezj7bor1778",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
@@ -357,7 +362,7 @@ export const blogPostsMockData = {
           createdAt: "2025-09-27T12:44:52.420Z",
           id: 35,
           documentId: "fc6bin9esfy431c4dbza2y96",
-          url: `${mockImageBaseUrl}test_placeholder.png`,
+          url: `${mockImageBaseUrl}blog_placeholder.png`,
           alternativeText: null,
           width: 4032,
           height: 3024
