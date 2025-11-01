@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { visibilityTimeout_ms } from '../utils/testParameters';
-import { navigationTitleTranslations, navigationIds, fallBackId }  from "@utils/appConstants"
+import { navigationTitleTranslations }  from "@utils/appConstants"
 import { TestHelpers } from '../utils/testHelpers';
 
 test.describe('Tests für die Navigationsleiste', () => {
