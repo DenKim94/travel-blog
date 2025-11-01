@@ -43,8 +43,8 @@ export function MenuBarElements(): JSX.Element {
 
     return(
         <div className={`${styles.mobileMenu} ${menuBarOpen ? styles['mobileMenu--visible'] : styles['mobileMenu--hidden']}`} 
-            id="mobile-menu-container"
-            data-testid="mobile-menu-container"
+            id="mobile-menu-open-container"
+            data-testid="mobile-menu-open-container"
             role="menu" 
             aria-label="Mobile Menu">  
             {/* Navigation Items */}

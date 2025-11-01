@@ -33,7 +33,7 @@ export function MobileNavigationMenu({language}: {language: appConstants.Support
             id="mobile-menu-container"
             data-testid="mobile-menu-container">
 
-            {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language} />}
+            {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language} testId="global-language-setter-mobile"/>}
             <button className={styles.menuButton} 
                     aria-label="Menu Button" 
                     data-testid="mobile-menu-button"

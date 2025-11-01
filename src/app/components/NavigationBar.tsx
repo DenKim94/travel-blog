@@ -67,10 +67,11 @@ export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
             )}            
             {/* Navigation Items */}
             <ul className={`${styles.navBarList} ${isMobile ? styles['navBarList--hidden'] : styles['navBarList--visible']}`} 
-                role="menubar" aria-label="Navigation Menu">
+                role="menubar" aria-label="Navigation Menu" data-testid="navigation-bar-list">
 
                 {!isOnSearchPage && !isOnImprintPage && navBarItems?.map((item) => (
-                    <li key={item.title} className={styles.navBarListItem}>
+                    <li key={item.title} 
+                        className={styles.navBarListItem}>
                         <a href={`#${item?.id}`}
                             className={styles.navBarLinkItem}
                             role="menuitem"
@@ -85,7 +86,7 @@ export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
                 {/* Search Functionality */}
                 {!isOnImprintPage && <SearchButton />}
                 {/* Language Selector */}
-                {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language} />}
+                {!isOnBlogPage && !isOnSearchPage && <GlobalLanguageSetter language={language}/>}
             </ul>
         </nav>
     );

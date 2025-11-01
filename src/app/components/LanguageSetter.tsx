@@ -16,8 +16,13 @@ import styles from "@styles/components/language-setter.module.scss";
  * 
  * @returns {JSX.Element} - Die JSX-Elemente der Komponente.
  */
-export function GlobalLanguageSetter({language, languageOptions = appConstants.languageOptions}: 
-    {language: appConstants.SupportedLanguageType, languageOptions?: typeof appConstants.languageOptions}): JSX.Element {
+export function GlobalLanguageSetter({language, 
+    languageOptions = appConstants.languageOptions, 
+    testId = "global-language-setter-container"}:
+    {language: appConstants.SupportedLanguageType, 
+        languageOptions?: typeof appConstants.languageOptions, 
+        testId?: string})
+    : JSX.Element {
 
     const { setLanguage } = useGlobalState();
     const router = useRouter();
@@ -67,7 +72,8 @@ export function GlobalLanguageSetter({language, languageOptions = appConstants.l
     const currentLanguageOption = languageOptions[language];
 
     return (
-        <div className={styles.languageSetter} ref={dropdownRef} id="language-setter-container">
+        <div className={styles.languageSetter} ref={dropdownRef} 
+        id="language-setter-container" data-testid={testId}>
             <div 
                 className={`${styles.languageSelector} ${isOpen ? styles.open : ''}`}
                 onClick={() => setIsOpen(!isOpen)}
@@ -88,7 +94,9 @@ export function GlobalLanguageSetter({language, languageOptions = appConstants.l
             </div>
             
             {isOpen && (
-                <div className={styles.languageDropdown} role="listbox" id="language-options">
+                <div className={styles.languageDropdown} role="listbox" 
+                id="language-options" aria-labelledby="language-selector"
+                data-testid="language-options-dropdown">
                     {Object.entries(languageOptions).map(([key, {shortName, longName}]) => (
                         <div
                             key={key}
@@ -105,7 +113,9 @@ export function GlobalLanguageSetter({language, languageOptions = appConstants.l
                                 }
                             }}
                         >
-                            <span className={styles.languageName}>{shortName} - {longName}</span>
+                            <span className={styles.languageName} data-testid={`language-option-${shortName}`}>
+                                {shortName} - {longName}
+                            </span>
                         </div>
                     ))}
                 </div>
