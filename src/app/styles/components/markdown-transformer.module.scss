@@ -6,7 +6,7 @@ $maxImageWidth: 640px;
 .markdownContent {
   max-width: 800px;
   line-height: 1.6;
-  color: var(--text-color, $foreground-color-global);
+  color: $foreground-color-global;
   font-family: inherit;
 
   &--center {

@@ -39,8 +39,18 @@ interface MarkdownTransformerProps {
  * @returns Die transformierte Markdown-Komponente als JSX-Element.
  */
 export function MarkdownTransformer({ content, textAlign = 'justify', alignContent = 'center' }: MarkdownTransformerProps) : JSX.Element {
+    
+ if (!content) {
+    console.warn('MarkdownTransformer: Empty content property provided!');
+    return (
+      <div className={`${styles.markdownContent} ${styles[`markdownContent--${alignContent}`]}`}
+           style={{ color: 'red'}}>
+        Empty content property provided.
+      </div>
+    );
+  }
 
- return (
+  return (
     <div className={`${styles.markdownContent} ${styles[`markdownContent--${alignContent}`]}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
