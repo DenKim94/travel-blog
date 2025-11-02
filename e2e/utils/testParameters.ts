@@ -1,7 +1,10 @@
 // [Stand: 01.11.2025]: Mock-Daten sind nur für die deutsche Sprache/Locale vorhanden
+import * as helperFunctions from "@utils/helperFunctions"
 
 export const visibilityTimeout_ms = 3000;
 const mockImageBaseUrl = 'mock-images/';
+export const testLanguage = 'de';
+export const testNavigationItems = helperFunctions.getNavigationItems(testLanguage);
 
 export const landingPageMockData = {
   data: [

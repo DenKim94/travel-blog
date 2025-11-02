@@ -26,7 +26,7 @@ export class TestHelpers {
 
         // [Sichtbarkeit prüfen]
         const imageLocator = page.getByTestId(testId);
-        await expect(imageLocator, `Das Bild mit der Test-ID '${testId}' sollte sichtbar sein.`).toBeVisible({ timeout: timeout_ms });
+        await expect(imageLocator, `Das Bild mit der Test-ID '${testId}' sollte sichtbar sein.`).toBeInViewport({ timeout: timeout_ms });
 
         // [Ladezustand im Browser evaluieren]
         const isImageLoaded = await imageLocator.evaluate(
@@ -47,6 +47,14 @@ export class TestHelpers {
         expect(isImageLoaded, `Das Bild mit der Test-ID '${testId}' konnte nicht vollständig geladen werden!`).toBe(true);
     };
 
+    /**
+     * Überprüft, ob ein Element sichtbar ist und den erwarteten Text enthält.
+     * Der Textvergleich kann entweder als Teilmenge oder als regulärer Ausdruck (RegExp) erfolgen.
+     * @param page Die Playwright Page-Instanz.
+     * @param testId Die 'data-testid' des Elements.
+     * @param expectedTexts Der erwartete Text als string oder RegExp.
+     * @param timeout_ms Optionaler Timeout in Millisekunden für die Sichtbarkeitsprüfung.
+     */
     static async expectElementToContainText(
         page: Page, 
         testId: string, 
@@ -55,16 +63,16 @@ export class TestHelpers {
     ): Promise<void> {
 
         const elementLocator = page.getByTestId(testId);
-        await expect(elementLocator, `Das Element mit der Test-ID '${testId}' sollte sichtbar sein.`).toBeVisible({ timeout: timeout_ms });
+        await expect(elementLocator, `Das Element mit der Test-ID '${testId}' sollte sichtbar sein.`).toBeInViewport({ timeout: timeout_ms });
         await expect(elementLocator).toContainText(expectedTexts);
     }
 
     /**
      * Überprüft, ob ein Element sichtbar ist und den erwarteten Text enthält.
-     * Der Textvergleich kann entweder als exakte Übereinstimmung (string) oder als regulärer Ausdruck (RegExp) erfolgen.
+     * Der Textvergleich erfolgt als exakte Übereinstimmung (string).
      * @param page Die Playwright Page-Instanz.
      * @param testId Die 'data-testid' des Elements.
-     * @param expectedText Der erwartete Text als string oder RegExp.
+     * @param expectedText Der erwartete Text als string.
      * @param timeout_ms Optionaler Timeout in Millisekunden für die Sichtbarkeitsprüfung.
      */
     static async expectElementToHaveText(
@@ -75,10 +83,38 @@ export class TestHelpers {
     ): Promise<void> {
 
         const elementLocator = page.getByTestId(testId);
-        await expect(elementLocator, `Das Element mit der Test-ID '${testId}' sollte sichtbar sein.`).toBeVisible({ timeout: timeout_ms });
+        await expect(elementLocator, `Das Element mit der Test-ID '${testId}' sollte sichtbar sein.`).toBeInViewport({ timeout: timeout_ms });
 
         // Diese Zeile funktioniert nun für beide Typen, ohne weitere Änderung.
         await expect(elementLocator).toHaveText(expectedText);
+    }
+
+    /**
+     * Erwartet, dass ein Link-Click zu einem bestimmten Abschnitt 
+     * auf der Seite führt und die URL und Sichtbarkeit des Abschnittes 
+     * stimmen.
+     * @param page Die Playwright Page-Instanz.
+     * @param role Die Rolle des Links (Standard: "link").
+     * @param linkName Der Name des Links.
+     * @param dataTestId Die ID des Abschnitts.
+     * @param expectedHash Der erwartete Hash-Wert in der URL.
+     */
+    static async expectSmoothScrollToSection(page: Page, role: string = "link", linkName: string, dataTestId: string, expectedHash: string) {
+
+        const section = page.getByTestId(dataTestId);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const link = page.getByRole(role as any, { name: linkName });
+
+        // Sicherstellen, dass der Abschnitt anfangs nicht sichtbar ist (falls möglich)
+        await expect(section).not.toBeInViewport();
+
+        // Klick ausführen
+        await link.click();
+        await this.wait_ms(500);
+        
+        // Warten, bis URL und Sichtbarkeit stimmen
+        await expect(page).toHaveURL(new RegExp(`${expectedHash}$`));
+        await expect(section).toBeInViewport();
     }
 }
 
