@@ -8,7 +8,10 @@ import Image from 'next/image';
 import * as appConstants from "@utils/appConstants"
 import { JSX, useState, useEffect, useRef } from "react";
 
-export function SearchButton(): JSX.Element {
+export function SearchButton( {iconTestId = "search-icon", buttonTestId = "search-button"}
+    : {iconTestId?: string, buttonTestId?: string} )
+    : JSX.Element {
+
     const { searchFieldOpen, setSearchFieldOpen } = useGlobalState();
 
     function toggleSearchField() {
@@ -17,8 +20,8 @@ export function SearchButton(): JSX.Element {
 
     return (
         <button className={styles.searchButton} 
-                id="search-button"
-                data-testid="search-button"
+                id={buttonTestId}
+                data-testid={buttonTestId}
                 aria-label="Search Button" 
                 onClick={toggleSearchField} >
             <Image
@@ -28,7 +31,7 @@ export function SearchButton(): JSX.Element {
                 width={appConstants.navBarIconProps.search.width}
                 height={appConstants.navBarIconProps.search.height}
                 loading="eager"
-                data-testid="search-icon"
+                data-testid={iconTestId}
             />
         </button>
     );
@@ -140,7 +143,9 @@ export function SearchField(): JSX.Element | null {
 
     return (
             <div className={`${styles.searchFieldContainer} ${isAnimating ? styles.open : ""}`}
-                id="search-field-container" 
+                id="search-field-container"
+                data-testid="search-field-container"
+                aria-label="Search Field Container" 
                 ref={modalRef}>
                 <input
                     ref={searchFieldRef}
@@ -157,6 +162,7 @@ export function SearchField(): JSX.Element | null {
                     className={styles.searchCloseButton}
                     onClick={closeSearchField}
                     aria-label="Close search field"
+                    data-testid="search-close-button"
                 >
                     <Image
                         src={appConstants.navBarIconProps.close_search_field.src}

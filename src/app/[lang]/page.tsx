@@ -20,26 +20,37 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
 
   return (
     <>
-      <section id={appConstants.fallBackId} className={styles.section}>
+      <section id={appConstants.fallBackId} 
+                className={styles.section}
+                data-testid={appConstants.fallBackId}>
         <LandingPage data={landingPageContent} />
       </section>
+
       <section 
           id={appConstants.navigationIds.blogs} 
-          className={`${styles.section} ${styles.responsiveHeight}`}>
-
+          className={`${styles.section} ${styles.responsiveHeight}`}
+          data-testid={appConstants.navigationIds.blogs}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].blogs}</h1>
         <TravelMap data={travelMapContent} />
       </section>
+
       <section 
           id="blog-posts" 
-          className={`${styles.section} ${styles.responsiveHeight}`}>
+          className={`${styles.section} ${styles.responsiveHeight}`}
+          data-testid="blog-posts-section">
         <BlogPostsContainer data={blogPostsContent} />
       </section>
-      <section id={appConstants.navigationIds.about} className={styles.section}>
+
+      <section id={appConstants.navigationIds.about} 
+                className={styles.section} 
+                data-testid={appConstants.navigationIds.about}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].about}</h1>
         <AboutPageContainer data={aboutPageContent} />
       </section>
-      <section id={appConstants.navigationIds.contact} className={styles.section}>
+      
+      <section id={appConstants.navigationIds.contact} 
+                className={styles.section} 
+                data-testid={appConstants.navigationIds.contact}>
         <h1 className={styles.h1}>{appConstants.navigationTitleTranslations[lang].contact}</h1>
         <ContactForm />
       </section>

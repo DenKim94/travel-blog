@@ -68,7 +68,7 @@ export function MenuBarElements(): JSX.Element {
                 ))}
             </ul>  
             <div className={styles.mobileMenuHeader}>
-                <SearchButton />
+                <SearchButton iconTestId="mobile-menu-search-icon" buttonTestId="mobile-menu-search-button"/>
                 <button className={`${styles.menuButton} ${styles['menuButton--closeButton']}`} 
                         aria-label="Close Menu Button"
                         data-testid="mobile-menu-close-button"
