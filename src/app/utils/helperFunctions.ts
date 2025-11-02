@@ -129,6 +129,10 @@ export function handleSmoothScroll (
         top: Math.max(0, targetPosition),
         behavior: 'smooth'
     });
+
+    if (history.pushState) {
+        history.pushState(null, '', `#${sectionId}`);
+    }
 }
 
 /**
