@@ -11,7 +11,7 @@ export function FoundBlogPostsContainer({ data }: { data: Array<BlogPostListData
 
     return (
         <div className={`${styles.foundBlogPostsContainer} ${(data.length > 1) ? '' : styles['singleCard']}`}
-            id="found-blog-posts-container">
+            id="found-blog-posts-container" data-testid="found-blog-posts-container">
             {data.map((blogPostElement: BlogPostListData, index) => {
                 return <BlogPostCard key={index}
                                      data={blogPostElement} 

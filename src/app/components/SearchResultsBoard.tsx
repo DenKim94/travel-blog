@@ -21,7 +21,7 @@ export default function SearchResultsBoard({ results }: { results: Array<BlogPos
 
     if (!results) {
         return (
-            <div className={styles.searchResultsNotFound}>
+            <div className={styles.searchResultsNotFound} data-testid="search-results-not-found-container">
                 <DataNotFound type="search" />
                 <GenericButton
                     title={appConstants.notFoundTranslations[lang].backToHome}
@@ -32,7 +32,7 @@ export default function SearchResultsBoard({ results }: { results: Array<BlogPos
     }
 
     return (
-        <div className={styles.searchResultsBoard}>
+        <div className={styles.searchResultsBoard} data-testid="search-results-board-container">
             <FoundBlogPostsContainer data={results} />
             <GenericButton
                 title={appConstants.notFoundTranslations[lang].backToHome}

@@ -150,6 +150,7 @@ export function SearchField(): JSX.Element | null {
                 <input
                     ref={searchFieldRef}
                     type="text"
+                    data-testid="search-input-field"
                     value={searchQuery}
                     enterKeyHint="search"
                     aria-label="Search field"

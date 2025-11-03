@@ -42,7 +42,8 @@ export function DataNotFound({type = "content", imgWidth = appConstants.notFound
     }
 
     return (
-        <div id="data-not-found-container" 
+        <div id="data-not-found-container"
+             data-testid="data-not-found-container" 
              aria-label="Data not found."
              style={styleProps}>
             <Image  src={imageUrl} 
