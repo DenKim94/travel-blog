@@ -24,7 +24,9 @@ export function BlogPostContent({ data }: { data: BlogPostDetailedData | null })
     }
     
     return (
-        <div className={styles.blogPostContentContainer} id="blog-post-content-container">
+        <div className={styles.blogPostContentContainer} 
+            id="blog-post-content-container"
+            data-testid="blog-post-content-container">
             <article key={data.id} className={styles.blogPost}>
                 <ImageCarousel images={data.featuredImages} />
                 <MarkdownTransformer content={data.description} />

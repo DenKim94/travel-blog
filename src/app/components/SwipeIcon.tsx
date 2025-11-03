@@ -13,6 +13,7 @@ export function SwipeIcon({isVisible}: {isVisible: boolean}) : JSX.Element {
                 alt={appConstants.SWIPE_ICON_ALT_TEXT}
                 width={appConstants.SWIPE_ICON_WIDTH}
                 height={appConstants.SWIPE_ICON_HEIGHT}
+                data-testid="swipe-icon-image"
             />
         </div>
     );

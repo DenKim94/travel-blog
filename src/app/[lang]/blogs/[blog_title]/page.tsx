@@ -2,7 +2,6 @@ import * as appConstants from "@utils/appConstants";
 import type { Metadata, ResolvingMetadata } from "next";
 import styles from "@styles/components/blog-page.module.scss";
 import { getDetailedBlogPost } from "@/lib/contentService";
-// import * as helperFunctions from "@utils/helperFunctions"
 import { DataNotFound } from "@/components/DataNotFound";
 import { BlogPostContent } from "@/components/BlogPostContent";
 
@@ -45,7 +44,7 @@ export default async function TravelBlogsPage({ params }:
   }
 
   return (
-    <section className={styles.blogPage}>
+    <section className={styles.blogPage} data-testid="detailed-blog-post-content">
         <h1 className={styles.blogTitle}>{foundBlogPost.title}</h1>
         <BlogPostContent data={foundBlogPost} />
     </section>

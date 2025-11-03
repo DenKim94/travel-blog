@@ -44,14 +44,16 @@ export function MarkdownTransformer({ content, textAlign = 'justify', alignConte
     console.warn('MarkdownTransformer: Empty content property provided!');
     return (
       <div className={`${styles.markdownContent} ${styles[`markdownContent--${alignContent}`]}`}
-           style={{ color: 'red'}}>
+           style={{ color: 'red'}}
+           data-testid="markdown-content">
         Empty content property provided.
       </div>
     );
   }
 
   return (
-    <div className={`${styles.markdownContent} ${styles[`markdownContent--${alignContent}`]}`}>
+    <div className={`${styles.markdownContent} ${styles[`markdownContent--${alignContent}`]}`}
+          data-testid="markdown-content">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}

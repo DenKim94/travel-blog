@@ -46,7 +46,7 @@ export function ImageCarousel({
     // Nur ein Bild - zeige ohne Navigation
     if (images.length === 1) {
         return (
-            <div className={`${styles.singleImageContainer}`} aria-label="Blogpost Image">
+            <div className={`${styles.singleImageContainer}`} aria-label="Blogpost Image" data-testid="image-carousel">
                 <Image 
                     src={images[0].url}
                     alt={images[0].alternativeText || `Image-ID: ${images[0].id}`}
@@ -54,6 +54,7 @@ export function ImageCarousel({
                     sizes={appConstants.imgDefaultSizes}
                     style={{ objectFit: 'cover' }}
                     loading="eager"
+                    data-testid="image-carousel-content"
                 />
             </div>
         );
@@ -62,6 +63,7 @@ export function ImageCarousel({
     return (
         <div 
         className={`${styles.carousel}`}
+        data-testid="image-carousel"
         role="region"
         aria-label={ariaLabel}
         onKeyDown={handleKeyDown}
@@ -82,6 +84,7 @@ export function ImageCarousel({
                             style={{ objectFit: 'cover' }}
                             loading={index === 0 ? "eager" : "lazy"}
                             aria-hidden={index !== currentIndex}
+                            data-testid="image-carousel-content"
                         />
                     </div>
                 ))}

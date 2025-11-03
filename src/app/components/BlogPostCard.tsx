@@ -7,7 +7,7 @@ import { DataNotFound } from "@/components/DataNotFound";
 import { BlogPostListData,  strapiLocaleType} from '@/types/strapiTypes';
 import Image from 'next/image';
 
-export function BlogPostCard({ data, styleProps, startAnimation }: { 
+export function BlogPostCard({ data, styleProps, startAnimation }: {
     data: BlogPostListData, 
     styleProps?: React.CSSProperties,
     startAnimation?: boolean }): JSX.Element {
@@ -54,7 +54,8 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
 
     return(
         <div className={`${styles.blogPostCard} ${startAnimation ? styles['runAnimation'] : ''}`} 
-            id="blog-post-card" 
+            id="blog-post-card"
+            data-testid="blog-post-card"
             style={styleProps}>
             <div className={styles.blogPostCardContent}
                 onMouseEnter={handleMouseEnter}

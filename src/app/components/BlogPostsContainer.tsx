@@ -17,7 +17,8 @@ export function BlogPostsContainer({ data }: { data: Array<BlogPostListData> | n
         <div 
             ref={ref} 
             className={styles.blogPostsContainer} 
-            id="blog-posts-container">
+            id="blog-posts-container"
+            data-testid="blog-posts-container">
             
             {data.map((blogPostElement: BlogPostListData, index) => {
                 return <BlogPostCard key={index}
