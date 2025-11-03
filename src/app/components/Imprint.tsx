@@ -14,8 +14,7 @@ export default function Imprint() {
         marginTop: '20px',
         marginBottom: '20px',
     };
-
-    // TODO: Inhalt an Sprache anpassen [11.09.2025]    
+    
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -26,10 +25,10 @@ export default function Imprint() {
                 <section className={styles.section}>
                     <h2>{appConstants.imprintTranslations[lang].subtitle}</h2>
                     <p>
-                        {appConstants.imprintTranslations[lang].adress.name}<br/>
-                        {appConstants.imprintTranslations[lang].adress.street}<br/>
-                        {appConstants.imprintTranslations[lang].adress.city}<br /> 
-                        {appConstants.imprintTranslations[lang].adress.country}
+                        {appConstants.imprintTranslations[lang].adress?.name}<br/>
+                        {appConstants.imprintTranslations[lang].adress?.street}<br/>
+                        {appConstants.imprintTranslations[lang].adress?.city}<br /> 
+                        {appConstants.imprintTranslations[lang].adress?.country}
                     </p>               
                 </section>
 

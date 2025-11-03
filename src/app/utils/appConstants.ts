@@ -438,12 +438,12 @@ export const privacyConsentTranslations: Record<SupportedLanguageType, { text: s
 type imprintContentType = { 
   title: string; 
   subtitle: string; 
-  adress: {
-    name: string;
-    street: string;
-    city: string;
+  adress?: {
+    name: string,
+    street: string,
+    city: string,
     country: string
-  }; 
+  } | null; 
   contact: {
     title: string,
     email: string,
@@ -456,7 +456,7 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     subtitle: 'Angaben gemaß § 5 TMG',
     adress: {
       name: 'Nadja Ogay',
-      street: 'Brambusch 5',
+      street: '',
       city: '28757 Bremen',
       country: 'Deutschland'
     },
@@ -470,7 +470,7 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     subtitle: 'Legal Notice as per § 5 TMG',
     adress: {
       name: 'Najda Ogay',
-      street: 'Brambusch 5',
+      street: '',
       city: '28757 Bremen',
       country: 'Germany'
     },
@@ -484,7 +484,7 @@ export const imprintTranslations: Record<SupportedLanguageType, imprintContentTy
     subtitle: 'Правовое уведомление по § 5 ТМГ',
     adress: {
       name: 'Надя Огай',
-      street: 'Брамбуш 5',
+      street: '',
       city: '28757 Бремен',
       country: 'Германия'
     },
