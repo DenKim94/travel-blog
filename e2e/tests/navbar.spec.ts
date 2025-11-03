@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { visibilityTimeout_ms, testNavigationItems, testLanguage } from '../utils/testParameters';
+import { visibilityTimeout_ms, testNavigationItems, testLanguage, searchInput } from '../utils/testParameters';
 import { navigationTitleTranslations }  from "@utils/appConstants"
 import { TestHelpers } from '../utils/testHelpers';
 
@@ -140,37 +140,60 @@ test.describe('Tests für die Elemente der Navigationsleiste', () => {
         await expect(page).toHaveURL(`/${testLanguage}`);
     });
 
-    // TODO: Tests für die Suchfunktion implementieren und ausführen [02.11.2025]
-    test('Test für den Search-Button und die Suchfunktion', async ({ page, isMobile }) => {
+    test('Test für den Search-Button und die Suchfunktion [valider Teilstring]', async ({ page, isMobile }) => {
         // ID des Search-Buttons je nach Ansicht
-        const searchButtonId = isMobile ? "mobile-menu-search-button" : "search-button"; 
+        const searchButtonId = isMobile ? "mobile-menu-search-button" : "search-button";
+        const searchFieldContainerId = "search-field-container";
+        const searchFieldId = "search-input-field";
 
-        // Suchfeld ist anfangs nicht sichtbar
-        const searchFieldContainer = page.getByTestId("search-field-container");
-        await expect(searchFieldContainer).not.toBeInViewport({ timeout: visibilityTimeout_ms });
+        if (isMobile) { await TestHelpers.openMobileMenu(page) };
+        
+        // Suchfeld öffnen
+        await TestHelpers.openSearchField(page, searchButtonId, searchFieldContainerId);
 
-        if (isMobile) {
-
-            const mobileMenuOpenContainer = page.getByTestId("mobile-menu-open-container");
-            // Mobiles Menü öffnen
-            const mobileMenuButton = page.getByTestId("mobile-menu-button");
-            await mobileMenuButton.click();
-            await expect(mobileMenuOpenContainer).toHaveClass(/--visible/);
-
-            // Klick auf das Search-Button
-            const searchButton = page.getByTestId(searchButtonId);
-            await expect(searchButton).toBeInViewport();
-            await searchButton.click();
-            await TestHelpers.wait_ms(500);
-            await expect(searchFieldContainer).toBeInViewport({ timeout: visibilityTimeout_ms });
-
-        } else {
-            // Klick auf das Search-Button
-            const searchButton = page.getByTestId(searchButtonId);
-            await expect(searchButton).toBeInViewport();
-            await searchButton.click();
-            await TestHelpers.wait_ms(500);
-            await expect(searchFieldContainer).toBeInViewport({ timeout: visibilityTimeout_ms });
-        }
+        // Validen Suchbegriff eingeben und Suche auslösen [Valider Teilstring]
+        await TestHelpers.executeSearch(page, searchFieldId, searchInput.valid_partial);
+        await TestHelpers.wait_ms(500); // ggf. warten, bis die Animation verarbeitet ist
+        await TestHelpers.expectElementToBeHidden(page, searchFieldContainerId);
+        // Überprüfung, ob korrekte Suchergebnisse angezeigt werden
+        await TestHelpers.checkSearchResults(page, "search-results-board-container", "found-blog-posts-container");
     });
+
+    test('Test für den Search-Button und die Suchfunktion [valider Suchstring]', async ({ page, isMobile }) => {
+        // ID des Search-Buttons je nach Ansicht
+        const searchButtonId = isMobile ? "mobile-menu-search-button" : "search-button";
+        const searchFieldContainerId = "search-field-container";
+        const searchFieldId = "search-input-field";
+
+        if (isMobile) { await TestHelpers.openMobileMenu(page) };
+        
+        // Suchfeld öffnen
+        await TestHelpers.openSearchField(page, searchButtonId, searchFieldContainerId);
+
+        // Validen Suchbegriff eingeben und Suche auslösen [Valider Suchstring]
+        await TestHelpers.executeSearch(page, searchFieldId, searchInput.valid_complete);
+        await TestHelpers.wait_ms(500); // ggf. warten, bis die Animation verarbeitet ist
+        await TestHelpers.expectElementToBeHidden(page, searchFieldContainerId);
+        // Überprüfung, ob korrekte Suchergebnisse angezeigt werden
+        await TestHelpers.checkSearchResults(page, "search-results-board-container", "found-blog-posts-container");
+    });   
+    
+    test('Test für den Search-Button und die Suchfunktion [ungültiger Suchstring]', async ({ page, isMobile }) => {
+        // ID des Search-Buttons je nach Ansicht
+        const searchButtonId = isMobile ? "mobile-menu-search-button" : "search-button";
+        const searchFieldContainerId = "search-field-container";
+        const searchFieldId = "search-input-field";
+
+        if (isMobile) { await TestHelpers.openMobileMenu(page) };
+        
+        // Suchfeld öffnen
+        await TestHelpers.openSearchField(page, searchButtonId, searchFieldContainerId);
+
+        // Ungültigen Suchbegriff eingeben und Suche auslösen [Ungültiger String]
+        await TestHelpers.executeSearch(page, searchFieldId, searchInput.invalid);
+        await TestHelpers.wait_ms(500); // ggf. warten, bis die Animation verarbeitet ist
+        await TestHelpers.expectElementToBeHidden(page, searchFieldContainerId);
+        // Überprüfung, ob korrekte Suchergebnisse angezeigt werden
+        await TestHelpers.checkSearchResults(page, "search-results-not-found-container", "data-not-found-container");
+    }); 
 });

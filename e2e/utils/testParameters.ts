@@ -6,6 +6,12 @@ const mockImageBaseUrl = 'mock-images/';
 export const testLanguage = 'de';
 export const testNavigationItems = helperFunctions.getNavigationItems(testLanguage);
 
+export const searchInput = {
+  valid_complete: "Indonesien",
+  valid_partial: "Usb",
+  invalid: "XYZ-ABC-123"
+};
+
 export const landingPageMockData = {
   data: [
     {
