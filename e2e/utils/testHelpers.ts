@@ -152,14 +152,32 @@ export class TestHelpers {
         await expect(searchFieldContainer).toBeInViewport({ timeout: visibilityTimeout_ms });
     };
 
+
     /**
-     * Erwartet, dass ein Element, das über eine testId identifiziert wird, nicht sichtbar ist.
+     * Überprüft, ob ein Element nicht sichtbar ist.
      * Der Test wartet, bis das Element nicht mehr sichtbar ist (oder ein Timeout erreicht wird).
      * @param page Die Playwright Page-Instanz.
-     * @param testId Die ID des Elements, das überprüft werden soll.
-     * @param timeout_ms Optionaler Timeout in Millisekunden für die Sichtbarkeitsprüfung (Standard: 3000 ms).
+     * @param testId Die 'data-testid' des Elements.
+     * @param timeout_ms Optionaler Timeout in Millisekunden für die Sichtbarkeitsprüfung.
      */
     static async expectElementToBeHidden(
+        page: Page,
+        testId: string,
+        timeout_ms: number = visibilityTimeout_ms
+    ): Promise<void> {
+        const elementLocator = page.getByTestId(testId);
+        await expect(elementLocator, `Das Element mit der Test-ID '${testId}' sollte nicht sichtbar sein.`)
+            .not.toBeHidden({ timeout: timeout_ms });
+    };
+
+    /**
+     * Überprüft, ob ein Element außerhalb des sichtbaren Bereichs liegt.
+     * Der Test wartet, bis das Element nicht mehr sichtbar ist (oder ein Timeout erreicht wird).
+     * @param page Die Playwright Page-Instanz.
+     * @param testId Die 'data-testid' des Elements.
+     * @param timeout_ms Optionaler Timeout in Millisekunden für die Sichtbarkeitsprüfung.
+     */
+    static async expectElementNotToBeInViewport(
         page: Page,
         testId: string,
         timeout_ms: number = visibilityTimeout_ms

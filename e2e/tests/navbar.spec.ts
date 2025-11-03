@@ -50,7 +50,7 @@ test.describe('Tests für die Elemente der Navigationsleiste', () => {
     test('Mobiles Navigationsmenü öffnet und schließt korrekt', async ({ page, isMobile }) => {
 
         // Test nur für mobile Ansicht durchführen
-        test.skip(!isMobile, 'Test nur für mobile Ansicht relevant');
+        test.skip(!isMobile, 'Test ist nur für mobile Ansicht relevant');
 
         const navBarElements = navigationTitleTranslations[testLanguage];
         const mobileMenuButton = page.getByTestId("mobile-menu-button");
@@ -87,7 +87,6 @@ test.describe('Tests für die Elemente der Navigationsleiste', () => {
 
         // Mobiles Menü schließen
         await mobileMenuCloseButton.click();
-        await TestHelpers.wait_ms(800);
         await expect(mobileMenuOpenContainer).not.toBeInViewport({ timeout: visibilityTimeout_ms });
         await expect(mobileMenuOpenContainer).toHaveClass(/--hidden/);
     });
@@ -153,8 +152,7 @@ test.describe('Tests für die Elemente der Navigationsleiste', () => {
 
         // Validen Suchbegriff eingeben und Suche auslösen [Valider Teilstring]
         await TestHelpers.executeSearch(page, searchFieldId, searchInput.valid_partial);
-        await TestHelpers.wait_ms(500); // ggf. warten, bis die Animation verarbeitet ist
-        await TestHelpers.expectElementToBeHidden(page, searchFieldContainerId);
+        await TestHelpers.expectElementNotToBeInViewport(page, searchFieldContainerId);
         // Überprüfung, ob korrekte Suchergebnisse angezeigt werden
         await TestHelpers.checkSearchResults(page, "search-results-board-container", "found-blog-posts-container");
     });
@@ -172,8 +170,7 @@ test.describe('Tests für die Elemente der Navigationsleiste', () => {
 
         // Validen Suchbegriff eingeben und Suche auslösen [Valider Suchstring]
         await TestHelpers.executeSearch(page, searchFieldId, searchInput.valid_complete);
-        await TestHelpers.wait_ms(500); // ggf. warten, bis die Animation verarbeitet ist
-        await TestHelpers.expectElementToBeHidden(page, searchFieldContainerId);
+        await TestHelpers.expectElementNotToBeInViewport(page, searchFieldContainerId);
         // Überprüfung, ob korrekte Suchergebnisse angezeigt werden
         await TestHelpers.checkSearchResults(page, "search-results-board-container", "found-blog-posts-container");
     });   
@@ -191,8 +188,7 @@ test.describe('Tests für die Elemente der Navigationsleiste', () => {
 
         // Ungültigen Suchbegriff eingeben und Suche auslösen [Ungültiger String]
         await TestHelpers.executeSearch(page, searchFieldId, searchInput.invalid);
-        await TestHelpers.wait_ms(500); // ggf. warten, bis die Animation verarbeitet ist
-        await TestHelpers.expectElementToBeHidden(page, searchFieldContainerId);
+        await TestHelpers.expectElementNotToBeInViewport(page, searchFieldContainerId);
         // Überprüfung, ob korrekte Suchergebnisse angezeigt werden
         await TestHelpers.checkSearchResults(page, "search-results-not-found-container", "data-not-found-container");
     }); 
