@@ -1,5 +1,6 @@
 import { strapiClient } from './strapi';
 import * as appConstants from "@utils/appConstants"
+import * as testParameters from '@e2e/utils/testParameters';
 import qs from 'qs';
 import type { LandingPageData, BlogPostDetailedData, BlogPostListData, StrapiImage, TravelMapData, AboutPageData, PrivacyPolicyData } from '@/types/strapiTypes';
 
@@ -48,13 +49,13 @@ export async function getDetailedBlogPost(appLanguage: appConstants.SupportedLan
     try {
         strapiClient.setLocale(appLanguage);
         const detailedQuery = buildBlogDetailQuery(appLanguage, blog_title);
-        const response = await strapiClient.getBlogPostData(detailedQuery);
-      
+        const response = await strapiClient.getBlogPostData(detailedQuery)
+
         if (!response || response.data.length === 0) {
           console.warn('@getDetailedBlogPosts: No data found.');
           return null;
         }        
-        const blogPostsMappedData = mapDetailedBlogPostData(response);
+        const blogPostsMappedData = mapDetailedBlogPostData(response, blog_title);
         return blogPostsMappedData;
 
     } catch (error) {
@@ -221,10 +222,13 @@ function mapBlogPostData(response: any): Array<BlogPostListData> | null {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapDetailedBlogPostData(response: any): BlogPostDetailedData | null {
+function mapDetailedBlogPostData(response: any, blog_title: string = ''): BlogPostDetailedData | null {
   try {
     if (!response.data || response.data.length === 0) return null;
-    const entry = response.data[0];
+
+    const entry = (process.env.PLAYWRIGHT_TEST_MODE === 'true') 
+                  ? (testParameters.blogPostsMockData.data.find(post => post.Titel === blog_title) ?? null) 
+                  : response.data[0];
 
     return {
         id: entry.id,
