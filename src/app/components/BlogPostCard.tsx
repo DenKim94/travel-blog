@@ -29,7 +29,7 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
     const handleReadMore = useCallback(() => {
 
         if (!data?.title) {
-            console.error('Blog post ID is missing');
+            console.error('Blog post title is missing.');
             return;
         }
         
