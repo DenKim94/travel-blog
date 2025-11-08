@@ -35,29 +35,30 @@ test.describe('Tests für die Elemente der Reiseblog-Seite', () => {
     test('Klick auf einen bestimmten Blogeintrag und Prüfung des Inhalts', async ({ page }) => {
         await page.goto(`/${testLanguage}#blog-posts`);
 
-        // String, um bestimmten Blog-Eintrag (Land) zu finden
-        const filteredText = "Kanada";
+        // Einen bestimmten Blog-Post aus "blogPostsMockData.data" verwenden 
+        const blogPostTestCountry: string = "Kanada";
+        const testTitle = blogPostsMockData.data.find(post => post.Land === blogPostTestCountry)?.Titel ?? 'NOT_FOUND';
 
-        // Alle Kind-Elemente mit der entsprechenden Test-ID im Container finden
-        const blogPostsContainer = page.getByTestId("blog-posts-container");
-
-        // TODO: Fix der Filterfunktion [03.11.2025]
-        const filteredBlogPost = blogPostsContainer.filter({
-                has: page.getByTestId('blog-post-card').filter({ hasText: filteredText }) });
+        const filteredBlogPost = page.getByTestId('blog-post-card') // Finde ALLE Karten
+                                     .filter({ hasText: blogPostTestCountry }); // Filtere die mit dem String aus blogPostTestCountry
 
         await expect(filteredBlogPost).toHaveCount(1);
 
-        // Klicke die gefundene Karte an
+        // Klicke den gefundenen Blog-Post an
         await filteredBlogPost.click();
         await TestHelpers.wait_ms(500);
 
         // Überprüfe, ob die Navigation zur Detailseite erfolgreich war
-        await expect(page).toHaveURL(new RegExp(`.*/blogs/.*${filteredText}.*`));
+        const expectedUrlPart = testTitle.replace(/ /g, '%20')
+                                        .replace(/\[/g, '\\[')
+                                        .replace(/\]/g, '\\]');
+
+        await expect(page).toHaveURL(new RegExp(`/${testLanguage}/blogs/${expectedUrlPart}`));
         
         // Überprüfe, ob der Inhalt sichtbar ist
         const blogPostContainer = page.getByTestId("detailed-blog-post-content");
         await expect(blogPostContainer).toBeInViewport({ timeout: visibilityTimeout_ms });
-        await expect(blogPostContainer).toContainText(filteredText);
+        await expect(blogPostContainer).toContainText(testTitle);
 
         // Überprüfe, ob mindestens ein Bild sichtbar ist
         const blogPostImageContainer = page.getByTestId("image-carousel");

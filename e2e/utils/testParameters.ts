@@ -213,7 +213,7 @@ export const blogPostsMockData = {
       ]
     },
     {
-      id: 90,
+      id: 35,
       documentId: "opa6ksl6o9rwndmyajs2csu2",
       Titel: "[MOCK] Reise in Italien",
       Land: "Italien",
@@ -296,7 +296,7 @@ export const blogPostsMockData = {
       ]
     },
   {
-      id: 90,
+      id: 44,
       documentId: "opa6ksl6o9rwndmyajs2csu2",
       Titel: "[MOCK] Reise in Kanada",
       Land: "Kanada",
