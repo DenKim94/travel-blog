@@ -1,7 +1,7 @@
 // [Stand: 01.11.2025]: Mock-Daten sind nur für die deutsche Sprache/Locale vorhanden
 import * as helperFunctions from "@utils/helperFunctions"
 
-export const visibilityTimeout_ms = 10000;
+export const visibilityTimeout_ms = 6000;
 const mockImageBaseUrl = 'mock-images/';
 export const testLanguage = 'de';
 export const testNavigationItems = helperFunctions.getNavigationItems(testLanguage);
@@ -422,4 +422,33 @@ export const privacyPolicyMockData = {
       locale: "de"
     }
   ],
+}
+
+type contactFormInputs = {
+  name: string,
+  email: string,
+  message: string,
+  code: number
+}
+
+type contactFormInputsType = {
+  valid: contactFormInputs,
+  invalid: contactFormInputs,
+  reCaptchaTestToken: string
+}
+
+export const contactFormInputs : contactFormInputsType = {
+  valid: {
+    name: "Valid Tester",
+    email: "test@mail.com",
+    message: "Hallo, dies ist eine Testnachricht.",
+    code: 200,
+  },
+  invalid: {
+    name: "X",
+    email: "invalid-email.de",
+    message: "Hallo.",
+    code: 400,
+  },
+  reCaptchaTestToken: "test-token",
 }

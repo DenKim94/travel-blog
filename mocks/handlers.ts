@@ -7,7 +7,7 @@ const strapiApiUrl = process.env.STRAPI_PUBLIC_URL;
 
 export const handlers = [
     // Strapi Landing Page mocken
-    http.get(`${strapiApiUrl}/api/landing-pages`, ({ request }) => {
+    http.get(`${strapiApiUrl}api/landing-pages`, ({ request }) => {
         const url = new URL(request.url);
         const locale = url.searchParams.get('locale');
         

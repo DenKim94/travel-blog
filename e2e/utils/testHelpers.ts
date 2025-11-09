@@ -58,7 +58,7 @@ export class TestHelpers {
     static async expectElementToContainText(
         page: Page, 
         testId: string, 
-        expectedTexts: string[] | RegExp, 
+        expectedTexts: string |string[] | RegExp, 
         timeout_ms: number = visibilityTimeout_ms
     ): Promise<void> {
 
