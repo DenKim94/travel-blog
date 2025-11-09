@@ -14,12 +14,12 @@ export default function Footer() {
     }
     
     return (
-        <div className={styles.footerContainer}>
-            <Link href={`/${language}/imprint`} className={styles.footerLink}>
+        <div className={styles.footerContainer} data-testid="footer-container">
+            <Link href={`/${language}/imprint`} className={styles.footerLink} data-testid="imprint-link">
               {appConstants.imprintTranslations[language]?.title} 
             </Link>
             {/* Social-Media Icons */}
-            <div className={styles.iconContainer}>
+            <div className={styles.iconContainer} data-testid="icon-container">
                 {appConstants.footerIconProps.map((iconObj, index) => (
                     <a key={index} href={iconObj.url} target="_blank" rel="noopener noreferrer">
                         <Image 
