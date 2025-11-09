@@ -11,7 +11,7 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
     const { titleImage, profileImage, description } = data;
 
     return (
-        <section className={styles.aboutPageContainer}>
+        <section className={styles.aboutPageContainer} data-testid="about-page-container">
             {titleImage?.url && (
                 <div className={styles.titleImageContainer}>
                 <Image
@@ -21,6 +21,7 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
                     sizes={appConstants.imgDefaultSizes}
                     priority={true}        
                     className={styles.titleImage}
+                    data-testid="about-page-title-image"
                 />
                 </div>
             )}
@@ -33,10 +34,11 @@ export function AboutPageContainer({ data }: { data: AboutPageData | null }): JS
                     sizes="(max-width: 768px) 120px, 180px"
                     className={styles.profileImage}
                     priority={true}
+                    data-testid="about-page-profile-image"
                 />
                 </div>
             )}
-            <div className={styles.descriptionContainer}>
+            <div className={styles.descriptionContainer} data-testid="about-page-description">
                 <MarkdownTransformer content={description} textAlign="left" alignContent="center" />
             </div>
         </section>

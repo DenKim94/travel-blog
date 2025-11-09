@@ -16,7 +16,7 @@ export default function PopUp({ message = "", visible, type = 'info' } : { messa
       };
 
     return (
-        <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`} data-testid="pop-up" style={popupStyle}>
+        <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`} data-testid={`pop-up-${type}`} style={popupStyle}>
             {message}
         </div>
     );
