@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { createContactFormSchema, type SupportedLocale } from './validationContactForm';
 import { ContactFormState, EmailResponse, EmailRequest, ContactFormData } from '@/types/contactFormTypes';
 import * as appConstants from "@utils/appConstants"
+import * as testParameters from '@e2e/utils/testParameters';
 
 /**
  * Liest die Sprache aus den HTTP-Headern und gibt sie als `SupportedLocale` zurück.
@@ -44,6 +45,7 @@ async function getLocaleFromHeaders(): Promise<SupportedLocale> {
  * @returns {Promise<boolean>} - `true`, wenn der Token gültig ist, sonst `false`.
  */
 async function verifyRecaptcha(token: string): Promise<boolean> {
+
   if (!token) return false;
   
   try {
@@ -92,6 +94,8 @@ export async function submitContactForm(
   const validation = contactFormSchema.safeParse(rawData);
   
   if (!validation.success) {
+    console.error('Formularvalidierung fehlgeschlagen:', validation.error.flatten().fieldErrors);
+
     return {
       success: false,
       errors: validation.error.flatten().fieldErrors
@@ -99,7 +103,7 @@ export async function submitContactForm(
   }
 
   // reCAPTCHA-Verifikation
-  const isRecaptchaValid = await verifyRecaptcha(validation.data.recaptchaToken || '');
+  const isRecaptchaValid = (process.env.PLAYWRIGHT_TEST_MODE === 'true') ? true : await verifyRecaptcha(validation.data.recaptchaToken || '');
 
   if (!isRecaptchaValid) {
     return {
@@ -122,6 +126,15 @@ export async function submitContactForm(
 }
 
 async function sendContactEmail(data: ContactFormData): Promise<EmailResponse> {
+  if (process.env.PLAYWRIGHT_TEST_MODE === 'true') {
+    console.log(">> [TEST MODE] Senden der E-Mail wird simuliert.");
+
+    if (!data.name || !data.email || !data.message) {
+      return { success: false, error: "Fehlerhafte Anfrage.", code: testParameters.contactFormInputs.invalid.code };
+    }
+    return { success: true, messageId: "random-test-id", code: testParameters.contactFormInputs.valid.code };
+  }
+
   try {
       const emailRequest: EmailRequest = {
         senderName: data.name.trim(),
