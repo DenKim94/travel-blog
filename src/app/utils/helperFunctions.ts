@@ -20,7 +20,7 @@ export function isSupportedLanguage(lang: string): lang is appConstants.Supporte
  * @returns Array von NavigationBarItemType
  */
 export function getNavigationItems(
-    language: appConstants.SupportedLanguageType,
+    language: string,
 ): Array<NavigationBarItemType> {
 
     const { navigationTitleTranslations, navigationIds } = appConstants;

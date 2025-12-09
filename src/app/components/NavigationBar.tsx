@@ -14,7 +14,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 
 
 interface NavigationBarProps {
-  language: appConstants.SupportedLanguageType;
+  language: string;
 }
 
 /**

@@ -19,7 +19,7 @@ import styles from "@styles/components/language-setter.module.scss";
 export function GlobalLanguageSetter({language, 
     languageOptions = appConstants.languageOptions, 
     testId = "global-language-setter-container"}:
-    {language: appConstants.SupportedLanguageType, 
+    {language: string, 
         languageOptions?: typeof appConstants.languageOptions, 
         testId?: string})
     : JSX.Element {

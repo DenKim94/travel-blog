@@ -3,7 +3,7 @@ import { ValidationProps } from "@/types/contactFormTypes";
 import { strapiLocaleType } from "@/types/strapiTypes";
 
 // *** Unterstützte Sprachen (global) ***
-export type SupportedLanguageType = "de" | "en" | "ru";
+export type SupportedLanguageType = string;
 export const supportedLanguages: Array<SupportedLanguageType> = ["de", "en", "ru"];
 export const defaultLanguage: SupportedLanguageType = supportedLanguages[0]; // Standardsprache als Fallback über Index definieren
 
@@ -207,7 +207,7 @@ export const navBarIconProps: Record<NavBarIconKeys, NavBarIconProps> = {
 };
 
 // Gesamttyp für das Übersetzungsobjekt
-export type NavigationTitleTranslations = Record<SupportedLanguageType, NavigationTitles>;
+export type NavigationTitleTranslations = Record<string, NavigationTitles>;
 
 export const navigationTitleTranslations: NavigationTitleTranslations = {
     de: {
