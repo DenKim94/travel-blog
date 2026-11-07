@@ -81,14 +81,12 @@ export function setLanguageCookie(language: string) {
  * Falls der User nicht auf der Hauptseite ist, wird zuerst zur Hauptseite navigiert.
  * 
  * @param targetId - Die ID des Ziels, zu dem gescrollt werden soll.
- * @param headerHeight - Die Höhe des Headers, der von der Scroll-Position abgezogen werden soll.
  * @param clickEvent - Das Event, das den Link-Click auslöst.
  * @param router - Next.js Router für Navigation (optional)
  * @param currentPath - Der aktuelle Pfad (optional)
  */
 export function handleSmoothScroll (
     targetId: string, 
-    headerHeight: number = 0, 
     clickEvent: React.MouseEvent<HTMLAnchorElement>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     router?: any,
@@ -120,15 +118,16 @@ export function handleSmoothScroll (
         return;
     }
 
-    // Header offset
-    const targetPosition = targetElement.offsetTop - headerHeight;
-
+    // Gescrollt wird ausschließlich im inneren Container (<main>);
+    // scrollIntoView richtet den nächsten scrollbaren Vorfahren aus.
+    //
+    // Ein zusätzliches window.scrollTo() stand hier früher, ist aber schädlich:
+    // Das Dokument selbst soll gar nicht scrollen. Auf iOS ist es durch die
+    // einfahrende Browserleiste zeitweise doch scrollbar – dann schob der
+    // Aufruf die gesamte Seite unter die Statusleiste und zog den Footer nach
+    // oben. Ein Header-Offset ist ebenfalls unnötig, weil der Header außerhalb
+    // von <main> in einer eigenen Grid-Zeile liegt.
     targetElement?.scrollIntoView({ block: 'start' });
-
-    window.scrollTo({
-        top: Math.max(0, targetPosition),
-        behavior: 'smooth'
-    });
 
     if (history.pushState) {
         history.pushState(null, '', `#${sectionId}`);

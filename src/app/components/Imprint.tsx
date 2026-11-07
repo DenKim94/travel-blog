@@ -36,11 +36,13 @@ export default function Imprint() {
                     <h2>{appConstants.imprintTranslations[lang].contact.title}</h2>
                     <p>{appConstants.imprintTranslations[lang].contact.email}</p>
                 </section>
-                <GenericButton
-                    title={appConstants.notFoundTranslations[lang].backToHome}
-                    onClick={backToHome}
-                    style={buttonstyle}
-                />
+                <div className={styles.backButtonRow}>
+                    <GenericButton
+                        title={appConstants.notFoundTranslations[lang].backToHome}
+                        onClick={backToHome}
+                        style={buttonstyle}
+                    />
+                </div>
             </main>
         </div>
     );

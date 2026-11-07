@@ -227,6 +227,13 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
     },
   }
 
+// *** Rücksprung von der Datenschutzseite zum Kontaktabschnitt ***
+export const backLabel: Record<SupportedLanguageType, string> = {
+  de: "Zurück",
+  en: "Back",
+  ru: "Назад",
+};
+
 // *** Scroll-Hinweis unterhalb des Titelbildes ***
 export const scrollHintLabel: Record<SupportedLanguageType, string> = {
   de: "Scrollen",

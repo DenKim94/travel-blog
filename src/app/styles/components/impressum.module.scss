@@ -6,7 +6,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 100vh;
+  // 100% statt 100vh: Der Container sitzt im Scroll-Container .main-content,
+  // der bereits um Header, Footer und Gaps kleiner ist als der Viewport. Mit
+  // 100vh war er genau um diesen Betrag zu hoch und erzeugte toten
+  // Scrollraum – auf iOS zusätzlich verstärkt, weil dort 100vh die große
+  // Viewport-Höhe meint.
+  min-height: 100%;
   background: $background-color-global;
   color: $foreground-color-global;
   gap: 20px;
@@ -28,7 +33,10 @@
 .impressumContainer {
   width: 100%;
   box-sizing: border-box;
-  max-width: 1200px;
+  // Keine eigene max-width: Der Scroll-Container .main-content begrenzt die
+  // Breite bereits und setzt die Gutter. Ein zusätzlicher Deckel ließ den
+  // Inhalt linksbündig im breiteren Bereich sitzen – der zentrierte Button
+  // stand dadurch sichtbar neben der Seitenmitte.
 }
 
 .section {
@@ -46,6 +54,14 @@
 .section p {
   line-height: 1.6;
   color: $foreground-color-global;
+}
+
+// Der Rücksprung steht mittig am Ende der Seite. Der umgebende Container ist
+// ein Block, der Button wäre sonst linksbündig.
+.backButtonRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 

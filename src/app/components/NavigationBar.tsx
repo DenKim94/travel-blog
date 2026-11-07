@@ -39,7 +39,6 @@ export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
         return helperFunctions.getNavigationItems(language);
     }, [language]);
 
-    const headerHeight = parseInt(variables.headerHeight, 10);
     const { width: windowWidth } = useWindowSize({ debounceDelay: appConstants.windowUpdateDelay_ms });
     const isMobile = windowWidth <= parseInt(variables.mobileHeaderWidth, 10);
 
@@ -80,7 +79,7 @@ export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
                             role="menuitem"
                             tabIndex={0}
                             aria-label={item.title}
-                            onClick={(e) => helperFunctions.handleSmoothScroll(item.id, headerHeight, e)}>
+                            onClick={(e) => helperFunctions.handleSmoothScroll(item.id, e)}>
 
                             {item.title?.toUpperCase()}
                         </a>

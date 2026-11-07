@@ -6,7 +6,6 @@ import { useGlobalState } from '@context/GlobalStateContext';
 import * as appConstants from "@utils/appConstants"
 import * as helperFunctions from "@utils/helperFunctions"
 import { SearchButton } from "./SearchModule";
-import variables from "@styles/variables.module.scss";
 import styles from "@styles/components/mobile-menu.module.scss";
 
 
@@ -26,7 +25,6 @@ import styles from "@styles/components/mobile-menu.module.scss";
  */
 export function MenuBarElements(): JSX.Element {
     const { language, menuBarOpen, setMenuBarOpen } = useGlobalState();
-    const headerHeight = parseInt(variables.headerHeight, 10);
 
     const navBarItems: NavigationBarItemType[] = useMemo(() => {
         return helperFunctions.getNavigationItems(language);
@@ -36,8 +34,8 @@ export function MenuBarElements(): JSX.Element {
         setMenuBarOpen(false);
     };
 
-    function handleClickOnLink(targetId: string, headerHeight: number = 0, clickEvent: React.MouseEvent<HTMLAnchorElement>){
-        helperFunctions.handleSmoothScroll(targetId, headerHeight, clickEvent);
+    function handleClickOnLink(targetId: string, clickEvent: React.MouseEvent<HTMLAnchorElement>){
+        helperFunctions.handleSmoothScroll(targetId, clickEvent);
         closeMenuBar();
     };
 
@@ -61,7 +59,7 @@ export function MenuBarElements(): JSX.Element {
                             role="menuitem"
                             tabIndex={0}
                             aria-label={item.title}
-                            onClick={(e) => handleClickOnLink(item.id, headerHeight, e)}>
+                            onClick={(e) => handleClickOnLink(item.id, e)}>
                             {item.title.toUpperCase()}
                         </a>
                     </li>

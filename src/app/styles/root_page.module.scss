@@ -24,15 +24,8 @@
   min-height: auto;
 }
 
-// Sektionskopf: Eyebrow-Nummerierung + Titel über einer kräftigen Trennlinie.
-// Die Nummer wird per CSS-Counter erzeugt und bleibt dadurch sprachneutral.
+// Sektionskopf: Titel über einer kräftigen Trennlinie.
 .h1 {
-  // Gezählt werden nur Sektionen, die tatsächlich eine Überschrift tragen –
-  // sonst entstehen Lücken in der Nummerierung.
-  counter-increment: sectionCounter;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
   margin: 0;
   padding-bottom: 0.9rem;
   border-bottom: $border-width-global solid $foreground-color-global;
@@ -40,12 +33,4 @@
   font-weight: 400;
   line-height: 1.15;
   text-align: left;
-
-  &::before {
-    content: counter(sectionCounter, decimal-leading-zero) " —";
-    font-size: $fs-eyebrow;
-    letter-spacing: $ls-eyebrow;
-    text-transform: uppercase;
-    color: $text-muted;
-  }
 }

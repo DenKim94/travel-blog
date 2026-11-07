@@ -63,10 +63,14 @@
   font-weight: normal;
   line-height: 1.08;
   max-width: 22ch;
+  // balance gleicht die Zeilenlängen aus, statt die letzte Zeile als Rest
+  // stehen zu lassen – bei wenigen, großen Zeilen der lesbarere Umbruch.
   text-wrap: balance;
   white-space: pre-line;     // Berücksichtigt Zeilenumbrüche aus dem CMS
-  overflow-wrap: break-word;
-  hyphens: auto;
+  // Bewusst keine Silbentrennung: In dieser Schriftgröße zerreißt sie Wörter
+  // mitten im Claim („individuel-le“) und stört den Lesefluss deutlich.
+  hyphens: none;
+  overflow-wrap: break-word; // Notbremse für einzelne überlange Wörter
 }
 
 .ctaRow {

@@ -28,10 +28,12 @@ $profile-image-size-mobile: 160px;
   background: linear-gradient(to top, rgba(243, 239, 228, 0.55), rgba(243, 239, 228, 0));
 }
 
+// Profilbild und Textspalte stehen als Gruppe mittig in der Sektion.
 .aboutBody {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: center;
   gap: clamp(1.5rem, 3vw, 3rem);
 }
 
@@ -57,13 +59,17 @@ $profile-image-size-mobile: 160px;
 
 // Kein eigener Scroll-Container mehr: Der Text fließt frei, die Sektion
 // wächst mit. Lesbarkeit über Zeilenhöhe und begrenzte Zeilenlänge.
+// Die Spalte wächst nur bis zur lesbaren Zeilenlänge. Ohne diese Grenze
+// würde sie die volle Restbreite belegen und die Gruppe nach links drücken.
 .descriptionContainer {
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   min-width: 0;
+  max-width: $measure-body;
   padding-top: $section-pad-sm;
   font-size: $fs-body;
   line-height: $lh-body;
   color: $foreground-color-global;
+  overflow-wrap: break-word; // lange URLs o. Ä. aus dem CMS dürfen nicht herausragen
 
   p,
   li {

@@ -21,6 +21,7 @@
     margin-inline: auto;
     font-size: $fs-body;
     line-height: $lh-body;
+    overflow-wrap: break-word; // lange URLs o. Ä. aus dem CMS dürfen nicht herausragen
 
     p {
         text-wrap: pretty;

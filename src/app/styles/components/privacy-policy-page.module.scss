@@ -7,3 +7,12 @@
 .privacyPolicyTitle{
     margin: 20px 0px;
 }
+
+// Der Rücksprung steht mittig am Ende des Abschnitts – die Spalte zentriert
+// bereits, die Klasse setzt nur den Abstand zum Fließtext.
+.backButtonRow{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem 0 1.5rem;
+}

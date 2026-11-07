@@ -18,7 +18,7 @@ $font-oranienbaum: var(--font-oranienbaum, sans-serif);
 
 // Abmessungen der Abschnitte
 $max-width: 1440px;               // Maximale Breite für große Bildschirme
-$min-width: 360px;                // Minimale Breite für kleine Bildschirme
+$min-width: 320px;                // Minimale Breite für kleine Bildschirme (erzwang zuvor als 360px horizontales Scrollen auf schmalen Geräten)
 $root-page-min-height: 100svh;
 $root-page-padding: 0px;
 $root-page-gap: 3px;
