@@ -2,35 +2,41 @@
 
 .footerContainer {
     display: flex;
-    position: fixed;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: $footer-height;
+    max-height: $footer-height;
     background-color: $background-color-global;
     color: $foreground-color-global;
-    max-height: $footer-height;
-    height: $footer-height;
-    width: $footer-width;
     font-family: inherit;
 }
 
 .footerLink {
     color: $foreground-color-global;
     text-decoration: none;
-    font-size: $font-size-footer;
-    font-weight: $font-weight-global;
+    font-size: 1.05rem;
+    letter-spacing: $ls-button;
     transition: color 0.3s ease;
 
-
     &:hover {
-        color: $third-color-global;
+        color: $accent-color;
         text-decoration: underline;
     }
 }
 
-.iconContainer{
+.iconContainer {
     display: flex;
     flex-direction: row;
-    gap: 5px;
-    margin-right: 5px;
+    align-items: center;
+    gap: 0.75rem;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+    }
 }

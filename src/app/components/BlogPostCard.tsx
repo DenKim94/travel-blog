@@ -78,17 +78,17 @@ export function BlogPostCard({ data, styleProps, startAnimation }: {
                         onLoad={handleImageLoad}
                     /> 
                 </div>      
-                <div className={`${styles.titleButtonContainer} ${isHovered ? styles.flipped : ''}`}>
-                    {/* Vorderseite: Titel */}
-                    <div className={styles.titleSide}>
-                        <p className={styles.title}>{data.title}</p>
-                    </div>
+                <div className={styles.cardBody}>
+                    <p className={styles.title}>{data.title}</p>
 
-                    <div className={styles.buttonSide}>
+                    {/* Dauerhaft sichtbarer Button: Die frühere Hover-Rückseite
+                        war auf Touch-Geräten nicht erreichbar. */}
+                    <div className={styles.cardFooter}>
                         <button className={styles.readMoreButton}
-                                onClick={handleReadMore}
+                                onClick={(event) => { event.stopPropagation(); handleReadMore(); }}
                                 aria-label={`${appConstants.blogCardButtonText[data.locale as strapiLocaleType]} - ${data.title}`}>
-                           <p> {appConstants.blogCardButtonText[data.locale as strapiLocaleType]} </p> 
+                            <p>{appConstants.blogCardButtonText[data.locale as strapiLocaleType]}</p>
+                            <span className={styles.readMoreArrow} aria-hidden="true">→</span>
                         </button>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { Oranienbaum } from 'next/font/google';
 import Image from 'next/image';
 import {  GlobalStateProvider } from "@context/GlobalStateContext";
 import { NavigationBar } from "@components/NavigationBar";
+import { HashScrollHandler } from "@components/HashScrollHandler";
 import { SearchField } from "@/components/SearchModule";
 import Footer from "@/components/Footer";
 import * as appConstants from "@utils/appConstants"
@@ -54,7 +55,7 @@ export default async function RootLayout({
 
   if(process.env.MAINTENANCE_MODE === 'true') {
     return(
-      <html lang={lang} className={oranienbaum.variable}>
+      <html lang={lang} className={oranienbaum.variable} data-scroll-behavior="smooth">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
         </head>
@@ -82,12 +83,13 @@ export default async function RootLayout({
 
 
   return (
-    <html lang={lang} className={oranienbaum.variable}>
+    <html lang={lang} className={oranienbaum.variable} data-scroll-behavior="smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
       </head>
       <body>
         <GlobalStateProvider initialLanguage={lang}>
+            <HashScrollHandler />
             <div className="root-page">
               <header aria-label="Application header">
                 <NavigationBar language={lang} />

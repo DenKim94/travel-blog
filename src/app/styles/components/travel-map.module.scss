@@ -1,56 +1,61 @@
 @use '../variables.module.scss' as *;
 
-.travelMapContainer{
+// Die Weltkarte sitzt in einer gerahmten Fläche. Horizontal gescrollt wird
+// nur innerhalb dieser Fläche – vertikal bleibt .main-content zuständig.
+.travelMapContainer {
+    position: relative;
     width: 100%;
     height: auto;
-    overflow: hidden;
     margin: auto;
-    position: relative;
+    overflow: hidden;
+    border: $border-width-global solid $foreground-color-global;
+    border-radius: $radius-surface;
+    background-color: $background-color-global;
 }
 
-.imageContainer{
+.imageContainer {
     position: relative;
     width: 100%;
     height: 100%;
     overflow-x: auto;   // Nur horizontal scrollen erlauben
     overflow-y: hidden;
+    overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     touch-action: pan-x;
-        
+
+    &::-webkit-scrollbar {
+        height: $scrollbar-width;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 10px;
+        border: none;
+        -webkit-appearance: none;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background-color: $scrollbar-thumb;
+    }
+
     @media (max-width: $tablet-threshold-max-width) {
         scrollbar-width: none; // Firefox
         -ms-overflow-style: none; // IE/Edge
-        
+
         &::-webkit-scrollbar {
             display: none; // Chrome, Safari, Opera
         }
     }
 }
 
-.travelMapImage{
-  display: block;
-  height: auto;
-  width: 100%;
-  min-width: $travel-map-image-min-width;    // Minimale Breite des Bildes
-  object-fit: contain;                     
-  position: relative;
-  z-index: 1;
-}
-
-@mixin vertical-margins {
-  margin-top: $root-page-gap;
-  margin-bottom: $root-page-gap;
-}
-
-.travelMapContainer {
-  @media (max-width: $travel-map-image-min-width), (min-width: 1920px) {
-    @include vertical-margins;
-  }
-}
-
-@media screen and (min-width: $desktop-threshold-max-width) {
-    .travelMapContainer  {
-        margin-bottom: 30px;  
-    }
+.travelMapImage {
+    display: block;
+    height: auto;
+    width: 100%;
+    min-width: $travel-map-image-min-width;    // Minimale Breite des Bildes
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
 }

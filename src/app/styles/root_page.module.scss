@@ -1,39 +1,51 @@
 @use './variables.module.scss' as *;
 
-@mixin vertical-margins {
+// Sektionsmodell des Redesigns:
+// Sektionen werden nicht mehr auf Viewport-Höhe gezwängt und haben
+// keinen eigenen Scroll-Container mehr. Nur die Landing füllt die volle Höhe.
+.section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $section-gap;
+  width: 100%;
+  font-family: $font-oranienbaum;
+  padding-block: $section-pad-sm $section-pad-lg;
+
+  &:first-child {
+    min-height: 100%;
+    padding-block: 0;
+  }
+}
+
+// Bleibt als Hook im Markup erhalten; Höhe wird nicht mehr erzwungen.
+.responsiveHeight {
   height: auto;
   min-height: auto;
 }
 
-.section {
-  min-height: 100%;
-  max-height: $main-content-height; // Füge eine explizite Viewport-Höhe hinzu
-  height: auto;
-  width: 100%;
-  flex-shrink: 0; // Verhindert, dass Sections schrumpfen
-  scroll-snap-align: start; 
+// Sektionskopf: Eyebrow-Nummerierung + Titel über einer kräftigen Trennlinie.
+// Die Nummer wird per CSS-Counter erzeugt und bleibt dadurch sprachneutral.
+.h1 {
+  // Gezählt werden nur Sektionen, die tatsächlich eine Überschrift tragen –
+  // sonst entstehen Lücken in der Nummerierung.
+  counter-increment: sectionCounter;
   display: flex;
   flex-direction: column;
-  font-family: $font-oranienbaum;
-  
-  &.responsiveHeight {
-    @media (max-width: 1024px), (min-width: 1920px) {
-      @include vertical-margins;
-    }
-  }
+  gap: 0.7rem;
+  margin: 0;
+  padding-bottom: 0.9rem;
+  border-bottom: $border-width-global solid $foreground-color-global;
+  font-size: $fs-section-title;
+  font-weight: 400;
+  line-height: 1.15;
+  text-align: left;
 
-  h1 {
-    font-size: $font-size-h1;
-    text-align: center;
-    margin: $margin-top-h1 0;
-  }
-}
-
-// Mobile Viewport
-@media screen and (max-width: $tablet-mini-threshold-max-width) {
-  .page {
-    gap: $root-page-gap;
+  &::before {
+    content: counter(sectionCounter, decimal-leading-zero) " —";
+    font-size: $fs-eyebrow;
+    letter-spacing: $ls-eyebrow;
+    text-transform: uppercase;
+    color: $text-muted;
   }
 }
-
-

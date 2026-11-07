@@ -1,6 +1,18 @@
 import { Page, expect } from '@playwright/test';
 import { visibilityTimeout_ms } from './testParameters';
 
+/**
+ * Zulässige Abweichung in Pixeln, mit der ein Abschnitt nach dem Scrollen
+ * am oberen Rand des Scroll-Containers anliegen muss.
+ *
+ * Der Wert trennt bewusst großzügig: Nach dem Klick werden Abweichungen von
+ * bis zu ~110 px gemessen, weil nachladende Bilder das Layout noch leicht
+ * verschieben. Ohne Klick liegen die Abweichungen dagegen bei 600 px und mehr,
+ * und ein Sprung zum falschen Abschnitt läge bei mindestens einer Abschnittshöhe.
+ * 200 px liegt sicher zwischen beiden Fällen.
+ */
+const scrollAlignTolerance_px = 200;
+
 export class TestHelpers {
 
     /**
@@ -105,16 +117,42 @@ export class TestHelpers {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const link = page.getByRole(role as any, { name: linkName });
 
-        // Sicherstellen, dass der Abschnitt anfangs nicht sichtbar ist (falls möglich)
-        await expect(section).not.toBeInViewport();
+        // Hinweis: Eine Vorab-Prüfung "Abschnitt ist noch nicht sichtbar" wäre hier
+        // nicht mehr aussagekräftig. Seit dem Redesign füllen die Abschnitte nicht
+        // mehr jeweils den gesamten Viewport, benachbarte Abschnitte ragen daher
+        // regulär ins Bild. Geprüft wird stattdessen die Wirkung des Klicks.
 
         // Klick ausführen
         await link.click();
         await this.wait_ms(500);
-        
+
         // Warten, bis URL und Sichtbarkeit stimmen
         await expect(page).toHaveURL(new RegExp(`${expectedHash}$`));
         await expect(section).toBeInViewport();
+
+        // Der Abschnitt muss tatsächlich an den oberen Rand des Scroll-Containers
+        // gescrollt worden sein – sonst würde auch ein wirkungsloser Klick genügen,
+        // solange der Abschnitt zufällig schon im Bild liegt.
+        // Ausnahme: Der letzte Abschnitt kann nicht weiter nach oben rutschen,
+        // wenn der Container bereits am unteren Anschlag steht.
+        await expect.poll(
+            async () => section.evaluate((element, tolerance) => {
+                const scroller = element.closest('main');
+                if (!scroller) return 'KEIN_SCROLL_CONTAINER';
+
+                const atBottom = Math.ceil(scroller.scrollTop + scroller.clientHeight) >= scroller.scrollHeight - 2;
+                if (atBottom) return 'AM_UNTEREN_ANSCHLAG';
+
+                const offset = element.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+                return Math.abs(offset) <= tolerance
+                    ? 'OBEN_AUSGERICHTET'
+                    : `ABWEICHUNG_${Math.round(offset)}px`;
+            }, scrollAlignTolerance_px),
+            {
+                timeout: visibilityTimeout_ms,
+                message: `Der Abschnitt '${dataTestId}' sollte nach dem Klick oben am Scroll-Container anliegen.`,
+            }
+        ).toMatch(/^(OBEN_AUSGERICHTET|AM_UNTEREN_ANSCHLAG)$/);
     };
 
     /**

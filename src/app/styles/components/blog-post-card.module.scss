@@ -1,13 +1,9 @@
 @use '../variables.module.scss' as *;
 
-$y-offset: 50px;
+$y-offset: 28px;
 $animation-duration: 0.5s;
 $hover-transition: 0.3s ease-in-out;
-$card-title-font-size: 1.1rem;
-$card-button-font-size: 0.95rem;
-$scale-factor-blog-card: 1;
-$scale-factor-blog-image: 1.03;
-
+$scale-factor-blog-image: 1.04;
 
 @keyframes slideInUp {
   0% {
@@ -20,11 +16,10 @@ $scale-factor-blog-image: 1.03;
   }
 }
 
-.blogPostCard{
+.blogPostCard {
     opacity: 0;
     width: 100%;
     height: 100%;
-    margin: auto;
 
     &.runAnimation {
       animation: slideInUp $animation-duration ease-out forwards;
@@ -36,106 +31,96 @@ $scale-factor-blog-image: 1.03;
     background-color: $background-color-global;
     display: flex;
     flex-direction: column;
-    aspect-ratio: 1;
-    border-radius: .2em;
-    align-items: stretch;
-    justify-content: stretch;
-    scroll-snap-align: none;
+    height: 100%;
     border: $border-width-global solid $foreground-color-global;
+    border-radius: $radius-surface;
     overflow: hidden;
     cursor: pointer;
     transition: transform $hover-transition, box-shadow $hover-transition;
 
     &:hover {
-        transform: scale($scale-factor-blog-card);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
     }
 }
 
 .blogPostImage {
     position: relative;
-    flex: 1 1 0;
     width: 100%;
-    height: auto;
-    min-height: 0;
+    aspect-ratio: 4 / 3;
+    flex: 0 0 auto;
     overflow: hidden;
-    transition: transform $hover-transition;
 
-    &.imageHovered {
+    img {
+        transition: transform 0.4s ease-in-out;
+    }
+
+    &.imageHovered img {
         transform: scale($scale-factor-blog-image);
     }
 }
 
-.titleButtonContainer {
-    flex: 0 0 auto;
-    min-height: 55px;
-    width: 100%;
-    position: relative;
-    perspective: 1000px; // 3D Perspective für die Rotation
-    transform-style: preserve-3d;
-
-}
-
-// Gemeinsame Eigenschaften für beide Seiten
-.titleSide,
-.buttonSide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.cardBody {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    backface-visibility: hidden; // Verhindert Sichtbarkeit der Rückseite
-    transition: transform $hover-transition ease-in-out;
-    transform-style: preserve-3d;
-    transition: transform $hover-transition;
-}
-
-// Titel-Seite (Vorderseite)
-.titleSide {
-    transform: rotateX(0deg);
-   
-    .titleButtonContainer.flipped & {
-        transform: rotateX(180deg);
-    }
-}
-
-// Button-Seite (Rückseite, anfangs um 180° gedreht)
-.buttonSide {
-    transform: rotateX(-180deg);
-
-    .titleButtonContainer.flipped & {
-        transform: rotateX(0deg);
-    }
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: clamp(0.85rem, 1.6vw, 1.15rem);
+    flex: 1 1 auto;
 }
 
 .title {
     margin: 0;
-    text-align: center;
-    font-size: $card-title-font-size;
-    font-weight: 550;
+    font-size: $fs-card-title;
+    font-weight: 400;
     line-height: 1.3;
     color: $foreground-color-global;
+    text-wrap: pretty;
 }
 
+.cardFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.7rem;
+    border-top: $border-width-global solid $accent-color;
+}
+
+// Dauerhaft sichtbarer Button statt Hover-Flip:
+// Auf Touch-Geräten war die Rückseite der Karte nicht erreichbar.
 .readMoreButton {
-    background-color: $foreground-color-global;
-    color: $background-color-global;
-    border: none;
-    padding: 8px;
-    border-radius: 4px;
-    font-size: $card-button-font-size;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: $tap-target;
+    padding: 0 1.1rem;
+    border: $border-width-global solid $foreground-color-global;
+    border-radius: $radius-button;
+    background: transparent;
+    color: $foreground-color-global;
+    font-size: 1.02rem;
     font-family: inherit;
+    letter-spacing: $ls-button;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
+
+    p {
+        margin: 0;
+    }
+
+    &:hover {
+        background: $foreground-color-global;
+        color: $background-color-global;
+    }
 
     &:active {
-        scale: 0.9;
+        transform: scale(0.96);
     }
+}
+
+.readMoreArrow {
+    line-height: 1;
 }
 
 .loaderContainer {
@@ -168,8 +153,8 @@ $scale-factor-blog-image: 1.03;
 @media screen and (max-width: $tablet-threshold-max-width) {
     .blogPostCardContent {
         &:hover {
-            transform: scale(1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transform: none;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.16);
         }
     }
 }

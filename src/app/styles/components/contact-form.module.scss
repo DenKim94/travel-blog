@@ -1,61 +1,76 @@
 @use '../variables.module.scss' as *;
 
-$padding-container: 2rem;
-
 .contactFormContainer {
+  width: 100%;
   max-width: $max-width;
-  min-width: calc($min-width - 2 * $side-gap);
-  padding: $padding-container;
-  background: var(--card-background);
-  border-radius: $button-border-radius;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
 
   h2 {
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
     text-align: center;
+    font-size: $fs-h2;
+    font-weight: 400;
   }
 }
 
 .grecaptcha-badge {
-  transform: scale(0.8); // Verkleinern statt verbergen
+  transform: scale(0.8);
   opacity: 0.6;
   transition: opacity 0.3s ease;
-  
+
   &:hover {
     opacity: 1;
   }
 }
 
+// Zweispaltiges Raster, das auf schmalen Geräten einspaltig umbricht.
 .contactForm {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  width: 100%;
+  max-width: 860px;
+  margin-inline: auto;
+
+  // Alles außer den beiden kurzen Feldern nimmt die volle Breite ein.
+  > :not(.formGroup) {
+    grid-column: 1 / -1;
+  }
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-width: $max-width;
-  min-width: calc($min-width - 2 * $side-gap);
+  gap: 0.45rem;
+  min-width: 0;
 
-  label {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: $font-size-h2;
+  // Das Nachrichtenfeld spannt sich über beide Spalten.
+  &:has(textarea) {
+    grid-column: 1 / -1;
   }
 
-  input, textarea {
-    padding: 0.75rem;
-    border: $border-width-global solid transparent;
-    border-radius: 8px;
-    font-size: $font-size-h3;
-    font-family: inherit;
-    transition: all 0.2s ease;
-    background: $background-color-global;
+  label {
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: $ls-button;
     color: $foreground-color-global;
-    box-shadow: 0 0 0 $border-width-global rgba($foreground-color-global, 0.1);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    min-height: $button-height;
+    padding: 0.7rem 0.85rem;
+    border: $border-width-global solid $input-border;
+    border-radius: $radius-button;
+    font-size: 1.05rem;
+    font-family: inherit;
+    background: transparent;
+    color: $foreground-color-global;
+    transition: border-color 0.2s ease;
 
     &:focus {
       outline: none;
@@ -63,52 +78,22 @@ $padding-container: 2rem;
     }
 
     &.inputError {
-      border-color: var(--error-color);
+      border-color: var(--error-color, rgb(239, 68, 68));
     }
   }
 
   textarea {
+    min-height: 150px;
+    max-height: none;
     resize: vertical;
-    min-height: 120px;
-    max-height: 180px;
-    scroll-behavior: smooth;
-
-    &::-webkit-scrollbar {
-        // Scrollbalken
-        width: $scrollbar-width; // Breite des Scrollbalkens
-        background-color: transparent;
-        // Safari-Fix: Explizite Höhe setzen
-        height: 100%;
-    }  
-
-    &::-webkit-scrollbar-thumb {
-        // Scrollbalken-Farbe
-        background-color: $foreground-color-global;
-        border-radius: $button-border-radius;
-        // Safari-Fix: Entferne Standard-Border
-        border: none;
-        // Safari-Fix: Verhindere Standard-Styling
-        -webkit-appearance: none;
-    }
-
-    // Scrollbar beim Hovern über den Container anzeigen
-    &:hover {    
-        &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.4);
-
-        &:hover {
-            background-color: $third-color-global; // Farbe beim Hover
-        }
-        }
-    }
+    line-height: 1.6;
   }
 }
 
 .message {
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: $radius-button;
   margin-bottom: 1rem;
-  font-weight: 500;
 
   &.success {
     background: rgba(34, 197, 94, 0.1);
@@ -124,27 +109,6 @@ $padding-container: 2rem;
 }
 
 .errorMessage {
-  color: var(--error-color);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-
-// Responsive Design
-@media (max-width: $small-mobile-width) {
-  .contactFormContainer {
-    padding: 0.8rem;
-    box-shadow: none;
-  }
-
-  .formGroup {
-    min-width: 290px;
-    max-width: calc(#{$min-width} - 2 * #{$side-gap} - #{$padding-container});
-
-    input, textarea {
-      padding: 0.5rem;
-    }
-  }
-  .contactForm {
-    align-items: center;
-  }
+  color: var(--error-color, rgb(239, 68, 68));
+  font-size: 0.9rem;
 }

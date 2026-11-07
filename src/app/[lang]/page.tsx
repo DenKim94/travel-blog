@@ -23,7 +23,7 @@ export default async function RootPage({ params }: Readonly<{params: Promise<{la
       <section id={appConstants.fallBackId} 
                 className={styles.section}
                 data-testid={appConstants.fallBackId}>
-        <LandingPage data={landingPageContent} />
+        <LandingPage data={landingPageContent} lang={lang} />
       </section>
 
       <section 

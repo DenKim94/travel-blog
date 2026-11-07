@@ -60,6 +60,9 @@ export function NavigationBar({ language }: NavigationBarProps): JSX.Element {
                         priority={true}
                         loading="eager"
                     />
+                    <span className={styles.wordmark} data-testid="navigation-bar-wordmark">
+                        {appConstants.metadataTranslations[language]?.title}
+                    </span>
                 </a>
             </div>
             {isMobile && !isOnImprintPage && (

@@ -1,14 +1,61 @@
-.blogPostContentContainer{
+@use '../variables.module.scss' as *;
+
+// Detailansicht: eine zentrierte Lesespalte ohne eigenen Scroll-Container.
+// Die Zeilenlänge ist auf 68 Zeichen begrenzt, damit lange Berichte
+// angenehm lesbar bleiben.
+.blogPostContentContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    gap: clamp(1.1rem, 2.4vw, 1.75rem);
+    width: 100%;
 }
 
 .blogPost {
     display: flex;
     flex-direction: column;
-    min-width: 50vw;
-    gap: 25px;
-}
+    gap: 1.15rem;
+    width: 100%;
+    max-width: $measure-detail;
+    min-width: 0;
+    margin-inline: auto;
+    font-size: $fs-body;
+    line-height: $lh-body;
 
+    p {
+        text-wrap: pretty;
+    }
+
+    h1 {
+        font-size: $fs-detail-title;
+        font-weight: 400;
+        line-height: 1.12;
+        text-wrap: balance;
+    }
+
+    h2 {
+        font-size: $fs-h2;
+        font-weight: 400;
+        line-height: 1.25;
+        margin-top: 0.6rem;
+    }
+
+    ul,
+    ol {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-left: 1.4rem;
+        line-height: 1.7;
+        color: $text-body;
+    }
+
+    blockquote {
+        margin: 0.4rem 0;
+        padding: 0.9rem 1.1rem;
+        border-left: 4px solid $accent-color;
+        font-style: italic;
+        line-height: 1.7;
+        color: rgba(23, 23, 23, 0.8);
+    }
+}

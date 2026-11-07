@@ -1,72 +1,51 @@
 @use '../variables.module.scss' as *;
 
-$margin-top-offset: 0px;
-$max-heigth-offset: 0px;
-
-.searchResultsNotFound{
+.searchResultsNotFound {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: $section-gap;
+    padding-top: $section-pad-sm; // Abstand zum Header
     margin: 20px 0;
 }
 
 .searchResultsBoard {
     display: flex;
-    max-height: calc($main-content-height + $margin-top-offset);
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: $margin-top-offset;
+    align-items: stretch;   // Trefferraster nutzt die volle Breite ...
+    gap: $section-gap;
+    width: 100%;
+    padding-top: $section-pad-sm; // Abstand zum Header
+
+    // ... der Zurück-Button steht dagegen mittig unter den Treffern.
+    > button {
+        align-self: center;
+    }
 }
 
-.foundBlogPostsContainer{
-    max-height: calc($main-content-height - $max-heigth-offset);
+// Kein eigener Scroll-Container mehr – die Trefferliste wächst mit und
+// wird vom übergeordneten .main-content gescrollt.
+.foundBlogPostsContainer {
     display: grid;
-    width: 95%;
-    gap: $card-gap;
-    grid-template-columns: repeat(auto-fit, minmax($min-card-width, 0.95fr));  
+    width: 100%;
+    gap: $grid-gap;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
     grid-auto-rows: auto;
     align-content: start;
-    justify-content: center;
-    padding: 5px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    padding: 0;
 
     &.singleCard {
-        width: 50%;
-        height: 100%;
-        padding: 20px;
-        overflow-y: hidden;
-    }
-
-        &::-webkit-scrollbar {
-        width: $scrollbar-width;
-    }
-    
-    &::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        
-        &:hover {
-            background: $foreground-color-global;
-        }
+        grid-template-columns: minmax(0, 360px);
+        justify-content: center;
     }
 }
 
 // Mobile Viewport
 @media screen and (max-width: $tablet-mini-threshold-max-width) {
-    .searchResultsBoard {
-        margin-top: 0px;
-    }
     .foundBlogPostsContainer {
         &.singleCard {
-            width: 100%;
+            grid-template-columns: minmax(0, 1fr);
         }
     }
 }

@@ -60,6 +60,59 @@ $travel-map-image-min-width: 1024px;
 $card-gap: 0.8rem;
 $min-card-width: 240px;
 
+// *** Redesign-Tokens ***
+// Abgeleitet aus der Designvorlage "Travel Blog – Redesign".
+$accent-color: rgba(159, 145, 100, 0.8);
+$accent-color-soft: rgba(159, 145, 100, 0.18);
+$text-muted: rgba(23, 23, 23, 0.6);
+$text-soft: rgba(23, 23, 23, 0.72);
+$text-body: rgba(23, 23, 23, 0.85);
+$hairline: rgba(23, 23, 23, 0.14);
+$input-border: rgba(23, 23, 23, 0.25);
+$scrollbar-thumb: rgba(23, 23, 23, 0.35);
+$surface-veil: rgba(243, 239, 228, 0.92);
+
+// Abstände
+$gutter: clamp(1rem, 5vw, 3rem);
+$section-pad-lg: clamp(2.5rem, 6vh, 4.5rem);
+$section-pad-sm: clamp(1.5rem, 3vh, 2.5rem);
+$section-gap: clamp(1.1rem, 2.4vw, 1.75rem);
+$grid-gap: clamp(0.9rem, 2vw, 1.5rem);
+
+// Radien
+$radius-button: 5px;
+$radius-surface: 0.2em;
+$radius-icon: 12px;
+
+// Typografie-Skala
+$fs-eyebrow: clamp(0.68rem, 1vw, 0.76rem);
+$fs-section-title: clamp(1.7rem, 3.4vw, 2.6rem);
+$fs-detail-title: clamp(1.9rem, 4.4vw, 3rem);
+$fs-h2: clamp(1.35rem, 2.2vw, 1.7rem);
+$fs-card-title: clamp(1.15rem, 1.5vw, 1.35rem);
+$fs-body: clamp(1.05rem, 1.25vw, 1.2rem);
+$fs-lead: clamp(1.05rem, 1.35vw, 1.25rem);
+$fs-claim: clamp(1.85rem, 5.4vw, 3.6rem);
+$fs-nav: clamp(1rem, 1.25vw, 1.15rem);
+$fs-wordmark: clamp(0.95rem, 1.4vw, 1.15rem);
+
+$ls-eyebrow: 0.24em;
+$ls-nav: 0.1em;
+$ls-button: 0.06em;
+$lh-body: 1.75;
+$measure-body: 64ch;
+$measure-detail: 68ch;
+
+// Luft zwischen Header und oberem Rand des Viewports
+$root-page-padding-top: 10px;
+
+// Interaktionsflächen (Touch-Mindestmaß)
+$tap-target: 44px;
+$button-height: 48px;
+
+// Breakpoint Desktop/Mobil des Redesigns
+$desktop-breakpoint: $mobile-header-width; // 720px
+
 // *** Export der Variablen für TypeScript ***
 :export {
     headerHeight: $header-height;

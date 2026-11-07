@@ -9,7 +9,7 @@
   width: calc(#{$side-gap} - #{$scrollbar-width}) !important;           /* eingeklappt */
   overflow: hidden !important;      /* Text abschneiden */
   transition: width 0.3s ease !important;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .grecaptcha-badge:hover {
@@ -19,7 +19,7 @@
 // Mobile Viewport
 @media screen and (max-width: $travel-map-image-min-width) {
   .grecaptcha-badge{
-    width: calc(2*#{$scrollbar-width}) !important; 
+    width: calc(2*#{$scrollbar-width}) !important;
   }
 }
 
@@ -47,83 +47,129 @@ body {
   margin: 0;
 }
 
+a {
+  color: $foreground-color-global;
+  text-decoration: none;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+input,
+textarea,
+button {
+  font-family: $font-oranienbaum;
+}
+
+// *** Animationen des Redesigns ***
+@keyframes riseIn {
+  0%   { transform: translateY(28px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes cueDrift {
+  0%, 100% { transform: translateY(0);   opacity: 0.55; }
+  50%      { transform: translateY(7px); opacity: 1; }
+}
+
+@keyframes swipeDrift {
+  0%, 100% { transform: translateX(-6px); opacity: 0.5; }
+  50%      { transform: translateX(6px);  opacity: 1; }
+}
+
+// Nutzerwunsch nach reduzierter Bewegung respektieren
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 header {
   top: 0;
   max-width: $max-width;
   min-width: $min-width;
   grid-row-start: 1;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   width: $header-width;
   height: $header-height;
-  z-index: 10;
+  z-index: 20;
 }
 
 .header-underline {
-  max-width: calc(#{$max-width} - 2*#{$side-gap} - #{$scrollbar-offset});
-  min-width: calc(#{$min-width} - 2*#{$side-gap} - #{$scrollbar-offset});
-  width: calc(#{$header-width} - 2*#{$side-gap} - #{$scrollbar-offset});
-  padding-right: calc(#{$side-gap} - #{$scrollbar-width});
+  max-width: calc(#{$max-width} - 2*#{$gutter});
+  width: calc(100% - 2*#{$gutter});
   height: $header-underline-height;
-  background: #000;
-  margin-left: $side-gap;
+  background: $accent-color;
+  margin: 0 auto;
 }
 
 .root-page {
   display: grid;
   grid-template-rows: $header-height 1fr $footer-height;
-  min-width: $min-width;
+  min-width: 320px;
   width: 100%;
   align-items: center;
   justify-items: center;
   overflow: hidden;
-  min-height: $root-page-min-height;
+  height: $root-page-min-height;
   padding: $root-page-padding;
+  padding-top: $root-page-padding-top; // etwas Luft über dem Header
   gap: $root-page-gap;
 }
 
+// Einziger Scroll-Container der Anwendung.
+// Alle inneren Scroll-Boxen wurden entfernt, damit Text frei fließen kann.
 .main-content {
   display: flex;
-  max-width: $max-width;
   flex-direction: column;
+  max-width: $max-width;
   grid-row-start: 2;
-  overflow-y: auto;        // Ermöglicht Scrollen innerhalb des Hauptbereichs
-  scroll-snap-type: none;  // Aktiviert Snap-Scrolling für Sektionen
-  height: $main-content-height;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
   min-width: $min-width;
-  width: calc(#{$root-page-min-width} - 2*#{$root-page-padding});
-  padding-left: $side-gap;
-  padding-right: calc(#{$side-gap} - #{$scrollbar-width});
-  gap: $root-page-gap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain; // verhindert Scroll-Ketten auf iOS
+  padding-inline: $gutter;
+  counter-reset: sectionCounter;
 
   // Für Safari und ältere Browser
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth; // Aktiviert sanftes Scrollen
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
-    // Scrollbalken
     width: $scrollbar-width;
+    height: $scrollbar-width;
     background-color: transparent;
-    // Safari-Fix: Explizite Höhe setzen
-    height: 100%;
-  }  
+  }
 
   &::-webkit-scrollbar-thumb {
-    // Scrollbalken-Farbe
     background-color: transparent;
     border-radius: 10px;
-    // Safari-Fix: Entferne Standard-Border
     border: none;
-    // Safari-Fix: Verhindere Standard-Styling
     -webkit-appearance: none;
   }
 
-  // Scrollbar beim Hovern über den Container anzeigen
-  &:hover {    
+  &:hover {
     &::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: $scrollbar-thumb;
 
       &:hover {
-        background-color: $third-color-global; // Farbe beim Hover
+        background-color: $accent-color;
       }
     }
   }
@@ -132,25 +178,18 @@ header {
 // Footer Styles
 footer {
   bottom: 0;
-  max-width: calc(#{$max-width} - 2*#{$side-gap});
-  width: calc(#{$header-width} - 2*#{$side-gap});       /* gewünschte Länge */
+  max-width: calc(#{$max-width} - 2*#{$gutter});
+  width: calc(100% - 2*#{$gutter});
   grid-row-start: 3;
   display: flex;
   flex-direction: row;
   height: $footer-height;
   align-items: center;
   justify-content: space-between;
+  border-top: $border-width-global solid $accent-color;
 
   p {
     font-size: $font-size-footer;
-  }
-}
-
-// Mobile Viewport
-@media screen and (max-width: 1400px) {
-  .main-content {
-    padding-right: $side-gap;
-    padding-left: $side-gap;
   }
 }
 
@@ -159,6 +198,3 @@ footer {
     width: 70px !important;
   }
 }
-
-
-

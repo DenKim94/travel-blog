@@ -1,72 +1,166 @@
 @use '../variables.module.scss' as *;
 
-$title-font-size: 1.5rem; // Größe des Titels anpassen
-$text-color: black; // Textfarbe für den Titel
-$slide-up-duration: 1.3s; // Dauer der Slide-Up-Animation
-$title-distance-top-percentage: 5%;
-
 .landingPageContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
-  height: $main-content-height;
 }
 
 .imageContainer {
   position: relative;
+  flex: 1 1 auto;
+  min-height: min(72svh, 620px);
   width: 100%;
-  height: $main-content-height; // Gewünschte Höhe festlegen
   overflow: hidden;
+  border-radius: $radius-surface;
+  animation: fadeIn 0.8s ease-out both;
 }
 
 .landingPageImage {
   object-fit: cover; // Bild füllt Container aus, behält Seitenverhältnis
 }
 
+// Verlauf von unten, damit der Claim auf jedem Titelbild lesbar bleibt.
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(243, 239, 228, 0.96) 0%,
+    rgba(243, 239, 228, 0.72) 26%,
+    rgba(243, 239, 228, 0.12) 52%,
+    rgba(243, 239, 228, 0) 72%
+  );
+  z-index: 1;
+}
+
 .titleOverlay {
   position: absolute;
-  top: $title-distance-top-percentage;
   left: 0;
   right: 0;
-  padding: 2rem;
-  overflow: hidden; // Wichtig für slideUp-Effekt
+  bottom: 0;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+  animation: riseIn 1s ease-out both;
   z-index: 5;
 }
 
-.landingPageTitle {
-  color: $text-color;
-  font-size: $title-font-size;
-  font-weight: normal;
-  margin: 0;
-  text-align: right;
-  line-height: 1.3; // Optimierte Zeilenhöhe für mehrzeiligen Text
-  white-space: pre-line; // Berücksichtigt Zeilenumbrüche aus dem CMS
-  max-width: 80%; // Begrenzt die Textbreite für bessere Umbrüche
-  margin-left: auto; // Schiebt den Text nach rechts 
-  overflow-wrap: break-word; // Moderne Alternative zu word-wrap
-  hyphens: auto; // Automatische Silbentrennung (sprachabhängig)
-
-
-  // SlideUp-Animation
-  animation: slideUp $slide-up-duration ease-out forwards;
-  transform: translateY(100%); // Startet unterhalb des sichtbaren Bereichs
-  opacity: 0;
+.eyebrow {
+  font-size: $fs-eyebrow;
+  letter-spacing: $ls-eyebrow;
+  text-transform: uppercase;
+  color: rgba(23, 23, 23, 0.68);
 }
 
+.landingPageTitle {
+  margin: 0;
+  color: $foreground-color-global;
+  font-size: $fs-claim;
+  font-weight: normal;
+  line-height: 1.08;
+  max-width: 22ch;
+  text-wrap: balance;
+  white-space: pre-line;     // Berücksichtigt Zeilenumbrüche aus dem CMS
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
 
-// Keyframe-Animation für slideUp-Effekt
-@keyframes slideUp {
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.ctaPrimary,
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: $button-height;
+  padding: 0 1.5rem;
+  border-radius: $radius-button;
+  font-size: 1.05rem;
+  letter-spacing: $ls-button;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.ctaPrimary {
+  background: $foreground-color-global;
+  color: $background-color-global;
+  border: $border-width-global solid $foreground-color-global;
+
+  &:hover {
+    background: $accent-color;
+    border-color: $accent-color;
+    color: $foreground-color-global;
   }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+}
+
+.ctaSecondary {
+  background: transparent;
+  border: $border-width-global solid $foreground-color-global;
+  color: $foreground-color-global;
+
+  &:hover {
+    background: $accent-color;
+    color: $foreground-color-global;
   }
+}
+
+// Scroll-Hinweis unterhalb des Titelbildes
+.scrollHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem 0 1.1rem;
+  flex: 0 0 auto;
+  animation: cueDrift 2.4s ease-in-out infinite;
+}
+
+.scrollHintRule {
+  width: 26px;
+  height: $header-underline-height;
+  background: $accent-color;
+}
+
+.scrollHintLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $text-muted;
+}
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes riseIn {
+  0%   { transform: translateY(28px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes cueDrift {
+  0%, 100% { transform: translateY(0);   opacity: 0.55; }
+  50%      { transform: translateY(7px); opacity: 1; }
 }
 
 // Mobile Viewport
-@media screen and (max-width: 768px) {
-  .titleOverlay {
-    top: 3%;
+@media screen and (max-width: $desktop-breakpoint) {
+  .imageContainer {
+    min-height: min(62svh, 480px);
+  }
+
+  .ctaPrimary,
+  .ctaSecondary {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 0 1rem;
   }
 }

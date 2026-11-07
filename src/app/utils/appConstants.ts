@@ -227,6 +227,13 @@ export const navigationTitleTranslations: NavigationTitleTranslations = {
     },
   }
 
+// *** Scroll-Hinweis unterhalb des Titelbildes ***
+export const scrollHintLabel: Record<SupportedLanguageType, string> = {
+  de: "Scrollen",
+  en: "Scroll",
+  ru: "Прокрутить",
+};
+
 export const navigationIds: Record<NavigationKey, string> = {
   blogs: "travel-blogs",
   about: "about",
@@ -277,6 +284,14 @@ export const blogCardButtonText: Record<strapiLocaleType, string> = { "de": "Meh
 export const imgDefaultSizes: string = "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw";
 
 // *** Angaben für den Swipe-Icon ***
+/**
+ * Sichtbarkeitsanteil der Weltkarte, ab dem der Wisch-Hinweis eingeblendet wird.
+ *
+ * Bewusst unter 0.8: Auf Mobilgeräten ist der Kartencontainer höher als der
+ * Scrollbereich (z. B. 685 px gegenüber 553 px). Ein Schwellwert von 0.8 wäre
+ * dort rechnerisch kaum erreichbar, der Hinweis würde nie erscheinen.
+ */
+export const SWIPE_HINT_IN_VIEW_THRESHOLD: number = 0.5;
 export const SWIPE_ICON_URL: string = "/assets/SwipeIcon.svg";
 export const SWIPE_ICON_ALT_TEXT: string = "Swipe Icon";
 export const SWIPE_ICON_WIDTH: number = 50;

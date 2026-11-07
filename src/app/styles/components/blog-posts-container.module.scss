@@ -1,55 +1,13 @@
 @use '../variables.module.scss' as *;
 
+// Kein eigener Scroll-Container mehr: Das Grid wächst mit seinem Inhalt,
+// gescrollt wird ausschließlich im übergeordneten .main-content.
 .blogPostsContainer {
     display: grid;
     width: 100%;
-    height: $main-content-height;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scroll-snap-type: y mandatory;
-    gap: $card-gap;
-    grid-template-columns: repeat(auto-fit, minmax($min-card-width, 0.95fr));  
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; // Aktiviert sanftes Scrollen
+    gap: $grid-gap;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
     grid-auto-rows: auto;
     align-content: start;
-    justify-content: center;
     padding: 0;
-
-    &::-webkit-scrollbar {
-        // Scrollbalken
-        width: $scrollbar-width; // Breite des Scrollbalkens
-        background-color: transparent;
-        // Safari-Fix: Explizite Höhe setzen
-        height: 100%;
-    }  
-
-    &::-webkit-scrollbar-thumb {
-        // Scrollbalken-Farbe
-        background-color: transparent;
-        border-radius: 10px;
-        // Safari-Fix: Entferne Standard-Border
-        border: none;
-        // Safari-Fix: Verhindere Standard-Styling
-        -webkit-appearance: none;
-    }
-
-    // Scrollbar beim Hovern über den Container anzeigen
-    &:hover {    
-        &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.4);
-
-        &:hover {
-            background-color: $third-color-global; // Farbe beim Hover
-        }
-        }
-    }
-  }
-  
-@media screen and (max-width: $tablet-threshold-max-width) {
-    .blogPostsContainer  {
-        padding: 10px;
-        margin: 10px 0;  
-    }
 }
-

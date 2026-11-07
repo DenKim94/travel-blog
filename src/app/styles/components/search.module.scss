@@ -1,65 +1,54 @@
 @use '../variables.module.scss' as *;
 
-$search-field-width: 280px; // Breite des Suchfeldes
-$search-field-height: 60px; // Höhe des Suchfeldes
+$search-field-width: 320px; // Breite des Suchfeldes
 $search-field-padding: 10px; // Padding innerhalb des Suchfeldes
 $search-field-offset: 20px; // Offset für die Positionierung des Suchfeldes
-$border-radius-search-field: 5px; // Border-Radius für das Suchfeld
-$close-button-size: 25px; // Größe des Schließen-Buttons
+$close-button-size: 40px; // Größe des Schließen-Buttons
 
-$input-width: calc(#{$search-field-width} - 3*#{$search-field-padding} - #{$close-button-size}); // Breite des Eingabefeldes, abzüglich Padding
-$threshold-display-width-search-field: calc($search-field-width + 0.5*#{$min-width}); // Schwellenwert für die Breite des Displays, um den vertikalen Abstand des Suchfelds anzupassen 
+$threshold-display-width-search-field: calc($search-field-width + 0.5*#{$min-width});
 
+// Icon-Button im Header: Touch-Mindestmaß, ruhiger Hover in der Akzentfarbe.
 .searchButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: auto;
-  background-color: inherit;
-  border-radius: $button-border-radius;
-  border: $border-width-global solid transparent; // Transparente Umrandung für den Glow-Effekt
+  width: $tap-target;
+  height: 40px;
+  background-color: transparent;
+  border-radius: $radius-icon;
+  border: $border-width-global solid transparent;
   cursor: pointer;
+  transition: background-color 0.25s ease;
 
     &:hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: $third-color-global;
-
-        // Mehrschichtiger Glow-Effekt für mehr Tiefe
-        box-shadow: 
-            0 0 20px rgba($third-color-global, 0.6),
-            0 0 40px rgba($third-color-global, 0.4),
-            0 0 60px rgba($third-color-global, 0.2);
-        
-        // Leichte Skalierung für zusätzlichen visuellen Effekt
-        transform: scale(1.05);
+        background-color: $accent-color;
     }
-    
+
     &:active {
-        transform: scale(0.9); // Leichte Verkleinerung bei Klick
+        transform: scale(0.96);
     }
 }
 
 .searchFieldContainer {
     position: fixed;
     top: calc($header-height + $search-field-offset);
-    right: calc($scrollbar-offset + $side-gap);
-    z-index: $search-field-z-index; 
+    right: calc($scrollbar-offset + $gutter);
+    z-index: $search-field-z-index;
 
     display: flex;
     background-color: $background-color-global;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: $search-field-padding;
-    padding: $search-field-padding;
+    gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
     width: $search-field-width;
-    height: $search-field-height;
-    border: $border-width-global solid $third-color-global;
-    border-radius: $button-border-radius;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    max-width: calc(100vw - 2*#{$gutter});
+    border: $border-width-global solid $accent-color;
+    border-radius: $radius-button;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 
     // Animation
-    transform: translateX(120%); // Startposition: außerhalb des Bildschirms rechts
+    transform: translateX(120%);
     opacity: 0;
     pointer-events: none;
     transition:
@@ -67,20 +56,20 @@ $threshold-display-width-search-field: calc($search-field-width + 0.5*#{$min-wid
         opacity $search-field-transition-duration cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     &.open {
-        transform: translateX(0); // Endposition: sichtbar
+        transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
     }
 }
 
-.searchInput{
-    width: $input-width;
-    border-radius: $border-radius-search-field;
-    height: 25px;
-    background-color: rgba(214, 211, 211, 0.6);;
-    border: 1px solid $third-color-global;
+.searchInput {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 40px;
+    border: none;
+    background: transparent;
     color: $foreground-color-global;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-family: $font-oranienbaum;
 
     &::placeholder {
@@ -88,42 +77,42 @@ $threshold-display-width-search-field: calc($search-field-width + 0.5*#{$min-wid
     }
 
     &:focus {
-        outline: none; // Kein Standard-Fokus-Rahmen
-        border: 2px solid $third-color-global; // Fokus-Rahmen
+        outline: none;
     }
 }
 
 .searchCloseButton {
     width: $close-button-size;
     height: $close-button-size;
-    background-color: inherit;
-    border: 1px solid $third-color-global;
+    flex-shrink: 0;
+    background-color: transparent;
+    border: 1px solid $accent-color;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: $border-radius-search-field;
+    border-radius: $radius-button;
     cursor: pointer;
+    transition: background-color 0.25s ease;
 
     &:hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: rgba($third-color-global, 0.5);
+        background-color: rgba(159, 145, 100, 0.5);
     }
 
     &:active {
-        transform: scale(0.9); // Leichte Verkleinerung bei Klick
+        transform: scale(0.96);
     }
 
     &:focus {
-        outline: none; // Kein Standard-Fokus-Rahmen
-        border: $border-width-global solid $third-color-global; // Fokus-Rahmen
+        outline: none;
+        border: $border-width-global solid $accent-color;
     }
 }
 
-.searchCloseIcon{
+.searchCloseIcon {
     display: flex;
     align-items: center;
     justify-content: center;
-    fill: $third-color-global; // Farbe des Suchsymbols
+    fill: $accent-color;
 }
 
 @media(max-width: $threshold-display-width-search-field){

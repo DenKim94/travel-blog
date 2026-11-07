@@ -19,7 +19,7 @@ import { useInView } from "@/hooks/useInView";
  */
 export function TravelMap({ data }: { data: TravelMapData | null }): JSX.Element {
     const [imageError, setImageError] = useState(false);
-    const [ref, isVisible] = useInView<HTMLDivElement>(0.8);
+    const [ref, isVisible] = useInView<HTMLDivElement>(appConstants.SWIPE_HINT_IN_VIEW_THRESHOLD);
     const { width: windowWidth } = useWindowSize();
     const isMobile = windowWidth <= parseInt(variables.travelMapImgMinWidth, 10);
     const showSwipeIcon = isMobile && isVisible;

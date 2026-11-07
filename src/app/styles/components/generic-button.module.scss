@@ -14,29 +14,30 @@ $animation-duration: 1s;
   }
 }
 
+// Primärer Button des Redesigns: gefüllt, beim Hover in die Akzentfarbe.
 .genericButton{
-    margin-top: 24px;
-    padding: 8px 24px;
-    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0;
+    min-height: 50px;
+    padding: 0 1.75rem;
+    border-radius: $radius-button;
     background: $foreground-color-global;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    letter-spacing: $ls-button;
     max-width: 300px;
-    max-height: 50px;
     color: $background-color-global;
     border: none;
     position: relative;
     cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
 
     &:hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        background-color: $third-color-global;
-        transform: scale(1.05);
-
-        box-shadow: 
-            0 0 20px rgba($third-color-global, 0.4),
-            0 0 40px rgba($third-color-global, 0.2),
-            0 0 60px rgba($third-color-global, 0.1);       
+        background-color: $accent-color;
+        color: $foreground-color-global;
     }
 
     &.runAnimation {

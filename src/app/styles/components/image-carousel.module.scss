@@ -1,36 +1,27 @@
 @use '../variables.module.scss' as *;
 
-$maxImageWidth: 640px;
+$maxImageWidth: 860px;
 
 @mixin setFocus {
     outline: 2px solid #3b82f6;
     outline-offset: 1px;
 }
 
-.carousel {
-    position: relative;
-    width: 100%;
-    max-width: $maxImageWidth;
-    overflow: hidden;
-    aspect-ratio: 16/9;
-    border-radius: 8px;
-    margin: auto;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    
-    &:focus {
-        @include setFocus;
-    }
-}
-
+.carousel,
 .singleImageContainer {
     position: relative;
     width: 100%;
     max-width: $maxImageWidth;
-    border-radius: 8px;
-    aspect-ratio: 16/9;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: $border-width-global solid $foreground-color-global;
+    border-radius: $radius-surface;
+    background: $background-color-global;
     margin: auto;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.carousel:focus {
+    @include setFocus;
 }
 
 .imageWrapper {
@@ -49,43 +40,43 @@ $maxImageWidth: 640px;
 
 .image {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   flex-shrink: 0;
   display: block;
-  aspect-ratio: 4/3; // Anpassbar je nach Design
 }
 
+// Bedienflächen im Touch-Mindestmaß, hell auf dem Bild statt dunkler Kreis.
 .navButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
+  width: $tap-target;
+  height: $tap-target;
+  background: $surface-veil;
+  border: $border-width-global solid $foreground-color-global;
+  color: $foreground-color-global;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.2rem;
   cursor: pointer;
   z-index: 2;
-  transition: all 0.2s ease;
-  
+  transition: background-color 0.2s ease;
+
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: translateY(-50%) scale(1.1);
+    background: rgba(159, 145, 100, 0.9);
   }
-  
+
   &:focus {
     @include setFocus;
   }
-  
+
   &:active {
     transform: translateY(-50%) scale(0.95);
   }
-  
+
   svg {
     fill: currentColor;
   }
@@ -101,67 +92,56 @@ $maxImageWidth: 640px;
 
 .indicators {
   position: absolute;
-  bottom: 16px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  align-items: center;
   gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: $surface-veil;
   z-index: 2;
 }
 
 .indicator {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
+  padding: 0;
   border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid $foreground-color-global;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
-  
+  transition: background-color 0.2s ease;
+
   &.active {
-    background: white;
-    transform: scale(1.2);
+    background: $foreground-color-global;
   }
-  
+
   &:hover {
-    background: rgba(255, 255, 255, 0.8);
+    background: $accent-color;
   }
-  
+
   &:focus {
     @include setFocus;
   }
 }
 
 // Responsive Design
-@media (max-width: 768px) {
-  .navButton {
-    width: 36px;
-    height: 36px;
-  }
-  
+@media (max-width: $desktop-breakpoint) {
   .prevButton {
     left: 8px;
   }
-  
+
   .nextButton {
     right: 8px;
-  }
-  
-  .indicators {
-    bottom: 12px;
   }
 }
 
 // Reduced Motion Support
 @media (prefers-reduced-motion: reduce) {
-  .imageWrapper {
-    transition: none;
-  }
-  
-  .navButton {
-    transition: none;
-  }
-  
+  .imageWrapper,
+  .navButton,
   .indicator {
     transition: none;
   }
